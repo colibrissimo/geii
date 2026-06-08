@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GEII Upcycling, E-Waste to Object</title>
+  <meta name="description" content="Second-year GEII projects at IUT de Lille: working objects built from electronic waste." />
+  <style>
+    :root{
+      --navy:#1a2e5a;          /* GEII deep blue */
+      --teal:#1a7a8c;          /* GEII accent */
+      --ink:#243244;
+      --muted:#5b6b7d;
+      --paper:#ffffff;
+      --wash:#f4f6fa;          /* cool off-white */
+      --line:#e3e8ef;
+      --chip:#eef2f7;
+      --radius:14px;
+      --maxw:1120px;
+      font-synthesis:none;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      color:var(--ink);
+      background:var(--wash);
+      line-height:1.55;
+    }
+    a{color:var(--teal);}
+
+    header.masthead{
+      background:var(--navy);
+      color:#fff;
+      padding:2.6rem 1.5rem 2.2rem;
+    }
+    .wrap{max-width:var(--maxw);margin:0 auto;}
+    .masthead .eyebrow{
+      text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;
+      color:#a9c4e6;margin:0 0 .5rem;
+    }
+    .masthead h1{
+      margin:0;font-size:clamp(1.7rem,3.6vw,2.6rem);line-height:1.1;font-weight:800;
+    }
+    .masthead h1 .accent{color:#7fd0df;}
+    .masthead p.sub{margin:.7rem 0 0;color:#d6e2f2;max-width:46ch;}
+
+    .intro{padding:1.6rem 1.5rem 0;}
+    .intro p{max-width:62ch;color:var(--muted);margin:.2rem 0;}
+
+    main{padding:1.4rem 1.5rem 3rem;}
+    .grid{
+      display:grid;gap:1.4rem;
+      grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    }
+    .card{
+      background:var(--paper);border:1px solid var(--line);
+      border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;
+      box-shadow:0 1px 2px rgba(26,46,90,.04);
+      transition:transform .15s ease,box-shadow .15s ease;
+    }
+    .card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(26,46,90,.10);}
+    .card .photo{
+      aspect-ratio:4/3;background:var(--wash);overflow:hidden;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .card .photo img{width:100%;height:100%;object-fit:cover;display:block;}
+    .card .body{padding:1.05rem 1.1rem 1.2rem;display:flex;flex-direction:column;gap:.55rem;}
+    .card h2{margin:0;font-size:1.18rem;color:var(--navy);font-weight:750;}
+    .card .credit{margin:0;font-size:.82rem;color:var(--teal);font-weight:600;letter-spacing:.01em;}
+    .card .idea{margin:.1rem 0 0;color:var(--ink);font-size:.95rem;}
+    .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.3rem;}
+    .chip{
+      background:var(--chip);color:#3c4a5b;border-radius:999px;
+      padding:.22rem .6rem;font-size:.74rem;white-space:nowrap;
+    }
+
+    footer{
+      border-top:1px solid var(--line);background:var(--paper);
+      padding:1.8rem 1.5rem 2.4rem;color:var(--muted);font-size:.84rem;
+    }
+    footer .marks{font-weight:700;color:var(--navy);letter-spacing:.02em;}
+    footer .note{margin:.5rem 0 0;max-width:60ch;}
+    .empty{color:var(--muted);font-style:italic;padding:2rem 0;}
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap">
+      <p class="eyebrow">IUT de Lille · GEII · BUT2 · S4 English</p>
+      <h1>Upcycling: <span class="accent">E-Waste to Object</span></h1>
+      <p class="sub">Second-year electrical-engineering students take a box of dead electronics and turn it into something that works, and has a soul. 2025 to 2026.</p>
+    </div>
+  </header>
+
+  <section class="intro wrap">
+    <p>Each project began as salvage: recovered circuit boards, components desoldered by hand, wire and scrap. The brief was simple. Reuse what would have been thrown away, build an object, and show how it was made.</p>
+  </section>
+
+  <main class="wrap">
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="marks">IUT de Lille · GEII · Université de Lille</p>
+      <p class="note">Student work, shown with permission. Credited by first name and class only. Photographs show the objects, not the makers.</p>
+    </div>
+  </footer>
+
+  <script>
+  /* =========================================================================
+     HOW TO ADD A PROJECT
+     1. Drop a hero photo of the object into  images/
+     2. Add an entry to the PROJECTS list below.
+     3. Set "visibility":
+          "public"   -> shown in the gallery
+          "unlisted" -> kept here but NOT shown (reserved for a future link)
+          "private"  -> kept here but NOT shown
+        Every submission can live in this list. You choose what appears.
+        Nothing is ever deleted to hide it; you only change the switch.
+     Credit with FIRST NAMES or CLASS only (privacy).
+     ========================================================================= */
+  const PROJECTS = [
+    {
+      title: "The Upcycled Carousel",
+      credit: "Nathan & Mehdi · BUT2 GEII A2I",
+      image: "images/carousel.jpg",
+      idea: "A working carousel built from electronic waste: a CD as the spinning floor, circuit boards as the architecture, a foil canopy, turned by a salvaged motor.",
+      parts: ["Recycled PCBs", "CD", "Aluminium foil", "Potentiometers", "Arduino", "Stepper motor", "Push button", "9V battery"],
+      visibility: "public"
+    },
+    {
+      title: "The Pianist",
+      credit: "Tom & Romane · BUT2 GEII A2I",
+      image: "images/pianist.jpg",
+      idea: "A piano whose keyboard is the gold edge-contacts of old PCI card slots. Rest the pianist's hands on the keys and the LEDs light up. The form carries the message; the light is the wink.",
+      parts: ["Recovered PCBs", "PCI connectors", "LEDs", "Capacitors", "Resistors", "Copper wire"],
+      visibility: "public"
+    },
+    {
+      title: "The Stargazer",
+      credit: "Joseph & Baptiste · BUT2 GEII A2I",
+      image: "images/astronomer.jpg",
+      idea: "A little astronomer made of components, gazing through a multimeter-probe telescope at LED planets on wire stalks: the Sun and Mars.",
+      parts: ["Recovered PCB", "LEDs", "Transistor", "Capacitors", "Resistors", "Multimeter probes", "Copper wire"],
+      visibility: "public"
+    }
+  ];
+
+  function render(){
+    const grid = document.getElementById("grid");
+    const shown = PROJECTS.filter(p => p.visibility === "public");
+    if(!shown.length){
+      grid.innerHTML = '<p class="empty">No projects are set to public yet.</p>';
+      return;
+    }
+    grid.innerHTML = shown.map(p => `
+      <article class="card">
+        <div class="photo">
+          <img src="${p.image}" alt="${p.title}, an object built from electronic waste" loading="lazy" />
+        </div>
+        <div class="body">
+          <h2>${p.title}</h2>
+          <p class="credit">${p.credit}</p>
+          <p class="idea">${p.idea}</p>
+          <div class="chips">${p.parts.map(x => `<span class="chip">${x}</span>`).join("")}</div>
+        </div>
+      </article>
+    `).join("");
+  }
+  render();
+  </script>
+</body>
+</html>
