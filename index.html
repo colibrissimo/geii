@@ -212,7 +212,7 @@ figure.card:hover figcaption{opacity:1}
       <button class="replay-btn" onclick="replayIntro()">GEII <span>↺ revoir l'intro</span></button>
     </div>
     <h1 class="gh-title">Projets Upcycling 2026</h1>
-    <p class="gh-desc">GEII · 2ᵉ année — 29 projets imaginés et fabriqués en binôme.<br>
+    <p class="gh-desc">GEII · 2ᵉ année — 30 projets imaginés et fabriqués en binôme.<br>
       <small>Second-year upcycling projects, designed and built in pairs.</small></p>
     <div class="filters">
       <button class="filter-btn active" onclick="setFilter(this,'all')">Tous</button>
@@ -239,7 +239,13 @@ figure.card:hover figcaption{opacity:1}
   <button class="lb-arrow lb-prev" onclick="lbNav(-1,event)">‹</button>
   <button class="lb-arrow lb-next" onclick="lbNav(1,event)">›</button>
   <div class="lb-body">
-    <div class="lb-img-wrap"><img id="lb-img" src="" alt=""></div>
+    <div class="lb-img-wrap">
+      <img id="lb-img" src="" alt="">
+      <div id="lb-ph" style="display:none;width:min(900px,82vw);height:62vh;background:repeating-linear-gradient(135deg,#1c1c1f 0 16px,#161618 16px 32px);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#56524c">
+        <div style="font:600 14px/1.2 ui-monospace,Menlo,monospace;letter-spacing:.14em">PHOTO · À VENIR</div>
+        <div style="font:500 12px/1.2 'Montserrat';color:#46433d">coming soon</div>
+      </div>
+    </div>
     <div class="lb-cap">
       <div class="lb-names" id="lb-names"></div>
       <div class="lb-meta">
@@ -269,8 +275,8 @@ const PROJECTS = [
   {title:'Eiffel Tower',             file:'eiffel_tower_Mohamed_Patrick_ESE.png',                  names:'Mohamed & Patrick',      classe:'ESE'},
   {title:'Electronic Student',       file:'electronic_student_Malick_Maxime_EME.png',              names:'Malick & Maxime',        classe:'EME'},
   {title:'Horse',                    file:'horse_Ibrahima_ESE.png',                                names:'Ibrahima',               classe:'ESE'},
-  {title:'House',                    file:'house_Alexis_Joseph_Clint_EME.png',                     names:'Alexis Joseph & Clint',  classe:'EME'},
-  {title:'Hypercar',                 file:'hypercar_Laifa_Leo.png',                                names:'Laifa & Leo',            classe:null},
+  {title:'House',                    file:'house_Alexis_Joseph_Clint_EME.png',                     names:'Alexis & Joseph-Clint',  classe:'EME'},
+  {title:'Hypercar',                 file:'hypercar_Laifa_Leo.png',                                names:'Laifa & Leo',            classe:'ESE'},
   {title:'Inverse Matrix',           file:'inverse_matrix_Alhan_Theo_ESE.png',                     names:'Alhan & Theo',           classe:'ESE'},
   {title:'LED Blinking System',      file:'led_blinking_system_Baptiste_Onesime_EME.png',          names:'Baptiste & Onesime',     classe:'EME'},
   {title:'Lightup Tree',             file:'lightup_tree_Anna_Fannie_EME.png',                      names:'Anna & Fannie',          classe:'EME'},
@@ -287,6 +293,7 @@ const PROJECTS = [
   {title:'Tie Fighter',              file:'tie_fighter_Elzear_Pierre_A2I.png',                     names:'Elzear & Pierre',        classe:'AII'},
   {title:'Tree',                     file:'tree_Axel_Romain_EME.png',                              names:'Axel & Romain',          classe:'EME'},
   {title:'Wire Flower',              file:'wire_flower_Loic_Thomas_A2I.png',                       names:'Loic & Thomas',          classe:'AII'},
+  {title:'Projet à venir',           file:null,                                                    names:'Sami & Rémi',            classe:'AII'},
 ];
 
 // ── lumières ──
@@ -329,11 +336,18 @@ function buildMasonry() {
     fig.className = 'card';
     fig.onclick = () => openLb(idx);
 
-    const img = document.createElement('img');
-    img.src = 'images/' + p.file;
-    img.alt = p.title + ' — ' + p.names;
-    img.loading = 'lazy';
-    fig.appendChild(img);
+    if (p.file) {
+      const img = document.createElement('img');
+      img.src = 'images/' + p.file;
+      img.alt = p.title + ' — ' + p.names;
+      img.loading = 'lazy';
+      fig.appendChild(img);
+    } else {
+      const ph = document.createElement('div');
+      ph.style.cssText = 'height:280px;background:repeating-linear-gradient(135deg,#eceae4 0 14px,#e4e1d9 14px 28px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;color:#b3aea3';
+      ph.innerHTML = '<div style="font:600 12px/1.2 ui-monospace,Menlo,monospace;letter-spacing:.12em">PHOTO · À VENIR</div><div style="font:500 11px/1.2 \'Montserrat\';letter-spacing:.04em;color:#c2bdb2">coming soon</div>';
+      fig.appendChild(ph);
+    }
 
     const cap = document.createElement('figcaption');
     const badgeHtml = p.classe
@@ -382,8 +396,15 @@ function updateLb() {
   const list = filtered();
   const p = list[lbIndex];
   const img = document.getElementById('lb-img');
-  img.src = 'images/' + p.file;
-  img.alt = p.title;
+  if (p.file) {
+    img.src = 'images/' + p.file;
+    img.alt = p.title;
+    img.style.display = '';
+    document.getElementById('lb-ph').style.display = 'none';
+  } else {
+    img.style.display = 'none';
+    document.getElementById('lb-ph').style.display = '';
+  }
   document.getElementById('lb-names').textContent = p.names;
   document.getElementById('lb-counter').textContent = pad(lbIndex + 1) + ' / ' + pad(list.length);
   const badge = document.getElementById('lb-badge');
