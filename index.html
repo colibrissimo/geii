@@ -20,7 +20,7 @@ body{background:#faf9f5;font-family:'Montserrat',system-ui,sans-serif;-webkit-fo
 /* ── intro stage ── */
 #stage{
   position:fixed;inset:0;z-index:1000;
-  background:radial-gradient(circle at 50% 44%,#161618,#050506 72%);
+  background:radial-gradient(circle at 50% 44%,#faf9f5,#e3dacc 72%);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   overflow:hidden;transition:opacity .9s ease,transform 1.1s ease;
 }
@@ -36,9 +36,9 @@ body{background:#faf9f5;font-family:'Montserrat',system-ui,sans-serif;-webkit-fo
 .stroke-wrap{position:absolute;border-radius:3px;overflow:hidden}
 .stroke-fill{
   position:absolute;inset:0;border-radius:3px;
-  background:#E2001A;box-shadow:0 0 22px 5px #E2001A;
-  -webkit-mask-image:linear-gradient(to top,#000 84%,transparent);
-  mask-image:linear-gradient(to top,#000 84%,transparent);
+  background:#3a8fb3;box-shadow:0 0 22px 5px #3a8fb3;
+  -webkit-mask-image:linear-gradient(to top,#000 92%,transparent);
+  mask-image:linear-gradient(to top,#000 92%,transparent);
   clip-path:inset(100% 0 0 0);
   animation:paintup .9s cubic-bezier(.2,.78,.25,1) both;
 }
@@ -47,13 +47,13 @@ body{background:#faf9f5;font-family:'Montserrat',system-ui,sans-serif;-webkit-fo
 .lumieres{position:absolute;inset:-8% -2%;pointer-events:none;overflow:visible}
 
 .intro-sub{text-align:center;opacity:0;animation:fadeUp .8s ease-out 3.5s both}
-.intro-sub h2{font:700 26px/1.1 'Montserrat';color:#fff;letter-spacing:.01em}
+.intro-sub h2{font:700 26px/1.1 'Montserrat';color:#f3704f;letter-spacing:.01em}
 .intro-sub p{margin-top:9px;font:500 14px/1.4 'Montserrat';color:#9a9690;letter-spacing:.02em}
 
 .enter-btn{
   opacity:0;animation:fadeUp .8s ease-out 3.95s both;cursor:pointer;border:none;
-  background:#E2001A;color:#fff;font:700 15px/1 'Montserrat';letter-spacing:.03em;
-  padding:16px 30px;border-radius:8px;box-shadow:0 12px 34px -10px #E2001A;
+  background:#3a8fb3;color:#fff;font:700 15px/1 'Montserrat';letter-spacing:.03em;
+  padding:16px 30px;border-radius:8px;box-shadow:0 12px 34px -10px #3a8fb3;
   display:inline-flex;align-items:center;gap:11px;
 }
 .enter-btn:hover{opacity:.88}
@@ -71,7 +71,7 @@ body{background:#faf9f5;font-family:'Montserrat',system-ui,sans-serif;-webkit-fo
 
 .gh-header{max-width:1280px;margin:0 auto;padding:60px 32px 24px}
 .gh-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
-.gh-label{font:600 12px/1.4 'Montserrat';letter-spacing:.16em;color:#E2001A;text-transform:uppercase}
+.gh-label{font:600 12px/1.4 'Montserrat';letter-spacing:.16em;color:#3a8fb3;text-transform:uppercase}
 
 .replay-btn{
   background:transparent;border:1px solid #d8d5cd;border-radius:999px;
@@ -80,7 +80,7 @@ body{background:#faf9f5;font-family:'Montserrat',system-ui,sans-serif;-webkit-fo
   font:800 13px/1 'Montserrat';letter-spacing:.08em;color:#1b1a18;
   transition:border-color .15s;
 }
-.replay-btn:hover{border-color:#E2001A}
+.replay-btn:hover{border-color:#3a8fb3}
 .replay-btn span{font-weight:500;color:#8a867d;letter-spacing:0}
 
 h1.gh-title{margin:18px 0 0;font:800 clamp(38px,6vw,68px)/1.02 'Montserrat';letter-spacing:-.02em}
@@ -94,7 +94,7 @@ h1.gh-title{margin:18px 0 0;font:800 clamp(38px,6vw,68px)/1.02 'Montserrat';lett
   border:1px solid #d8d5cd;background:transparent;color:#56524a;
   transition:all .18s;
 }
-.filter-btn.active{border-color:#E2001A;background:#E2001A;color:#fff}
+.filter-btn.active{border-color:#3a8fb3;background:#3a8fb3;color:#fff}
 .count-label{margin-left:6px;font:600 13px/1 'Montserrat';color:#a39e94;letter-spacing:.04em}
 
 .gm{max-width:1280px;margin:0 auto;padding:14px 28px 24px}
@@ -106,7 +106,7 @@ figure.card{
   background:#ece9e3;break-inside:avoid;-webkit-column-break-inside:avoid;
   transition:box-shadow .2s;
 }
-figure.card:hover{box-shadow:inset 0 0 0 6px #E2001A}
+figure.card:hover{box-shadow:inset 0 0 0 6px #3a8fb3}
 figure.card img{width:100%;display:block}
 figcaption{
   position:absolute;inset:0;display:flex;flex-direction:column;
@@ -125,7 +125,7 @@ figure.card:hover figcaption{opacity:1}
 .b-null{background:#666}
 
 .gf{margin-top:40px;background:#0a0a0b;color:#d9d6cf;text-align:center;padding:60px 24px}
-.gf-bar{width:42px;height:2px;background:#E2001A;margin:0 auto 26px}
+.gf-bar{width:42px;height:2px;background:#f3704f;margin:0 auto 26px}
 .gf-title{font:800 16px/1.4 'Montserrat';letter-spacing:.04em}
 .gf-sub{margin-top:10px;font:500 13px/1.5 'Montserrat';color:#8e8a83;letter-spacing:.03em}
 
@@ -174,7 +174,7 @@ figure.card:hover figcaption{opacity:1}
           <div class="stroke-wrap" style="left:0;top:0;width:150px;height:42px"><div class="stroke-fill" style="animation-delay:.28s"></div></div>
           <div class="stroke-wrap" style="left:0;top:178px;width:150px;height:42px"><div class="stroke-fill" style="animation-delay:.40s"></div></div>
           <div class="stroke-wrap" style="left:108px;top:104px;width:42px;height:116px"><div class="stroke-fill" style="animation-delay:.52s"></div></div>
-          <div class="stroke-wrap" style="left:78px;top:116px;width:72px;height:40px"><div class="stroke-fill" style="animation-delay:.62s"></div></div>
+          <div class="stroke-wrap" style="left:78px;top:104px;width:72px;height:40px"><div class="stroke-fill" style="animation-delay:.62s"></div></div>
         </div>
         <!-- E: 140 × 220 -->
         <div class="letter" style="width:140px;height:220px">
@@ -258,9 +258,9 @@ figure.card:hover figcaption{opacity:1}
 
 <script>
 const FULL = {
-  AII: 'Automatisme & Informatique Industrielle',
-  EME: "Électricité & Maîtrise de l'Énergie",
-  ESE: 'Électronique & Systèmes Embarqués'
+  AII: '',
+  EME: "",
+  ESE: ''
 };
 
 const PROJECTS = [
@@ -297,7 +297,7 @@ const PROJECTS = [
 ];
 
 // ── lumières ──
-const LUM_PALETTE = ['#ff2b2b','#ffd400','#ff3db5','#16e08a','#ff9a00','#1f9bff','#ffc400','#19e6e6','#b14cff','#ff5ab0'];
+const LUM_PALETTE = ['#00a5dd','#f3704f','#9cb9d4','#3a8fb3','#e8896d','#5fb0cc','#c45a3e','#b8d4e8','#2d7fa3','#f5956e'];
 function buildLumieres() {
   const container = document.getElementById('lumieres');
   container.innerHTML = '';
@@ -415,7 +415,7 @@ function updateLb() {
   } else {
     badge.style.display = 'none';
   }
-  const fullName = p.classe ? FULL[p.classe] + ' · ' : '';
+  const fullName = p.classe && FULL[p.classe] ? FULL[p.classe] + ' · ' : '';
   document.getElementById('lb-project').textContent = fullName + p.title;
 }
 
