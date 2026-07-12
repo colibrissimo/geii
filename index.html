@@ -97,26 +97,62 @@ h1.gh-title{margin:18px 0 0;font:800 clamp(38px,6vw,68px)/1.02 'Montserrat';lett
 .filter-btn.active{border-color:#3a8fb3;background:#3a8fb3;color:#fff}
 .count-label{margin-left:6px;font:600 13px/1 'Montserrat';color:#a39e94;letter-spacing:.04em}
 
-.gm{max-width:1280px;margin:0 auto;padding:14px 28px 24px}
-.masonry{columns:300px;column-gap:18px}
+/* ── 3D ring gallery ── */
+.gm{max-width:1400px;margin:0 auto;padding:4px 16px 8px}
+.scene{
+  display:grid;place-items:center;overflow:hidden;
+  perspective:38em;perspective-origin:50% 34%;
+  min-height:clamp(330px,50vh,500px);
+  -webkit-mask:linear-gradient(90deg,#0000,#000 14% 86%,#0000);
+  mask:linear-gradient(90deg,#0000,#000 14% 86%,#0000);
+}
+/* "Tous" (30 cards): a big ring reads flat, so tighten card size + perspective */
+.scene.dense{perspective:33em}
+.scene.dense figure.card{--w:clamp(8em,24vw,11em)}
+.a3d{
+  display:grid;place-self:center;transform-style:preserve-3d;
+  animation:ry 46s linear infinite;
+}
+.scene:hover .a3d{animation-play-state:paused}
+@keyframes ry{to{transform:rotateY(1turn)}}
 
 figure.card{
-  display:inline-block;width:100%;margin:0 0 18px;
-  position:relative;cursor:pointer;border-radius:4px;overflow:hidden;
-  background:#ece9e3;break-inside:avoid;-webkit-column-break-inside:avoid;
-  transition:box-shadow .2s;
+  --w:clamp(9.5em,38vw,15.5em);
+  --ba:1turn/var(--n);
+  grid-area:1/1;margin:0;
+  width:var(--w);aspect-ratio:7/10;
+  border-radius:1.1em;overflow:hidden;cursor:pointer;background:#ece9e3;
+  backface-visibility:hidden;
+  box-shadow:0 20px 44px -20px rgba(15,20,28,.6);
+  transform:
+    rotateY(calc(var(--i)*var(--ba)))
+    translateZ(calc(-1*(.5*var(--w) + .55em)/tan(.5*var(--ba))));
+  transition:box-shadow .25s,filter .25s;
 }
-figure.card:hover{box-shadow:inset 0 0 0 6px #3a8fb3}
-figure.card img{width:100%;display:block}
-figcaption{
-  position:absolute;inset:0;display:flex;flex-direction:column;
-  justify-content:flex-end;gap:10px;padding:18px;
-  background:linear-gradient(to top,rgba(10,10,12,.86),rgba(10,10,12,.1) 55%,transparent);
-  opacity:0;transition:opacity .25s;border-radius:4px;
+figure.card img{width:100%;height:100%;object-fit:cover;display:block}
+.scene:hover figure.card{filter:brightness(.8) saturate(.92)}
+.scene figure.card:hover{
+  filter:none;
+  box-shadow:0 0 0 4px #3a8fb3,0 22px 50px -16px rgba(15,20,28,.72);
 }
-figure.card:hover figcaption{opacity:1}
-.cap-name{font:700 17px/1.2 'Montserrat';color:#fff}
-.cap-title{font:500 12px/1.3 'Montserrat';color:#ccc9c4;margin-top:2px}
+.card-ph{
+  width:100%;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;
+  background:repeating-linear-gradient(135deg,#eceae4 0 14px,#e4e1d9 14px 28px);
+  color:#b3aea3;font:600 12px/1.4 ui-monospace,Menlo,monospace;
+  letter-spacing:.12em;text-align:center;
+}
+
+/* ── ring caption ── */
+.ring-caption{
+  text-align:center;padding:6px 20px 0;min-height:72px;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:9px;
+}
+.rc-names{font:700 21px/1.2 'Montserrat';color:#1b1a18}
+.rc-meta{display:flex;gap:11px;align-items:center;flex-wrap:wrap;justify-content:center}
+.rc-title{font:500 13px/1.3 'Montserrat';color:#8a867d}
+.rc-hint{font:500 13px/1.4 'Montserrat';color:#a39e94;letter-spacing:.02em}
+.rc-hint.sm{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c2bdb2}
 
 .badge{display:inline-block;font:700 11px/1 'Montserrat';letter-spacing:.08em;color:#fff;padding:6px 10px;border-radius:5px}
 .b-AII{background:oklch(0.60 0.13 255)}
@@ -157,6 +193,14 @@ figure.card:hover figcaption{opacity:1}
 @media(max-width:500px){
   .wordmark{gap:14px;transform:scale(.7);transform-origin:center}
   .lb-arrow{font-size:36px;padding:6px 10px}
+  .scene{min-height:56vh;perspective:30em}
+  figure.card{--w:clamp(8em,46vw,12.5em)}
+  .rc-names{font-size:19px}
+}
+
+/* respect visitors who prefer less motion: keep the ring, slow it right down */
+@media(prefers-reduced-motion:reduce){
+  .a3d{animation-duration:200s}
 }
 </style>
 </head>
@@ -223,7 +267,10 @@ figure.card:hover figcaption{opacity:1}
     </div>
   </header>
   <main class="gm">
-    <div class="masonry" id="masonry"></div>
+    <div class="scene">
+      <div class="a3d" id="a3d"></div>
+    </div>
+    <div class="ring-caption" id="ring-caption"></div>
   </main>
   <footer class="gf">
     <div class="gf-bar"></div>
@@ -293,7 +340,7 @@ const PROJECTS = [
   {title:'Tie Fighter',              file:'tie_fighter_Elzear_Pierre_A2I.png',                     names:'Elzear & Pierre',        classe:'AII'},
   {title:'Tree',                     file:'tree_Axel_Romain_EME.png',                              names:'Axel & Romain',          classe:'EME'},
   {title:'Wire Flower',              file:'wire_flower_Loic_Thomas_A2I.png',                       names:'Loic & Thomas',          classe:'AII'},
-  {title:'Darth Vader',              file:'darth_vader_Sami_Remi_A2I.png',                         names:'Sami & Rémi',            classe:'AII'},
+  {title:'Darth Vader',              file:'darth_vader_Sami_Remi_A2I.jpg',                         names:'Sami & Rémi',            classe:'AII'},
 ];
 
 // ── lumières ──
@@ -326,44 +373,57 @@ function filtered() {
 
 function pad(n) { return n < 10 ? '0' + n : '' + n; }
 
-// ── masonry ──
-function buildMasonry() {
+// ── 3D ring ──
+function thumbOf(file) { return 'images/thumbs/' + file.replace(/\.png$/i, '.jpg'); }
+function badgeHtml(classe) {
+  return classe ? `<span class="badge b-${classe}">${classe}</span>` : '';
+}
+
+function buildRing() {
   const list = filtered();
-  const container = document.getElementById('masonry');
-  container.innerHTML = '';
+  const a3d = document.getElementById('a3d');
+  a3d.style.setProperty('--n', list.length);
+  a3d.innerHTML = '';
+  // many cards make a huge (flat-looking) ring: tighten in "dense" mode
+  document.querySelector('.scene').classList.toggle('dense', list.length > 16);
   list.forEach((p, idx) => {
-    const fig = document.createElement('figure');
-    fig.className = 'card';
-    fig.onclick = () => openLb(idx);
+    const card = document.createElement('figure');
+    card.className = 'card';
+    card.style.setProperty('--i', idx);
+    card.onclick = () => openLb(idx);
+    card.addEventListener('mouseenter', () => setRingCaption(p));
 
     if (p.file) {
       const img = document.createElement('img');
-      img.src = 'images/' + p.file;
+      img.src = thumbOf(p.file);         // light thumbnail on the ring
       img.alt = p.title + ' — ' + p.names;
-      img.loading = 'lazy';
-      fig.appendChild(img);
+      card.appendChild(img);
     } else {
       const ph = document.createElement('div');
-      ph.style.cssText = 'height:280px;background:repeating-linear-gradient(135deg,#eceae4 0 14px,#e4e1d9 14px 28px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;color:#b3aea3';
-      ph.innerHTML = '<div style="font:600 12px/1.2 ui-monospace,Menlo,monospace;letter-spacing:.12em">PHOTO · À VENIR</div><div style="font:500 11px/1.2 \'Montserrat\';letter-spacing:.04em;color:#c2bdb2">coming soon</div>';
-      fig.appendChild(ph);
+      ph.className = 'card-ph';
+      ph.innerHTML = 'PHOTO<br>À VENIR';
+      card.appendChild(ph);
     }
-
-    const cap = document.createElement('figcaption');
-    const badgeHtml = p.classe
-      ? `<span class="badge b-${p.classe}">${p.classe}</span>`
-      : '';
-    cap.innerHTML =
-      `<div class="cap-name">${p.names}</div>` +
-      `<div class="cap-title">${p.title}</div>` +
-      `<div style="display:flex;align-items:center;gap:8px;margin-top:4px">${badgeHtml}</div>`;
-    fig.appendChild(cap);
-    container.appendChild(fig);
+    a3d.appendChild(card);
   });
 
   const count = list.length;
   document.getElementById('count-label').textContent =
     count + ' projet' + (count > 1 ? 's' : '');
+  resetRingCaption();
+}
+
+// ── ring caption (below the ring) ──
+function setRingCaption(p) {
+  const full = p.classe && FULL[p.classe] ? FULL[p.classe] + ' · ' : '';
+  document.getElementById('ring-caption').innerHTML =
+    `<div class="rc-names">${p.names}</div>` +
+    `<div class="rc-meta">${badgeHtml(p.classe)}<span class="rc-title">${full}${p.title}</span></div>`;
+}
+function resetRingCaption() {
+  document.getElementById('ring-caption').innerHTML =
+    `<div class="rc-hint">Survolez une carte pour la voir · cliquez pour l'agrandir</div>` +
+    `<div class="rc-hint sm">hover to reveal · click to enlarge</div>`;
 }
 
 function setFilter(btn, filter) {
@@ -371,7 +431,7 @@ function setFilter(btn, filter) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   if (lbIndex !== null) lbIndex = null;
-  buildMasonry();
+  buildRing();
 }
 
 // ── lightbox ──
@@ -426,6 +486,9 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
 // stop click on content from propagating to backdrop
 document.querySelector('.lb-body').addEventListener('click', e => e.stopPropagation());
 
+// reset the ring caption to its hint when the pointer leaves the ring
+document.querySelector('.scene').addEventListener('mouseleave', resetRingCaption);
+
 // keyboard nav
 document.addEventListener('keydown', e => {
   if (!document.getElementById('lightbox').classList.contains('open')) return;
@@ -439,7 +502,7 @@ function enterGallery() {
   document.getElementById('stage').classList.add('gone');
   const g = document.getElementById('gallery');
   g.classList.add('visible');
-  buildMasonry();
+  buildRing();
 }
 
 function replayIntro() {
