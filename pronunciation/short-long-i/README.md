@@ -39,10 +39,16 @@ Live: https://colibrissimo.github.io/geii/pronunciation/short-long-i/
   w**o**men, b**u**sy, marri**a**ge, and bus**i**ness (where the *u* says
   nothing at all).
 
+## Title slide, rebuilt 9 Aug 2026 (Sarah's composition)
+Hands dropped. The leg enters top-left with the I-ball bobbing just off the toe
+— keepie-uppie, kicking rightwards into the title — and the title plus START sit
+in a right-hand column. The trainer is **not** mirrored: its toe already points
+down-right, so `scaleX(-1)` put the ball behind the heel.
+
 ## Images still carrying someone else's branding
-Sarah is redoing these; the deck reads whatever file is at the path.
-- `assets/img/yellow_tape.png`, `assets/img/pink_tape.png` — "GENIALLY MIX Vol. 1 / 2"
-- `assets/img/mixtape.gif` — "colorSTREET Mixtape" (index + thanks slide)
+The deck reads whatever file sits at the path, so replacing a file is enough.
+- ~~`yellow_tape.png`, `pink_tape.png` — "GENIALLY MIX Vol. 1 / 2"~~ **done by Sarah, labels now blank**
+- `assets/img/mixtape.gif` — "colorSTREET Mixtape" (index + thanks slide) — still to do
 
 ## Not carried over
 - The "+ info" pop-ups on the two "Meet…" slides (they held no content that
