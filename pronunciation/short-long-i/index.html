@@ -180,6 +180,25 @@ h1,h2,h3{line-height:1.02;letter-spacing:-.01em}
 .letters{font:700 34px/1.5 'Montserrat',sans-serif;letter-spacing:.22em;margin-top:12px}
 .oddgrid{display:flex;flex-wrap:wrap;gap:11px;margin-top:14px}
 
+/* ─────────── rule-breakers ─────────── */
+.breakers{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.breaker{
+  background:var(--blue);border:none;cursor:pointer;border-radius:6px;
+  padding:22px 26px;display:flex;flex-direction:column;gap:8px;text-align:left;
+  transition:transform .13s,background .15s;
+}
+.breaker .spell{font:italic 800 44px/1 'Montserrat',sans-serif;color:#fff}
+.breaker .spell b{color:var(--yellow);font-weight:800}
+.breaker .spell s{color:rgba(255,255,255,.42);text-decoration-thickness:3px}
+.breaker .why{font:600 17px/1.3 'Montserrat',sans-serif;color:#BFD0FF}
+.breaker .why b{color:var(--yellow)}
+.breaker .why s{color:#8fa3e0}
+.breaker:hover{transform:translateY(-4px);background:#1450F5}
+.breaker:active{transform:translateY(0)}
+.breaker:focus-visible{outline:4px solid var(--yellow);outline-offset:3px}
+.breaker.playing{background:var(--pink)}
+.breaker.playing .why{color:#fff}
+
 /* ─────────── quiz ─────────── */
 .quizwrap{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;height:100%}
 .tapebtn{background:none;border:none;cursor:pointer;padding:0;transition:transform .15s}
@@ -243,7 +262,8 @@ h1,h2,h3{line-height:1.02;letter-spacing:-.01em}
           <button data-goto="10"><span class="n">3</span><span class="t">Beach or?</span></button>
           <button data-goto="11"><span class="n">4</span><span class="t">Comparison</span></button>
           <button data-goto="12"><span class="n">5</span><span class="t">Notes</span></button>
-          <button data-goto="13"><span class="n">6</span><span class="t">Quiz</span></button>
+          <button data-goto="13"><span class="n">6</span><span class="t">Now forget everything</span></button>
+          <button data-goto="14"><span class="n">7</span><span class="t">Quiz</span></button>
         </nav>
         <img src="assets/img/mixtape.gif" alt="" style="width:300px;justify-self:center">
       </div>
@@ -416,7 +436,34 @@ h1,h2,h3{line-height:1.02;letter-spacing:-.01em}
       </div>
     </section>
 
-    <!-- 13 ─ QUIZ -->
+    <!-- 13 ─ NOW FORGET EVERYTHING -->
+    <section class="slide" id="s13b" style="background:var(--ink)" aria-label="Now forget everything">
+      <div class="dots" style="color:#1D2160;background-size:52px 52px"></div>
+      <div class="frame" style="padding:38px 54px;display:flex;flex-direction:column">
+        <h2 class="display" style="font-size:56px;color:var(--yellow);text-align:center;line-height:.98">
+          Now forget<br>everything
+        </h2>
+        <p style="font:italic 600 21px/1.4 'Montserrat',sans-serif;color:#fff;text-align:center;margin:14px 0 26px">
+          Four words where the vowel is short /ɪ/ — and not one of them spells it
+          with an&nbsp;‘i’ where you would expect. <span style="color:var(--yellow)">Which letter is saying /ɪ/?</span>
+        </p>
+        <div class="breakers">
+          <button class="breaker" data-audio="short/women.mp3">
+            <span class="spell">w<b>o</b>men</span><span class="why">the <b>o</b> says /ɪ/</span></button>
+          <button class="breaker" data-audio="short/busy.mp3">
+            <span class="spell">b<b>u</b>sy</span><span class="why">the <b>u</b> says /ɪ/</span></button>
+          <button class="breaker" data-audio="short/marriage.mp3">
+            <span class="spell">marri<b>a</b>ge</span><span class="why">the <b>a</b> says /ɪ/</span></button>
+          <button class="breaker" data-audio="short/business.mp3">
+            <span class="spell">b<s>u</s>s<b>i</b>ness</span><span class="why">the <b>i</b> says /ɪ/ — the <s>u</s> says nothing</span></button>
+        </div>
+        <p style="font:italic 600 19px/1.4 'Montserrat',sans-serif;color:#fff;text-align:center;margin-top:auto;opacity:.85">
+          Click each one. Same vowel as <em>sit</em>, every time.
+        </p>
+      </div>
+    </section>
+
+    <!-- 14 ─ QUIZ -->
     <section class="slide" id="s13" style="background:var(--blue)" aria-label="Quiz">
       <div class="dots" style="color:#B7E82A;opacity:.85"></div>
       <div class="frame pad" style="background:var(--cyan)">
@@ -572,7 +619,7 @@ groups.forEach(function(g,n){
 });
 
 /* chips (comparison + notes) */
-document.querySelectorAll('.chip[data-audio]').forEach(function(c){
+document.querySelectorAll('.chip[data-audio],.breaker[data-audio]').forEach(function(c){
   c.addEventListener('click',function(){play(c.dataset.audio,c)});
 });
 

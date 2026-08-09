@@ -32,6 +32,18 @@ Live: https://colibrissimo.github.io/geii/pronunciation/short-long-i/
 - `business / women / marriage / busy` promoted onto the NOTES slide as the
   "odd spellings" set, with audio.
 
+## Added beyond the Genially
+- **Slide 13, "Now forget everything"** — the four rule-breakers promoted out of
+  the notes into their own slide, immediately before the quiz. Each word is
+  clickable and marks the letter actually carrying the /ɪ/:
+  w**o**men, b**u**sy, marri**a**ge, and bus**i**ness (where the *u* says
+  nothing at all).
+
+## Images still carrying someone else's branding
+Sarah is redoing these; the deck reads whatever file is at the path.
+- `assets/img/yellow_tape.png`, `assets/img/pink_tape.png` — "GENIALLY MIX Vol. 1 / 2"
+- `assets/img/mixtape.gif` — "colorSTREET Mixtape" (index + thanks slide)
+
 ## Not carried over
 - The "+ info" pop-ups on the two "Meet…" slides (they held no content that
   isn't already on the slide).
