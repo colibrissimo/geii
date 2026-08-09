@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Short &amp; Long I Sounds — GEII · IUT Lille</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#FF2D8E; --yellow:#E4FF1A; --cyan:#25D6C4; --blue:#0A38CE; --ink:#10123A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:#000;overflow:hidden;
+  font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ─────────── fixed 16:9 stage, scaled to fit (projector-safe) ─────────── */
+#viewport{position:fixed;inset:0;overflow:hidden}
+#stage{
+  width:1280px;height:720px;overflow:hidden;
+  position:absolute;left:50%;top:50%;
+  margin:-360px 0 0 -640px;      /* centre the unscaled box, then scale about it */
+  transform-origin:center center;
+}
+.slide{
+  position:absolute;inset:0;opacity:0;visibility:hidden;
+  transition:opacity .35s ease;
+  display:grid;
+}
+.slide.on{opacity:1;visibility:visible}
+
+/* ─────────── shared furniture ─────────── */
+.frame{position:absolute;inset:44px;display:grid}
+.pad{padding:54px 62px}
+
+.home{
+  position:absolute;top:26px;left:26px;z-index:30;
+  width:46px;height:46px;border-radius:50%;border:3px solid #fff;
+  background:var(--ink);color:#fff;cursor:pointer;
+  display:grid;place-items:center;font-size:20px;line-height:1;
+  box-shadow:0 3px 0 rgba(0,0,0,.35);
+  transition:transform .15s;
+}
+.home:hover{transform:scale(1.1)}
+.home:focus-visible{outline:4px solid var(--yellow);outline-offset:3px}
+
+.nav{
+  position:fixed;top:50%;transform:translateY(-50%);z-index:40;
+  width:52px;height:96px;border:none;cursor:pointer;
+  background:rgba(16,18,58,.55);color:#fff;font-size:26px;
+  display:grid;place-items:center;transition:background .15s;
+}
+.nav:hover{background:var(--pink)}
+.nav:focus-visible{outline:4px solid var(--yellow);outline-offset:-4px}
+#prev{left:0;border-radius:0 8px 8px 0}
+#next{right:0;border-radius:8px 0 0 8px}
+.nav[disabled]{opacity:.15;pointer-events:none}
+
+#counter{
+  position:fixed;bottom:14px;right:18px;z-index:40;
+  color:#fff;font-size:13px;font-weight:600;letter-spacing:.08em;
+  background:rgba(16,18,58,.6);padding:6px 12px;border-radius:20px;
+}
+
+h1,h2,h3{line-height:1.02;letter-spacing:-.01em}
+.display{font-weight:800;font-style:italic;text-transform:uppercase}
+
+/* decorative dot / stripe fields */
+.dots{position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,currentColor 26%,transparent 27%);
+  background-size:62px 62px;opacity:1}
+
+/* ─────────── clickable word buttons ─────────── */
+.wordlist{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.wordrow{display:flex;align-items:center;gap:0}
+.word{
+  font:italic 700 27px/1 'Montserrat',sans-serif;
+  color:#fff;background:transparent;border:none;cursor:pointer;
+  padding:9px 20px 9px 16px;border-radius:30px;
+  display:inline-flex;align-items:center;gap:11px;
+  transition:background .15s,transform .12s;
+}
+.word .dot{
+  width:30px;height:30px;border-radius:50%;flex:none;
+  background:var(--yellow);border:5px solid #fff;
+  display:grid;place-items:center;transition:transform .15s;
+}
+.word .bar{height:5px;width:var(--w,120px);background:var(--pink);border-radius:4px;transition:width .15s}
+.word:hover{background:rgba(255,255,255,.14)}
+.word:hover .dot{transform:scale(1.18)}
+.word:active{transform:translateY(2px)}
+.word:focus-visible{outline:4px solid var(--yellow);outline-offset:2px}
+.word.playing .dot{background:var(--yellow);animation:pulse .5s ease infinite alternate}
+.word.mute{cursor:default;opacity:.62;font-weight:600;padding-left:4px}
+.word.mute .dot{display:none}
+.word.mute:hover{background:transparent}
+@keyframes pulse{to{transform:scale(1.3)}}
+
+.speaker{font-size:15px;opacity:.55;margin-left:4px}
+
+/* ─────────── slide 1 : title ─────────── */
+#s1{background:var(--pink)}
+#s1 .inner{position:absolute;inset:44px 90px 44px 90px;background:var(--cyan);display:grid;place-items:center}
+#s1 .inner{padding:0 300px 0 60px}
+#s1 h1{font-size:78px;color:var(--yellow);text-align:center}
+.start{
+  margin-top:26px;background:var(--pink);color:var(--yellow);
+  font:italic 800 34px/1 'Montserrat',sans-serif;letter-spacing:.02em;
+  border:none;padding:14px 44px;cursor:pointer;text-transform:uppercase;
+  transition:transform .15s;
+}
+.start:hover{transform:scale(1.06)}
+.start:focus-visible{outline:4px solid var(--ink);outline-offset:4px}
+.tape-l{position:absolute;left:-10px;bottom:60px;width:230px;transform:rotate(-8deg)}
+.trainers{position:absolute;right:26px;top:-6px;width:330px}
+
+/* ─────────── slide 2 : index ─────────── */
+#s2{background:var(--yellow)}
+#s2 .inner{position:absolute;inset:44px;background:var(--blue);display:grid;
+  grid-template-columns:150px 1fr 330px;align-items:center;padding:0 40px}
+#s2 .vert{
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font:800 italic 82px/1 'Montserrat',sans-serif;color:var(--yellow);
+  justify-self:center;text-transform:uppercase;
+}
+.toc{display:flex;flex-direction:column;gap:6px}
+.toc button{
+  display:flex;align-items:baseline;gap:26px;background:transparent;border:none;
+  cursor:pointer;text-align:left;padding:7px 14px;border-radius:10px;
+  transition:background .15s,transform .12s;
+}
+.toc button:hover{background:rgba(255,255,255,.13);transform:translateX(8px)}
+.toc button:focus-visible{outline:4px solid var(--yellow);outline-offset:2px}
+.toc .n{font:800 46px/1 'Montserrat',sans-serif;color:var(--yellow);width:44px;flex:none}
+.toc .t{font:italic 600 29px/1.1 'Montserrat',sans-serif;color:#fff;text-transform:uppercase}
+
+/* ─────────── section dividers ─────────── */
+.divider .panel{position:absolute;inset:56px 70px;display:grid;
+  grid-template-columns:1fr 460px;align-items:center;gap:30px;padding:0 60px;
+  transform:rotate(-1.4deg)}
+.divider h2{font-size:88px;text-align:center}
+.divider .media{width:100%;border-radius:6px;overflow:hidden}
+.divider video{width:100%;display:block}
+
+/* ─────────── content two-column ─────────── */
+.two{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:46px;height:100%}
+.two video{width:100%;border-radius:6px;display:block;background:#000}
+.lead{font:italic 600 27px/1.5 'Montserrat',sans-serif}
+
+.sectionTitle{font-size:52px;margin-bottom:10px}
+.sub{font:italic 600 27px/1.4 'Montserrat',sans-serif;margin-bottom:26px}
+
+/* ─────────── comparison ─────────── */
+.cmp{display:grid;grid-template-columns:1fr 1fr;height:100%;gap:0}
+.cmp .card{padding:52px 46px;display:flex;flex-direction:column;gap:16px}
+.cmp .card:first-child{background:var(--pink);transform:rotate(-1deg)}
+.cmp .card:last-child{background:var(--cyan);transform:rotate(1deg)}
+.cmp h3{font:800 italic 46px/1 'Montserrat',sans-serif;text-transform:uppercase}
+.cmp p{font:italic 500 22px/1.45 'Montserrat',sans-serif}
+.chips{display:flex;gap:16px;margin-top:auto;flex-wrap:wrap}
+.chip{
+  background:var(--yellow);border:none;cursor:pointer;
+  font:italic 700 25px/1 'Montserrat',sans-serif;color:var(--ink);
+  padding:13px 26px;border-radius:4px;transition:transform .12s;
+}
+.chip:hover{transform:translateY(-4px)}
+.chip:active{transform:translateY(1px)}
+.chip:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.chip.playing{background:var(--pink);color:#fff}
+
+/* ─────────── notes ─────────── */
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:44px;height:100%;align-items:start}
+.note h4{font:800 italic 25px/1.2 'Montserrat',sans-serif;text-transform:uppercase;margin-bottom:14px}
+.note p{font:italic 500 21px/1.5 'Montserrat',sans-serif}
+.letters{font:700 34px/1.5 'Montserrat',sans-serif;letter-spacing:.22em;margin-top:12px}
+.oddgrid{display:flex;flex-wrap:wrap;gap:11px;margin-top:14px}
+
+/* ─────────── quiz ─────────── */
+.quizwrap{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;height:100%}
+.tapebtn{background:none;border:none;cursor:pointer;padding:0;transition:transform .15s}
+.tapebtn img{width:100%;display:block}
+.tapebtn:hover{transform:scale(1.04) rotate(-2deg)}
+.tapebtn:focus-visible{outline:5px solid var(--yellow);outline-offset:6px}
+.tapehint{font:800 19px/1.3 'Montserrat',sans-serif;text-transform:uppercase;text-align:center;margin-top:16px}
+.qcard{background:var(--yellow);padding:40px 38px;transform:rotate(-2deg)}
+.qcard h3{font:700 30px/1.28 'Montserrat',sans-serif;color:var(--ink);margin-bottom:26px}
+.opt{
+  display:block;width:100%;text-align:left;margin-bottom:14px;
+  background:var(--pink);color:#fff;border:none;cursor:pointer;
+  font:600 26px/1 'Montserrat',sans-serif;padding:19px 24px;
+  transition:transform .12s,background .15s;
+}
+.opt:hover{transform:translateX(6px)}
+.opt:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.opt.right{background:#0FA958}
+.opt.wrong{background:#454545}
+.qmeta{display:flex;justify-content:space-between;align-items:center;margin-top:20px;
+  font:700 17px/1 'Montserrat',sans-serif;color:var(--ink)}
+.qfb{font:800 italic 24px/1.3 'Montserrat',sans-serif;min-height:34px;margin-top:14px;color:var(--ink)}
+.again{background:var(--ink);color:#fff;border:none;cursor:pointer;
+  font:700 17px/1 'Montserrat',sans-serif;padding:12px 22px;border-radius:24px}
+.again:focus-visible{outline:4px solid var(--pink);outline-offset:3px}
+
+/* ─────────── thanks ─────────── */
+#thanks{background:var(--pink)}
+#thanks .inner{position:absolute;inset:44px;background:var(--cyan);display:grid;place-items:center;align-content:center;gap:20px}
+#thanks h2{font-size:110px;color:var(--yellow);transform:rotate(-6deg)}
+#thanks img{width:260px}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="viewport">
+  <div id="stage">
+
+    <!-- 1 ─ TITLE -->
+    <section class="slide" id="s1" aria-label="Title">
+      <div class="dots" style="color:#E4FF1A;opacity:.85;background-size:74px 74px;width:420px;height:300px;inset:auto auto 0 0"></div>
+      <div class="inner">
+        <h1 class="display">Short &amp; Long<br>I Sounds</h1>
+        <button class="start" data-goto="2">Start</button>
+      </div>
+      <img class="trainers" src="assets/img/trainers_tracksuit.png" alt="">
+      <img class="tape-l" src="assets/img/hands_holding_I.png" alt="">
+    </section>
+
+    <!-- 2 ─ INDEX -->
+    <section class="slide" id="s2" aria-label="Index">
+      <div class="inner">
+        <div class="vert">Index</div>
+        <nav class="toc" aria-label="Lesson contents">
+          <button data-goto="3"><span class="n">1</span><span class="t">Long I sound</span></button>
+          <button data-goto="7"><span class="n">2</span><span class="t">Short I sound</span></button>
+          <button data-goto="10"><span class="n">3</span><span class="t">Beach or?</span></button>
+          <button data-goto="11"><span class="n">4</span><span class="t">Comparison</span></button>
+          <button data-goto="12"><span class="n">5</span><span class="t">Notes</span></button>
+          <button data-goto="13"><span class="n">6</span><span class="t">Quiz</span></button>
+        </nav>
+        <img src="assets/img/mixtape.gif" alt="" style="width:300px;justify-self:center">
+      </div>
+    </section>
+
+    <!-- 3 ─ LONG I divider -->
+    <section class="slide divider" id="s3" style="background:var(--cyan)" aria-label="Long I sound">
+      <div class="dots" style="color:#B7E82A;opacity:.9"></div>
+      <div class="panel" style="background:var(--blue)">
+        <h2 class="display" style="color:var(--yellow)">Long<br>I<br>Sound</h2>
+        <div class="media" style="border-radius:50%;overflow:hidden;background:#C7359E">
+          <video src="assets/img/swimming_pool.mp4" autoplay muted loop playsinline></video>
+        </div>
+      </div>
+      <img src="assets/img/jump.png" alt="" style="position:absolute;right:40px;top:20px;width:190px">
+    </section>
+
+    <!-- 4 ─ MEET LONG I -->
+    <section class="slide" id="s4" style="background:var(--cyan)" aria-label="Meet long I">
+      <div class="dots" style="color:#B7E82A;opacity:.85"></div>
+      <div class="frame pad" style="background:var(--blue)">
+        <div class="two">
+          <video src="assets/video/long-i.mp4" controls preload="metadata" playsinline></video>
+          <div>
+            <h2 class="display sectionTitle" style="color:var(--yellow)">Meet long I:</h2>
+            <p class="sub" style="color:#fff">Sound symbol /iː/</p>
+            <p class="lead" style="color:#fff">Make your mouth wide, like a smile.<br>
+              Your tongue touches the side of your teeth.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 ─ LONG spelling ee / ea -->
+    <section class="slide" id="s5" style="background:var(--pink)" aria-label="Long I spelling">
+      <div class="dots" style="color:#FF8FBF;opacity:.75"></div>
+      <div class="frame" style="background:var(--yellow);display:grid;grid-template-columns:340px 1fr;gap:0;align-items:stretch">
+        <div style="display:grid;place-items:center;padding:26px">
+          <img src="assets/img/i_life_rotating.gif" alt="" style="width:100%;border-radius:4px">
+        </div>
+        <div class="pad" style="background:var(--blue);align-self:stretch;display:flex;flex-direction:column;justify-content:center">
+          <h2 class="display sectionTitle" style="color:var(--yellow)">Sound &amp; spelling</h2>
+          <p class="sub" style="color:#fff">/iː/ is usually spelled ‘ee’ or ‘ea’. <span class="speaker">click a word to hear it</span></p>
+          <div class="wordlist" data-words="see,agree,eat,seat,team" data-set="long"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 ─ other long spellings -->
+    <section class="slide" id="s6" style="background:var(--blue)" aria-label="Other spellings">
+      <div class="frame" style="background:var(--yellow);padding:36px">
+        <div style="background:var(--pink);padding:40px 54px;display:flex;flex-direction:column;justify-content:center">
+          <h2 class="display" style="font-size:40px;color:var(--blue);margin-bottom:8px">Other spellings with the long I:</h2>
+          <p class="sub" style="color:#fff;font-size:20px;margin-bottom:18px">click the words in white to hear them</p>
+          <div class="wordlist" id="otherlong"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 ─ SHORT I divider -->
+    <section class="slide divider" id="s7" style="background:var(--blue)" aria-label="Short I sound">
+      <div class="dots" style="color:#B7E82A;opacity:.9"></div>
+      <div class="panel" style="background:var(--pink)">
+        <h2 class="display" style="color:var(--yellow)">Short<br>I<br>Sound</h2>
+        <div class="media"><video src="assets/img/i_breaking.mp4" autoplay muted loop playsinline></video></div>
+      </div>
+      <img src="assets/img/jump_arms_back.png" alt="" style="position:absolute;right:36px;top:110px;width:250px">
+    </section>
+
+    <!-- 8 ─ MEET SHORT I -->
+    <section class="slide" id="s8" style="background:var(--pink)" aria-label="Meet short I">
+      <div class="frame pad" style="background:var(--yellow)">
+        <div class="two">
+          <video src="assets/video/short-i.mp4" controls preload="metadata" playsinline></video>
+          <div>
+            <h2 class="display sectionTitle" style="color:var(--pink)">Meet short /ɪ/</h2>
+            <p class="sub" style="color:var(--ink)">Sound symbol /ɪ/</p>
+            <p class="lead" style="color:var(--ink)">Make your mouth a bit less wide than for /iː/.<br>
+              Your tongue is a bit further back in your mouth than for /iː/.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 ─ SHORT spelling -->
+    <section class="slide" id="s9" style="background:var(--yellow)" aria-label="Short I spelling">
+      <div class="dots" style="color:#FF8FBF;opacity:.8"></div>
+      <div class="frame" style="background:var(--blue);display:grid;grid-template-columns:330px 1fr;gap:0;align-items:center">
+        <div style="display:grid;place-items:center;padding:30px">
+          <video src="assets/img/mozart_i.mp4" autoplay muted loop playsinline style="width:100%;border-radius:4px"></video>
+        </div>
+        <div class="pad" style="display:flex;flex-direction:column;justify-content:center">
+          <h2 class="display sectionTitle" style="color:var(--yellow)">Sound &amp; spelling</h2>
+          <p class="sub" style="color:#fff">/ɪ/ is usually spelled ‘i’. <span class="speaker">click a word to hear it</span></p>
+          <div class="wordlist" data-words="if,listen,miss,dinner,swim" data-set="short"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 ─ BEACH OR? main video -->
+    <section class="slide" id="s10" style="background:var(--blue)" aria-label="Beach or?">
+      <div class="dots" style="color:#25D6C4;opacity:.55"></div>
+      <div class="frame" style="background:var(--pink);padding:26px">
+        <div style="background:var(--yellow);padding:24px 30px 30px;display:flex;flex-direction:column;gap:14px">
+          <h2 class="display" style="font-size:38px;color:var(--blue);text-align:center">Ship vs sheep? Long and short “I” vowels</h2>
+          <video src="assets/video/ship-vs-sheep.mp4" controls preload="metadata" playsinline
+                 style="width:100%;flex:1;min-height:0;background:#000;border-radius:4px"></video>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 ─ COMPARISON -->
+    <section class="slide" id="s11" style="background:var(--yellow)" aria-label="Comparison">
+      <div class="dots" style="color:#25D6C4;opacity:.55"></div>
+      <div class="frame">
+        <div class="cmp">
+          <div class="card">
+            <h3 style="color:var(--yellow)">Short I sound</h3>
+            <p style="color:#fff;font-size:34px;font-weight:800">/ɪ/</p>
+            <p style="color:#fff">A relaxed, quick sound as in “sit” or “ship”.<br><br>
+              French equivalent: similar to the ‘i’ in <em>vite</em>, but shorter and more relaxed.</p>
+            <div class="chips">
+              <button class="chip" data-audio="short/sit.mp3">sit</button>
+              <button class="chip" data-audio="short/ship.mp3">ship</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="color:var(--blue)">Long I sound</h3>
+            <p style="color:var(--ink);font-size:34px;font-weight:800">/iː/</p>
+            <p style="color:var(--ink)">Similar to the French ‘i’ but held longer.<br><br>
+              A tense, sustained sound as in “seat” or “feel”.</p>
+            <div class="chips">
+              <button class="chip" data-audio="long/seat.mp3">seat</button>
+              <button class="chip" data-audio="long/feel.mp3">feel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 ─ NOTES -->
+    <section class="slide" id="s12" style="background:var(--blue)" aria-label="Notes">
+      <div class="dots" style="color:#B7E82A;opacity:.85"></div>
+      <div class="frame pad" style="background:var(--cyan)">
+        <div style="display:flex;flex-direction:column;height:100%">
+          <h2 class="display" style="font-size:46px;color:var(--blue);text-align:center;margin-bottom:22px">Notes</h2>
+          <div class="notes">
+            <div class="note">
+              <h4 style="color:var(--blue)">Eight letters of the alphabet have the sound /iː/</h4>
+              <p class="letters" style="color:var(--ink)">B C D E G P T V</p>
+              <h4 style="color:var(--blue);margin-top:30px">At the end of a word</h4>
+              <p style="color:var(--ink)">In an unstressed final syllable — <em>happy, coffee, busy</em> — the
+                sound is like /iː/ but shorter.</p>
+              <img src="assets/img/pink_tape.png" alt="" style="width:190px;margin-top:22px">
+            </div>
+            <div class="note">
+              <h4 style="color:var(--blue)">Careful — /ɪ/ hiding in odd spellings</h4>
+              <p style="color:var(--ink)">These four are all short /ɪ/, and none of them are spelled the way you would expect:</p>
+              <div class="oddgrid">
+                <button class="chip" data-audio="short/business.mp3">business</button>
+                <button class="chip" data-audio="short/women.mp3">women</button>
+                <button class="chip" data-audio="short/marriage.mp3">marriage</button>
+                <button class="chip" data-audio="short/busy.mp3">busy</button>
+              </div>
+              <p style="color:var(--ink);margin-top:18px">Click each one and listen: the vowel you hear is
+                the same /ɪ/ as in <em>sit</em>, whatever the spelling suggests.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 ─ QUIZ -->
+    <section class="slide" id="s13" style="background:var(--blue)" aria-label="Quiz">
+      <div class="dots" style="color:#B7E82A;opacity:.85"></div>
+      <div class="frame pad" style="background:var(--cyan)">
+        <h2 class="display" style="font-size:44px;color:var(--blue);text-align:center;margin-bottom:10px">Quiz</h2>
+        <div class="quizwrap">
+          <div>
+            <button class="tapebtn" id="qplay" aria-label="Play the word again">
+              <img src="assets/img/yellow_tape.png" alt="">
+            </button>
+            <p class="tapehint" style="color:var(--blue)">Click the tape to listen</p>
+          </div>
+          <div class="qcard">
+            <h3 id="qtext">Listen to the audio. Is the sound you hear a short /ɪ/ or a long /iː/?</h3>
+            <div id="qopts"></div>
+            <p class="qfb" id="qfb"></p>
+            <div class="qmeta">
+              <span id="qscore">Question 1 / 10 · score 0</span>
+              <button class="again" id="qagain">New round</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 ─ THANKS -->
+    <section class="slide" id="thanks" aria-label="Thanks">
+      <div class="inner">
+        <h2 class="display">Thanks!</h2>
+        <img src="assets/img/mixtape.gif" alt="">
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<button class="nav" id="prev" aria-label="Previous slide">‹</button>
+<button class="nav" id="next" aria-label="Next slide">›</button>
+<div id="counter" aria-live="off"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ── stage scaling ───────────────────────────────────────── */
+var stage=document.getElementById('stage');
+function fit(){
+  var s=Math.min(innerWidth/1280,innerHeight/720);
+  stage.style.transform='scale('+s+')';
+}
+addEventListener('resize',fit);fit();
+
+/* ── slides ──────────────────────────────────────────────── */
+var slides=[].slice.call(document.querySelectorAll('.slide'));
+var i=0;
+
+// home button on every slide except the title
+slides.forEach(function(sl,n){
+  if(n===0)return;
+  var b=document.createElement('button');
+  b.className='home';b.type='button';b.innerHTML='⌂';
+  b.setAttribute('aria-label','Back to index');
+  b.addEventListener('click',function(){go(1)});
+  sl.appendChild(b);
+});
+
+function go(n){
+  n=Math.max(0,Math.min(slides.length-1,n));
+  if(n===i && slides[i].classList.contains('on'))return;
+  slides[i].classList.remove('on');
+  // pause any playing lesson video when leaving
+  slides[i].querySelectorAll('video[controls]').forEach(function(v){v.pause()});
+  i=n;
+  slides[i].classList.add('on');
+  document.getElementById('prev').disabled=(i===0);
+  document.getElementById('next').disabled=(i===slides.length-1);
+  document.getElementById('counter').textContent=(i+1)+' / '+slides.length;
+  if(location.hash!=='#'+(i+1))history.replaceState(null,'','#'+(i+1));
+  if(slides[i].id==='s13')newRound();
+}
+document.getElementById('prev').addEventListener('click',function(){go(i-1)});
+document.getElementById('next').addEventListener('click',function(){go(i+1)});
+document.querySelectorAll('[data-goto]').forEach(function(b){
+  b.addEventListener('click',function(){go(+b.dataset.goto-1)});
+});
+addEventListener('keydown',function(e){
+  var t=e.target.tagName;
+  if(t==='VIDEO')return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'){go(i+1);e.preventDefault()}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){go(i-1);e.preventDefault()}
+  else if(e.key===' '&&t!=='BUTTON'){go(i+1);e.preventDefault()}
+  else if(e.key==='Home'){go(1);e.preventDefault()}
+});
+
+/* ── audio ───────────────────────────────────────────────── */
+var player=new Audio(); var lastBtn=null;
+function play(path,btn){
+  if(lastBtn){lastBtn.classList.remove('playing')}
+  player.pause();
+  player.src='assets/audio/'+path;
+  player.currentTime=0;
+  var p=player.play();
+  if(p&&p.catch)p.catch(function(){});
+  if(btn){btn.classList.add('playing');lastBtn=btn}
+}
+player.addEventListener('ended',function(){if(lastBtn)lastBtn.classList.remove('playing')});
+
+/* ── build clickable word lists ──────────────────────────── */
+function wordBtn(word,set,widthPx){
+  var b=document.createElement('button');
+  b.type='button';b.className='word';
+  b.innerHTML='<span class="dot"></span><span class="bar" style="--w:'+widthPx+'px"></span>'+
+              '<span>'+word+'</span><span class="speaker" aria-hidden="true">🔊</span>';
+  b.setAttribute('aria-label','Play the word '+word);
+  b.addEventListener('click',function(){play(set+'/'+word.toLowerCase()+'.mp3',b)});
+  return b;
+}
+document.querySelectorAll('.wordlist[data-words]').forEach(function(box){
+  var set=box.dataset.set;
+  box.dataset.words.split(',').forEach(function(w,n){
+    box.appendChild(wordBtn(w,set,110+n*26));
+  });
+});
+
+/* slide 6 — grouped spellings; only some words have recordings */
+var HAVE_LONG=['field','key','pizza','kilo','metre','these','people','litre'];
+var groups=[
+  ['IE',['field','piece']],
+  ['E', ['these','metre','complete']],
+  ['EY',['key']],
+  ['I', ['pizza','kilo','machine','magazine']],
+  ['EO',['people']]
+];
+var ol=document.getElementById('otherlong');
+groups.forEach(function(g,n){
+  var row=document.createElement('div');row.className='wordrow';
+  var lab=document.createElement('span');
+  lab.textContent=g[0];
+  lab.style.cssText='font:800 30px/1 Montserrat,sans-serif;color:var(--blue);width:72px;flex:none';
+  row.appendChild(lab);
+  g[1].forEach(function(w){
+    if(HAVE_LONG.indexOf(w)>-1){
+      var b=wordBtn(w,'long',34);
+      b.querySelector('.bar').style.setProperty('--w','30px');
+      row.appendChild(b);
+    }else{
+      var s=document.createElement('span');
+      s.className='word mute';
+      s.innerHTML='<span class="dot"></span><span>'+w+'</span>';
+      row.appendChild(s);
+    }
+  });
+  ol.appendChild(row);
+});
+
+/* chips (comparison + notes) */
+document.querySelectorAll('.chip[data-audio]').forEach(function(c){
+  c.addEventListener('click',function(){play(c.dataset.audio,c)});
+});
+
+/* ── quiz : randomised from the whole recorded pool ──────── */
+var LONG=['agree','beach','deep','easy','eat','equal','evening','feel','field','key','kilo','leak',
+          'litre','metre','people','pizza','sea','seat','see','seek','sheep','teach','team','teen','these'];
+var SHORT=['business','busy','dinner','dip','fit','hip','if','lick','listen','marriage','miss','pitch',
+           'ship','sick','sit','swim','ticket','tin','women'];
+var ROUND=10, queue=[], qi=0, score=0, current=null, answered=false;
+
+function shuffle(a){for(var j=a.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1));var t=a[j];a[j]=a[k];a[k]=t}return a}
+
+function newRound(){
+  var pool=LONG.map(function(w){return{w:w,set:'long'}})
+        .concat(SHORT.map(function(w){return{w:w,set:'short'}}));
+  queue=shuffle(pool).slice(0,ROUND);
+  qi=0;score=0;
+  ask();
+}
+function ask(){
+  answered=false;
+  current=queue[qi];
+  document.getElementById('qfb').textContent='';
+  var opts=document.getElementById('qopts');
+  opts.innerHTML='';
+  shuffle([['short','Short /ɪ/'],['long','Long /iː/']]).forEach(function(o){
+    var b=document.createElement('button');
+    b.className='opt';b.type='button';b.textContent=o[1];
+    b.addEventListener('click',function(){answer(o[0],b)});
+    opts.appendChild(b);
+  });
+  document.getElementById('qscore').textContent='Question '+(qi+1)+' / '+ROUND+' · score '+score;
+  play(current.set+'/'+current.w+'.mp3',null);
+}
+function answer(choice,btn){
+  if(answered)return;
+  answered=true;
+  var ok=(choice===current.set);
+  if(ok)score++;
+  btn.classList.add(ok?'right':'wrong');
+  document.getElementById('qfb').textContent=
+    (ok?'Yes — ':'No — ')+'“'+current.w+'” is '+(current.set==='long'?'long /iː/':'short /ɪ/')+'.';
+  document.getElementById('qscore').textContent='Question '+(qi+1)+' / '+ROUND+' · score '+score;
+  setTimeout(function(){
+    qi++;
+    if(qi<ROUND){ask()}
+    else{
+      document.getElementById('qopts').innerHTML='';
+      document.getElementById('qtext').textContent='Round finished.';
+      document.getElementById('qfb').textContent='You scored '+score+' out of '+ROUND+'. Click “New round” for ten different words.';
+    }
+  },1700);
+}
+document.getElementById('qplay').addEventListener('click',function(){
+  if(current)play(current.set+'/'+current.w+'.mp3',null);
+});
+document.getElementById('qagain').addEventListener('click',function(){
+  document.getElementById('qtext').textContent='Listen to the audio. Is the sound you hear a short /ɪ/ or a long /iː/?';
+  newRound();
+});
+
+/* ── boot ────────────────────────────────────────────────── */
+var start=parseInt((location.hash||'').replace('#',''),10);
+go(isNaN(start)?0:start-1);
+})();
+</script>
+</body>
+</html>
