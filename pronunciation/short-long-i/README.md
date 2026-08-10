@@ -27,8 +27,10 @@ Live: https://colibrissimo.github.io/geii/pronunciation/short-long-i/
   spelling slide.
 - **The home button is dark blue with a white ring on every slide**, so it never
   disappears into a pink background.
-- **Words with a yellow dot are clickable and play their recording.** Words
-  without a dot (piece, complete, machine, magazine) have no mp3 yet.
+- **Every word on the spelling slides is clickable and plays its recording.**
+  The last four gaps (piece, complete, machine, magazine) were filled 10 Aug 2026
+  with `say -v "Daniel (Enhanced)"` re-encoded to match the originals exactly
+  (24 kHz mono, 48 kbps); Sarah verified all four by ear before install.
 - `business / women / marriage / busy` promoted onto the NOTES slide as the
   "odd spellings" set, with audio.
 
@@ -48,7 +50,9 @@ down-right, so `scaleX(-1)` put the ball behind the heel.
 ## Images still carrying someone else's branding
 The deck reads whatever file sits at the path, so replacing a file is enough.
 - ~~`yellow_tape.png`, `pink_tape.png` — "GENIALLY MIX Vol. 1 / 2"~~ **done by Sarah, labels now blank**
-- `assets/img/mixtape.gif` — "colorSTREET Mixtape" (index + thanks slide) — still to do
+- ~~`assets/img/mixtape.gif` — "colorSTREET Mixtape"~~ **done 10 Aug 2026**: label
+  painted blank across all 60 frames with a measured `drawbox`, re-encoded on a
+  32-colour palette, 703 KB → 411 KB. All three cassettes now blank-label.
 
 ## Not carried over
 - The "+ info" pop-ups on the two "Meet…" slides (they held no content that

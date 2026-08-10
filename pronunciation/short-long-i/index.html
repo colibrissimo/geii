@@ -322,7 +322,7 @@ h1,h2,h3{line-height:1.02;letter-spacing:-.01em}
       <div class="frame" style="background:var(--yellow);padding:36px">
         <div style="background:var(--pink);padding:40px 54px;display:flex;flex-direction:column;justify-content:center">
           <h2 class="display" style="font-size:40px;color:var(--blue);margin-bottom:8px">Other spellings with the long I:</h2>
-          <p class="sub" style="color:#fff;font-size:20px;margin-bottom:18px">click the words in white to hear them</p>
+          <p class="sub" style="color:#fff;font-size:20px;margin-bottom:18px">click any word to hear it</p>
           <div class="wordlist" id="otherlong"></div>
         </div>
       </div>
@@ -593,7 +593,8 @@ document.querySelectorAll('.wordlist[data-words]').forEach(function(box){
 });
 
 /* slide 6 — grouped spellings; only some words have recordings */
-var HAVE_LONG=['field','key','pizza','kilo','metre','these','people','litre'];
+var HAVE_LONG=['field','key','pizza','kilo','metre','these','people','litre',
+               'piece','complete','machine','magazine'];
 var groups=[
   ['IE',['field','piece']],
   ['E', ['these','metre','complete']],
