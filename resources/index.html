@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English resources — GEII · IUT Lille</title>
+<style>
+/* ─────────────────────────────────────────────────────────────
+   TO ADD A RESOURCE: copy one <a class="card"> block below and
+   edit the href, the h2 and the two lines under it. Nothing else
+   needs touching. No build step, no dependencies.
+   ───────────────────────────────────────────────────────────── */
+:root{ --ink:#14162e; --paper:#faf9f5; --line:#d9d5cb; --accent:#0A38CE; --hot:#FF2D8E; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--paper);color:var(--ink);
+  font:400 18px/1.65 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding:48px 20px 80px;
+}
+.wrap{max-width:760px;margin:0 auto}
+
+header{border-bottom:4px solid var(--ink);padding-bottom:22px;margin-bottom:14px}
+h1{font-size:2rem;line-height:1.15;letter-spacing:-.02em}
+header p{margin-top:10px;color:#5b5850;max-width:52ch}
+
+.card{
+  display:block;text-decoration:none;color:inherit;
+  border:2px solid var(--line);border-radius:10px;
+  padding:20px 22px;margin-top:18px;background:#fff;
+  transition:border-color .12s,transform .12s;
+}
+.card:hover,.card:focus-visible{border-color:var(--accent);transform:translateY(-2px)}
+.card:focus-visible{outline:3px solid var(--hot);outline-offset:3px}
+.card h2{font-size:1.22rem;line-height:1.25;color:var(--accent)}
+.card .what{margin-top:6px;max-width:56ch}
+.card .how{margin-top:8px;font-size:.92rem;color:#5b5850}
+.tag{
+  display:inline-block;font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;
+  font-weight:700;color:#fff;background:var(--ink);border-radius:20px;
+  padding:3px 11px;margin-bottom:9px;
+}
+footer{margin-top:44px;padding-top:18px;border-top:2px solid var(--line);
+  font-size:.9rem;color:#5b5850}
+footer a{color:var(--accent)}
+
+@media (prefers-color-scheme:dark){
+  :root{--ink:#eceaf3;--paper:#14162e;--line:#343758;--accent:#8fb0ff}
+  .card{background:#1c1f3d}
+  header p,.card .how,footer{color:#a8a5b8}
+  .tag{color:#14162e;background:#eceaf3}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>English resources — GEII</h1>
+    <p>Practice pages for BUT GEII at IUT Lille. Everything here runs in the
+       browser, needs no account, and works on a phone. Headphones recommended
+       for anything with sound.</p>
+  </header>
+
+  <a class="card" href="../pronunciation/short-long-i/">
+    <span class="tag">Pronunciation</span>
+    <h2>Short &amp; long I sounds — /ɪ/ and /iː/</h2>
+    <p class="what">Fifteen slides on the difference between <em>ship</em> and
+      <em>sheep</em>. Every example word is clickable and plays a recording,
+      and the quiz draws ten random words from a pool of forty-four, so it is
+      different every time you run it.</p>
+    <p class="how">Move with the arrows on screen, or the arrow keys on a
+      computer. Straight to the quiz: <strong>short-long-i/#14</strong></p>
+  </a>
+
+  <a class="card" href="../games/KATAMBO_minimal_pairs.html">
+    <span class="tag">Game · listening</span>
+    <h2>KATAMBO — minimal pairs</h2>
+    <p class="what">A duel beneath the blood moon. Hear a word, pick the right
+      one of a confusable pair, win the round. Trains the sounds that French
+      ears merge.</p>
+    <p class="how">Original game © Bert · pedagogical mod by Sarah &amp; Claude</p>
+  </a>
+
+  <a class="card" href="../games/nightshift.html">
+    <span class="tag">Game · vocabulary</span>
+    <h2>NIGHT SHIFT — technical phrasal verbs</h2>
+    <p class="what">Phrasal verbs as they actually turn up in a workshop and a
+      lab: boot up, plug in, burn out, shut down.</p>
+  </a>
+
+  <a class="card" href="../games/phrasal-verbs-deck.html">
+    <span class="tag">Reference</span>
+    <h2>Phrasal verb deck — 30 verbs</h2>
+    <p class="what">The reference list behind NIGHT SHIFT, grouped by situation:
+      starting the day, connecting and installing, working, and what you say
+      when it breaks.</p>
+  </a>
+
+  <footer>
+    Made for GEII students at <strong>IUT de Lille</strong>.
+    Student project gallery: <a href="../">Projets Upcycling</a>.
+  </footer>
+
+</div>
+</body>
+</html>
