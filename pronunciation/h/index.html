@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The letter H — GEII · IUT Lille</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#FF2D8E; --yellow:#E4FF1A; --cyan:#25D6C4; --blue:#0A38CE; --ink:#10123A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:#000;overflow:hidden;
+  font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+#viewport{position:fixed;inset:0;overflow:hidden}
+#stage{
+  width:1280px;height:720px;overflow:hidden;
+  position:absolute;left:50%;top:50%;
+  margin:-360px 0 0 -640px;
+  transform-origin:center center;
+}
+.slide{
+  position:absolute;inset:0;opacity:0;visibility:hidden;
+  transition:opacity .35s ease;
+  display:grid;
+}
+.slide.on{opacity:1;visibility:visible}
+
+.frame{position:absolute;inset:44px;display:grid}
+.pad{padding:54px 62px}
+
+.home{
+  position:absolute;top:26px;left:26px;z-index:30;
+  width:46px;height:46px;border-radius:50%;border:3px solid #fff;
+  background:var(--ink);color:#fff;cursor:pointer;
+  display:grid;place-items:center;font-size:20px;line-height:1;
+  box-shadow:0 3px 0 rgba(0,0,0,.35);
+  transition:transform .15s;
+}
+.home:hover{transform:scale(1.1)}
+.home:focus-visible{outline:4px solid var(--yellow);outline-offset:3px}
+
+.nav{
+  position:fixed;top:50%;transform:translateY(-50%);z-index:40;
+  width:52px;height:96px;border:none;cursor:pointer;
+  background:rgba(16,18,58,.55);color:#fff;font-size:26px;
+  display:grid;place-items:center;transition:background .15s;
+}
+.nav:hover{background:var(--pink)}
+.nav:focus-visible{outline:4px solid var(--yellow);outline-offset:-4px}
+#prev{left:0;border-radius:0 8px 8px 0}
+#next{right:0;border-radius:8px 0 0 8px}
+.nav[disabled]{opacity:.15;pointer-events:none}
+
+#counter{
+  position:fixed;bottom:14px;right:18px;z-index:40;
+  color:#fff;font-size:13px;font-weight:600;letter-spacing:.08em;
+  background:rgba(16,18,58,.6);padding:6px 12px;border-radius:20px;
+}
+
+h1,h2,h3{line-height:1.02;letter-spacing:-.01em}
+.display{font-weight:800;font-style:italic;text-transform:uppercase}
+
+.dots{position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,currentColor 26%,transparent 27%);
+  background-size:62px 62px;opacity:1}
+
+/* ─────────── clickable word buttons ─────────── */
+.wordlist{display:flex;flex-direction:column;gap:13px;margin-top:6px}
+.wordrow{display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.word{
+  font:italic 700 27px/1 'Montserrat',sans-serif;
+  color:#fff;background:transparent;border:none;cursor:pointer;
+  padding:9px 20px 9px 16px;border-radius:30px;
+  display:inline-flex;align-items:center;gap:11px;
+  transition:background .15s,transform .12s;
+}
+.word .dot{
+  width:30px;height:30px;border-radius:50%;flex:none;
+  background:var(--yellow);border:5px solid #fff;
+  display:grid;place-items:center;transition:transform .15s;
+}
+.word .bar{height:5px;width:var(--w,120px);background:var(--pink);border-radius:4px;transition:width .15s}
+.word:hover{background:rgba(255,255,255,.14)}
+.word:hover .dot{transform:scale(1.18)}
+.word:active{transform:translateY(2px)}
+.word:focus-visible{outline:4px solid var(--yellow);outline-offset:2px}
+.word.playing .dot{background:var(--yellow);animation:pulse .5s ease infinite alternate}
+@keyframes pulse{to{transform:scale(1.3)}}
+.word.sm{font-size:23px;padding:7px 15px 7px 12px}
+.word.sm .dot{width:22px;height:22px;border-width:4px}
+.word .ghost{color:rgba(255,255,255,.38);text-decoration:line-through;text-decoration-thickness:3px}
+
+.speaker{font-size:15px;opacity:.55;margin-left:4px}
+
+/* ─────────── slide 1 : title ─────────── */
+#s1{background:var(--cyan)}
+#s1 .inner{
+  position:absolute;inset:44px 70px;background:var(--blue);
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  padding:0 60px 0 430px;
+}
+#s1 h1{font-size:78px;color:var(--yellow);text-align:left}
+#s1 .kicker{font:italic 600 29px/1.3 'Montserrat',sans-serif;color:#fff;margin-top:18px}
+.start{
+  margin-top:30px;background:var(--pink);color:var(--yellow);
+  font:italic 800 34px/1 'Montserrat',sans-serif;letter-spacing:.02em;
+  border:none;padding:14px 46px;cursor:pointer;text-transform:uppercase;
+  transition:transform .15s;
+}
+.start:hover{transform:scale(1.06)}
+.start:focus-visible{outline:4px solid var(--yellow);outline-offset:4px}
+
+/* the breathing H */
+.bigH{
+  position:absolute;left:90px;top:50%;margin-top:-150px;
+  font:800 italic 300px/1 'Montserrat',sans-serif;color:var(--pink);
+  animation:breathe 3.2s ease-in-out infinite;
+}
+@keyframes breathe{
+  0%,100%{transform:scale(1);opacity:.95}
+  50%{transform:scale(1.07);opacity:.7}
+}
+
+/* ─────────── slide 2 : index ─────────── */
+#s2{background:var(--yellow)}
+#s2 .inner{position:absolute;inset:44px;background:var(--blue);display:grid;
+  grid-template-columns:150px 1fr;align-items:center;padding:0 40px}
+#s2 .vert{
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font:800 italic 82px/1 'Montserrat',sans-serif;color:var(--yellow);
+  justify-self:center;text-transform:uppercase;
+}
+.toc{display:flex;flex-direction:column;gap:4px}
+.toc button{
+  display:flex;align-items:baseline;gap:26px;background:transparent;border:none;
+  cursor:pointer;text-align:left;padding:6px 14px;border-radius:10px;
+  transition:background .15s,transform .12s;
+}
+.toc button:hover{background:rgba(255,255,255,.13);transform:translateX(8px)}
+.toc button:focus-visible{outline:4px solid var(--yellow);outline-offset:2px}
+.toc .n{font:800 40px/1 'Montserrat',sans-serif;color:var(--yellow);width:44px;flex:none}
+.toc .t{font:italic 600 26px/1.1 'Montserrat',sans-serif;color:#fff;text-transform:uppercase}
+
+/* ─────────── section dividers ─────────── */
+.divider .panel{position:absolute;inset:56px 70px;display:grid;
+  place-items:center;padding:0 60px;transform:rotate(-1.4deg)}
+.divider h2{font-size:80px;text-align:center}
+
+/* ─────────── content two-column ─────────── */
+.two{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:46px;height:100%}
+.lead{font:italic 600 26px/1.5 'Montserrat',sans-serif}
+
+.sectionTitle{font-size:50px;margin-bottom:10px}
+.sub{font:italic 600 25px/1.4 'Montserrat',sans-serif;margin-bottom:22px}
+
+/* ─────────── comparison ─────────── */
+.cmp{display:grid;grid-template-columns:1fr 1fr;height:100%;gap:0}
+.cmp .card{padding:50px 44px;display:flex;flex-direction:column;gap:16px}
+.cmp .card:first-child{background:var(--pink);transform:rotate(-1deg)}
+.cmp .card:last-child{background:var(--cyan);transform:rotate(1deg)}
+.cmp h3{font:800 italic 42px/1 'Montserrat',sans-serif;text-transform:uppercase}
+.cmp p{font:italic 500 21px/1.45 'Montserrat',sans-serif}
+.chips{display:flex;gap:13px;margin-top:auto;flex-wrap:wrap}
+.chip{
+  background:var(--yellow);border:none;cursor:pointer;
+  font:italic 700 23px/1 'Montserrat',sans-serif;color:var(--ink);
+  padding:12px 22px;border-radius:4px;transition:transform .12s;
+}
+.chip:hover{transform:translateY(-4px)}
+.chip:active{transform:translateY(1px)}
+.chip:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.chip.playing{background:var(--pink);color:#fff}
+
+/* ─────────── notes / groups ─────────── */
+.grouprow{display:flex;align-items:center;margin-bottom:9px;flex-wrap:wrap}
+.grouplab{font:800 21px/1 'Montserrat',sans-serif;color:var(--yellow);
+  width:132px;flex:none;text-transform:uppercase;letter-spacing:.04em}
+
+/* ─────────── minimal pairs ─────────── */
+.pairgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px 24px;margin-top:6px}
+.pair{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.07);
+  border-radius:8px;padding:7px 11px}
+.pair .vs{font:800 14px/1 'Montserrat',sans-serif;color:var(--cyan);flex:none;opacity:.8}
+.pbtn{
+  flex:1;background:var(--blue);border:none;cursor:pointer;border-radius:6px;
+  padding:11px 8px;text-align:center;transition:transform .13s,background .15s;
+}
+.pbtn .spell{font:italic 800 27px/1 'Montserrat',sans-serif;color:#fff;display:block}
+.pbtn .spell b{color:var(--yellow)}
+.pbtn .ipa{font:600 13px/1.2 'Montserrat',sans-serif;color:#BFD0FF;display:block;margin-top:4px}
+.pbtn:hover{transform:translateY(-3px);background:#1450F5}
+.pbtn:focus-visible{outline:4px solid var(--yellow);outline-offset:3px}
+.pbtn.playing{background:var(--pink)}
+.pbtn.playing .ipa{color:#fff}
+
+/* ─────────── quiz ─────────── */
+.quizwrap{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;height:100%}
+.tapebtn{background:none;border:none;cursor:pointer;padding:0;transition:transform .15s;
+  width:100%;display:grid;place-items:center}
+.tapedisc{
+  width:210px;height:210px;border-radius:50%;background:var(--blue);
+  border:10px solid var(--yellow);display:grid;place-items:center;
+  font-size:74px;color:var(--yellow);
+}
+.tapebtn:hover{transform:scale(1.05) rotate(-3deg)}
+.tapebtn:focus-visible{outline:5px solid var(--yellow);outline-offset:6px}
+.tapehint{font:800 19px/1.3 'Montserrat',sans-serif;text-transform:uppercase;text-align:center;margin-top:16px}
+.qcard{background:var(--yellow);padding:38px 36px;transform:rotate(-2deg)}
+.qcard h3{font:700 28px/1.28 'Montserrat',sans-serif;color:var(--ink);margin-bottom:24px}
+.opt{
+  display:block;width:100%;text-align:left;margin-bottom:14px;
+  background:var(--pink);color:#fff;border:none;cursor:pointer;
+  font:600 26px/1 'Montserrat',sans-serif;padding:19px 24px;
+  transition:transform .12s,background .15s;
+}
+.opt:hover{transform:translateX(6px)}
+.opt:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.opt.right{background:#0FA958}
+.opt.wrong{background:#454545}
+.qmeta{display:flex;justify-content:space-between;align-items:center;margin-top:18px;
+  font:700 17px/1 'Montserrat',sans-serif;color:var(--ink)}
+.qfb{font:800 italic 22px/1.3 'Montserrat',sans-serif;min-height:32px;margin-top:12px;color:var(--ink)}
+.again{background:var(--ink);color:#fff;border:none;cursor:pointer;
+  font:700 17px/1 'Montserrat',sans-serif;padding:12px 22px;border-radius:24px}
+.again:focus-visible{outline:4px solid var(--pink);outline-offset:3px}
+
+#thanks{background:var(--pink)}
+#thanks .inner{position:absolute;inset:44px;background:var(--cyan);display:grid;place-items:center;align-content:center;gap:20px}
+#thanks h2{font-size:110px;color:var(--yellow);transform:rotate(-6deg)}
+#thanks p{font:italic 700 26px/1.4 'Montserrat',sans-serif;color:var(--ink);text-align:center}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="viewport">
+  <div id="stage">
+
+    <!-- 1 ─ TITLE -->
+    <section class="slide" id="s1" aria-label="Title">
+      <div class="dots" style="color:#E4FF1A;opacity:.8;background-size:74px 74px;width:420px;height:280px;inset:auto 0 0 auto"></div>
+      <div class="inner">
+        <h1 class="display">The letter<br>H</h1>
+        <p class="kicker">Three problems, not one:<br>saying it, not saying it,<br>and not inventing it.</p>
+        <button class="start" data-goto="2">Start</button>
+      </div>
+      <span class="bigH" aria-hidden="true">H</span>
+    </section>
+
+    <!-- 2 ─ INDEX -->
+    <section class="slide" id="s2" aria-label="Index">
+      <div class="inner">
+        <div class="vert">Index</div>
+        <nav class="toc" aria-label="Lesson contents">
+          <button data-goto="3"><span class="n">1</span><span class="t">The H you breathe</span></button>
+          <button data-goto="5"><span class="n">2</span><span class="t">H words</span></button>
+          <button data-goto="6"><span class="n">3</span><span class="t">The silent H</span></button>
+          <button data-goto="7"><span class="n">4</span><span class="t">Silent H words</span></button>
+          <button data-goto="8"><span class="n">5</span><span class="t">Do not add an H</span></button>
+          <button data-goto="9"><span class="n">6</span><span class="t">Side by side</span></button>
+          <button data-goto="10"><span class="n">7</span><span class="t">The ten pairs</span></button>
+          <button data-goto="11"><span class="n">8</span><span class="t">Quiz</span></button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- 3 ─ DIVIDER : THE H YOU BREATHE -->
+    <section class="slide divider" id="s3" style="background:var(--cyan)" aria-label="The H you breathe">
+      <div class="dots" style="color:#B7E82A;opacity:.9"></div>
+      <div class="panel" style="background:var(--blue)">
+        <h2 class="display" style="color:var(--yellow)">The H<br>you<br>breathe</h2>
+      </div>
+    </section>
+
+    <!-- 4 ─ MEET /h/ -->
+    <section class="slide" id="s4" style="background:var(--cyan)" aria-label="Meet the H sound">
+      <div class="dots" style="color:#B7E82A;opacity:.85"></div>
+      <div class="frame pad" style="background:var(--blue)">
+        <div class="two">
+          <div>
+            <p class="display" style="font-size:150px;color:var(--yellow)">/h/</p>
+            <p class="sub" style="color:#fff;margin-top:14px">a breath, not a consonant</p>
+          </div>
+          <div>
+            <h2 class="display sectionTitle" style="color:var(--yellow)">Meet /h/</h2>
+            <p class="lead" style="color:#fff">There is no tongue position, no lips, no
+              vibration. You simply push air out before the vowel — like fogging a window.<br><br>
+              French has no /h/ at all, so the muscle is not missing, it is
+              <b style="color:var(--yellow)">unused</b>.<br><br>
+              Put your hand in front of your mouth and say <em>house</em>. You should feel warmth.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 ─ H WORDS -->
+    <section class="slide" id="s5" style="background:var(--pink)" aria-label="H words">
+      <div class="dots" style="color:#FF8FBF;opacity:.75"></div>
+      <div class="frame" style="background:var(--yellow);padding:32px">
+        <div style="background:var(--blue);padding:32px 44px;display:flex;flex-direction:column;justify-content:center;height:100%">
+          <h2 class="display" style="font-size:42px;color:var(--yellow);margin-bottom:4px">Say the H</h2>
+          <p class="sub" style="color:#fff;font-size:19px;margin-bottom:14px">Eighteen words where the H is real.
+            <span class="speaker">click any word to hear it</span></p>
+          <div id="hgroups"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 ─ DIVIDER : SILENT H -->
+    <section class="slide divider" id="s6" style="background:var(--blue)" aria-label="The silent H">
+      <div class="dots" style="color:#B7E82A;opacity:.9"></div>
+      <div class="panel" style="background:var(--pink)">
+        <h2 class="display" style="color:var(--yellow)">The H<br>that is<br>not there</h2>
+      </div>
+    </section>
+
+    <!-- 7 ─ SILENT H WORDS -->
+    <section class="slide" id="s7" style="background:var(--pink)" aria-label="Silent H words">
+      <div class="frame" style="background:var(--yellow);padding:32px">
+        <div style="background:var(--blue);padding:30px 44px;display:flex;flex-direction:column;justify-content:center;height:100%">
+          <h2 class="display" style="font-size:40px;color:var(--yellow);margin-bottom:4px">Written, never said</h2>
+          <p class="sub" style="color:#fff;font-size:19px;margin-bottom:12px">Thirteen words where the H on the page makes no sound.
+            <span class="speaker">click any word to hear it</span></p>
+          <div id="silentgroups"></div>
+          <p style="font:italic 600 18px/1.4 'Montserrat',sans-serif;color:#BFD0FF;margin-top:14px">
+            Note the trap: <b style="color:var(--yellow)">who</b> and <b style="color:var(--yellow)">whose</b>
+            do sound their H, while <em>what, when, where, why</em> do not.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 ─ DO NOT ADD AN H -->
+    <section class="slide" id="s8" style="background:var(--yellow)" aria-label="Do not add an H">
+      <div class="dots" style="color:#FF8FBF;opacity:.6"></div>
+      <div class="frame pad" style="background:var(--pink)">
+        <div class="two">
+          <div>
+            <h2 class="display sectionTitle" style="color:var(--yellow)">The invented H</h2>
+            <p class="lead" style="color:#fff">The mirror-image mistake. Having learned that English
+              likes its H, French speakers start putting one where there is none:
+              <em>h-energy</em>, <em>h-idea</em>, <em>h-apple</em>.<br><br>
+              These seven begin on a bare vowel. Open your mouth and let the vowel arrive
+              with <b style="color:var(--yellow)">no</b> breath in front of it.</p>
+          </div>
+          <div>
+            <div class="wordlist" data-words="energy,engineer,electricity,idea" data-size="lg"></div>
+            <div class="wordrow" data-words="answer,apple,upcycling" data-size="sm" style="margin-top:12px"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 ─ SIDE BY SIDE -->
+    <section class="slide" id="s9" style="background:var(--blue)" aria-label="Side by side">
+      <div class="dots" style="color:#25D6C4;opacity:.5"></div>
+      <div class="frame">
+        <div class="cmp">
+          <div class="card">
+            <h3 style="color:var(--yellow)">Breath</h3>
+            <p style="color:#fff;font-size:30px;font-weight:800">/h/ is heard</p>
+            <p style="color:#fff">The H is doing work. Skip it and the word becomes a
+              different word — often one you did not mean.</p>
+            <div class="chips">
+              <button class="chip" data-audio="heart.mp3">heart</button>
+              <button class="chip" data-audio="hold.mp3">hold</button>
+              <button class="chip" data-audio="who.mp3">who</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="color:var(--blue)">No breath</h3>
+            <p style="color:var(--ink);font-size:30px;font-weight:800">/h/ is absent</p>
+            <p style="color:var(--ink)">Either there is no H on the page, or there is one and
+              it is silent. Both sound identical: the vowel starts clean.</p>
+            <div class="chips">
+              <button class="chip" data-audio="art.mp3">art</button>
+              <button class="chip" data-audio="old.mp3">old</button>
+              <button class="chip" data-audio="hour.mp3">hour</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 ─ THE TEN PAIRS -->
+    <section class="slide" id="s10" style="background:var(--ink)" aria-label="The ten pairs">
+      <div class="dots" style="color:#1D2160;background-size:52px 52px"></div>
+      <div class="frame" style="padding:26px 44px;display:flex;flex-direction:column">
+        <h2 class="display" style="font-size:44px;color:var(--yellow);text-align:center;line-height:.98">
+          The ten pairs
+        </h2>
+        <p style="font:italic 600 18px/1.35 'Montserrat',sans-serif;color:#fff;text-align:center;margin:8px 0 12px">
+          One breath is the only difference between these twenty words.
+          <span style="color:var(--yellow)">Click both sides and hear it appear.</span>
+        </p>
+        <div class="pairgrid" id="pairs"></div>
+      </div>
+    </section>
+
+    <!-- 11 ─ QUIZ -->
+    <section class="slide" id="quiz" style="background:var(--blue)" aria-label="Quiz">
+      <div class="dots" style="color:#B7E82A;opacity:.85"></div>
+      <div class="frame pad" style="background:var(--cyan)">
+        <h2 class="display" style="font-size:42px;color:var(--blue);text-align:center;margin-bottom:8px">Quiz</h2>
+        <div class="quizwrap">
+          <div>
+            <button class="tapebtn" id="qplay" aria-label="Play the word again">
+              <span class="tapedisc">▶</span>
+            </button>
+            <p class="tapehint" style="color:var(--blue)">Click to listen again</p>
+          </div>
+          <div class="qcard">
+            <h3 id="qtext">Listen. Did you hear an /h/ at the start?</h3>
+            <div id="qopts"></div>
+            <p class="qfb" id="qfb"></p>
+            <div class="qmeta">
+              <span id="qscore">Question 1 / 10 · score 0</span>
+              <button class="again" id="qagain">New round</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 ─ THANKS -->
+    <section class="slide" id="thanks" aria-label="Thanks">
+      <div class="inner">
+        <h2 class="display">Thanks!</h2>
+        <p>Hand in front of the mouth.<br><em>Art</em>, then <em>heart</em>. Feel the difference.</p>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<button class="nav" id="prev" aria-label="Previous slide">‹</button>
+<button class="nav" id="next" aria-label="Next slide">›</button>
+<div id="counter" aria-live="off"></div>
+
+<script>
+(function(){
+"use strict";
+
+var stage=document.getElementById('stage');
+function fit(){
+  var s=Math.min(innerWidth/1280,innerHeight/720);
+  stage.style.transform='scale('+s+')';
+}
+addEventListener('resize',fit);fit();
+
+var slides=[].slice.call(document.querySelectorAll('.slide'));
+var i=0;
+
+slides.forEach(function(sl,n){
+  if(n===0)return;
+  var b=document.createElement('button');
+  b.className='home';b.type='button';b.innerHTML='⌂';
+  b.setAttribute('aria-label','Back to index');
+  b.addEventListener('click',function(){go(1)});
+  sl.appendChild(b);
+});
+
+function go(n){
+  n=Math.max(0,Math.min(slides.length-1,n));
+  if(n===i && slides[i].classList.contains('on'))return;
+  slides[i].classList.remove('on');
+  i=n;
+  slides[i].classList.add('on');
+  document.getElementById('prev').disabled=(i===0);
+  document.getElementById('next').disabled=(i===slides.length-1);
+  document.getElementById('counter').textContent=(i+1)+' / '+slides.length;
+  if(location.hash!=='#'+(i+1))history.replaceState(null,'','#'+(i+1));
+  if(slides[i].id==='quiz')newRound();
+}
+document.getElementById('prev').addEventListener('click',function(){go(i-1)});
+document.getElementById('next').addEventListener('click',function(){go(i+1)});
+document.querySelectorAll('[data-goto]').forEach(function(b){
+  b.addEventListener('click',function(){go(+b.dataset.goto-1)});
+});
+addEventListener('keydown',function(e){
+  var t=e.target.tagName;
+  if(e.key==='ArrowRight'||e.key==='PageDown'){go(i+1);e.preventDefault()}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){go(i-1);e.preventDefault()}
+  else if(e.key===' '&&t!=='BUTTON'){go(i+1);e.preventDefault()}
+  else if(e.key==='Home'){go(1);e.preventDefault()}
+});
+
+/* ── audio (flat folder) ─────────────────────────────────── */
+var player=new Audio(); var lastBtn=null;
+function play(file,btn){
+  if(lastBtn){lastBtn.classList.remove('playing')}
+  player.pause();
+  player.src='assets/audio/'+file;
+  player.currentTime=0;
+  var p=player.play();
+  if(p&&p.catch)p.catch(function(){});
+  if(btn){btn.classList.add('playing');lastBtn=btn}
+}
+player.addEventListener('ended',function(){if(lastBtn)lastBtn.classList.remove('playing')});
+
+function wordBtn(word,widthPx,small,html){
+  var b=document.createElement('button');
+  b.type='button';b.className='word'+(small?' sm':'');
+  b.innerHTML='<span class="dot"></span><span class="bar" style="--w:'+widthPx+'px"></span>'+
+              '<span>'+(html||word)+'</span><span class="speaker" aria-hidden="true">🔊</span>';
+  b.setAttribute('aria-label','Play the word '+word);
+  b.addEventListener('click',function(){play(word.toLowerCase()+'.mp3',b)});
+  return b;
+}
+document.querySelectorAll('[data-words]').forEach(function(box){
+  var small=(box.dataset.size==='sm');
+  box.dataset.words.split(',').forEach(function(w,n){
+    box.appendChild(wordBtn(w,small?26:(110+n*26),small));
+  });
+});
+
+function buildGroups(target,groups,markSilent){
+  groups.forEach(function(g){
+    var row=document.createElement('div');row.className='grouprow';
+    var lab=document.createElement('span');
+    lab.className='grouplab';lab.textContent=g[0];
+    row.appendChild(lab);
+    g[1].forEach(function(w){
+      var html=w;
+      if(markSilent){
+        html=w.replace(/h/i,'<span class="ghost">h</span>');
+      }
+      row.appendChild(wordBtn(w,26,true,html));
+    });
+    target.appendChild(row);
+  });
+}
+
+/* slide 5 — the eighteen sounded-H words */
+buildGroups(document.getElementById('hgroups'),[
+  ['body',      ['hand','hair','heart','harm']],
+  ['feeling',   ['happy','hate','hear','heat']],
+  ['places',    ['house','hospital','hill','high']],
+  ['questions', ['how','who','whose']],
+  ['other',     ['hold','behind','perhaps']]
+],false);
+
+/* slide 7 — the thirteen silent-H words */
+buildGroups(document.getElementById('silentgroups'),[
+  ['h at the start', ['honest','honour','hour']],
+  ['h in the middle',['ghost','exhaust','exhibit','vehicle','rheostat','shepherd']],
+  ['wh- questions',  ['what','when','where','why']]
+],true);
+
+document.querySelectorAll('.chip[data-audio]').forEach(function(c){
+  c.addEventListener('click',function(){play(c.dataset.audio,c)});
+});
+
+/* ── the ten minimal pairs ───────────────────────────────── */
+var PAIRS=[
+  ['air','hair'],['and','hand'],['arm','harm'],['art','heart'],['ate','hate'],
+  ['ear','hear'],['eat','heat'],['eye','high'],['ill','hill'],['old','hold']
+];
+var IPA={air:'/eə/',hair:'/heə/',and:'/ænd/',hand:'/hænd/',arm:'/ɑːm/',harm:'/hɑːm/',
+  art:'/ɑːt/',heart:'/hɑːt/',ate:'/eɪt/',hate:'/heɪt/',ear:'/ɪə/',hear:'/hɪə/',
+  eat:'/iːt/',heat:'/hiːt/',eye:'/aɪ/',high:'/haɪ/',ill:'/ɪl/',hill:'/hɪl/',
+  old:'/əʊld/',hold:'/həʊld/'};
+
+function pairBtn(word,isH){
+  var b=document.createElement('button');
+  b.type='button';b.className='pbtn';
+  var spelt=isH?word.replace(/^h/,'<b>h</b>'):word;
+  b.innerHTML='<span class="spell">'+spelt+'</span><span class="ipa">'+(IPA[word]||'')+'</span>';
+  b.setAttribute('aria-label','Play the word '+word);
+  b.addEventListener('click',function(){play(word+'.mp3',b)});
+  return b;
+}
+var pg=document.getElementById('pairs');
+PAIRS.forEach(function(p){
+  var row=document.createElement('div');row.className='pair';
+  row.appendChild(pairBtn(p[0],false));
+  var vs=document.createElement('span');vs.className='vs';vs.textContent='vs';
+  row.appendChild(vs);
+  row.appendChild(pairBtn(p[1],true));
+  pg.appendChild(row);
+});
+
+/* ── quiz : did you hear an /h/ ? ────────────────────────── */
+var HAS_H=['hair','hand','happy','harm','hate','hear','heart','heat','high','hill',
+           'hold','hospital','house','how','behind','perhaps','who','whose'];
+var NO_H =['air','and','answer','apple','arm','art','ate','ear','eat','electricity',
+           'energy','engineer','exhaust','exhibit','eye','ghost','honest','honour',
+           'hour','idea','ill','old','rheostat','shepherd','upcycling','vehicle',
+           'what','when','where','why'];
+var ROUND=10, queue=[], qi=0, score=0, current=null, answered=false;
+
+function shuffle(a){for(var j=a.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1));var t=a[j];a[j]=a[k];a[k]=t}return a}
+
+function newRound(){
+  var pool=HAS_H.map(function(w){return{w:w,h:true}})
+        .concat(NO_H.map(function(w){return{w:w,h:false}}));
+  queue=shuffle(pool).slice(0,ROUND);
+  qi=0;score=0;
+  document.getElementById('qtext').textContent='Listen. Did you hear an /h/ at the start?';
+  ask();
+}
+function ask(){
+  answered=false;
+  current=queue[qi];
+  document.getElementById('qfb').textContent='';
+  var opts=document.getElementById('qopts');
+  opts.innerHTML='';
+  shuffle([[true,'Yes — I heard /h/'],[false,'No — no /h/']]).forEach(function(o){
+    var b=document.createElement('button');
+    b.className='opt';b.type='button';b.textContent=o[1];
+    b.addEventListener('click',function(){answer(o[0],b)});
+    opts.appendChild(b);
+  });
+  document.getElementById('qscore').textContent='Question '+(qi+1)+' / '+ROUND+' · score '+score;
+  play(current.w+'.mp3',null);
+}
+function answer(choice,btn){
+  if(answered)return;
+  answered=true;
+  var ok=(choice===current.h);
+  if(ok)score++;
+  btn.classList.add(ok?'right':'wrong');
+  document.getElementById('qfb').textContent=
+    (ok?'Yes — ':'No — ')+'“'+current.w+'” '+(current.h?'does':'does not')+' sound its /h/.';
+  document.getElementById('qscore').textContent='Question '+(qi+1)+' / '+ROUND+' · score '+score;
+  setTimeout(function(){
+    qi++;
+    if(qi<ROUND){ask()}
+    else{
+      document.getElementById('qopts').innerHTML='';
+      document.getElementById('qtext').textContent='Round finished.';
+      document.getElementById('qfb').textContent='You scored '+score+' out of '+ROUND+'. Click “New round” for ten different words.';
+    }
+  },1700);
+}
+document.getElementById('qplay').addEventListener('click',function(){
+  if(current)play(current.w+'.mp3',null);
+});
+document.getElementById('qagain').addEventListener('click',newRound);
+
+var start=parseInt((location.hash||'').replace('#',''),10);
+go(isNaN(start)?0:start-1);
+})();
+</script>
+</body>
+</html>

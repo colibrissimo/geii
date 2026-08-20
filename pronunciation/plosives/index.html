@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plosives: the puff of air — GEII · IUT Lille</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#FF2D8E; --yellow:#E4FF1A; --cyan:#25D6C4; --blue:#0A38CE; --ink:#10123A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:#000;overflow:hidden;
+  font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ─────────── fixed 16:9 stage, scaled to fit (projector-safe) ─────────── */
+#viewport{position:fixed;inset:0;overflow:hidden}
+#stage{
+  width:1280px;height:720px;overflow:hidden;
+  position:absolute;left:50%;top:50%;
+  margin:-360px 0 0 -640px;
+  transform-origin:center center;
+}
+.slide{
+  position:absolute;inset:0;opacity:0;visibility:hidden;
+  transition:opacity .35s ease;
+  display:grid;
+}
+.slide.on{opacity:1;visibility:visible}
+
+/* ─────────── shared furniture ─────────── */
+.frame{position:absolute;inset:44px;display:grid}
+.pad{padding:54px 62px}
+
+.home{
+  position:absolute;top:26px;left:26px;z-index:30;
+  width:46px;height:46px;border-radius:50%;border:3px solid #fff;
+  background:var(--ink);color:#fff;cursor:pointer;
+  display:grid;place-items:center;font-size:20px;line-height:1;
+  box-shadow:0 3px 0 rgba(0,0,0,.35);
+  transition:transform .15s;
+}
+.home:hover{transform:scale(1.1)}
+.home:focus-visible{outline:4px solid var(--yellow);outline-offset:3px}
+
+.nav{
+  position:fixed;top:50%;transform:translateY(-50%);z-index:40;
+  width:52px;height:96px;border:none;cursor:pointer;
+  background:rgba(16,18,58,.55);color:#fff;font-size:26px;
+  display:grid;place-items:center;transition:background .15s;
+}
+.nav:hover{background:var(--pink)}
+.nav:focus-visible{outline:4px solid var(--yellow);outline-offset:-4px}
+#prev{left:0;border-radius:0 8px 8px 0}
+#next{right:0;border-radius:8px 0 0 8px}
+.nav[disabled]{opacity:.15;pointer-events:none}
+
+#counter{
+  position:fixed;bottom:14px;right:18px;z-index:40;
+  color:#fff;font-size:13px;font-weight:600;letter-spacing:.08em;
+  background:rgba(16,18,58,.6);padding:6px 12px;border-radius:20px;
+}
+
+h1,h2,h3{line-height:1.02;letter-spacing:-.01em}
+.display{font-weight:800;font-style:italic;text-transform:uppercase}
+
+.dots{position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,currentColor 26%,transparent 27%);
+  background-size:62px 62px;opacity:1}
+
+/* ─────────── clickable word buttons ─────────── */
+.wordlist{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.wordrow{display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.word{
+  font:italic 700 27px/1 'Montserrat',sans-serif;
+  color:#fff;background:transparent;border:none;cursor:pointer;
+  padding:9px 20px 9px 16px;border-radius:30px;
+  display:inline-flex;align-items:center;gap:11px;
+  transition:background .15s,transform .12s;
+}
+.word .dot{
+  width:30px;height:30px;border-radius:50%;flex:none;
+  background:var(--yellow);border:5px solid #fff;
+  display:grid;place-items:center;transition:transform .15s;
+}
+.word .bar{height:5px;width:var(--w,120px);background:var(--pink);border-radius:4px;transition:width .15s}
+.word:hover{background:rgba(255,255,255,.14)}
+.word:hover .dot{transform:scale(1.18)}
+.word:active{transform:translateY(2px)}
+.word:focus-visible{outline:4px solid var(--yellow);outline-offset:2px}
+.word.playing .dot{background:var(--yellow);animation:pulse .5s ease infinite alternate}
+@keyframes pulse{to{transform:scale(1.3)}}
+.word.sm{font-size:23px;padding:7px 15px 7px 12px}
+.word.sm .dot{width:22px;height:22px;border-width:4px}
+
+.speaker{font-size:15px;opacity:.55;margin-left:4px}
+/* slide 6 sits on pink — the pink bar would be invisible */
+#s6 .word .bar{background:var(--blue)}
+#s6 .word{font-size:25px}
+#s6 .word .dot{border-color:var(--yellow);background:var(--blue)}
+
+/* ─────────── slide 1 : title ─────────── */
+#s1{background:var(--blue)}
+#s1 .inner{
+  position:absolute;inset:44px 70px;background:var(--pink);
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  padding:0 70px;
+}
+#s1 h1{font-size:82px;color:var(--yellow);text-align:left}
+#s1 .kicker{font:italic 600 30px/1.3 'Montserrat',sans-serif;color:#fff;margin-top:18px}
+.start{
+  margin-top:30px;background:var(--yellow);color:var(--ink);
+  font:italic 800 34px/1 'Montserrat',sans-serif;letter-spacing:.02em;
+  border:none;padding:14px 46px;cursor:pointer;text-transform:uppercase;
+  transition:transform .15s;
+}
+.start:hover{transform:scale(1.06)}
+.start:focus-visible{outline:4px solid var(--ink);outline-offset:4px}
+
+/* the puff — three expanding rings, CSS only */
+.puff{position:absolute;right:120px;top:50%;margin-top:-90px;width:180px;height:180px}
+.puff span{
+  position:absolute;inset:0;border-radius:50%;border:7px solid var(--yellow);
+  opacity:0;animation:puff 2.6s ease-out infinite;
+}
+.puff span:nth-child(2){animation-delay:.55s}
+.puff span:nth-child(3){animation-delay:1.1s}
+@keyframes puff{
+  0%{transform:scale(.18);opacity:1}
+  80%{opacity:.12}
+  100%{transform:scale(1);opacity:0}
+}
+
+/* ─────────── slide 2 : index ─────────── */
+#s2{background:var(--yellow)}
+#s2 .inner{position:absolute;inset:44px;background:var(--blue);display:grid;
+  grid-template-columns:150px 1fr;align-items:center;padding:0 40px}
+#s2 .vert{
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font:800 italic 82px/1 'Montserrat',sans-serif;color:var(--yellow);
+  justify-self:center;text-transform:uppercase;
+}
+.toc{display:flex;flex-direction:column;gap:4px}
+.toc button{
+  display:flex;align-items:baseline;gap:26px;background:transparent;border:none;
+  cursor:pointer;text-align:left;padding:6px 14px;border-radius:10px;
+  transition:background .15s,transform .12s;
+}
+.toc button:hover{background:rgba(255,255,255,.13);transform:translateX(8px)}
+.toc button:focus-visible{outline:4px solid var(--yellow);outline-offset:2px}
+.toc .n{font:800 40px/1 'Montserrat',sans-serif;color:var(--yellow);width:44px;flex:none}
+.toc .t{font:italic 600 26px/1.1 'Montserrat',sans-serif;color:#fff;text-transform:uppercase}
+
+/* ─────────── section dividers ─────────── */
+.divider .panel{position:absolute;inset:56px 70px;display:grid;
+  place-items:center;padding:0 60px;transform:rotate(-1.4deg)}
+.divider h2{font-size:88px;text-align:center}
+.divider .say{font:800 italic 120px/1 'Montserrat',sans-serif;letter-spacing:.06em}
+
+/* ─────────── content two-column ─────────── */
+.two{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:46px;height:100%}
+.lead{font:italic 600 26px/1.5 'Montserrat',sans-serif}
+
+.sectionTitle{font-size:52px;margin-bottom:10px}
+.sub{font:italic 600 26px/1.4 'Montserrat',sans-serif;margin-bottom:24px}
+
+/* ─────────── comparison ─────────── */
+.cmp{display:grid;grid-template-columns:1fr 1fr;height:100%;gap:0}
+.cmp .card{padding:52px 46px;display:flex;flex-direction:column;gap:16px}
+.cmp .card:first-child{background:var(--pink);transform:rotate(-1deg)}
+.cmp .card:last-child{background:var(--cyan);transform:rotate(1deg)}
+.cmp h3{font:800 italic 44px/1 'Montserrat',sans-serif;text-transform:uppercase}
+.cmp p{font:italic 500 21px/1.45 'Montserrat',sans-serif}
+.chips{display:flex;gap:14px;margin-top:auto;flex-wrap:wrap}
+.chip{
+  background:var(--yellow);border:none;cursor:pointer;
+  font:italic 700 24px/1 'Montserrat',sans-serif;color:var(--ink);
+  padding:12px 24px;border-radius:4px;transition:transform .12s;
+}
+.chip:hover{transform:translateY(-4px)}
+.chip:active{transform:translateY(1px)}
+.chip:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.chip.playing{background:var(--pink);color:#fff}
+
+/* ─────────── notes ─────────── */
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:44px;height:100%;align-items:start}
+.note h4{font:800 italic 25px/1.2 'Montserrat',sans-serif;text-transform:uppercase;margin-bottom:14px}
+.note p{font:italic 500 20px/1.5 'Montserrat',sans-serif}
+.oddgrid{display:flex;flex-wrap:wrap;gap:11px;margin-top:14px}
+
+/* ─────────── minimal pairs ─────────── */
+.pairgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 26px;margin-top:8px}
+.pair{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);
+  border-radius:8px;padding:8px 12px}
+.pair .vs{font:800 15px/1 'Montserrat',sans-serif;color:var(--cyan);flex:none;opacity:.8}
+.pbtn{
+  flex:1;background:var(--blue);border:none;cursor:pointer;border-radius:6px;
+  padding:13px 10px;text-align:center;transition:transform .13s,background .15s;
+}
+.pbtn .spell{font:italic 800 30px/1 'Montserrat',sans-serif;color:#fff;display:block}
+.pbtn .spell b{color:var(--yellow)}
+.pbtn .ipa{font:600 14px/1.2 'Montserrat',sans-serif;color:#BFD0FF;display:block;margin-top:5px}
+.pbtn:hover{transform:translateY(-3px);background:#1450F5}
+.pbtn:focus-visible{outline:4px solid var(--yellow);outline-offset:3px}
+.pbtn.playing{background:var(--pink)}
+.pbtn.playing .ipa{color:#fff}
+
+/* ─────────── quiz ─────────── */
+.quizwrap{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;height:100%}
+.tapebtn{background:none;border:none;cursor:pointer;padding:0;transition:transform .15s;
+  width:100%;display:grid;place-items:center}
+.tapedisc{
+  width:210px;height:210px;border-radius:50%;background:var(--blue);
+  border:10px solid var(--yellow);display:grid;place-items:center;
+  font-size:74px;color:var(--yellow);
+}
+.tapebtn:hover{transform:scale(1.05) rotate(-3deg)}
+.tapebtn:focus-visible{outline:5px solid var(--yellow);outline-offset:6px}
+.tapehint{font:800 19px/1.3 'Montserrat',sans-serif;text-transform:uppercase;text-align:center;margin-top:16px}
+.qcard{background:var(--yellow);padding:38px 36px;transform:rotate(-2deg)}
+.qcard h3{font:700 28px/1.28 'Montserrat',sans-serif;color:var(--ink);margin-bottom:24px}
+.opt{
+  display:block;width:100%;text-align:left;margin-bottom:14px;
+  background:var(--pink);color:#fff;border:none;cursor:pointer;
+  font:600 26px/1 'Montserrat',sans-serif;padding:19px 24px;
+  transition:transform .12s,background .15s;
+}
+.opt:hover{transform:translateX(6px)}
+.opt:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.opt.right{background:#0FA958}
+.opt.wrong{background:#454545}
+.qmeta{display:flex;justify-content:space-between;align-items:center;margin-top:18px;
+  font:700 17px/1 'Montserrat',sans-serif;color:var(--ink)}
+.qfb{font:800 italic 23px/1.3 'Montserrat',sans-serif;min-height:32px;margin-top:12px;color:var(--ink)}
+.again{background:var(--ink);color:#fff;border:none;cursor:pointer;
+  font:700 17px/1 'Montserrat',sans-serif;padding:12px 22px;border-radius:24px}
+.again:focus-visible{outline:4px solid var(--pink);outline-offset:3px}
+
+/* ─────────── thanks ─────────── */
+#thanks{background:var(--pink)}
+#thanks .inner{position:absolute;inset:44px;background:var(--cyan);display:grid;place-items:center;align-content:center;gap:20px}
+#thanks h2{font-size:110px;color:var(--yellow);transform:rotate(-6deg)}
+#thanks p{font:italic 700 26px/1.4 'Montserrat',sans-serif;color:var(--ink);text-align:center}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="viewport">
+  <div id="stage">
+
+    <!-- 1 ─ TITLE -->
+    <section class="slide" id="s1" aria-label="Title">
+      <div class="dots" style="color:#E4FF1A;opacity:.85;background-size:74px 74px;width:420px;height:300px;inset:auto auto 0 0"></div>
+      <div class="inner">
+        <h1 class="display">P T K<br>The puff<br>of air</h1>
+        <p class="kicker">Why “pin” and “spin” do not start<br>with the same sound.</p>
+        <button class="start" data-goto="2">Start</button>
+      </div>
+      <div class="puff" aria-hidden="true"><span></span><span></span><span></span></div>
+    </section>
+
+    <!-- 2 ─ INDEX -->
+    <section class="slide" id="s2" aria-label="Index">
+      <div class="inner">
+        <div class="vert">Index</div>
+        <nav class="toc" aria-label="Lesson contents">
+          <button data-goto="3"><span class="n">1</span><span class="t">The puff</span></button>
+          <button data-goto="5"><span class="n">2</span><span class="t">P words</span></button>
+          <button data-goto="6"><span class="n">3</span><span class="t">T and K words</span></button>
+          <button data-goto="7"><span class="n">4</span><span class="t">After S, no puff</span></button>
+          <button data-goto="9"><span class="n">5</span><span class="t">Side by side</span></button>
+          <button data-goto="10"><span class="n">6</span><span class="t">Notes</span></button>
+          <button data-goto="11"><span class="n">7</span><span class="t">The eight pairs</span></button>
+          <button data-goto="12"><span class="n">8</span><span class="t">Quiz</span></button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- 3 ─ DIVIDER : THE PUFF -->
+    <section class="slide divider" id="s3" style="background:var(--cyan)" aria-label="The puff">
+      <div class="dots" style="color:#B7E82A;opacity:.9"></div>
+      <div class="panel" style="background:var(--blue)">
+        <h2 class="display" style="color:var(--yellow)">The<br>puff</h2>
+      </div>
+    </section>
+
+    <!-- 4 ─ MEET P T K -->
+    <section class="slide" id="s4" style="background:var(--cyan)" aria-label="Meet P T K">
+      <div class="dots" style="color:#B7E82A;opacity:.85"></div>
+      <div class="frame pad" style="background:var(--blue)">
+        <div class="two">
+          <div>
+            <p class="display" style="font-size:110px;color:var(--yellow);letter-spacing:.06em">Pʰ Tʰ Kʰ</p>
+            <p class="sub" style="color:#fff;margin-top:16px">aspirated — with a puff</p>
+          </div>
+          <div>
+            <h2 class="display sectionTitle" style="color:var(--yellow)">Meet the puff</h2>
+            <p class="lead" style="color:#fff">At the start of a stressed syllable, English
+              <b>p</b>, <b>t</b> and <b>k</b> come with a small burst of air.<br><br>
+              <b style="color:var(--yellow)">The paper test:</b> hold a sheet of paper in front of
+              your mouth and say <em>pot</em>. The paper should move.<br><br>
+              In French it does not move. That is the whole lesson.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 ─ P WORDS -->
+    <section class="slide" id="s5" style="background:var(--pink)" aria-label="P words">
+      <div class="dots" style="color:#FF8FBF;opacity:.75"></div>
+      <div class="frame" style="background:var(--yellow);display:grid;grid-template-columns:300px 1fr;gap:0;align-items:stretch">
+        <div style="display:grid;place-items:center;padding:26px">
+          <span class="display" style="font-size:190px;color:var(--pink)">P</span>
+        </div>
+        <div class="pad" style="background:var(--blue);align-self:stretch;display:flex;flex-direction:column;justify-content:center">
+          <h2 class="display sectionTitle" style="color:var(--yellow)">P with a puff</h2>
+          <p class="sub" style="color:#fff">Paper moves on every one. <span class="speaker">click a word to hear it</span></p>
+          <div class="wordlist" data-words="power,plug,port,pin,peak" data-size="lg"></div>
+          <div class="wordrow" data-words="piston,police,potential,pot" data-size="sm" style="margin-top:14px"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 ─ T AND K WORDS -->
+    <section class="slide" id="s6" style="background:var(--blue)" aria-label="T and K words">
+      <div class="frame" style="background:var(--yellow);padding:34px">
+        <div style="background:var(--pink);padding:34px 46px;display:flex;flex-direction:column;justify-content:center">
+          <h2 class="display" style="font-size:40px;color:var(--blue);margin-bottom:6px">Same puff on T and K</h2>
+          <p class="sub" style="color:#fff;font-size:19px;margin-bottom:16px">click any word to hear it</p>
+          <div id="tkgroups"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 ─ DIVIDER : AFTER S -->
+    <section class="slide divider" id="s7" style="background:var(--blue)" aria-label="After S">
+      <div class="dots" style="color:#B7E82A;opacity:.9"></div>
+      <div class="panel" style="background:var(--pink)">
+        <h2 class="display" style="color:var(--yellow)">After S<br>no puff</h2>
+      </div>
+    </section>
+
+    <!-- 8 ─ THE S RULE -->
+    <section class="slide" id="s8" style="background:var(--pink)" aria-label="The S rule">
+      <div class="frame pad" style="background:var(--yellow)">
+        <div class="two">
+          <div>
+            <h2 class="display sectionTitle" style="color:var(--pink)">Put an S in front</h2>
+            <p class="lead" style="color:var(--ink)">The puff disappears. <b>sp</b>, <b>st</b>, <b>sk</b>
+              are said with no burst of air at all.<br><br>
+              This is the one place where the French <b>p</b>, <b>t</b>, <b>k</b> is
+              <em>exactly right</em>. Use it.<br><br>
+              Paper test on <em>spin</em>: nothing moves.</p>
+          </div>
+          <div>
+            <p class="display" style="font-size:84px;color:var(--blue);letter-spacing:.04em">sp st sk</p>
+            <div class="wordlist" data-words="spin,still,school,star" data-size="lg" style="margin-top:20px"></div>
+            <div class="wordrow" data-words="speaker,screw,station,spot,stop" data-size="sm" style="margin-top:12px"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 ─ SIDE BY SIDE -->
+    <section class="slide" id="s9" style="background:var(--yellow)" aria-label="Side by side">
+      <div class="dots" style="color:#25D6C4;opacity:.55"></div>
+      <div class="frame">
+        <div class="cmp">
+          <div class="card">
+            <h3 style="color:var(--yellow)">With the puff</h3>
+            <p style="color:#fff;font-size:32px;font-weight:800">/pʰ/ /tʰ/ /kʰ/</p>
+            <p style="color:#fff">Start of a stressed syllable. A small explosion of air
+              before the vowel arrives.<br><br>
+              Say it too gently and an English ear hears <em>battery</em> where you said
+              <em>pattery</em>.</p>
+            <div class="chips">
+              <button class="chip" data-audio="pin.mp3">pin</button>
+              <button class="chip" data-audio="top.mp3">top</button>
+              <button class="chip" data-audio="cool.mp3">cool</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="color:var(--blue)">No puff</h3>
+            <p style="color:var(--ink);font-size:32px;font-weight:800">/sp/ /st/ /sk/</p>
+            <p style="color:var(--ink)">Straight after an S. No burst — the sound is
+              clean and flat.<br><br>
+              Identical to the French plosive. The only free gift in this lesson.</p>
+            <div class="chips">
+              <button class="chip" data-audio="spin.mp3">spin</button>
+              <button class="chip" data-audio="stop.mp3">stop</button>
+              <button class="chip" data-audio="school.mp3">school</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 ─ NOTES -->
+    <section class="slide" id="s10" style="background:var(--blue)" aria-label="Notes">
+      <div class="dots" style="color:#B7E82A;opacity:.85"></div>
+      <div class="frame pad" style="background:var(--cyan)">
+        <div style="display:flex;flex-direction:column;height:100%">
+          <h2 class="display" style="font-size:44px;color:var(--blue);text-align:center;margin-bottom:18px">Notes</h2>
+          <div class="notes">
+            <div class="note">
+              <h4 style="color:var(--blue)">Why it is worth the trouble</h4>
+              <p style="color:var(--ink)">English does not tell <b>p</b> from <b>b</b> mainly by
+                voicing — it tells them apart by the puff. Drop the puff and your
+                <em>p</em> lands in <em>b</em> territory.</p>
+              <div class="oddgrid">
+                <button class="chip" data-audio="battery.mp3">battery</button>
+                <button class="chip" data-audio="power.mp3">power</button>
+              </div>
+              <p style="color:var(--ink);margin-top:14px">Listen to both. The difference you hear at
+                the start is air, not voice.</p>
+            </div>
+            <div class="note">
+              <h4 style="color:var(--blue)">Where the rule does not apply</h4>
+              <p style="color:var(--ink)">The puff needs a <b>stressed</b> syllable. In
+                <em>compu·ter</em> and <em>po·lice</em> the first consonant is unstressed and
+                the puff is weak or absent.</p>
+              <div class="oddgrid">
+                <button class="chip" data-audio="computer.mp3">computer</button>
+                <button class="chip" data-audio="police.mp3">police</button>
+                <button class="chip" data-audio="potential.mp3">potential</button>
+                <button class="chip" data-audio="capacity.mp3">capacity</button>
+              </div>
+              <p style="color:var(--ink);margin-top:14px">So the quiz sticks to the eight clean pairs,
+                where the answer is never arguable.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 ─ THE EIGHT PAIRS -->
+    <section class="slide" id="s11" style="background:var(--ink)" aria-label="The eight pairs">
+      <div class="dots" style="color:#1D2160;background-size:52px 52px"></div>
+      <div class="frame" style="padding:30px 48px;display:flex;flex-direction:column">
+        <h2 class="display" style="font-size:48px;color:var(--yellow);text-align:center;line-height:.98">
+          The eight pairs
+        </h2>
+        <p style="font:italic 600 19px/1.4 'Montserrat',sans-serif;color:#fff;text-align:center;margin:10px 0 16px">
+          Same consonant, twice. On the left it puffs, on the right it does not.
+          <span style="color:var(--yellow)">Click both. Hear the air appear and disappear.</span>
+        </p>
+        <div class="pairgrid" id="pairs"></div>
+      </div>
+    </section>
+
+    <!-- 12 ─ QUIZ -->
+    <section class="slide" id="quiz" style="background:var(--blue)" aria-label="Quiz">
+      <div class="dots" style="color:#B7E82A;opacity:.85"></div>
+      <div class="frame pad" style="background:var(--cyan)">
+        <h2 class="display" style="font-size:42px;color:var(--blue);text-align:center;margin-bottom:8px">Quiz</h2>
+        <div class="quizwrap">
+          <div>
+            <button class="tapebtn" id="qplay" aria-label="Play the word again">
+              <span class="tapedisc">▶</span>
+            </button>
+            <p class="tapehint" style="color:var(--blue)">Click to listen again</p>
+          </div>
+          <div class="qcard">
+            <h3 id="qtext">Listen. Which word did you hear?</h3>
+            <div id="qopts"></div>
+            <p class="qfb" id="qfb"></p>
+            <div class="qmeta">
+              <span id="qscore">Question 1 / 8 · score 0</span>
+              <button class="again" id="qagain">New round</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 ─ THANKS -->
+    <section class="slide" id="thanks" aria-label="Thanks">
+      <div class="inner">
+        <h2 class="display">Thanks!</h2>
+        <p>Hold up the paper. Say <em>pot</em>, then <em>spot</em>.<br>That is the whole thing.</p>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<button class="nav" id="prev" aria-label="Previous slide">‹</button>
+<button class="nav" id="next" aria-label="Next slide">›</button>
+<div id="counter" aria-live="off"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ── stage scaling ───────────────────────────────────────── */
+var stage=document.getElementById('stage');
+function fit(){
+  var s=Math.min(innerWidth/1280,innerHeight/720);
+  stage.style.transform='scale('+s+')';
+}
+addEventListener('resize',fit);fit();
+
+/* ── slides ──────────────────────────────────────────────── */
+var slides=[].slice.call(document.querySelectorAll('.slide'));
+var i=0;
+
+slides.forEach(function(sl,n){
+  if(n===0)return;
+  var b=document.createElement('button');
+  b.className='home';b.type='button';b.innerHTML='⌂';
+  b.setAttribute('aria-label','Back to index');
+  b.addEventListener('click',function(){go(1)});
+  sl.appendChild(b);
+});
+
+function go(n){
+  n=Math.max(0,Math.min(slides.length-1,n));
+  if(n===i && slides[i].classList.contains('on'))return;
+  slides[i].classList.remove('on');
+  i=n;
+  slides[i].classList.add('on');
+  document.getElementById('prev').disabled=(i===0);
+  document.getElementById('next').disabled=(i===slides.length-1);
+  document.getElementById('counter').textContent=(i+1)+' / '+slides.length;
+  if(location.hash!=='#'+(i+1))history.replaceState(null,'','#'+(i+1));
+  if(slides[i].id==='quiz')newRound();
+}
+document.getElementById('prev').addEventListener('click',function(){go(i-1)});
+document.getElementById('next').addEventListener('click',function(){go(i+1)});
+document.querySelectorAll('[data-goto]').forEach(function(b){
+  b.addEventListener('click',function(){go(+b.dataset.goto-1)});
+});
+addEventListener('keydown',function(e){
+  var t=e.target.tagName;
+  if(e.key==='ArrowRight'||e.key==='PageDown'){go(i+1);e.preventDefault()}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){go(i-1);e.preventDefault()}
+  else if(e.key===' '&&t!=='BUTTON'){go(i+1);e.preventDefault()}
+  else if(e.key==='Home'){go(1);e.preventDefault()}
+});
+
+/* ── audio (flat folder: assets/audio/word.mp3) ──────────── */
+var player=new Audio(); var lastBtn=null;
+function play(file,btn){
+  if(lastBtn){lastBtn.classList.remove('playing')}
+  player.pause();
+  player.src='assets/audio/'+file;
+  player.currentTime=0;
+  var p=player.play();
+  if(p&&p.catch)p.catch(function(){});
+  if(btn){btn.classList.add('playing');lastBtn=btn}
+}
+player.addEventListener('ended',function(){if(lastBtn)lastBtn.classList.remove('playing')});
+
+/* ── clickable word lists ────────────────────────────────── */
+function wordBtn(word,widthPx,small){
+  var b=document.createElement('button');
+  b.type='button';b.className='word'+(small?' sm':'');
+  b.innerHTML='<span class="dot"></span><span class="bar" style="--w:'+widthPx+'px"></span>'+
+              '<span>'+word+'</span><span class="speaker" aria-hidden="true">🔊</span>';
+  b.setAttribute('aria-label','Play the word '+word);
+  b.addEventListener('click',function(){play(word.toLowerCase()+'.mp3',b)});
+  return b;
+}
+document.querySelectorAll('[data-words]').forEach(function(box){
+  var small=(box.dataset.size==='sm');
+  box.dataset.words.split(',').forEach(function(w,n){
+    box.appendChild(wordBtn(w,small?26:(110+n*26),small));
+  });
+});
+
+/* slide 6 — T and K grouped */
+var groups=[
+  ['T',['table','terminal','test','turbine','transistor','tar','top','till']],
+  ['K',['cable','capacitor','contact','computer','capacity','cool','kill']]
+];
+var tk=document.getElementById('tkgroups');
+groups.forEach(function(g){
+  var row=document.createElement('div');row.className='wordrow';
+  row.style.marginBottom='10px';
+  var lab=document.createElement('span');
+  lab.textContent=g[0];
+  lab.style.cssText='font:800 34px/1 Montserrat,sans-serif;color:var(--blue);width:60px;flex:none';
+  row.appendChild(lab);
+  g[1].forEach(function(w){
+    var b=wordBtn(w,26,true);
+    row.appendChild(b);
+  });
+  tk.appendChild(row);
+});
+
+/* chips */
+document.querySelectorAll('.chip[data-audio]').forEach(function(c){
+  c.addEventListener('click',function(){play(c.dataset.audio,c)});
+});
+
+/* ── the eight minimal pairs ─────────────────────────────── */
+var PAIRS=[
+  ['pin','spin','p'],
+  ['peak','speak','p'],
+  ['pot','spot','p'],
+  ['till','still','t'],
+  ['top','stop','t'],
+  ['tar','star','t'],
+  ['kill','skill','k'],
+  ['cool','school','c']
+];
+var IPA={pin:'/pʰɪn/',spin:'/spɪn/',peak:'/pʰiːk/',speak:'/spiːk/',
+  pot:'/pʰɒt/',spot:'/spɒt/',till:'/tʰɪl/',still:'/stɪl/',
+  top:'/tʰɒp/',stop:'/stɒp/',tar:'/tʰɑː/',star:'/stɑː/',
+  kill:'/kʰɪl/',skill:'/skɪl/',cool:'/kʰuːl/',school:'/skuːl/'};
+
+function pairBtn(word,mark){
+  var b=document.createElement('button');
+  b.type='button';b.className='pbtn';
+  var spelt=word.replace(new RegExp('^(s?)('+mark+')'),function(m,s,c){
+    return s+'<b>'+c+'</b>';
+  });
+  b.innerHTML='<span class="spell">'+spelt+'</span><span class="ipa">'+(IPA[word]||'')+'</span>';
+  b.setAttribute('aria-label','Play the word '+word);
+  b.addEventListener('click',function(){play(word+'.mp3',b)});
+  return b;
+}
+var pg=document.getElementById('pairs');
+PAIRS.forEach(function(p){
+  var row=document.createElement('div');row.className='pair';
+  row.appendChild(pairBtn(p[0],p[2]));
+  var vs=document.createElement('span');vs.className='vs';vs.textContent='vs';
+  row.appendChild(vs);
+  row.appendChild(pairBtn(p[1],p[2]));
+  pg.appendChild(row);
+});
+
+/* ── quiz : which of the pair did you hear? ──────────────── */
+var ROUND=PAIRS.length, queue=[], qi=0, score=0, current=null, answered=false;
+
+function shuffle(a){for(var j=a.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1));var t=a[j];a[j]=a[k];a[k]=t}return a}
+
+function newRound(){
+  queue=shuffle(PAIRS.slice()).map(function(p){
+    return{a:p[0],b:p[1],heard:(Math.random()<.5?p[0]:p[1])};
+  });
+  qi=0;score=0;
+  document.getElementById('qtext').textContent='Listen. Which word did you hear?';
+  ask();
+}
+function ask(){
+  answered=false;
+  current=queue[qi];
+  document.getElementById('qfb').textContent='';
+  var opts=document.getElementById('qopts');
+  opts.innerHTML='';
+  shuffle([current.a,current.b]).forEach(function(w){
+    var b=document.createElement('button');
+    b.className='opt';b.type='button';b.textContent=w;
+    b.addEventListener('click',function(){answer(w,b)});
+    opts.appendChild(b);
+  });
+  document.getElementById('qscore').textContent='Question '+(qi+1)+' / '+ROUND+' · score '+score;
+  play(current.heard+'.mp3',null);
+}
+function answer(choice,btn){
+  if(answered)return;
+  answered=true;
+  var ok=(choice===current.heard);
+  if(ok)score++;
+  btn.classList.add(ok?'right':'wrong');
+  document.getElementById('qfb').textContent=
+    (ok?'Yes — ':'No — ')+'that was “'+current.heard+'”.';
+  document.getElementById('qscore').textContent='Question '+(qi+1)+' / '+ROUND+' · score '+score;
+  setTimeout(function(){
+    qi++;
+    if(qi<ROUND){ask()}
+    else{
+      document.getElementById('qopts').innerHTML='';
+      document.getElementById('qtext').textContent='Round finished.';
+      document.getElementById('qfb').textContent='You scored '+score+' out of '+ROUND+'. Click “New round” to hear the eight pairs again, in a new order.';
+    }
+  },1700);
+}
+document.getElementById('qplay').addEventListener('click',function(){
+  if(current)play(current.heard+'.mp3',null);
+});
+document.getElementById('qagain').addEventListener('click',newRound);
+
+/* ── boot ────────────────────────────────────────────────── */
+var start=parseInt((location.hash||'').replace('#',''),10);
+go(isNaN(start)?0:start-1);
+})();
+</script>
+</body>
+</html>
