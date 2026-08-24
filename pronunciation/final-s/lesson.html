@@ -233,7 +233,7 @@
     var R=function(id){return document.getElementById(id);};
 
     var CLIPS="assets/audio/";
-    var HAVE={"all-the-devices":1,"both-motors":1,"bridge":1,"bridges":1,"check-the-fuses":1,"circuit":1,"circuits":1,"eight-outputs":1,"four-boxes":1,"fuse":1,"fuses":1,"it-charges-the-battery":1,"it-detects-the-fault":1,"it-measures-the-current":1,"it-produces":1,"it-runs-all-night":1,"it-works-well":1,"mikes-cat":1,"mikes-laptop":1,"my-parents-meeting":1,"roses-car":1,"roses-cat":1,"switch":1,"switches":1,"tesss-car":1,"the-cables-are-here":1,"the-chips-are-hot":1,"the-engineers-report":1,"the-girls-car":1,"the-sensors-failed":1,"the-switches-are-off":1,"the-valves-are-shut":1,"the-wires-are-loose":1,"twelve-volts":1,"two-bridges":1,"two-circuits-on-the-board":1};
+    var HAVE={"boxes":1,"bridge":1,"bridges":1,"cables":1,"chips":1,"circuit":1,"circuits":1,"devices":1,"fuse":1,"fuses":1,"it-charges":1,"it-detects":1,"it-measures":1,"it-produces":1,"it-runs":1,"it-works":1,"mikes":1,"mikes-cat":1,"motors":1,"my-parents-meeting":1,"outputs":1,"roses":1,"roses-cat":1,"sensors":1,"switch":1,"switches":1,"tesss":1,"tesss-car":1,"the-engineers":1,"the-engineers-report":1,"the-girls-car":1,"valves":1,"volts":1,"wires":1};
 
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;
@@ -377,7 +377,9 @@
       var it=ITEMS[idx];
       R('fs-word').textContent=it[0];
       R('fs-base').textContent=it[1];
-      R('fs-saytxt').innerHTML='&#8220;'+phraseHTML(it[0],it[3])+'&#8221;';
+      /* carrier phrases dropped 24 Aug: the -s is decided by the sound BEFORE it, so
+         nothing that follows the word can change it. Phrases left in ITEMS[3]. */
+      R('fs-saytxt').innerHTML='';
       R('fs-fb').textContent=''; R('fs-fb').className='fb';
       R('fs-why').innerHTML='';
       R('fs-verdict').classList.add('hidden');
@@ -432,7 +434,7 @@
     R('fs-again').addEventListener('click',function(){
       idx=0; right=0; shuffle(ITEMS); R('fs-score').textContent=''; render();
     });
-    R('fs-say').addEventListener('click',function(){ TTS.say(ITEMS[idx][3], 0.72); });
+    R('fs-say').addEventListener('click',function(){ TTS.say(ITEMS[idx][0], 0.72); });
 
     render();
   })();
