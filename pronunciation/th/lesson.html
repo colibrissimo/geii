@@ -174,31 +174,44 @@
     var R=function(id){return document.getElementById(id);};
 
     /* ---------- shared TTS ---------- */
-    var TTS = (function(){
-      var ok = ('speechSynthesis' in window);
-      var voice = null;
+    var CLIPS="assets/audio/";
+    var HAVE={"beneath":1,"breathe":1,"breeze":1,"cathode":1,"dare":1,"deaf":1,"death":1,"depth":1,"earth":1,"ethernet":1,"face":1,"faith":1,"first":1,"fought":1,"length":1,"mathematics":1,"method":1,"month":1,"north":1,"northern":1,"other":1,"sink":1,"south":1,"southern":1,"tense":1,"tenth":1,"the":1,"then":1,"there":1,"thermal":1,"thermistor":1,"thermocouple":1,"they":1,"think":1,"thirst":1,"this":1,"thought":1,"thousand":1,"three":1,"through":1,"weather":1,"whizz":1,"width":1,"with":1,"within":1,"zen":1};
+
+    var TTS=(function(){
+      var ok=('speechSynthesis' in window), voice=null;
       function pick(){
         if(!ok) return null;
-        var vs = window.speechSynthesis.getVoices()||[];
-        var gb = vs.filter(function(v){return /en[-_]GB/i.test(v.lang);});
+        var vs=window.speechSynthesis.getVoices()||[];
+        var gb=vs.filter(function(v){return /en[-_]GB/i.test(v.lang);});
         return gb[0] || vs.filter(function(v){return /^en/i.test(v.lang);})[0] || null;
       }
-      if(ok){
-        voice = pick();
-        window.speechSynthesis.onvoiceschanged = function(){ voice = pick(); };
+      if(ok){ voice=pick(); window.speechSynthesis.onvoiceschanged=function(){voice=pick();}; }
+      function tts(t,r){
+        if(!ok) return;
+        try{window.speechSynthesis.cancel();}catch(e){}
+        var u=new SpeechSynthesisUtterance(t); u.lang='en-GB'; u.rate=(r||0.85);
+        if(voice) u.voice=voice; window.speechSynthesis.speak(u);
       }
-      return {
-        ok: ok,
-        say: function(text, rate){
-          if(!ok) return;
-          try{ window.speechSynthesis.cancel(); }catch(e){}
-          var u = new SpeechSynthesisUtterance(text);
-          u.lang = 'en-GB';
-          u.rate = (rate||0.85);
-          if(voice) u.voice = voice;
-          window.speechSynthesis.speak(u);
-        }
-      };
+      var player=null;
+      /* filename key: lowercase, apostrophes dropped, every other run of non-alphanumerics
+         collapsed to one hyphen. Identical output to the older spaces-to-hyphens rule for
+         every key already in use, and it survives the commas in the -ed pairs. */
+      function key(t){
+        return String(t).toLowerCase().replace(/['\u2019]/g,'')
+                 .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+      }
+      /* recorded clip first, Web Speech as the onerror fallback, so a word that is not
+         recorded yet degrades to the browser voice instead of to silence. */
+      return {ok:ok, say:function(t,r){
+        var k=key(t);
+        if(!HAVE[k]){ tts(t,r); return; }
+        try{window.speechSynthesis.cancel();}catch(e){}
+        if(player){ try{ player.pause(); }catch(e){} }
+        player=new Audio(CLIPS+encodeURIComponent(k)+".mp3");
+        player.onerror=function(){ tts(t,r); };
+        var pr=player.play();
+        if(pr&&pr["catch"]) pr["catch"](function(){ tts(t,r); });
+      }};
     })();
 
     R('th-ttsnote').textContent = TTS.ok

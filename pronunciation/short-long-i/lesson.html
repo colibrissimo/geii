@@ -190,6 +190,9 @@
   (function(){
     var R=function(id){return document.getElementById(id);};
 
+    var CLIPS="assets/audio/";
+    var HAVE={"a-cheap-part":1,"a-digital-meter":1,"a-machine":1,"a-magnetic-field":1,"a-printed-circuit":1,"a-relief-valve":1,"a-sheep":1,"a-ship":1,"a-silicon-chip":1,"a-strong-signal":1,"a-switch":1,"a-tight-fit":1,"beat-the-record":1,"full-speed":1,"give-it-to-me":1,"one-bit":1,"one-minute":1,"one-piece":1,"pin-one":1,"press-the-key":1,"since-yesterday":1,"the-screen-is-on":1,"they-live-here":1,"two-feet":1,"we-built-it":1};
+
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;
       function pick(){
@@ -199,11 +202,31 @@
         return gb[0] || vs.filter(function(v){return /^en/i.test(v.lang);})[0] || null;
       }
       if(ok){ voice=pick(); window.speechSynthesis.onvoiceschanged=function(){voice=pick();}; }
-      return {ok:ok, say:function(t,r){
+      function tts(t,r){
         if(!ok) return;
         try{window.speechSynthesis.cancel();}catch(e){}
         var u=new SpeechSynthesisUtterance(t); u.lang='en-GB'; u.rate=(r||0.8);
         if(voice) u.voice=voice; window.speechSynthesis.speak(u);
+      }
+      var player=null;
+      /* filename key: lowercase, apostrophes dropped, every other run of non-alphanumerics
+         collapsed to one hyphen. Identical output to the older spaces-to-hyphens rule for
+         every key already in use, and it survives the commas in the -ed pairs. */
+      function key(t){
+        return String(t).toLowerCase().replace(/['\u2019]/g,'')
+                 .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+      }
+      /* recorded clip first, Web Speech as the onerror fallback, so a word that is not
+         recorded yet degrades to the browser voice instead of to silence. */
+      return {ok:ok, say:function(t,r){
+        var k=key(t);
+        if(!HAVE[k]){ tts(t,r); return; }
+        try{window.speechSynthesis.cancel();}catch(e){}
+        if(player){ try{ player.pause(); }catch(e){} }
+        player=new Audio(CLIPS+encodeURIComponent(k)+".mp3");
+        player.onerror=function(){ tts(t,r); };
+        var pr=player.play();
+        if(pr&&pr["catch"]) pr["catch"](function(){ tts(t,r); });
       }};
     })();
 

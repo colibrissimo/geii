@@ -158,6 +158,9 @@
   (function(){
     var R=function(id){return document.getElementById(id);};
 
+    var CLIPS="assets/audio/";
+    var HAVE={"actor":1,"address":1,"away":1,"banana":1,"cabbage":1,"capacitor":1,"carrot":1,"circuit":1,"conduct":1,"conductor":1,"connect":1,"connector":1,"cucumber":1,"current":1,"dangerous":1,"digital":1,"dress":1,"drive":1,"driver":1,"generate":1,"generator":1,"lemon":1,"lettuce":1,"machine":1,"metal":1,"minute":1,"motor":1,"office":1,"officer":1,"orange":1,"potato":1,"pumpkin":1,"radish":1,"resist":1,"resistor":1,"sensor":1,"signal":1,"socket":1,"ticket":1,"village":1,"voltage":1,"way":1,"woman":1,"women":1};
+
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;
       function pick(){
@@ -167,11 +170,31 @@
         return gb[0] || vs.filter(function(v){return /^en/i.test(v.lang);})[0] || null;
       }
       if(ok){ voice=pick(); window.speechSynthesis.onvoiceschanged=function(){voice=pick();}; }
-      return {ok:ok, say:function(t,r){
+      function tts(t,r){
         if(!ok) return;
         try{window.speechSynthesis.cancel();}catch(e){}
         var u=new SpeechSynthesisUtterance(t); u.lang='en-GB'; u.rate=(r||0.85);
         if(voice) u.voice=voice; window.speechSynthesis.speak(u);
+      }
+      var player=null;
+      /* filename key: lowercase, apostrophes dropped, every other run of non-alphanumerics
+         collapsed to one hyphen. Identical output to the older spaces-to-hyphens rule for
+         every key already in use, and it survives the commas in the -ed pairs. */
+      function key(t){
+        return String(t).toLowerCase().replace(/['\u2019]/g,'')
+                 .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+      }
+      /* recorded clip first, Web Speech as the onerror fallback, so a word that is not
+         recorded yet degrades to the browser voice instead of to silence. */
+      return {ok:ok, say:function(t,r){
+        var k=key(t);
+        if(!HAVE[k]){ tts(t,r); return; }
+        try{window.speechSynthesis.cancel();}catch(e){}
+        if(player){ try{ player.pause(); }catch(e){} }
+        player=new Audio(CLIPS+encodeURIComponent(k)+".mp3");
+        player.onerror=function(){ tts(t,r); };
+        var pr=player.play();
+        if(pr&&pr["catch"]) pr["catch"](function(){ tts(t,r); });
       }};
     })();
 
