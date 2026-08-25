@@ -216,14 +216,14 @@
   <div class="panel">
     <h2>5 &middot; Say it</h2>
     <p class="sub" style="margin-bottom:8px;">The <span class="x">orange</span> endings are the ones that add a syllable. Every other s is there and must be heard.</p>
-    <div class="tw">The board has four output<b>s</b>, two input<b>s</b> and six test point<b>s</b>. <span class="note" style="display:inline;">(three /s/, no extra syllables)</span></div>
-    <div class="tw">The sensor<b>s</b> and the cable<b>s</b> go to the motor<b>s</b>. <span class="note" style="display:inline;">(three /z/, the normal ending)</span></div>
-    <div class="tw">Check the switch<span class="x">es</span>, the fus<span class="x">es</span> and the bridg<span class="x">es</span>. <span class="note" style="display:inline;">(three extra syllables, and you can hear all three)</span></div>
-    <div class="tw">It work<b>s</b>, it run<b>s</b>, it charg<span class="x">es</span> and it measure<b>s</b> the current.</div>
-    <div class="tw">The engineer'<b>s</b> report say<b>s</b> the devic<span class="x">es</span> failed.</div>
+    <div class="tw">The board has four output<b>s</b>, two input<b>s</b> and six test point<b>s</b>. <span class="note" style="display:inline;">(three /s/, no extra syllables)</span> <span class="chip" data-w="The board has four outputs, two inputs and six test points.">&#128266; Listen</span></div>
+    <div class="tw">The sensor<b>s</b> and the cable<b>s</b> go to the motor<b>s</b>. <span class="note" style="display:inline;">(three /z/, the normal ending)</span> <span class="chip" data-w="The sensors and the cables go to the motors.">&#128266; Listen</span></div>
+    <div class="tw">Check the switch<span class="x">es</span>, the fus<span class="x">es</span> and the bridg<span class="x">es</span>. <span class="note" style="display:inline;">(three extra syllables, and you can hear all three)</span> <span class="chip" data-w="Check the switches, the fuses and the bridges.">&#128266; Listen</span></div>
+    <div class="tw">It work<b>s</b>, it run<b>s</b>, it charg<span class="x">es</span> and it measure<b>s</b> the current. <span class="chip" data-w="It works, it runs, it charges and it measures the current.">&#128266; Listen</span></div>
+    <div class="tw">The engineer'<b>s</b> report say<b>s</b> the devic<span class="x">es</span> failed. <span class="chip" data-w="The engineer's report says the devices failed.">&#128266; Listen</span></div>
     <table style="margin-top:12px;">
-      <tr><td>/s/</td><td style="color:var(--ink);font-weight:normal;"><b>circuits &middot; outputs &middot; volts &middot; chips &middot; watts &middot; sockets &middot; it works &middot; it starts &middot; it detects</b></td></tr>
-      <tr><td>/z/</td><td style="color:var(--ink);font-weight:normal;"><b>cables &middot; sensors &middot; wires &middot; motors &middot; coils &middot; valves &middot; signals &middot; it runs &middot; it controls &middot; it measures</b></td></tr>
+      <tr><td>/s/</td><td style="color:var(--ink);font-weight:normal;"><b>circuits &middot; outputs &middot; volts &middot; chips &middot; watts &middot; sockets &middot; it works &middot; <span class="chip" data-w="it starts">it starts</span> &middot; it detects</b></td></tr>
+      <tr><td>/z/</td><td style="color:var(--ink);font-weight:normal;"><b>cables &middot; sensors &middot; wires &middot; motors &middot; coils &middot; valves &middot; signals &middot; it runs &middot; <span class="chip" data-w="it controls">it controls</span> &middot; it measures</b></td></tr>
       <tr><td>/&#618;z/</td><td style="color:var(--ink);font-weight:normal;"><b>switches &middot; fuses &middot; bridges &middot; devices &middot; boxes &middot; phases &middot; gauges &middot; interfaces &middot; it charges &middot; it produces</b></td></tr>
     </table>
     </div>
@@ -233,7 +233,9 @@
     var R=function(id){return document.getElementById(id);};
 
     var CLIPS="assets/audio/";
-    var HAVE={"boxes":1,"bridge":1,"bridges":1,"cables":1,"chips":1,"circuit":1,"circuits":1,"devices":1,"fuse":1,"fuses":1,"it-charges":1,"it-detects":1,"it-measures":1,"it-produces":1,"it-runs":1,"it-works":1,"mikes":1,"mikes-cat":1,"motors":1,"my-parents-meeting":1,"outputs":1,"roses":1,"roses-cat":1,"sensors":1,"switch":1,"switches":1,"tesss":1,"tesss-car":1,"the-engineers":1,"the-engineers-report":1,"the-girls-car":1,"valves":1,"volts":1,"wires":1};
+    var HAVE={"boxes":1,"bridge":1,"bridges":1,"cables":1,"chips":1,"circuit":1,"circuits":1,"devices":1,"fuse":1,"fuses":1,"it-charges":1,"it-detects":1,"it-measures":1,"it-produces":1,"it-runs":1,"it-works":1,"mikes":1,"mikes-cat":1,"motors":1,"my-parents-meeting":1,"outputs":1,"roses":1,"roses-cat":1,"sensors":1,"switch":1,"switches":1,"tesss":1,"tesss-car":1,"the-engineers":1,"the-engineers-report":1,"the-girls-car":1,"valves":1,"volts":1,"wires":1,
+      "the-board-has-four-outputs-two-inputs-and-six-test-points":1,"the-sensors-and-the-cables-go-to-the-motors":1,"check-the-switches-the-fuses-and-the-bridges":1,"it-works-it-runs-it-charges-and-it-measures-the-current":1,"the-engineers-report-says-the-devices-failed":1,
+      "it-controls":1,"it-starts":1};
 
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;

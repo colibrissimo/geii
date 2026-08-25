@@ -121,9 +121,9 @@
   <div class="panel">
     <h2>4 · Say it</h2>
     <p class="sub" style="margin-bottom:8px;">Strip back up. Read aloud, slowly, and make the strip move on every bold letter.</p>
-    <div class="tw">Two <span class="p">t</span>ired <span class="p">t</span>igers <span class="p">t</span>ook a <span class="p">t</span>axi to <span class="p">t</span>own.</div>
-    <div class="tw"><span class="p">P</span>eter <span class="p">P</span>i<span class="p">p</span>er <span class="p">p</span>icked a <span class="p">p</span>eck of <span class="p">p</span>ickled <span class="p">p</span>eppers.</div>
-    <div class="tw">The <span class="p">c</span>ontrol <span class="p">p</span>anel <span class="p">t</span>ests the <span class="p">p</span>ower su<span class="p">pp</span>ly, the <span class="p">c</span>able and the <span class="p">t</span>erminal.</div>
+    <div class="tw">Two <span class="p">t</span>ired <span class="p">t</span>igers <span class="p">t</span>ook a <span class="p">t</span>axi to <span class="p">t</span>own. <button class="listen" id="pl-sent1" style="margin-left:8px;">🔊 Listen</button></div>
+    <div class="tw"><span class="p">P</span>eter <span class="p">P</span>i<span class="p">p</span>er <span class="p">p</span>icked a <span class="p">p</span>eck of <span class="p">p</span>ickled <span class="p">p</span>eppers. <button class="listen" id="pl-sent2" style="margin-left:8px;">🔊 Listen</button></div>
+    <div class="tw">The <span class="p">c</span>ontrol <span class="p">p</span>anel <span class="p">t</span>ests the <span class="p">p</span>ower su<span class="p">pp</span>ly, the <span class="p">c</span>able and the <span class="p">t</span>erminal. <button class="listen" id="pl-sent3" style="margin-left:8px;">🔊 Listen</button></div>
     <div class="tw">Now the switch. Strip should stay <b>still</b> on: <i>spin, stop, still, skill, spot, school, star, speaker.</i> The /s/ takes the puff away.</div>
     <p style="margin-top:14px;"><b>Minimal pairs.</b> Say each cell across, watching the strip. Left moves, right does not.</p>
     <div class="pairgrid">
@@ -225,6 +225,16 @@
       var pr=player.play();
       if(pr && pr["catch"]) pr["catch"](function(){ ttsSpeak(w); });
     }
+    /* Same idea as speak(), but for a full sentence: the clip is keyed by a
+       short id, and the TTS fallback is told the real sentence to say. */
+    function speakSentence(id, text){
+      try{ window.speechSynthesis.cancel(); }catch(e){}
+      if(player){ try{ player.pause(); }catch(e){} }
+      player=new Audio(CLIPS+id+".mp3");
+      player.onerror=function(){ ttsSpeak(text); };
+      var pr=player.play();
+      if(pr && pr["catch"]) pr["catch"](function(){ ttsSpeak(text); });
+    }
 
     function buildTwins(){
       var box=R("pl-twins"); box.innerHTML="";
@@ -285,6 +295,9 @@
     R("pl-nextw").addEventListener("click",nextWord);
     R("pl-again").addEventListener("click",startSort);
     R("pl-say").addEventListener("click",function(){ speak(seq[idx][0]); });
+    R("pl-sent1").addEventListener("click",function(){ speakSentence("tired-tigers","Two tired tigers took a taxi to town."); });
+    R("pl-sent2").addEventListener("click",function(){ speakSentence("peter-piper","Peter Piper picked a peck of pickled peppers."); });
+    R("pl-sent3").addEventListener("click",function(){ speakSentence("control-panel","The control panel tests the power supply, the cable and the terminal."); });
 
     /* the minimal-pair grid: every cell word is a recorded clip, so make them playable */
     Array.prototype.forEach.call(document.querySelectorAll("#pl-mod .pairgrid .on,#pl-mod .pairgrid .off"),

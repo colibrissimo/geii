@@ -100,9 +100,14 @@
   <div class="panel">
     <h2>3 · Say it</h2>
     <p class="sub" style="margin-bottom:8px;">Read aloud, slowly, with the breath on every bold H. Then at speed.</p>
-    <div class="tw">Who has Hugo’s <span class="h">h</span>elmet? <span class="h">H</span>ow <span class="h">h</span>eavy is it?</div>
-    <div class="tw"><span class="h">H</span>ow <span class="h">h</span>appy <span class="h">H</span>arry <span class="h">h</span>eld <span class="h">h</span>is <span class="h">h</span>eavy <span class="h">h</span>ammer.</div>
+    <div class="tw">Who has Hugo’s <span class="h">h</span>elmet? <span class="h">H</span>ow <span class="h">h</span>eavy is it? <button class="listen" id="hh-sent0" style="margin-left:8px;">🔊 Listen</button></div>
+    <div class="tw"><span class="h">H</span>ow <span class="h">h</span>appy <span class="h">H</span>arry <span class="h">h</span>eld <span class="h">h</span>is <span class="h">h</span>eavy <span class="h">h</span>ammer. <button class="listen" id="hh-sent1" style="margin-left:8px;">🔊 Listen</button></div>
     <div class="tw">Now <b>no</b> breath: <i>What, where, when, why</i>: just /w/. <i>Eat, engineer, energy, upcycling</i>: start on the vowel, no h.</div>
+    <div class="tw">Breathe the H. <button class="listen" id="hh-sent2" style="margin-left:8px;">🔊 Listen</button></div>
+    <div class="tw">The letter h is breath, not noise. <button class="listen" id="hh-sent3" style="margin-left:8px;">🔊 Listen</button></div>
+    <div class="tw">WHO and HOW both breathe the H. <button class="listen" id="hh-sent4" style="margin-left:8px;">🔊 Listen</button></div>
+    <div class="tw">WHAT · WHERE · WHEN · WHY · WHICH have no H, just the letter W. <button class="listen" id="hh-sent5" style="margin-left:8px;">🔊 Listen</button></div>
+    <div class="tw">With who, whose, whole, the letter W, but with what, where, when, the letter H is silent. <button class="listen" id="hh-sent6" style="margin-left:8px;">🔊 Listen</button></div>
     <table style="margin-top:12px;">
       <tr><td>Breathe it</td><td><b>who · how · house · here · behind · perhaps</b></td></tr>
       <tr><td>Silent h</td><td><b>hour · honest · honour · vehicle · what · where</b></td></tr>
@@ -184,6 +189,17 @@
       var pr=player.play();
       if(pr && pr["catch"]) pr["catch"](function(){ ttsSpeak(w); });
     }
+    /* Same idea as speak(), but for a full sentence: the clip is keyed by a
+       short id (not the sentence text, which is unsafe as a URL/filename), and
+       the TTS fallback is told the real sentence to say instead of the id. */
+    function speakSentence(id, text){
+      try{ window.speechSynthesis.cancel(); }catch(e){}
+      if(player){ try{ player.pause(); }catch(e){} }
+      player=new Audio(CLIPS+id+".mp3");
+      player.onerror=function(){ ttsSpeak(text); };
+      var pr=player.play();
+      if(pr && pr["catch"]) pr["catch"](function(){ ttsSpeak(text); });
+    }
 
     // ---- Activity 1 ----
     var seq=[], idx=0, score=0, answered=false;
@@ -245,6 +261,13 @@
     R("hh-nextw").addEventListener("click",nextWord);
     R("hh-again").addEventListener("click",startSort);
     R("hh-say").addEventListener("click",function(){ speak(seq[idx]); });
+    R("hh-sent0").addEventListener("click",function(){ speakSentence("hugo-helmet","Who has Hugo’s helmet? How heavy is it?"); });
+    R("hh-sent1").addEventListener("click",function(){ speakSentence("harry-hammer","How happy Harry held his heavy hammer."); });
+    R("hh-sent2").addEventListener("click",function(){ speakSentence("breathe-the-h","Breathe the H."); });
+    R("hh-sent3").addEventListener("click",function(){ speakSentence("letter-h-breath","The letter h is breath, not noise."); });
+    R("hh-sent4").addEventListener("click",function(){ speakSentence("who-how-breathe","WHO and HOW both breathe the H."); });
+    R("hh-sent5").addEventListener("click",function(){ speakSentence("what-where-when-why-which","WHAT WHERE WHEN WHY WHICH have no H, just the letter W."); });
+    R("hh-sent6").addEventListener("click",function(){ speakSentence("who-whose-whole-vs-what-where-when","With who, whose, whole, the letter W, but with what, where, when, the letter H is silent."); });
 
     // boot
     startSort();
