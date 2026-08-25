@@ -159,10 +159,10 @@
     </div>
     <p class="note"><b>ch is just sh with a t stuck on the front.</b> Say <i>sh</i>, then say <i>t-sh</i>.</p>
     <p style="margin-top:14px;"><b>Now the sentences.</b></p>
-    <div class="tw">She sells seashells by the seashore. The shells she sells are seashells, I am sure.</div>
-    <div class="tw">The me<span class="st">chan</span>ical <span class="st">chart</span> shows the <span class="st">tech</span>nical <span class="st">struc</span>ture.</div>
-    <div class="tw">Check the pressure, the temperature and the mixture, then change the chip.</div>
-    <div class="tw">A ma<span class="st">chine</span>, a <span class="st">chas</span>sis and a bro<span class="st">chure</span>: three French words that all say sh.</div>
+    <div class="tw">She sells seashells by the seashore. The shells she sells are seashells, I am sure. <span class="chip" data-w="She sells seashells by the seashore. The shells she sells are seashells, I am sure.">&#128266; Listen</span></div>
+    <div class="tw">The me<span class="st">chan</span>ical <span class="st">chart</span> shows the <span class="st">tech</span>nical <span class="st">struc</span>ture. <span class="chip" data-w="The mechanical chart shows the technical structure.">&#128266; Listen</span></div>
+    <div class="tw">Check the pressure, the temperature and the mixture, then change the chip. <span class="chip" data-w="Check the pressure, the temperature and the mixture, then change the chip.">&#128266; Listen</span></div>
+    <div class="tw">A ma<span class="st">chine</span>, a <span class="st">chas</span>sis and a bro<span class="st">chure</span>: three French words that all say sh. <span class="chip" data-w="A machine, a chassis and a brochure: three French words that all say sh.">&#128266; Listen</span></div>
    </div>
 
   <script>
@@ -170,7 +170,8 @@
     var R=function(id){return document.getElementById(id);};
 
     var CLIPS="assets/audio/";
-    var HAVE={"shhh":1,"chchch":1,"architecture":1,"brochure":1,"chain":1,"chair":1,"champagne":1,"chandelier":1,"change":1,"chaos":1,"chapter":1,"character":1,"charge":1,"chart":1,"chassis":1,"cheat":1,"cheese":1,"chef":1,"chemical":1,"chew":1,"chicken":1,"chip":1,"chips":1,"chlorine":1,"chocolate":1,"choose":1,"christmas":1,"cliche":1,"closure":1,"commercial":1,"connection":1,"culture":1,"decision":1,"echo":1,"essential":1,"fascination":1,"feature":1,"future":1,"insure":1,"machine":1,"manufacture":1,"measure":1,"mechanical":1,"mixture":1,"orchestra":1,"parachute":1,"picture":1,"pleasure":1,"potential":1,"pressure":1,"production":1,"schematic":1,"session":1,"shampoo":1,"share":1,"she-is":1,"sheet":1,"shield":1,"ships":1,"shoe":1,"shoes":1,"shout":1,"shunt":1,"solution":1,"structure":1,"sunshine":1,"switch":1,"synchronous":1,"technical":1,"technique":1,"technology":1,"television":1,"temperature":1,"tension":1};
+    var HAVE={"shhh":1,"chchch":1,"architecture":1,"brochure":1,"chain":1,"chair":1,"champagne":1,"chandelier":1,"change":1,"chaos":1,"chapter":1,"character":1,"charge":1,"chart":1,"chassis":1,"cheat":1,"cheese":1,"chef":1,"chemical":1,"chew":1,"chicken":1,"chip":1,"chips":1,"chlorine":1,"chocolate":1,"choose":1,"christmas":1,"cliche":1,"closure":1,"commercial":1,"connection":1,"culture":1,"decision":1,"echo":1,"essential":1,"fascination":1,"feature":1,"future":1,"insure":1,"machine":1,"manufacture":1,"measure":1,"mechanical":1,"mixture":1,"orchestra":1,"parachute":1,"picture":1,"pleasure":1,"potential":1,"pressure":1,"production":1,"schematic":1,"session":1,"shampoo":1,"share":1,"she-is":1,"sheet":1,"shield":1,"ships":1,"shoe":1,"shoes":1,"shout":1,"shunt":1,"solution":1,"structure":1,"sunshine":1,"switch":1,"synchronous":1,"technical":1,"technique":1,"technology":1,"television":1,"temperature":1,"tension":1,
+      "she-sells-seashells-by-the-seashore-the-shells-she-sells-are-seashells-i-am-sure":1,"the-mechanical-chart-shows-the-technical-structure":1,"check-the-pressure-the-temperature-and-the-mixture-then-change-the-chip":1,"a-machine-a-chassis-and-a-brochure-three-french-words-that-all-say-sh":1};
 
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;

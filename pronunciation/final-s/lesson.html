@@ -123,10 +123,10 @@
     <p class="sub" style="margin-bottom:8px;">Everything on this page depends on recognising one family of sounds. Do these out loud.</p>
 
     <div class="noises">
-      <div class="noise"><div class="snd">Zzzzzz</div><div class="ipa">/z/</div><div class="do">be the bee</div></div>
-      <div class="noise"><div class="snd">Ssssss</div><div class="ipa">/s/</div><div class="do">be the snake</div></div>
-      <div class="noise"><div class="snd">Shhhhh</div><div class="ipa">/&#643;/</div><div class="do">ask for silence</div></div>
-      <div class="noise"><div class="snd">Jjjjjj</div><div class="ipa">/&#658;/</div><div class="do">say "joujou"</div></div>
+      <div class="noise"><div class="snd">Zzzzzz</div><div class="ipa">/z/</div><div class="do">be the bee</div><span class="chip" data-w="Zzzzzz">&#128266; Listen</span></div>
+      <div class="noise"><div class="snd">Ssssss</div><div class="ipa">/s/</div><div class="do">be the snake</div><span class="chip" data-w="Ssssss">&#128266; Listen</span></div>
+      <div class="noise"><div class="snd">Shhhhh</div><div class="ipa">/&#643;/</div><div class="do">ask for silence</div><span class="chip" data-w="Shhhhh">&#128266; Listen</span></div>
+      <div class="noise"><div class="snd">Jjjjjj</div><div class="ipa">/&#658;/</div><div class="do">say "joujou"</div><span class="chip" data-w="Jjjjjj">&#128266; Listen</span></div>
     </div>
 
     <p>Those are <b>sibilants</b>: consonants that hiss or buzz, made by sending air at your teeth. Add the two that are the same noises with a stop on the front, and the full list is six.</p>
@@ -235,7 +235,8 @@
     var CLIPS="assets/audio/";
     var HAVE={"boxes":1,"bridge":1,"bridges":1,"cables":1,"chips":1,"circuit":1,"circuits":1,"devices":1,"fuse":1,"fuses":1,"it-charges":1,"it-detects":1,"it-measures":1,"it-produces":1,"it-runs":1,"it-works":1,"mikes":1,"mikes-cat":1,"motors":1,"my-parents-meeting":1,"outputs":1,"roses":1,"roses-cat":1,"sensors":1,"switch":1,"switches":1,"tesss":1,"tesss-car":1,"the-engineers":1,"the-engineers-report":1,"the-girls-car":1,"valves":1,"volts":1,"wires":1,
       "the-board-has-four-outputs-two-inputs-and-six-test-points":1,"the-sensors-and-the-cables-go-to-the-motors":1,"check-the-switches-the-fuses-and-the-bridges":1,"it-works-it-runs-it-charges-and-it-measures-the-current":1,"the-engineers-report-says-the-devices-failed":1,
-      "it-controls":1,"it-starts":1};
+      "it-controls":1,"it-starts":1,
+      "zzzzzz":1,"ssssss":1,"jjjjjj":1,"shhhhh":1};
 
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;
