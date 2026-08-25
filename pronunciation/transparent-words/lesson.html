@@ -94,15 +94,15 @@
   <!-- 2 -->
   <div class="panel">
     <h2>2 &middot; The seven worst offenders</h2>
-    <p class="sub" style="margin-bottom:8px;">These seven are mangled on a <b>sound</b> rather than on the stress. Every one of them is a sound you have already had a whole session on.</p>
+    <p class="sub" style="margin-bottom:8px;">These seven are mangled on a <b>sound</b> rather than on the stress. Every one of them is a sound that has a whole lesson of its own.</p>
     <table>
       <tr><td><b class="chip" data-w="country">country</b></td><td>The <i>ou</i> is the vowel in <i>cut</i>, not oo. <span class="resp">KUN-tree</span></td></tr>
-      <tr><td><b class="chip" data-w="hero">hero</b></td><td>The h is breathed. Drop it and the word is gone. <span class="resp">HEER-oh</span> <span class="back">session 1</span></td></tr>
-      <tr><td><b class="chip" data-w="myth">myth</b></td><td>Ends in the quiet th, not a t. <span class="resp">MITH</span> <span class="back">session 12</span></td></tr>
-      <tr><td><b class="chip" data-w="author">author</b></td><td>The quiet th again, and an -or that lands on nothing. <span class="resp">AW-thuh</span> <span class="back">sessions 12 and 15</span></td></tr>
-      <tr><td><b class="chip" data-w="firm">firm</b></td><td>The <i>ir</i> is not ee, and there is no r sound. <span class="resp">FURM</span> <span class="back">session 11</span></td></tr>
-      <tr><td><b class="chip" data-w="language">language</b></td><td>A hidden double-u in the <i>gu</i>, and a short i at the end. <span class="resp">LANG-gwij</span> <span class="back">sessions 13 and 15</span></td></tr>
-      <tr><td><b class="chip" data-w="message">message</b></td><td>Same ending as <i>language</i>. <span class="resp">MESS-ij</span> <span class="back">session 15</span></td></tr>
+      <tr><td><b class="chip" data-w="hero">hero</b></td><td>The h is breathed. Drop it and the word is gone. <span class="resp">HEER-oh</span></td></tr>
+      <tr><td><b class="chip" data-w="myth">myth</b></td><td>Ends in the quiet th, not a t. <span class="resp">MITH</span></td></tr>
+      <tr><td><b class="chip" data-w="author">author</b></td><td>The quiet th again, and an -or that lands on nothing. <span class="resp">AW-thuh</span></td></tr>
+      <tr><td><b class="chip" data-w="firm">firm</b></td><td>The <i>ir</i> is not ee, and there is no r sound. <span class="resp">FURM</span></td></tr>
+      <tr><td><b class="chip" data-w="language">language</b></td><td>A hidden double-u in the <i>gu</i>, and a short i at the end. <span class="resp">LANG-gwij</span></td></tr>
+      <tr><td><b class="chip" data-w="message">message</b></td><td>Same ending as <i>language</i>. <span class="resp">MESS-ij</span></td></tr>
     </table>
   </div>
 
@@ -127,12 +127,12 @@
   <!-- 4 -->
   <div class="panel">
     <h2>4 &middot; Say it</h2>
-    <div class="tw">Yesterday, I went to the zoo and I saw a lot of animals: lions, elephants, crocodiles. It was an excellent day.</div>
-    <div class="tw">He is an elegant and intelligent man. He looks ideal but he is arrogant.</div>
-    <div class="tw">The distance between the hospital and the theatre is important.</div>
-    <div class="tw">Your oral presentation was original and admirable.</div>
+    <div class="tw">Yesterday, I went to the zoo and I saw a lot of animals: lions, elephants, crocodiles. It was an excellent day. <span class="chip" data-w="Yesterday, I went to the zoo and I saw a lot of animals: lions, elephants, crocodiles. It was an excellent day.">&#128266; Listen</span></div>
+    <div class="tw">He is an elegant and intelligent man. He looks ideal but he is arrogant. <span class="chip" data-w="He is an elegant and intelligent man. He looks ideal but he is arrogant.">&#128266; Listen</span></div>
+    <div class="tw">The distance between the hospital and the theatre is important. <span class="chip" data-w="The distance between the hospital and the theatre is important.">&#128266; Listen</span></div>
+    <div class="tw">Your oral presentation was original and admirable. <span class="chip" data-w="Your oral presentation was original and admirable.">&#128266; Listen</span></div>
     <p><b>And one of ours</b>, in case the zoo does not come up much in a lab:</p>
-    <div class="tw">The transistor is in position, the circuit is stable, and the digital signal is normal.</div>
+    <div class="tw">The transistor is in position, the circuit is stable, and the digital signal is normal. <span class="chip" data-w="The transistor is in position, the circuit is stable, and the digital signal is normal.">&#128266; Listen</span></div>
   </div>
 
   <script>
@@ -151,7 +151,8 @@
     };
 
     var CLIPS="assets/audio/";
-    var HAVE={"accident":1,"amsterdam":1,"author":1,"berlin":1,"canada":1,"circuit":1,"condition":1,"country":1,"digital":1,"excellent":1,"firm":1,"hero":1,"hong-kong":1,"important":1,"international":1,"language":1,"message":1,"minute":1,"myth":1,"paris":1,"possible":1,"question":1,"simple":1,"special":1,"texas":1,"transistor":1};
+    var HAVE={"accident":1,"amsterdam":1,"author":1,"berlin":1,"canada":1,"circuit":1,"condition":1,"country":1,"digital":1,"excellent":1,"firm":1,"hero":1,"hong-kong":1,"important":1,"international":1,"language":1,"message":1,"minute":1,"myth":1,"paris":1,"possible":1,"question":1,"simple":1,"special":1,"texas":1,"transistor":1,
+      "yesterday-i-went-to-the-zoo-and-i-saw-a-lot-of-animals-lions-elephants-crocodiles-it-was-an-excellent-day":1,"he-is-an-elegant-and-intelligent-man-he-looks-ideal-but-he-is-arrogant":1,"the-distance-between-the-hospital-and-the-theatre-is-important":1,"your-oral-presentation-was-original-and-admirable":1,"the-transistor-is-in-position-the-circuit-is-stable-and-the-digital-signal-is-normal":1};
 
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;

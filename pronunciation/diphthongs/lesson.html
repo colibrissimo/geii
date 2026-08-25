@@ -99,9 +99,9 @@
     <h2>2 &middot; The eight sounds</h2>
     <p class="sub" style="margin-bottom:8px;">The right-hand column is the useful part: most of the time you can tell from the spelling alone.</p>
     <table>
-      <tr><td><span class="nm letter">the A</span></td><td><b class="chip" data-w="day">day</b> <b class="chip" data-w="Spain">Spain</b> <b class="chip" data-w="main">main</b> <b class="chip" data-w="gain">gain</b> &middot; <i>ay, ai, ei, ey, and a + consonant + silent e</i></td></tr>
-      <tr><td><span class="nm letter">the I</span></td><td><b class="chip" data-w="child">child</b> <b class="chip" data-w="find">find</b> <b class="chip" data-w="high">high</b> <b class="chip" data-w="bias">bias</b> &middot; <i>igh, and i + consonant + silent e</i></td></tr>
-      <tr><td><span class="nm letter">the O</span></td><td><b class="chip" data-w="no">no</b> <b class="chip" data-w="road">road</b> <b class="chip" data-w="diode">diode</b> <b class="chip" data-w="download">download</b> &middot; <i>oa, and o + consonant + silent e</i></td></tr>
+      <tr><td><span class="nm letter">the A</span></td><td><b class="chip" data-w="day">day</b> <b class="chip" data-w="Spain">Spain</b> <b class="chip" data-w="main">main</b> <b class="chip" data-w="gain">gain</b> <b class="chip" data-w="gate">gate</b> &middot; <i>ay, ai, ei, ey, and a + consonant + silent e</i></td></tr>
+      <tr><td><span class="nm letter">the I</span></td><td><b class="chip" data-w="child">child</b> <b class="chip" data-w="find">find</b> <b class="chip" data-w="high">high</b> <b class="chip" data-w="bias">bias</b> <b class="chip" data-w="site">site</b> &middot; <i>igh, and i + consonant + silent e</i></td></tr>
+      <tr><td><span class="nm letter">the O</span></td><td><b class="chip" data-w="no">no</b> <b class="chip" data-w="road">road</b> <b class="chip" data-w="diode">diode</b> <b class="chip" data-w="download">download</b> <b class="chip" data-w="node">node</b> &middot; <i>oa, and o + consonant + silent e</i></td></tr>
       <tr><td><span class="nm">OY</span></td><td><b class="chip" data-w="boy">boy</b> <b class="chip" data-w="noise">noise</b> <b class="chip" data-w="choice">choice</b> <b class="chip" data-w="coil">coil</b> &middot; <i>oi, oy</i></td></tr>
       <tr><td><span class="nm">OW</span></td><td><b class="chip" data-w="house">house</b> <b class="chip" data-w="down">down</b> <b class="chip" data-w="power">power</b> <b class="chip" data-w="ground">ground</b> &middot; <i>ow, ou</i></td></tr>
       <tr><td><span class="nm">AIR</span></td><td><b class="chip" data-w="chair">chair</b> <b class="chip" data-w="care">care</b> <b class="chip" data-w="where">where</b> <b class="chip" data-w="square">square</b> &middot; <i>ai, a, e + r + silent e</i></td></tr>
@@ -139,10 +139,10 @@
     </div>
 
     <p style="margin-top:14px;"><b>Now out loud, slowly, watching the jaw move.</b></p>
-    <div class="tw">No pain, no gain. Both halves glide.</div>
-    <div class="tw">The diode, the anode and the cathode: DY-ode, ANN-ode, KATH-ode.</div>
-    <div class="tw">High voltage, low current, no noise: five glides in six words.</div>
-    <div class="tw">Power out, ground down, and the whole board goes quiet.</div>
+    <div class="tw">No pain, no gain. Both halves glide. <span class="chip" data-w="No pain, no gain. Both halves glide.">&#128266; Listen</span></div>
+    <div class="tw">The diode, the anode and the cathode: DY-ode, ANN-ode, KATH-ode. <span class="chip" data-w="The diode, the anode and the cathode: DY-ode, ANN-ode, KATH-ode.">&#128266; Listen</span></div>
+    <div class="tw">High voltage, low current, no noise: five glides in six words. <span class="chip" data-w="High voltage, low current, no noise: five glides in six words.">&#128266; Listen</span></div>
+    <div class="tw">Power out, ground down, and the whole board goes quiet. <span class="chip" data-w="Power out, ground down, and the whole board goes quiet.">&#128266; Listen</span></div>
 
    </div>
 
@@ -151,7 +151,8 @@
     var R=function(id){return document.getElementById(id);};
 
     var CLIPS="assets/audio/";
-    var HAVE={"amp":1,"anode":1,"appear":1,"beer":1,"bias":1,"bit":1,"boy":1,"care":1,"cathode":1,"chair":1,"child":1,"chip":1,"choice":1,"coast":1,"coil":1,"cost":1,"cow":1,"current":1,"day":1,"diode":1,"down":1,"download":1,"electrode":1,"fight":1,"filter":1,"find":1,"gain":1,"gate":1,"get":1,"goal":1,"ground":1,"hair":1,"hear":1,"here":1,"high":1,"hop":1,"hope":1,"house":1,"late":1,"let":1,"level":1,"main":1,"metal":1,"near":1,"nine":1,"no":1,"noise":1,"not":1,"note":1,"output":1,"pain":1,"pen":1,"plug":1,"poor":1,"power":1,"pulse":1,"pure":1,"rain":1,"resistor":1,"road":1,"rod":1,"say":1,"secure":1,"sensor":1,"series":1,"shout":1,"show":1,"shunt":1,"signal":1,"spain":1,"square":1,"sure":1,"switch":1,"taste":1,"test":1,"there":1,"tour":1,"watt":1,"where":1};
+    var HAVE={"amp":1,"anode":1,"appear":1,"beer":1,"bias":1,"bit":1,"boy":1,"care":1,"cathode":1,"chair":1,"child":1,"chip":1,"choice":1,"coast":1,"coil":1,"cost":1,"cow":1,"current":1,"day":1,"diode":1,"down":1,"download":1,"electrode":1,"fight":1,"filter":1,"find":1,"gain":1,"gate":1,"get":1,"goal":1,"ground":1,"hair":1,"hear":1,"here":1,"high":1,"hop":1,"hope":1,"house":1,"late":1,"let":1,"level":1,"main":1,"metal":1,"near":1,"nine":1,"no":1,"noise":1,"not":1,"note":1,"output":1,"pain":1,"pen":1,"plug":1,"poor":1,"power":1,"pulse":1,"pure":1,"rain":1,"resistor":1,"road":1,"rod":1,"say":1,"secure":1,"sensor":1,"series":1,"shout":1,"show":1,"shunt":1,"signal":1,"spain":1,"square":1,"sure":1,"switch":1,"taste":1,"test":1,"there":1,"tour":1,"watt":1,"where":1,
+      "no-pain-no-gain-both-halves-glide":1,"the-diode-the-anode-and-the-cathode-dy-ode-ann-ode-kath-ode":1,"high-voltage-low-current-no-noise-five-glides-in-six-words":1,"power-out-ground-down-and-the-whole-board-goes-quiet":1,"node":1,"site":1};
 
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;

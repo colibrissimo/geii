@@ -179,10 +179,10 @@
   <div class="panel">
     <h2>4 &middot; Say it</h2>
     <p class="sub" style="margin-bottom:8px;">The <span class="x">orange</span> L's are dark. Back of the tongue up, as if the "ou" were coming.</p>
-    <div class="tw">The <b>l</b>eve<span class="x">l</span> is sma<span class="x">l</span><span class="x">l</span> but the cab<span class="x">l</span>e is <b>l</b>ong.</div>
-    <div class="tw">P<b>l</b>ug the para<span class="x">l</span><b>l</b>e<span class="x">l</span> ce<span class="x">l</span><span class="x">l</span>s into the <b>l</b>eft rai<span class="x">l</span>.</div>
-    <div class="tw">A coo<span class="x">l</span> <b>l</b>ook to <b>l</b>ook coo<span class="x">l</span>. <span class="note" style="display:inline;"></span></div>
-    <div class="tw">You shou<span style="color:#9aa7ab;">l</span>d check ha<span style="color:#9aa7ab;">l</span>f the va<span class="x">l</span>ves and stay ca<span style="color:#9aa7ab;">l</span>m. <span class="note" style="display:inline;">(three silent L's and one dark one)</span></div>
+    <div class="tw">The <b>l</b>eve<span class="x">l</span> is sma<span class="x">l</span><span class="x">l</span> but the cab<span class="x">l</span>e is <b>l</b>ong. <span class="chip" data-w="The level is small but the cable is long.">&#128266; Listen</span></div>
+    <div class="tw">P<b>l</b>ug the para<span class="x">l</span><b>l</b>e<span class="x">l</span> ce<span class="x">l</span><span class="x">l</span>s into the <b>l</b>eft rai<span class="x">l</span>. <span class="chip" data-w="Plug the parallel cells into the left rail.">&#128266; Listen</span></div>
+    <div class="tw">A coo<span class="x">l</span> <b>l</b>ook to <b>l</b>ook coo<span class="x">l</span>. <span class="note" style="display:inline;"></span> <span class="chip" data-w="A cool look to look cool.">&#128266; Listen</span></div>
+    <div class="tw">You shou<span style="color:#9aa7ab;">l</span>d check ha<span style="color:#9aa7ab;">l</span>f the va<span class="x">l</span>ves and stay ca<span style="color:#9aa7ab;">l</span>m. <span class="note" style="display:inline;">(three silent L's and one dark one)</span> <span class="chip" data-w="You should check half the valves and stay calm. (three silent L&#x27;s and one dark one)">&#128266; Listen</span></div>
     <table style="margin-top:12px;">
       <tr><td>clear L</td><td style="color:var(--ink);font-weight:normal;"><b>light &middot; load &middot; level (first) &middot; relay &middot; alloy &middot; allow &middot; solution &middot; analogue</b></td></tr>
       <tr><td>dark L</td><td style="color:var(--ink);font-weight:normal;"><b>cell &middot; cable &middot; small &middot; coil &middot; signal &middot; parallel (last) &middot; digital &middot; tool &middot; full</b></td></tr>
@@ -195,7 +195,8 @@
     var R=function(id){return document.getElementById(id);};
 
     var CLIPS="assets/audio/";
-    var HAVE={"allow":1,"analogue":1,"cable":1,"calf":1,"calm":1,"cell":1,"coil":1,"could":1,"digital":1,"folk":1,"full":1,"half":1,"level":1,"light":1,"little":1,"palm":1,"parallel":1,"plug":1,"relay":1,"should":1,"signal":1,"small":1,"solder":1,"talk":1,"tool":1,"walk":1,"would":1};
+    var HAVE={"allow":1,"analogue":1,"cable":1,"calf":1,"calm":1,"cell":1,"coil":1,"could":1,"digital":1,"folk":1,"full":1,"half":1,"level":1,"light":1,"little":1,"palm":1,"parallel":1,"plug":1,"relay":1,"should":1,"signal":1,"small":1,"solder":1,"talk":1,"tool":1,"walk":1,"would":1,
+      "the-level-is-small-but-the-cable-is-long":1,"plug-the-parallel-cells-into-the-left-rail":1,"a-cool-look-to-look-cool":1,"you-should-check-half-the-valves-and-stay-calm-three-silent-ls-and-one-dark-one":1};
 
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;

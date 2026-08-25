@@ -155,10 +155,10 @@
   <div class="panel">
     <h2>5 &middot; Say it</h2>
     <p class="sub" style="margin-bottom:8px;">Read aloud, slowly. <span class="v">The underlined letter</span> buzzes. <span class="h">The orange letter</span> is quiet. Then again at speed.</p>
-    <div class="tw"><span class="v">Th</span>e <span class="h">th</span>ermal sensor sends <span class="h">th</span>ree values <span class="h">th</span>rough <span class="v">th</span>e E<span class="h">th</span>ernet port.</div>
-    <div class="tw">Put <span class="v">th</span>e probe benea<span class="h">th</span> <span class="v">th</span>is panel, <span class="v">th</span>en check <span class="v">th</span>e ear<span class="h">th</span>.</div>
-    <div class="tw"><span class="v">Th</span>e nor<span class="h">th</span> side and <span class="v">th</span>e nor<span class="v">th</span>ern side: same root, and <span class="v">th</span>e sound changes.</div>
-    <div class="tw">What is <span class="v">th</span>e wid<span class="h">th</span>, <span class="v">th</span>e dep<span class="h">th</span> and <span class="v">th</span>e leng<span class="h">th</span> of <span class="v">th</span>is board?</div>
+    <div class="tw"><span class="v">Th</span>e <span class="h">th</span>ermal sensor sends <span class="h">th</span>ree values <span class="h">th</span>rough <span class="v">th</span>e E<span class="h">th</span>ernet port. <span class="chip" data-w="The thermal sensor sends three values through the Ethernet port.">&#128266; Listen</span></div>
+    <div class="tw">Put <span class="v">th</span>e probe benea<span class="h">th</span> <span class="v">th</span>is panel, <span class="v">th</span>en check <span class="v">th</span>e ear<span class="h">th</span>. <span class="chip" data-w="Put the probe beneath this panel, then check the earth.">&#128266; Listen</span></div>
+    <div class="tw"><span class="v">Th</span>e nor<span class="h">th</span> side and <span class="v">th</span>e nor<span class="v">th</span>ern side: same root, and <span class="v">th</span>e sound changes. <span class="chip" data-w="The north side and the northern side: same root, and the sound changes.">&#128266; Listen</span></div>
+    <div class="tw">What is <span class="v">th</span>e wid<span class="h">th</span>, <span class="v">th</span>e dep<span class="h">th</span> and <span class="v">th</span>e leng<span class="h">th</span> of <span class="v">th</span>is board? <span class="chip" data-w="What is the width, the depth and the length of this board?">&#128266; Listen</span></div>
     <table style="margin-top:12px;">
       <tr><td>Buzz it</td><td><b>the &middot; this &middot; that &middot; they &middot; there &middot; with &middot; within &middot; other &middot; northern &middot; breathe</b></td></tr>
       <tr><td>No buzz</td><td><b>think &middot; three &middot; through &middot; beneath &middot; north &middot; south &middot; earth &middot; month &middot; depth &middot; width &middot; length</b></td></tr>
@@ -175,7 +175,8 @@
 
     /* ---------- shared TTS ---------- */
     var CLIPS="assets/audio/";
-    var HAVE={"beneath":1,"breathe":1,"breeze":1,"cathode":1,"dare":1,"deaf":1,"death":1,"depth":1,"earth":1,"ethernet":1,"face":1,"faith":1,"first":1,"fought":1,"length":1,"mathematics":1,"method":1,"month":1,"north":1,"northern":1,"other":1,"sink":1,"south":1,"southern":1,"tense":1,"tenth":1,"the":1,"then":1,"there":1,"thermal":1,"thermistor":1,"thermocouple":1,"they":1,"think":1,"thirst":1,"this":1,"thought":1,"thousand":1,"three":1,"through":1,"weather":1,"whizz":1,"width":1,"with":1,"within":1,"zen":1};
+    var HAVE={"beneath":1,"breathe":1,"breeze":1,"cathode":1,"dare":1,"deaf":1,"death":1,"depth":1,"earth":1,"ethernet":1,"face":1,"faith":1,"first":1,"fought":1,"length":1,"mathematics":1,"method":1,"month":1,"north":1,"northern":1,"other":1,"sink":1,"south":1,"southern":1,"tense":1,"tenth":1,"the":1,"then":1,"there":1,"thermal":1,"thermistor":1,"thermocouple":1,"they":1,"think":1,"thirst":1,"this":1,"thought":1,"thousand":1,"three":1,"through":1,"weather":1,"whizz":1,"width":1,"with":1,"within":1,"zen":1,
+      "the-thermal-sensor-sends-three-values-through-the-ethernet-port":1,"put-the-probe-beneath-this-panel-then-check-the-earth":1,"the-north-side-and-the-northern-side-same-root-and-the-sound-changes":1,"what-is-the-width-the-depth-and-the-length-of-this-board":1};
 
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;
@@ -305,6 +306,12 @@
         R('th-score').textContent = 'Finished: '+right+' right out of '+WORDS.length+'.';
       }
     }
+    /* module-level, so a .chip anywhere on the page plays, not only the ones
+       built into the generated box below */
+    document.getElementById('th-mod').addEventListener('click',function(e){
+      var c=e.target.closest?e.target.closest('.chip[data-w]'):null;
+      if(c) TTS.say(c.getAttribute('data-w'), 0.75);
+    });
     R('th-cats').addEventListener('click',function(e){
       var b = e.target.closest ? e.target.closest('.cat') : null;
       if(b) answer(b.getAttribute('data-c'));

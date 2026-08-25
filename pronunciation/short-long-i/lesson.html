@@ -175,10 +175,10 @@
   <div class="panel">
     <h2>4 &middot; Say it</h2>
     <p class="sub" style="margin-bottom:8px;">The <span class="x">orange</span> vowels are long.</p>
-    <div class="tw">The ch<b>i</b>p is not ch<span class="x">ea</span>p.</div>
-    <div class="tw">F<b>i</b>ll the b<b>i</b>n, then f<span class="x">ee</span>l the b<span class="x">ea</span>n. <span class="note" style="display:inline;">(four words, two sounds, and the difference is your lips)</span></div>
-    <div class="tw">We b<b>ui</b>lt the c<b>i</b>rcu<b>i</b>t, tested the sp<span class="x">ee</span>d and read the scr<span class="x">ee</span>n. <span class="note" style="display:inline;">(three short, two long, and the first two break the rule)</span></div>
-    <div class="tw">Th<span class="x">e</span>se b<b>i</b>ts l<b>i</b>ve here; those p<span class="x">ie</span>ces l<span class="x">ea</span>ve tomorrow.</div>
+    <div class="tw">The ch<b>i</b>p is not ch<span class="x">ea</span>p. <span class="chip" data-w="The chip is not cheap.">&#128266; Listen</span></div>
+    <div class="tw">F<b>i</b>ll the b<b>i</b>n, then f<span class="x">ee</span>l the b<span class="x">ea</span>n. <span class="note" style="display:inline;">(four words, two sounds, and the difference is your lips)</span> <span class="chip" data-w="Fill the bin, then feel the bean. (four words, two sounds, and the difference is your lips)">&#128266; Listen</span></div>
+    <div class="tw">We b<b>ui</b>lt the c<b>i</b>rcu<b>i</b>t, tested the sp<span class="x">ee</span>d and read the scr<span class="x">ee</span>n. <span class="note" style="display:inline;">(three short, two long, and the first two break the rule)</span> <span class="chip" data-w="We built the circuit, tested the speed and read the screen. (three short, two long, and the first two break the rule)">&#128266; Listen</span></div>
+    <div class="tw">Th<span class="x">e</span>se b<b>i</b>ts l<b>i</b>ve here; those p<span class="x">ie</span>ces l<span class="x">ea</span>ve tomorrow. <span class="chip" data-w="These bits live here; those pieces leave tomorrow.">&#128266; Listen</span></div>
     <table style="margin-top:12px;">
       <tr><td>short /&#618;/</td><td style="color:var(--ink);font-weight:normal;"><b>chip &middot; bit &middot; switch &middot; signal &middot; digital &middot; minute &middot; circuit &middot; built &middot; live &middot; since &middot; give</b></td></tr>
       <tr><td>long /i&#720;/</td><td style="color:var(--ink);font-weight:normal;"><b>cheap &middot; screen &middot; speed &middot; key &middot; heat &middot; field &middot; relief &middot; machine &middot; metre &middot; leave &middot; piece</b></td></tr>
@@ -191,7 +191,8 @@
     var R=function(id){return document.getElementById(id);};
 
     var CLIPS="assets/audio/";
-    var HAVE={"a-cheap-part":1,"a-digital-meter":1,"a-machine":1,"a-magnetic-field":1,"a-printed-circuit":1,"a-relief-valve":1,"a-sheep":1,"a-ship":1,"a-silicon-chip":1,"a-strong-signal":1,"a-switch":1,"a-tight-fit":1,"beat-the-record":1,"full-speed":1,"give-it-to-me":1,"one-bit":1,"one-minute":1,"one-piece":1,"pin-one":1,"press-the-key":1,"since-yesterday":1,"the-screen-is-on":1,"they-live-here":1,"two-feet":1,"we-built-it":1};
+    var HAVE={"a-cheap-part":1,"a-digital-meter":1,"a-machine":1,"a-magnetic-field":1,"a-printed-circuit":1,"a-relief-valve":1,"a-sheep":1,"a-ship":1,"a-silicon-chip":1,"a-strong-signal":1,"a-switch":1,"a-tight-fit":1,"beat-the-record":1,"full-speed":1,"give-it-to-me":1,"one-bit":1,"one-minute":1,"one-piece":1,"pin-one":1,"press-the-key":1,"since-yesterday":1,"the-screen-is-on":1,"they-live-here":1,"two-feet":1,"we-built-it":1,
+      "the-chip-is-not-cheap":1,"fill-the-bin-then-feel-the-bean-four-words-two-sounds-and-the-difference-is-your-lips":1,"we-built-the-circuit-tested-the-speed-and-read-the-screen-three-short-two-long-and-the-first-two-break-the-rule":1,"these-bits-live-here-those-pieces-leave-tomorrow":1};
 
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;

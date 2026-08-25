@@ -119,11 +119,11 @@
     <h2>3 &middot; When the stress <i>is</i> the meaning</h2>
     <p class="sub" style="margin-bottom:8px;">If a two-syllable word is both a noun and a verb, the <b>noun takes the first syllable and the verb takes the second</b>. Same letters. Different word.</p>
     <table>
-      <tr><td>noun</td><td>an <span class="st">ob</span>ject &middot; a <span class="st">re</span>cord &middot; a <span class="st">per</span>mit &middot; the <span class="st">in</span>crease &middot; a <span class="st">pro</span>ject</td></tr>
-      <tr><td>verb</td><td>to ob<span class="st">ject</span> &middot; to re<span class="st">cord</span> &middot; to per<span class="st">mit</span> &middot; to in<span class="st">crease</span> &middot; to pro<span class="st">ject</span></td></tr>
+      <tr><td>noun</td><td><span class="chip" data-w="an object">an <span class="st">ob</span>ject</span> <span class="chip" data-w="a record">a <span class="st">re</span>cord</span> <span class="chip" data-w="a permit">a <span class="st">per</span>mit</span> <span class="chip" data-w="the increase">the <span class="st">in</span>crease</span> <span class="chip" data-w="a project">a <span class="st">pro</span>ject</span></td></tr>
+      <tr><td>verb</td><td><span class="chip" data-w="to object">to ob<span class="st">ject</span></span> <span class="chip" data-w="to record">to re<span class="st">cord</span></span> <span class="chip" data-w="to permit">to per<span class="st">mit</span></span> <span class="chip" data-w="to increase">to in<span class="st">crease</span></span> <span class="chip" data-w="to project">to pro<span class="st">ject</span></span></td></tr>
     </table>
-    <div class="tw">The robot picks up an <span class="st">ob</span>ject. &nbsp;&middot;&nbsp; I ob<span class="st">ject</span> to that.</div>
-    <div class="tw">We keep a <span class="st">re</span>cord of the data. &nbsp;&middot;&nbsp; We re<span class="st">cord</span> the data.</div>
+    <div class="tw">The robot picks up an <span class="st">ob</span>ject. &nbsp;&middot;&nbsp; I ob<span class="st">ject</span> to that. <span class="chip" data-w="The robot picks up an object. · I object to that.">&#128266; Listen</span></div>
+    <div class="tw">We keep a <span class="st">re</span>cord of the data. &nbsp;&middot;&nbsp; We re<span class="st">cord</span> the data. <span class="chip" data-w="We keep a record of the data. · We record the data.">&#128266; Listen</span></div>
     <div class="flag">This is the same fact as ro<span class="st">bot</span>ics, seen from the other side. There the ending moved the beat. Here <b>the beat moves on its own and the word changes what it is.</b> Stress is not decoration. It carries meaning.</div>
     <p class="note">A two-syllable word that is only a noun still takes the first syllable: a <span class="st">sen</span>sor, a <span class="st">mo</span>tor, a <span class="st">cir</span>cuit.</p>
   </div>
@@ -141,10 +141,10 @@
   <div class="panel">
     <h2>5 &middot; Say it</h2>
     <p class="sub" style="margin-bottom:8px;">Lean on the <span class="st">capitals</span>. Tap any word to hear it first.</p>
-    <div class="tw">A <span class="st">ro</span>bot does ro<span class="st">bot</span>ics, and an engi<span class="st">neer</span> built it.</div>
-    <div class="tw">Tech<span class="st">no</span>logy and ef<span class="st">fi</span>ciency both count back <b>two</b>.</div>
-    <div class="tw">The <span class="st">sen</span>sor sends a <span class="st">re</span>cord. We re<span class="st">cord</span> it.</div>
-    <div class="tw">The equip<span class="st">ment</span> is wrong: it is e<span class="st">quip</span>ment, because e<span class="st">quip</span> was already there.</div>
+    <div class="tw">A <span class="st">ro</span>bot does ro<span class="st">bot</span>ics, and an engi<span class="st">neer</span> built it. <span class="chip" data-w="A robot does robotics, and an engineer built it.">&#128266; Listen</span></div>
+    <div class="tw">Tech<span class="st">no</span>logy and ef<span class="st">fi</span>ciency both count back <b>two</b>. <span class="chip" data-w="Technology and efficiency both count back two.">&#128266; Listen</span></div>
+    <div class="tw">The <span class="st">sen</span>sor sends a <span class="st">re</span>cord. We re<span class="st">cord</span> it. <span class="chip" data-w="The sensor sends a record. We record it.">&#128266; Listen</span></div>
+    <div class="tw">The equip<span class="st">ment</span> is wrong: it is e<span class="st">quip</span>ment, because e<span class="st">quip</span> was already there. <span class="chip" data-w="The equipment is wrong: it is equipment, because equip was already there.">&#128266; Listen</span></div>
     <p class="center" style="font-size:16px;line-height:2;">
       <span class="chip" data-w="robot">robot</span> <span class="chip" data-w="robotics">robotics</span>
       <span class="chip" data-w="engineer">engineer</span> <span class="chip" data-w="technology">technology</span>
@@ -160,7 +160,8 @@
     var R=function(id){return document.getElementById(id);};
 
     var CLIPS="assets/audio/";
-    var HAVE={"actuator":1,"balloon":1,"comfortable":1,"control":1,"democracy":1,"development":1,"efficiency":1,"engineer":1,"equipment":1,"frequency":1,"guarantee":1,"machine":1,"methodology":1,"referee":1,"robot":1,"robotics":1,"sensor":1,"technology":1};
+    var HAVE={"actuator":1,"balloon":1,"comfortable":1,"control":1,"democracy":1,"development":1,"efficiency":1,"engineer":1,"equipment":1,"frequency":1,"guarantee":1,"machine":1,"methodology":1,"referee":1,"robot":1,"robotics":1,"sensor":1,"technology":1,
+      "the-robot-picks-up-an-object-i-object-to-that":1,"we-keep-a-record-of-the-data-we-record-the-data":1,"a-robot-does-robotics-and-an-engineer-built-it":1,"technology-and-efficiency-both-count-back-two":1,"the-sensor-sends-a-record-we-record-it":1,"the-equipment-is-wrong-it-is-equipment-because-equip-was-already-there":1,"an-object":1,"a-record":1,"a-permit":1,"the-increase":1,"a-project":1,"to-object":1,"to-record":1,"to-permit":1,"to-increase":1,"to-project":1};
 
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;

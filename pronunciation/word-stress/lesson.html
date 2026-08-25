@@ -141,10 +141,10 @@
   <div class="panel">
     <h2>4 &middot; Say it</h2>
     <p class="sub" style="margin-bottom:8px;">Lean on the <span class="st">capitals</span>. Tap any word to hear it first.</p>
-    <div class="tw">Elec<span class="st">tri</span>city, insu<span class="st">la</span>tion, con<span class="st">nec</span>tion, cali<span class="st">bra</span>tion: same ending, same beat.</div>
-    <div class="tw">The auto<span class="st">ma</span>tic system needs regu<span class="st">la</span>tion.</div>
-    <div class="tw">Produc<span class="st">ti</span>vity, ca<span class="st">pa</span>city, ve<span class="st">lo</span>city: count back one, every time.</div>
-    <div class="tw">Am&eacute;-ri-que is a machine gun. A<span class="st">me</span>rica is Morse code.</div>
+    <div class="tw">Elec<span class="st">tri</span>city, insu<span class="st">la</span>tion, con<span class="st">nec</span>tion, cali<span class="st">bra</span>tion: same ending, same beat. <span class="chip" data-w="Electricity, insulation, connection, calibration: same ending, same beat.">&#128266; Listen</span></div>
+    <div class="tw">The auto<span class="st">ma</span>tic system needs regu<span class="st">la</span>tion. <span class="chip" data-w="The automatic system needs regulation.">&#128266; Listen</span></div>
+    <div class="tw">Produc<span class="st">ti</span>vity, ca<span class="st">pa</span>city, ve<span class="st">lo</span>city: count back one, every time. <span class="chip" data-w="Productivity, capacity, velocity: count back one, every time.">&#128266; Listen</span></div>
+    <div class="tw">Am&eacute;-ri-que is a machine gun. A<span class="st">me</span>rica is Morse code. <span class="chip" data-w="Amé-ri-que is a machine gun. America is Morse code.">&#128266; Listen</span></div>
     <p class="center" style="font-size:16px;line-height:2;">
       <span class="chip" data-w="robotics">robotics</span> <span class="chip" data-w="automatic">automatic</span>
       <span class="chip" data-w="automation">automation</span> <span class="chip" data-w="electricity">electricity</span>
@@ -160,7 +160,8 @@
     var R=function(id){return document.getElementById(id);};
 
     var CLIPS="assets/audio/";
-    var HAVE={"automatic":1,"automation":1,"battery":1,"calibration":1,"capacitor":1,"capacity":1,"circuit":1,"component":1,"computer":1,"connection":1,"electricity":1,"insulation":1,"machine":1,"productivity":1,"regulation":1,"resistor":1,"robotics":1,"transformer":1};
+    var HAVE={"automatic":1,"automation":1,"battery":1,"calibration":1,"capacitor":1,"capacity":1,"circuit":1,"component":1,"computer":1,"connection":1,"electricity":1,"insulation":1,"machine":1,"productivity":1,"regulation":1,"resistor":1,"robotics":1,"transformer":1,
+      "electricity-insulation-connection-calibration-same-ending-same-beat":1,"the-automatic-system-needs-regulation":1,"productivity-capacity-velocity-count-back-one-every-time":1,"am-ri-que-is-a-machine-gun-america-is-morse-code":1};
 
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;

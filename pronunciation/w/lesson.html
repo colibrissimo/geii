@@ -145,11 +145,11 @@
   <div class="panel">
     <h2>5 &middot; Say it</h2>
     <p class="sub" style="margin-bottom:8px;">Lips rounded, teeth out of the way. Slowly first, then at speed.</p>
-    <div class="tw">We were watching the water level while the workshop was warm.</div>
-    <div class="tw">What is the frequency? The equipment requires a square wave.</div>
-    <div class="tw">Which switch? The one on the wall, not the valve.</div>
-    <div class="tw">One wire, once welded, will work.</div>
-    <div class="tw">Write it down: the answer is two, and the sword is on the wall.</div>
+    <div class="tw">We were watching the water level while the workshop was warm. <span class="chip" data-w="We were watching the water level while the workshop was warm.">&#128266; Listen</span></div>
+    <div class="tw">What is the frequency? The equipment requires a square wave. <span class="chip" data-w="What is the frequency? The equipment requires a square wave.">&#128266; Listen</span></div>
+    <div class="tw">Which switch? The one on the wall, not the valve. <span class="chip" data-w="Which switch? The one on the wall, not the valve.">&#128266; Listen</span></div>
+    <div class="tw">One wire, once welded, will work. <span class="chip" data-w="One wire, once welded, will work.">&#128266; Listen</span></div>
+    <div class="tw">Write it down: the answer is two, and the sword is on the wall. <span class="chip" data-w="Write it down: the answer is two, and the sword is on the wall.">&#128266; Listen</span></div>
   </div>
 
   <script>
@@ -157,7 +157,8 @@
     var R=function(id){return document.getElementById(id);};
 
     var CLIPS="assets/audio/";
-    var HAVE={"always":1,"answer":1,"choir":1,"equipment":1,"equivalent":1,"frequency":1,"grew":1,"language":1,"liquid":1,"once":1,"one":1,"quality":1,"quantity":1,"quartz":1,"queen":1,"requirement":1,"sequence":1,"snow":1,"somewhere":1,"square":1,"sword":1,"two":1,"valve":1,"vent":1,"vest":1,"vet":1,"vine":1,"voltage":1,"vow":1,"wall":1,"watt":1,"went":1,"west":1,"wet":1,"whale":1,"which":1,"who":1,"whose":1,"wine":1,"wow":1,"wrist":1,"write":1,"wrong":1};
+    var HAVE={"always":1,"answer":1,"choir":1,"equipment":1,"equivalent":1,"frequency":1,"grew":1,"language":1,"liquid":1,"once":1,"one":1,"quality":1,"quantity":1,"quartz":1,"queen":1,"requirement":1,"sequence":1,"snow":1,"somewhere":1,"square":1,"sword":1,"two":1,"valve":1,"vent":1,"vest":1,"vet":1,"vine":1,"voltage":1,"vow":1,"wall":1,"watt":1,"went":1,"west":1,"wet":1,"whale":1,"which":1,"who":1,"whose":1,"wine":1,"wow":1,"wrist":1,"write":1,"wrong":1,
+      "we-were-watching-the-water-level-while-the-workshop-was-warm":1,"what-is-the-frequency-the-equipment-requires-a-square-wave":1,"which-switch-the-one-on-the-wall-not-the-valve":1,"one-wire-once-welded-will-work":1,"write-it-down-the-answer-is-two-and-the-sword-is-on-the-wall":1};
 
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;

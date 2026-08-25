@@ -174,10 +174,10 @@
   <div class="panel">
     <h2>7 &middot; Say it</h2>
     <p class="sub" style="margin-bottom:8px;"><span class="v">Underlined letter</span> is a real /r/. <span class="x">Struck through</span> is written but not said: stretch the vowel instead.</p>
-    <div class="tw">My tailo<span class="x">r</span> is <span class="v">r</span>ich.</div>
-    <div class="tw">The se<span class="x">r</span>ve<span class="x">r</span> and the <span class="v">r</span>oute<span class="x">r</span> a<span class="x">r</span>e on the same netwo<span class="x">r</span>k.</div>
-    <div class="tw">Check the ci<span class="x">r</span>cuit, the <span class="v">r</span>esisto<span class="x">r</span> and the powe<span class="x">r</span> boa<span class="x">r</span>d.</div>
-    <div class="tw">The <span class="v">r</span>emote <span class="v">r</span>elay <span class="v">r</span>eset the <span class="v">r</span>ectifie<span class="x">r</span>. <span class="note" style="display:inline;">(four real r's, one silent)</span></div>
+    <div class="tw">My tailo<span class="x">r</span> is <span class="v">r</span>ich. <span class="chip" data-w="My tailor is rich.">&#128266; Listen</span></div>
+    <div class="tw">The se<span class="x">r</span>ve<span class="x">r</span> and the <span class="v">r</span>oute<span class="x">r</span> a<span class="x">r</span>e on the same netwo<span class="x">r</span>k. <span class="chip" data-w="The server and the router are on the same network.">&#128266; Listen</span></div>
+    <div class="tw">Check the ci<span class="x">r</span>cuit, the <span class="v">r</span>esisto<span class="x">r</span> and the powe<span class="x">r</span> boa<span class="x">r</span>d. <span class="chip" data-w="Check the circuit, the resistor and the power board.">&#128266; Listen</span></div>
+    <div class="tw">The <span class="v">r</span>emote <span class="v">r</span>elay <span class="v">r</span>eset the <span class="v">r</span>ectifie<span class="x">r</span>. <span class="note" style="display:inline;">(four real r's, one silent)</span> <span class="chip" data-w="The remote relay reset the rectifier. (four real r&#x27;s, one silent)">&#128266; Listen</span></div>
     <table style="margin-top:12px;">
       <tr><td>Real /r/</td><td><b>router &middot; remote &middot; relay &middot; reset &middot; resistor &middot; ratio &middot; rich &middot; read</b></td></tr>
       <tr><td>No /r/ at all</td><td><b>server &middot; circuit &middot; network &middot; power &middot; board &middot; port &middot; sensor &middot; firmware &middot; wire</b></td></tr>
@@ -192,7 +192,8 @@
 
     /* ---------- shared TTS ---------- */
     var CLIPS="assets/audio/";
-    var HAVE={"board":1,"capacitor":1,"circuit":1,"converter":1,"current":1,"error":1,"firmware":1,"hardware":1,"library":1,"motor":1,"network":1,"parameter":1,"port":1,"power":1,"primary":1,"ratio":1,"rave":1,"read":1,"rectifier":1,"relay":1,"remote":1,"reset":1,"resistor":1,"right":1,"rotary":1,"router":1,"sensor":1,"server":1,"transformer":1,"water":1,"watt":1,"wave":1,"weed":1,"weekend":1,"wet":1,"white":1,"wire":1};
+    var HAVE={"board":1,"capacitor":1,"circuit":1,"converter":1,"current":1,"error":1,"firmware":1,"hardware":1,"library":1,"motor":1,"network":1,"parameter":1,"port":1,"power":1,"primary":1,"ratio":1,"rave":1,"read":1,"rectifier":1,"relay":1,"remote":1,"reset":1,"resistor":1,"right":1,"rotary":1,"router":1,"sensor":1,"server":1,"transformer":1,"water":1,"watt":1,"wave":1,"weed":1,"weekend":1,"wet":1,"white":1,"wire":1,
+      "my-tailor-is-rich":1,"the-server-and-the-router-are-on-the-same-network":1,"check-the-circuit-the-resistor-and-the-power-board":1,"the-remote-relay-reset-the-rectifier-four-real-rs-one-silent":1};
 
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;
@@ -318,6 +319,12 @@
         R('rr-score').textContent='Finished: '+right+' right out of '+WORDS.length+'.';
       }
     }
+    /* module-level, so a .chip anywhere on the page plays, not only the ones
+       built into the generated box below */
+    document.getElementById('rr-mod').addEventListener('click',function(e){
+      var c=e.target.closest?e.target.closest('.chip[data-w]'):null;
+      if(c) TTS.say(c.getAttribute('data-w'), 0.75);
+    });
     R('rr-cats').addEventListener('click',function(e){
       var b=e.target.closest ? e.target.closest('.cat') : null;
       if(b) answer(b.getAttribute('data-c'));

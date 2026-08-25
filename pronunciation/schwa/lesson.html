@@ -163,9 +163,9 @@
   <div class="panel">
     <h2>6 &middot; Say it</h2>
     <p class="sub" style="margin-bottom:8px;"><span class="st">Capital letters</span> are stressed: lean on them.</p>
-    <div class="tw">The <span class="st">sen</span>s<span class="s">or</span> is <span class="st">conn</span>ect<span class="s">ed</span> to <span class="s">a</span> <span class="st">smal</span>l<span class="s">er</span> trans<span class="st">for</span>m<span class="s">er</span>.</div>
-    <div class="tw">Th<span class="s">is</span> c<span class="s">on</span><span class="st">ver</span>t<span class="s">er</span> is <span class="st">chea</span>p<span class="s">er</span> th<span class="s">an</span> th<span class="s">at</span> <span class="st">am</span>plifi<span class="s">er</span>.</div>
-    <div class="tw"><span class="st">Meas</span><span class="s">ure</span> th<span class="s">e</span> <span class="st">cur</span>r<span class="s">ent</span>, th<span class="s">en</span> c<span class="s">on</span><span class="st">firm</span> th<span class="s">e</span> <span class="st">val</span>u<span class="s">e</span>.</div>
+    <div class="tw">The <span class="st">sen</span>s<span class="s">or</span> is <span class="st">conn</span>ect<span class="s">ed</span> to <span class="s">a</span> <span class="st">smal</span>l<span class="s">er</span> trans<span class="st">for</span>m<span class="s">er</span>. <span class="chip" data-w="The sensor is connected to a smaller transformer.">&#128266; Listen</span></div>
+    <div class="tw">Th<span class="s">is</span> c<span class="s">on</span><span class="st">ver</span>t<span class="s">er</span> is <span class="st">chea</span>p<span class="s">er</span> th<span class="s">an</span> th<span class="s">at</span> <span class="st">am</span>plifi<span class="s">er</span>. <span class="chip" data-w="This converter is cheaper than that amplifier.">&#128266; Listen</span></div>
+    <div class="tw"><span class="st">Meas</span><span class="s">ure</span> th<span class="s">e</span> <span class="st">cur</span>r<span class="s">ent</span>, th<span class="s">en</span> c<span class="s">on</span><span class="st">firm</span> th<span class="s">e</span> <span class="st">val</span>u<span class="s">e</span>. <span class="chip" data-w="Measure the current, then confirm the value.">&#128266; Listen</span></div>
     <table style="margin-top:12px;">
       <tr><td>-er / -or</td><td><b>resistor &middot; capacitor &middot; sensor &middot; motor &middot; computer &middot; converter</b></td></tr>
       <tr><td>comparatives</td><td><b>bigger &middot; smaller &middot; faster &middot; cheaper &middot; longer &middot; safer</b></td></tr>
@@ -179,7 +179,8 @@
     var R=function(id){return document.getElementById(id);};
 
     var CLIPS="assets/audio/";
-    var HAVE={"again":1,"amazing":1,"amplifier":1,"analysis":1,"august":1,"bigger":1,"bottom":1,"canada":1,"capacitor":1,"carrot":1,"cheaper":1,"circus":1,"computer":1,"conductor":1,"confirm":1,"connector":1,"converter":1,"difficult":1,"duplicate":1,"family":1,"faster":1,"father":1,"inverter":1,"longer":1,"madness":1,"measure":1,"motor":1,"parameter":1,"pennsylvania":1,"president":1,"problem":1,"pyjamas":1,"rectifier":1,"resistor":1,"safer":1,"sensor":1,"smaller":1,"soda":1,"summer":1,"support":1,"system":1,"tomorrow":1,"transformer":1,"transistor":1};
+    var HAVE={"again":1,"amazing":1,"amplifier":1,"analysis":1,"august":1,"bigger":1,"bottom":1,"canada":1,"capacitor":1,"carrot":1,"cheaper":1,"circus":1,"computer":1,"conductor":1,"confirm":1,"connector":1,"converter":1,"difficult":1,"duplicate":1,"family":1,"faster":1,"father":1,"inverter":1,"longer":1,"madness":1,"measure":1,"motor":1,"parameter":1,"pennsylvania":1,"president":1,"problem":1,"pyjamas":1,"rectifier":1,"resistor":1,"safer":1,"sensor":1,"smaller":1,"soda":1,"summer":1,"support":1,"system":1,"tomorrow":1,"transformer":1,"transistor":1,
+      "the-sensor-is-connected-to-a-smaller-transformer":1,"this-converter-is-cheaper-than-that-amplifier":1,"measure-the-current-then-confirm-the-value":1};
 
     var TTS=(function(){
       var ok=('speechSynthesis' in window), voice=null;
