@@ -225,10 +225,13 @@
         if(!HAVE[k]){ tts(t,r); return; }
         try{window.speechSynthesis.cancel();}catch(e){}
         if(player){ try{ player.pause(); }catch(e){} }
-        player=new Audio(CLIPS+encodeURIComponent(k)+".mp3");
-        player.onerror=function(){ tts(t,r); };
+        var me=new Audio(CLIPS+encodeURIComponent(k)+".mp3");
+        player=me;
+        /* only the current player may fall back: a clip superseded by a second tap
+           rejects with AbortError, and that is not a missing file */
+        player.onerror=function(){ if(player===me) tts(t,r); };
         var pr=player.play();
-        if(pr&&pr["catch"]) pr["catch"](function(){ tts(t,r); });
+        if(pr&&pr["catch"]) pr["catch"](function(){ if(player===me) tts(t,r); });
       }};
     })();
 
@@ -346,9 +349,7 @@
       var box=R('rr-chips'), html='';
       for(var i=0;i<LAB.length;i++) html+='<span class="chip" data-w="'+LAB[i]+'">'+LAB[i]+'</span>';
       box.innerHTML=html;
-      box.addEventListener('click',function(e){
-        if(e.target.classList.contains('chip')) TTS.say(e.target.getAttribute('data-w'), 0.75);
-      });
+      /* no click handler here: the module-level .chip[data-w] listener above plays these */
     })();
   })();
   </script>
