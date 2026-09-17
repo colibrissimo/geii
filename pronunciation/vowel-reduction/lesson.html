@@ -201,7 +201,7 @@
     })();
 
     R('vr-ttsnote').textContent = TTS.ok
-      ? 'The Listen button uses your browser voice.'
+      ? 'The Listen buttons play a recorded voice where a clip exists, and fall back to your browser voice if one is missing or slow.'
       : 'This browser has no speech support, so the Listen buttons will not work. Everything else does.';
 
     Array.prototype.forEach.call(document.querySelectorAll('#vr-mod .chip[data-w]'), function(c){

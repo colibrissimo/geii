@@ -236,7 +236,7 @@
     })();
 
     R('ll-ttsnote').textContent = TTS.ok
-      ? 'The Listen button uses a short phrase, and a browser voice will not always make the dark L properly. Trust your own tongue over the speaker on this page.'
+      ? 'The Listen buttons play a recorded voice where a clip exists, and fall back to your browser voice if one is missing or slow. A browser voice will not always make the dark L properly: trust your own tongue over the speaker.'
       : 'This browser has no speech support, so the Listen buttons will not work. Everything else does.';
 
     Array.prototype.forEach.call(document.querySelectorAll('#ll-mod .chip[data-w]'), function(c){

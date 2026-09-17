@@ -276,7 +276,7 @@
     })();
 
     R('fs-ttsnote').textContent = TTS.ok
-      ? 'The Listen button says the word inside a short phrase, because browser voices read single words badly. Treat it as a guide, not a model.'
+      ? 'The Listen buttons play a recorded voice where a clip exists, and fall back to your browser voice if one is missing or slow.'
       : 'This browser has no speech support, so the Listen buttons will not work. Everything else does.';
 
     Array.prototype.forEach.call(document.querySelectorAll('#fs-mod .chip[data-w]'), function(c){
