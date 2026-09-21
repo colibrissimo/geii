@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Are you paying attention? 08-ex11-what-would-you-do</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="ap11p">
+  <style>
+    #ap11p{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ap11p *{box-sizing:border-box;}
+    #ap11p h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ap11p h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ap11p .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ap11p .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ap11p .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ap11p .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ap11p .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ap11p .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #ap11p button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ap11p button:hover{background:#0f4a5c;}
+    #ap11p button.ghost{background:transparent;color:var(--teal);}
+    #ap11p button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ap11p button.amber:hover{background:#e0a52a;}
+    #ap11p button:disabled{opacity:.45;cursor:default;}
+    #ap11p .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #ap11p .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ap11p .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #ap11p .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #ap11p .choice:disabled{opacity:.9;}
+    #ap11p .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ap11p .fb.ok{color:var(--ok);} #ap11p .fb.no{color:var(--no);}
+    #ap11p .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #ap11p .tag.z{background:var(--slate-bg);color:var(--slate);} #ap11p .tag.f{background:var(--teal-bg);color:var(--teal);} #ap11p .tag.s{background:var(--terra-bg);color:var(--terra);}
+    #ap11p input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #ap11p input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #ap11p input.gap{width:auto;min-width:150px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #ap11p input.ok{border-color:var(--ok);background:var(--ok-bg);} #ap11p input.no{border-color:var(--no);background:var(--no-bg);}
+    #ap11p select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);margin:0 4px;}
+    #ap11p select.ok{border-color:var(--ok);background:var(--ok-bg);} #ap11p select.no{border-color:var(--no);background:var(--no-bg);}
+    #ap11p .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ap11p .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ap11p .talk p{margin:0 0 6px;}
+    #ap11p .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ap11p .ex p{margin:4px 0;}
+    #ap11p .note{font-size:14px;color:var(--muted);}
+    #ap11p .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;}
+    #ap11p .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;}
+    #ap11p .card h3{margin:0 0 6px;font-size:18px;color:var(--teal);}
+    #ap11p .card p{margin:0;font-size:15px;color:var(--muted);}
+    #ap11p .card.pick{cursor:pointer;} #ap11p .card.pick:hover{border-color:var(--teal);}
+    #ap11p .card.on{border-color:var(--terra);background:var(--terra-bg);}
+    #ap11p .rule{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+    #ap11p .rule:first-child{border-top:none;}
+    #ap11p .form{font-family:"Courier New",monospace;font-size:16px;}
+    #ap11p .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #ap11p .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #ap11p .hide{display:none;}
+    #ap11p .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:start;}
+    #ap11p .item:first-child{border-top:none;}
+    #ap11p .item b{color:var(--teal);}
+    #ap11p .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #ap11p .who{font-size:14px;font-weight:bold;color:var(--terra);letter-spacing:.04em;text-transform:uppercase;}
+  </style>
+
+  <h1>11 &middot; What would you do?</h1>
+  <p class="sub">Click <strong>at least three</strong> situations. For each one, do tasks A, B and C. Use all three conditionals: the example shows how.</p>
+
+  <div class="ex">
+    <p><strong>Example:</strong> <em>You have to start studying for an exam, but you don't feel motivated.</em></p>
+    <p><span class="tag z">ZERO</span> If I have an exam, I usually study on my own.</p>
+    <p><span class="tag f">FIRST</span> If I don't feel motivated, I will try the body-doubling technique. I might work better with other people.</p>
+    <p><span class="tag s">SECOND</span> I would get very distracted if I used background music.</p>
+  </div>
+
+  <div class="grid" id="ap11">
+    <div class="card pick"><p>You have to write a long essay, but you don't know how to begin.</p></div>
+    <div class="card pick"><p>You keep checking your phone every few minutes while you are studying.</p></div>
+    <div class="card pick"><p>You need to concentrate, but your room is noisy.</p></div>
+    <div class="card pick"><p>You have to organise your presentation notes for an important meeting or class.</p></div>
+    <div class="card pick"><p>You often switch between different tasks instead of finishing one.</p></div>
+    <div class="card pick"><p>You find it difficult to stay focused when working alone for several hours, and you keep taking coffee and snack breaks.</p></div>
+  </div>
+  <div class="score" id="ap11-n">0 chosen. Choose at least three.</div>
+
+  <div class="panel" style="margin-top:18px">
+    <div class="item"><b>A</b><div>Say what you <strong>usually</strong> do in a similar situation. <span class="tag z">ZERO</span></div></div>
+    <div class="item"><b>B</b><div>Say which technique from ex. 10 you <strong>want to try</strong>, and why. <span class="tag f">FIRST</span></div></div>
+    <div class="item"><b>C</b><div>Say which technique you <strong>wouldn't</strong> try, and why. <span class="tag s">SECOND</span></div></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var g=document.getElementById('ap11'), n=document.getElementById('ap11-n'); if(!g) return;
+    g.addEventListener('click',function(e){
+      var c=e.target.closest?e.target.closest('.card'):null; if(!c) return;
+      c.classList.toggle('on');
+      var k=g.querySelectorAll('.card.on').length;
+      n.textContent=k+' chosen.'+(k<3?' Choose at least three.':' Start with the first one you clicked.');
+    });
+  })();
+  </script>
+</div>
+</body>
+</html>
