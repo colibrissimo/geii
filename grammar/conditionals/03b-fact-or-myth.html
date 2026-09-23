@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Are you paying attention? 03b-fact-or-myth</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="ap3b">
+  <style>
+    #ap3b{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ap3b *{box-sizing:border-box;}
+    #ap3b h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ap3b h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ap3b .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ap3b .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ap3b .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ap3b .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ap3b .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ap3b .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #ap3b button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ap3b button:hover{background:#0f4a5c;}
+    #ap3b button.ghost{background:transparent;color:var(--teal);}
+    #ap3b button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ap3b button.amber:hover{background:#e0a52a;}
+    #ap3b button:disabled{opacity:.45;cursor:default;}
+    #ap3b .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #ap3b .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ap3b .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #ap3b .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #ap3b .choice:disabled{opacity:.9;}
+    #ap3b .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ap3b .fb.ok{color:var(--ok);} #ap3b .fb.no{color:var(--no);}
+    #ap3b .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #ap3b .tag.z{background:var(--slate-bg);color:var(--slate);} #ap3b .tag.f{background:var(--teal-bg);color:var(--teal);} #ap3b .tag.s{background:var(--terra-bg);color:var(--terra);}
+    #ap3b input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #ap3b input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #ap3b input.gap{width:auto;min-width:150px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #ap3b input.ok{border-color:var(--ok);background:var(--ok-bg);} #ap3b input.no{border-color:var(--no);background:var(--no-bg);}
+    #ap3b select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);margin:0 4px;}
+    #ap3b select.ok{border-color:var(--ok);background:var(--ok-bg);} #ap3b select.no{border-color:var(--no);background:var(--no-bg);}
+    #ap3b .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ap3b .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ap3b .talk p{margin:0 0 6px;}
+    #ap3b .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ap3b .ex p{margin:4px 0;}
+    #ap3b .note{font-size:14px;color:var(--muted);}
+    #ap3b .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;}
+    #ap3b .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;}
+    #ap3b .card h3{margin:0 0 6px;font-size:18px;color:var(--teal);}
+    #ap3b .card p{margin:0;font-size:15px;color:var(--muted);}
+    #ap3b .card.pick{cursor:pointer;} #ap3b .card.pick:hover{border-color:var(--teal);}
+    #ap3b .card.on{border-color:var(--terra);background:var(--terra-bg);}
+    #ap3b .rule{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+    #ap3b .rule:first-child{border-top:none;}
+    #ap3b .form{font-family:"Courier New",monospace;font-size:16px;}
+    #ap3b .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #ap3b .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #ap3b .hide{display:none;}
+    #ap3b .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:start;}
+    #ap3b .item:first-child{border-top:none;}
+    #ap3b .item b{color:var(--teal);}
+    #ap3b .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #ap3b .who{font-size:14px;font-weight:bold;color:var(--terra);letter-spacing:.04em;text-transform:uppercase;}
+  </style>
+
+  <h1>Fact or myth?</h1>
+  <p class="sub">Every sentence below is a <span class="tag z">ZERO</span> conditional: it presents something as always true. But are they all true? Decide for each one. Talk to your partner first.</p>
+  <div class="panel" id="fm"></div>
+  <div class="score" id="fm-score"></div>
+
+  <div class="panel hide" id="fm-end">
+    <h2 style="margin-top:0">Now look at the grammar</h2>
+    <p>Five of these sentences are false. Did the grammar change? <strong>No.</strong></p>
+    <div class="rule"><span class="tag z">ZERO</span><span class="form">If + present simple, present simple</span></div>
+    <p style="margin-top:10px">The zero conditional <em>sounds</em> like a fact. It does not <em>make</em> something a fact. Checking is your job.</p>
+  </div>
+
+  <div class="talk">
+    <p><strong>Then:</strong> write one true zero-conditional sentence about <em>your</em> attention. Your partner guesses: fact or myth?</p>
+    <p class="note" style="margin:0"><em>If I study after 10 p.m., I remember almost nothing the next day.</em></p>
+  </div>
+
+
+  <script>
+  (function(){
+    var D=[{"s": "If you do two things at once, you do both of them more slowly and make more mistakes.", "k": 1, "w": "Every switch between tasks costs a little time, and the costs add up.", "src": "Rubinstein, Meyer &amp; Evans (2001)"}, {"s": "If you are a human, your attention span is shorter than a goldfish's.", "k": 0, "w": "The famous \"8 seconds\" figure came from a 2015 marketing report that gave no real source. And goldfish can remember things for months.", "src": "Microsoft Canada report (2015), checked by BBC <em>More or Less</em>"}, {"s": "If you sleep badly, your attention is worse the next day.", "k": 1, "w": "Attention is one of the first things to suffer when you lose sleep.", "src": "Lim &amp; Dinges (2010), a review of 70 studies"}, {"s": "If you grow up with the internet, you are naturally good at multitasking.", "k": 0, "w": "\"Digital natives\" are not better multitaskers. Nobody's brain really does two demanding things at once.", "src": "Kirschner &amp; De Bruyckere (2017)"}, {"s": "If you read with song lyrics playing, you understand less of the text.", "k": 1, "w": "Words in the music compete with the words on the page. Music without lyrics causes much less trouble.", "src": "Vasilev, Kirkby &amp; Angele (2018), a review of 65 studies"}, {"s": "If you are not concentrating, you use only 10% of your brain.", "k": 0, "w": "Brain scans show activity all over the brain, all the time. Even when you sleep.", "src": "a very old myth, with no study behind it"}, {"s": "If you think you are good at multitasking, you usually are.", "k": 0, "w": "Most people rate themselves above average. In the tests, their opinion did not match their real results.", "src": "Sanbonmatsu et al. (2013)"}, {"s": "If you drink coffee, you stay alert for longer.", "k": 1, "w": "Caffeine really does increase alertness and concentration, for a few hours, in most adults.", "src": "European Food Safety Authority (2011)"}, {"s": "If you daydream, your brain switches off.", "k": 0, "w": "When your mind wanders, a whole network of brain regions becomes <em>more</em> active, not less.", "src": "Raichle et al. (2001)"}, {"s": "If you concentrate hard on one thing, you can miss a gorilla.", "k": 1, "w": "In a famous experiment, people counted basketball passes in a video. About half of them did not see a person in a gorilla suit walk through the middle.", "src": "Simons &amp; Chabris (1999)"}], box=document.getElementById('fm'), sc=document.getElementById('fm-score'); if(!box) return;
+    var names=['MYTH','FACT'], order=[], done=0, right=0;
+    for(var i=0;i<D.length;i++) order.push(i);
+    for(var i=order.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=order[i]; order[i]=order[j]; order[j]=t; }
+    var html='';
+    for(var n=0;n<order.length;n++){
+      html+='<div class="item" data-q="'+order[n]+'"><b>'+(n+1)+'</b><div>'+D[order[n]].s+
+            '<div class="opt"><button class="choice" data-v="1">Fact</button><button class="choice" data-v="0">Myth</button></div><div class="fb"></div></div></div>';
+    }
+    box.innerHTML=html;
+    box.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b||b.disabled) return;
+      var it=b.closest('.item'); if(it.getAttribute('data-done')) return; it.setAttribute('data-done','1');
+      var d=D[+it.getAttribute('data-q')], v=+b.getAttribute('data-v'), ok=v===d.k;
+      var bs=it.querySelectorAll('button'); for(var k=0;k<bs.length;k++){ bs[k].disabled=true; if(+bs[k].getAttribute('data-v')===d.k) bs[k].className='choice ok'; }
+      if(!ok) b.className='choice no';
+      done++; if(ok) right++;
+      var fb=it.querySelector('.fb'); fb.className='fb '+(ok?'ok':'no');
+      fb.innerHTML=(ok?'Yes, ':'You said '+names[v]+'. It is a ')+names[d.k]+(ok?'.':'.')+
+        ' <span style="font-weight:normal;color:#1d2733">'+d.w+'</span><br><span class="note" style="font-weight:normal">Source: '+d.src+'</span>';
+      sc.textContent=right+' right out of '+done+(done===D.length?'. Now the grammar, below.':'');
+      if(done===D.length) document.getElementById('fm-end').classList.remove('hide');
+    });
+  })();
+  </script>
+</div>
+</body>
+</html>
