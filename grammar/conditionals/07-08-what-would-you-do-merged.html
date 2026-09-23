@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Are you paying attention? 07-08-what-would-you-do-merged</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="ap78">
+  <style>
+    #ap78{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ap78 *{box-sizing:border-box;}
+    #ap78 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ap78 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ap78 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ap78 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ap78 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ap78 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ap78 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ap78 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #ap78 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ap78 button:hover{background:#0f4a5c;}
+    #ap78 button.ghost{background:transparent;color:var(--teal);}
+    #ap78 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ap78 button.amber:hover{background:#e0a52a;}
+    #ap78 button:disabled{opacity:.45;cursor:default;}
+    #ap78 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #ap78 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ap78 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #ap78 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #ap78 .choice:disabled{opacity:.9;}
+    #ap78 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ap78 .fb.ok{color:var(--ok);} #ap78 .fb.no{color:var(--no);}
+    #ap78 .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #ap78 .tag.z{background:var(--slate-bg);color:var(--slate);} #ap78 .tag.f{background:var(--teal-bg);color:var(--teal);} #ap78 .tag.s{background:var(--terra-bg);color:var(--terra);}
+    #ap78 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #ap78 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #ap78 input.gap{width:auto;min-width:150px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #ap78 input.ok{border-color:var(--ok);background:var(--ok-bg);} #ap78 input.no{border-color:var(--no);background:var(--no-bg);}
+    #ap78 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);margin:0 4px;}
+    #ap78 select.ok{border-color:var(--ok);background:var(--ok-bg);} #ap78 select.no{border-color:var(--no);background:var(--no-bg);}
+    #ap78 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ap78 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ap78 .talk p{margin:0 0 6px;}
+    #ap78 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ap78 .ex p{margin:4px 0;}
+    #ap78 .note{font-size:14px;color:var(--muted);}
+    #ap78 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;}
+    #ap78 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;}
+    #ap78 .card h3{margin:0 0 6px;font-size:18px;color:var(--teal);}
+    #ap78 .card p{margin:0;font-size:15px;color:var(--muted);}
+    #ap78 .card.pick{cursor:pointer;} #ap78 .card.pick:hover{border-color:var(--teal);}
+    #ap78 .card.on{border-color:var(--terra);background:var(--terra-bg);}
+    #ap78 .rule{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+    #ap78 .rule:first-child{border-top:none;}
+    #ap78 .form{font-family:"Courier New",monospace;font-size:16px;}
+    #ap78 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #ap78 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #ap78 .hide{display:none;}
+    #ap78 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:start;}
+    #ap78 .item:first-child{border-top:none;}
+    #ap78 .item b{color:var(--teal);}
+    #ap78 .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #ap78 .who{font-size:14px;font-weight:bold;color:var(--terra);letter-spacing:.04em;text-transform:uppercase;}
+  </style>
+
+  <h1>What would you do?</h1>
+  <p class="sub">In pairs. Three steps, then talk. Do at least three situations.</p>
+
+  <h2>1. Choose a situation</h2>
+  <div class="grid" id="ww-s"><div class="card pick" data-s="0"><p>You have to write a long essay, but you don't know how to begin.</p></div><div class="card pick" data-s="1"><p>You keep checking your phone every few minutes while you are studying.</p></div><div class="card pick" data-s="2"><p>You need to concentrate, but your room is noisy.</p></div><div class="card pick" data-s="3"><p>You have to organise your presentation notes for an important meeting or class.</p></div><div class="card pick" data-s="4"><p>You often switch between different tasks instead of finishing one.</p></div><div class="card pick" data-s="5"><p>You find it difficult to stay focused when working alone for several hours, and you keep taking coffee and snack breaks.</p></div></div>
+
+  <div class="hide" id="ww-step2">
+    <h2>2. Which technique would you try?</h2>
+    <div class="grid" id="ww-t"><div class="card pick" data-t="0"><h3>task breakdown</h3><p>dividing a big task into smaller, easier steps</p></div><div class="card pick" data-t="1"><h3>the five-minute rule</h3><p>working on the task for just five minutes, then deciding whether to continue</p></div><div class="card pick" data-t="2"><h3>background music</h3><p>listening to instrumental music to improve concentration</p></div><div class="card pick" data-t="3"><h3>body doubling</h3><p>working in the same room as another person who is also working</p></div><div class="card pick" data-t="4"><h3>virtual co-working</h3><p>working online with others, with regular check-ins</p></div></div>
+  </div>
+
+  <div class="panel hide" id="ww-step3" style="margin-top:18px">
+    <h2 style="margin-top:0">3. Talk</h2>
+    <p class="note" id="ww-recap" style="margin:0 0 6px"></p>
+    <div class="item"><b>A</b><div><span class="tag z">ZERO</span> What do you <strong>usually</strong> do in a situation like this?<br><span class="note"><em>If I have an essay to write, I usually&hellip;</em></span></div></div>
+    <div class="item"><b>B</b><div><span class="tag f">FIRST</span> Why do you want to try this technique?<br><span class="note"><em id="ww-b"></em></span></div></div>
+    <div class="item"><b>C</b><div><span class="tag s">SECOND</span> Which technique <strong>wouldn't</strong> you try, and why?<br><span class="note"><em>If I tried &hellip;, I would / wouldn't &hellip;</em></span></div></div>
+    <div class="btns"><button id="ww-next" class="amber">Done: another situation</button></div>
+  </div>
+  <div class="score" id="ww-n">0 situations done. Do at least three.</div>
+
+
+  <script>
+  (function(){
+    var S=document.getElementById('ww-s'), T=document.getElementById('ww-t'); if(!S) return;
+    var N=["task breakdown", "the five-minute rule", "background music", "body doubling", "virtual co-working"], s2=document.getElementById('ww-step2'), s3=document.getElementById('ww-step3'), cnt=document.getElementById('ww-n'), done=0, cur=null;
+    function clear(g){ var cs=g.querySelectorAll('.card'); for(var i=0;i<cs.length;i++) cs[i].classList.remove('on'); }
+    S.addEventListener('click',function(e){
+      var c=e.target.closest?e.target.closest('.card'):null; if(!c||c.classList.contains('used')) return;
+      clear(S); clear(T); c.classList.add('on'); cur=c; s2.classList.remove('hide'); s3.classList.add('hide');
+      s2.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    T.addEventListener('click',function(e){
+      var c=e.target.closest?e.target.closest('.card'):null; if(!c||!cur) return;
+      clear(T); c.classList.add('on');
+      var n=N[+c.getAttribute('data-t')];
+      document.getElementById('ww-recap').innerHTML='Situation: '+cur.textContent+'<br>Technique: <strong>'+n+'</strong>';
+      document.getElementById('ww-b').textContent='If I try '+n+', I will…';
+      s3.classList.remove('hide'); s3.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    document.getElementById('ww-next').addEventListener('click',function(){
+      if(!cur) return;
+      cur.classList.remove('on'); cur.classList.add('used'); cur.style.opacity='.45'; cur.style.cursor='default'; cur=null; done++;
+      clear(T); s2.classList.add('hide'); s3.classList.add('hide');
+      cnt.textContent=done+' situation'+(done===1?'':'s')+' done.'+(done<3?' Do at least three.':' Good. Keep going if you have time.');
+      S.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  })();
+  </script>
+</div>
+</body>
+</html>

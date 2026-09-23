@@ -70,6 +70,17 @@
   </style>
 
   <h1>Fact or myth?</h1>
+  <h2 style="margin-top:6px">First, a test</h2>
+  <p class="sub">Watch the video. Count how many times the players in <strong>white</strong> pass the ball. Count carefully, and do not talk while you watch.</p>
+  <div class="video"><iframe src="https://www.youtube.com/embed/vJG698U2Mvo?rel=0" title="Selective attention test" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="panel" id="fm-count">
+    <div class="item"><b>?</b><div>How many passes did you count?<input type="text" class="gap" id="fm-n" autocomplete="off" inputmode="numeric"></div></div>
+    <div class="btns"><button id="fm-lock">Lock my number</button></div>
+    <div class="fb" id="fm-lockfb"></div>
+  </div>
+
+  <div class="hide" id="fm-qs">
+  <h2>Now: fact or myth?</h2>
   <p class="sub">Every sentence below is a <span class="tag z">ZERO</span> conditional: it presents something as always true. But are they all true? Decide for each one. Talk to your partner first.</p>
   <div class="panel" id="fm"></div>
   <div class="score" id="fm-score"></div>
@@ -85,11 +96,18 @@
     <p><strong>Then:</strong> write one true zero-conditional sentence about <em>your</em> attention. Your partner guesses: fact or myth?</p>
     <p class="note" style="margin:0"><em>If I study after 10 p.m., I remember almost nothing the next day.</em></p>
   </div>
+  </div>
 
 
   <script>
   (function(){
-    var D=[{"s": "If you do two things at once, you do both of them more slowly and make more mistakes.", "k": 1, "w": "Every switch between tasks costs a little time, and the costs add up.", "src": "Rubinstein, Meyer &amp; Evans (2001)"}, {"s": "If you are a human, your attention span is shorter than a goldfish's.", "k": 0, "w": "The famous \"8 seconds\" figure came from a 2015 marketing report that gave no real source. And goldfish can remember things for months.", "src": "Microsoft Canada report (2015), checked by BBC <em>More or Less</em>"}, {"s": "If you sleep badly, your attention is worse the next day.", "k": 1, "w": "Attention is one of the first things to suffer when you lose sleep.", "src": "Lim &amp; Dinges (2010), a review of 70 studies"}, {"s": "If you grow up with the internet, you are naturally good at multitasking.", "k": 0, "w": "\"Digital natives\" are not better multitaskers. Nobody's brain really does two demanding things at once.", "src": "Kirschner &amp; De Bruyckere (2017)"}, {"s": "If you read with song lyrics playing, you understand less of the text.", "k": 1, "w": "Words in the music compete with the words on the page. Music without lyrics causes much less trouble.", "src": "Vasilev, Kirkby &amp; Angele (2018), a review of 65 studies"}, {"s": "If you are not concentrating, you use only 10% of your brain.", "k": 0, "w": "Brain scans show activity all over the brain, all the time. Even when you sleep.", "src": "a very old myth, with no study behind it"}, {"s": "If you think you are good at multitasking, you usually are.", "k": 0, "w": "Most people rate themselves above average. In the tests, their opinion did not match their real results.", "src": "Sanbonmatsu et al. (2013)"}, {"s": "If you drink coffee, you stay alert for longer.", "k": 1, "w": "Caffeine really does increase alertness and concentration, for a few hours, in most adults.", "src": "European Food Safety Authority (2011)"}, {"s": "If you daydream, your brain switches off.", "k": 0, "w": "When your mind wanders, a whole network of brain regions becomes <em>more</em> active, not less.", "src": "Raichle et al. (2001)"}, {"s": "If you concentrate hard on one thing, you can miss a gorilla.", "k": 1, "w": "In a famous experiment, people counted basketball passes in a video. About half of them did not see a person in a gorilla suit walk through the middle.", "src": "Simons &amp; Chabris (1999)"}], box=document.getElementById('fm'), sc=document.getElementById('fm-score'); if(!box) return;
+    var D=[{"s": "If you do two things at once, you do both of them more slowly and make more mistakes.", "k": 1, "w": "Every switch between tasks costs a little time, and the costs add up.", "src": "Rubinstein, Meyer &amp; Evans (2001)"}, {"s": "If you are a human, your attention span is shorter than a goldfish's.", "k": 0, "w": "The famous \"8 seconds\" figure came from a 2015 marketing report that gave no real source. And goldfish can remember things for months.", "src": "Microsoft Canada report (2015), checked by BBC <em>More or Less</em>"}, {"s": "If you sleep badly, your attention is worse the next day.", "k": 1, "w": "Attention is one of the first things to suffer when you lose sleep.", "src": "Lim &amp; Dinges (2010), a review of 70 studies"}, {"s": "If you grow up with the internet, you are naturally good at multitasking.", "k": 0, "w": "\"Digital natives\" are not better multitaskers. Nobody's brain really does two demanding things at once.", "src": "Kirschner &amp; De Bruyckere (2017)"}, {"s": "If you read with song lyrics playing, you understand less of the text.", "k": 1, "w": "Words in the music compete with the words on the page. Music without lyrics causes much less trouble.", "src": "Vasilev, Kirkby &amp; Angele (2018), a review of 65 studies"}, {"s": "If you are not concentrating, you use only 10% of your brain.", "k": 0, "w": "Brain scans show activity all over the brain, all the time. Even when you sleep.", "src": "a very old myth, with no study behind it"}, {"s": "If you think you are good at multitasking, you usually are.", "k": 0, "w": "Most people rate themselves above average. In the tests, their opinion did not match their real results.", "src": "Sanbonmatsu et al. (2013)"}, {"s": "If you drink coffee, you stay alert for longer.", "k": 1, "w": "Caffeine really does increase alertness and concentration, for a few hours, in most adults.", "src": "European Food Safety Authority (2011)"}, {"s": "If you daydream, your brain switches off.", "k": 0, "w": "When your mind wanders, a whole network of brain regions becomes <em>more</em> active, not less.", "src": "Raichle et al. (2001)"}, {"s": "If you concentrate hard on one thing, you can miss a gorilla.", "k": 1, "w": "You just did the experiment. When people count the passes, about half of them do not see the gorilla walk through the middle.", "src": "Simons &amp; Chabris (1999)"}], box=document.getElementById('fm'), sc=document.getElementById('fm-score'); if(!box) return;
+    document.getElementById('fm-lock').addEventListener('click',function(){
+      var n=document.getElementById('fm-n'); n.readOnly=true; this.disabled=true; this.textContent='Number locked';
+      var v=n.value.trim();
+      document.getElementById('fm-lockfb').innerHTML=(v?'You counted '+v.replace(/</g,'&lt;')+'. ':'')+'The end of the video gives the right number. But the number does not really matter. <strong>Did you see the gorilla?</strong>';
+      document.getElementById('fm-qs').classList.remove('hide');
+    });
     var names=['MYTH','FACT'], order=[], done=0, right=0;
     for(var i=0;i<D.length;i++) order.push(i);
     for(var i=order.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=order[i]; order[i]=order[j]; order[j]=t; }
