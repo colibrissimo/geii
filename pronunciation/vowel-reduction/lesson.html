@@ -52,7 +52,7 @@
     #vr-mod .flag{background:#f2f7f8;border-left:4px solid var(--petrol);border-radius:6px;padding:10px 12px;margin:10px 0;font-size:15px;}
     #vr-mod .st{color:var(--petrol);font-weight:bold;text-transform:uppercase;}
     #vr-mod .resp{font-weight:bold;color:var(--petrol);letter-spacing:1px;}
-    /* the double gymnastic: syllable tiles, then the two landing sounds */
+    /* the double move: syllable tiles, then the two landing sounds */
     #vr-mod .syls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:14px 0 8px;}
     #vr-mod .syls button{font-size:26px;font-weight:bold;padding:12px 16px;background:#eef1f0;
       border:2px solid var(--line);color:var(--ink);min-width:62px;}
@@ -78,11 +78,11 @@
 
   <div class="panel rule">
     <h2>The rule</h2>
-    <p><b>In the lesson on Word Stress, you.</b>learned that the stressed syllable is <b>higher, stronger, longer</b>. Every other syllable in the word is lower, weaker and shorter, and its vowel collapses.</p>
+    <p><b>In the lesson on Word Stress, you</b> learned that the stressed syllable is <b>higher, stronger, longer</b>. Every other syllable in the word is lower, weaker and shorter, and its vowel collapses.</p>
 
     <div class="key">
       <div class="big">Lean on one part of the word. Swallow the rest.</div>
-      <div class="y">It's like a double gymnastic. Two moves, not one.</div>
+      <div class="y">It's like a double move in gymnastics. Two moves, not one.</div>
     </div>
 
     <p>Putting the accent on is the easy half, and most people do it. Then they say the other syllables at full strength, carefully and clearly, and the word still sounds French. <b>The swallowing is the half that makes it English</b>, and it feels wrong to do, because it feels like mumbling. It is not mumbling. It is the language.</p>
@@ -106,7 +106,7 @@
 
   <!-- 2 -->
   <div class="panel">
-    <h2>2 &middot; The double gymnastic</h2>
+    <h2>2 &middot; The double move</h2>
     <p class="sub" style="margin-bottom:8px;">Two moves on every word. First find the syllable you lean on. Then say where the swallowed one lands. Both are scored.</p>
     <div class="prog" id="vr-prog">Word 1 of 0</div>
     <div class="bar"><i id="vr-fill"></i></div>
@@ -208,7 +208,7 @@
       c.addEventListener('click', function(){ TTS.say(c.getAttribute('data-w'), 0.75); });
     });
 
-    /* ---------- the double gymnastic: two moves per word ---------- */
+    /* ---------- the double move: two moves per word ---------- */
     /* word, syllables, stressed index, the syllable asked about, where it lands, why */
     var ITEMS=[
       ["lemon",["lem","on"],0,1,"n","LEM and then nothing at all."],
