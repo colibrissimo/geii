@@ -494,16 +494,6 @@
             50% { transform: translate(-50%, -50%) scale(1.2) rotate(10deg); }
             100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
         }
-
-        .start-screen { text-align:center; padding:40px 20px; }
-        .start-screen h2 { margin-bottom:16px; }
-        .start-screen p { line-height:1.6; margin-bottom:24px; }
-        .btn-start { font-size:1.3em; padding:16px 48px; border:none; border-radius:12px;
-                     background:linear-gradient(135deg,#fb923c,#f97316); color:#fff; font-weight:bold; cursor:pointer; }
-        .game-area { display:none; }
-        .game-area.active { display:block; }
-        .hint-en { font-weight:bold; }
-        .hint-fr { font-style:italic; opacity:.85; margin-top:4px; }
         .reveal-word { font-size:1.6em; letter-spacing:3px; color:#fb923c; margin:6px 0 4px; text-transform:uppercase; }
         .btn-next { display:none; margin:14px auto 0; background:linear-gradient(135deg,#14b8a6,#0d9488); color:#fff; }
         .btn-next.show { display:block; }
@@ -513,72 +503,60 @@
 <body>
     <div class="container">
         <h1>⭐ Vocabulary Constellation Race ⭐</h1>
-        <p class="subtitle">How Inductors Work - Racing Challenge</p>
+        <p class="subtitle">How Capacitors Work - Racing Challenge</p>
 
-        <div class="start-screen" id="startScreen">
-            <h2>Ready to Race? 🚀</h2>
-            <p>15 vocabulary words await you!<br>
-            Reveal letters, guess quickly, and unlock badges!</p>
-            <button class="btn-start" onclick="startGame()">START GAME</button>
+        <div class="timer-display" id="timerDisplay">⏱️ --:--</div>
+
+        <div class="game-info">
+            <div class="info-card">
+                <div class="info-label">Your Score</div>
+                <div class="info-value" id="score">100</div>
+            </div>
+            <div class="info-card">
+                <div class="info-label">Words Found</div>
+                <div class="info-value" id="wordsFound">0</div>
+            </div>
+            <div class="info-card">
+                <div class="info-label">Current Streak</div>
+                <div class="info-value" id="streakCount">0</div>
+                <div class="streak-indicator" id="streakIndicator">🔥 ON FIRE!</div>
+            </div>
+            <div class="info-card">
+                <div class="info-label">Letters Revealed</div>
+                <div class="info-value" id="lettersRevealed">0</div>
+            </div>
         </div>
 
-        <div class="game-area" id="gameArea">
-            <div class="timer-display" id="timerDisplay">⏱️ 00:00</div>
-
-            <div class="game-info">
-                <div class="info-card">
-                    <div class="info-label">Your Score</div>
-                    <div class="info-value" id="score">100</div>
-                </div>
-                <div class="info-card">
-                    <div class="info-label">Words Found</div>
-                    <div class="info-value" id="wordsFound">0</div>
-                </div>
-                <div class="info-card">
-                    <div class="info-label">Current Streak</div>
-                    <div class="info-value" id="streakCount">0</div>
-                    <div class="streak-indicator" id="streakIndicator">🔥 ON FIRE!</div>
-                </div>
-                <div class="info-card">
-                    <div class="info-label">Letters Revealed</div>
-                    <div class="info-value" id="lettersRevealed">0</div>
-                </div>
+        <div class="word-display">
+            <div class="letters" id="letterDisplay"></div>
+            
+            <div class="reveal-controls">
+                <button class="btn btn-reveal" id="revealBtn" onclick="revealLetter()">
+                    💡 Reveal Next Letter (Cost: <span id="revealCost">10</span> pts)
+                </button>
+                <button class="btn btn-skip" id="skipBtn" onclick="skipWord()">⏭️ Skip Word</button>
             </div>
 
-            <div class="word-display">
-                <div class="letters" id="letterDisplay"></div>
+            <p class="hint" id="hintText">Reveal letters to discover the word!</p>
+        </div>
 
-                <div class="reveal-controls">
-                    <button class="btn btn-reveal" id="revealBtn" onclick="revealLetter()">
-                        💡 Reveal Next Letter (Cost: <span id="revealCost">10</span> pts)
-                    </button>
-                    <button class="btn btn-skip" id="skipBtn" onclick="skipWord()">⏭️ Skip Word</button>
-                </div>
-
-                <div class="hint" id="hintText">
-                    <div class="hint-en">Reveal letters to discover the word!</div>
-                    <div class="hint-fr">Révélez des lettres pour découvrir le mot !</div>
-                </div>
+        <div class="input-section">
+            <div class="input-group">
+                <input type="text" id="guessInput" placeholder="Type your guess here..." onkeypress="handleKeyPress(event)">
+                <button class="btn btn-submit" id="submitBtn" onclick="submitGuess()">Submit Guess</button>
             </div>
+            <div class="feedback" id="feedback"></div>
+            <button class="btn btn-next" id="nextBtn" onclick="nextWord()">Next word ▶</button>
+        </div>
 
-            <div class="input-section">
-                <div class="input-group">
-                    <input type="text" id="guessInput" placeholder="Type your guess here..." onkeypress="handleKeyPress(event)" autocomplete="off">
-                    <button class="btn btn-submit" id="submitBtn" onclick="submitGuess()">Submit Guess</button>
-                </div>
-                <div class="feedback" id="feedback"></div>
-                <button class="btn btn-next" id="nextBtn" onclick="nextWord()">Next word ▶</button>
-            </div>
+        <div class="badges-section">
+            <h3>🏅 Your Achievements</h3>
+            <div class="badges-grid" id="badgesGrid"></div>
+        </div>
 
-            <div class="badges-section">
-                <h3>🏅 Your Achievements</h3>
-                <div class="badges-grid" id="badgesGrid"></div>
-            </div>
-
-            <div class="completed-words">
-                <h3>🏆 Words You've Found</h3>
-                <div class="word-list" id="completedList"></div>
-            </div>
+        <div class="completed-words">
+            <h3>🏆 Words You've Found</h3>
+            <div class="word-list" id="completedList"></div>
         </div>
 
         <div class="game-over" id="gameOver">
@@ -615,27 +593,41 @@
     </div>
 
     <script>
-        // Hints are definitions. None contains the answer, and the French line avoids
-        // the cognate (inducteur, courant, composant...) which was handing the word over.
-        const enc = btoa(unescape(encodeURIComponent(JSON.stringify([
-            {w: "component", en: "One single part of a circuit", fr: "Une pièce d'un circuit"},
-            {w: "device", en: "A machine or gadget built to do a job", fr: "Un appareil"},
-            {w: "inductor", en: "Passive part, symbol L, that resists changes in current", fr: "Composant passif, symbole L, qui s'oppose aux variations du courant"},
-            {w: "steady", en: "Constant, not changing over time", fr: "Constant, régulier"},
-            {w: "flow", en: "The movement of electricity along a conductor", fr: "Le passage de l'électricité dans un conducteur"},
-            {w: "current", en: "Symbol I, measured in amps", fr: "Symbole I, ce que mesure un ampèremètre"},
-            {w: "core", en: "The central part the wire is wound around", fr: "La partie centrale, souvent en fer ou en ferrite"},
-            {w: "wrapped", en: "Wound around something (past participle)", fr: "Enroulé autour de (participe passé)"},
-            {w: "coil", en: "A length of wire wound in loops", fr: "Du fil enroulé en spires"},
-            {w: "multilayer", en: "Built from several stacked layers", fr: "Fait de plusieurs couches superposées"},
-            {w: "chipinductor", en: "Tiny surface-mount version of the L component (two words)", fr: "Version CMS miniature, montée en surface (deux mots)"},
-            {w: "wire", en: "A thin metal conductor", fr: "Un fil métallique conducteur"},
-            {w: "magneticfield", en: "The invisible region of force around a magnet or a coil (two words)", fr: "La zone d'influence invisible autour d'un aimant (deux mots)"},
-            {w: "manufactured", en: "Made in a factory (past participle)", fr: "Fabriqué en usine (participe passé)"},
-            {w: "power", en: "To supply energy to a device (verb)", fr: "Alimenter en énergie (verbe)"}
-        ]))));
+        // Encoded vocabulary data with CORRECTED words
+        const enc = btoa(JSON.stringify([
+            {w: "capacitor", h: "Electronic component that stores electrical energy"},
+            {w: "operate", h: "To function or work"},
+            {w: "maintain", h: "To keep in good condition"},
+            {w: "plates", h: "Flat metal surfaces in a capacitor"},
+            {w: "dielectric", h: "Insulating material between plates"},
+            {w: "meaning", h: "Definition or significance"},
+            {w: "equal", h: "The same in quantity or value"},
+            {w: "top", h: "Upper part"},
+            {w: "attracted", h: "Pulled towards"},
+            {w: "bottom", h: "Lower part"},
+            {w: "prevent", h: "To stop from happening"},
+            {w: "process", h: "A series of actions"},
+            {w: "across", h: "From one side to another"},
+            {w: "increasing", h: "Getting larger"},
+            {w: "decreasing", h: "Getting smaller"},
+            {w: "remain", h: "To stay the same"},
+            {w: "lightbulb", h: "LED bulb - light source"},
+            {w: "remove", h: "To take away"},
+            {w: "turn", h: "To switch on"},
+            {w: "allow", h: "To permit"},
+            {w: "glow", h: "To shine with light"},
+            {w: "capacitance", h: "Ability to store charge"},
+            {w: "power", h: "Energy supply"},
+            {w: "drops", h: "Small amounts of liquid"},
+            {w: "watertank", h: "Container for water storage"},
+            {w: "backup", h: "Reserve or support system"},
+            {w: "stabilize", h: "To make steady"},
+            {w: "provide", h: "To supply or give"},
+            {w: "burst", h: "Sudden release of energy"},
+            {w: "lowlight", h: "Dim illumination"}
+        ]));
 
-        let vocab = JSON.parse(decodeURIComponent(escape(atob(enc))));
+        let vocab = JSON.parse(atob(enc));
         let currentWordIndex = 0;
         let currentWord = null;
         let revealedLetters = [];
@@ -649,22 +641,17 @@
         let timerInterval = null;
         let timeElapsed = 0;
         let wordLocked = false;
-        let wrongGuessCount = 0;
-        let gameStarted = false;
 
+        // Badge system
         const badges = [
-            {id: 'first_word', name: 'First Steps', desc: 'Complete your first word', icon: '🌟', unlocked: false, goofy: false},
-            {id: 'speed_demon', name: 'Speed Demon', desc: 'Complete in under 15 seconds', icon: '⚡', unlocked: false, goofy: false},
-            {id: 'streak_3', name: 'Hat Trick', desc: 'Get a 3-word streak', icon: '🎩', unlocked: false, goofy: false},
-            {id: 'streak_5', name: 'On Fire', desc: 'Get a 5-word streak', icon: '🔥', unlocked: false, goofy: false},
-            {id: 'perfect_guess', name: 'Mind Reader', desc: 'Guess with no letters revealed', icon: '🔮', unlocked: false, goofy: false},
-            {id: 'ten_words', name: 'Vocabulary Master', desc: 'Complete 10 words', icon: '📚', unlocked: false, goofy: false},
-            {id: 'high_score', name: 'Point Champion', desc: 'Reach 500 points', icon: '💎', unlocked: false, goofy: false},
-            {id: 'completionist', name: 'Completionist', desc: 'Finish all words', icon: '🏆', unlocked: false, goofy: false},
-            {id: 'slow_steady', name: 'Slow & Steady', desc: 'Take over 2 min but get it right', icon: '🐌', unlocked: false, goofy: true},
-            {id: 'typo_king', name: 'Typo Royalty', desc: '3 wrong guesses before success', icon: '🤪', unlocked: false, goofy: true},
-            {id: 'lucky_guess', name: 'Lucky Guesser', desc: 'Guess with only 1 letter revealed', icon: '🎲', unlocked: false, goofy: true},
-            {id: 'letter_lover', name: 'Letter Lover', desc: 'Reveal all letters before guessing', icon: '🔤', unlocked: false, goofy: true}
+            {id: 'first_word', name: 'First Steps', desc: 'Complete your first word', icon: '🌟', unlocked: false},
+            {id: 'speed_demon', name: 'Speed Demon', desc: 'Complete a word in under 15 seconds', icon: '⚡', unlocked: false},
+            {id: 'streak_3', name: 'Hat Trick', desc: 'Get a 3-word streak', icon: '🎩', unlocked: false},
+            {id: 'streak_5', name: 'On Fire', desc: 'Get a 5-word streak', icon: '🔥', unlocked: false},
+            {id: 'perfect_guess', name: 'Mind Reader', desc: 'Guess with no letters revealed', icon: '🔮', unlocked: false},
+            {id: 'ten_words', name: 'Vocabulary Master', desc: 'Complete 10 words', icon: '📚', unlocked: false},
+            {id: 'high_score', name: 'Point Champion', desc: 'Reach 500 points', icon: '💎', unlocked: false},
+            {id: 'completionist', name: 'Completionist', desc: 'Finish all words', icon: '🏆', unlocked: false}
         ];
 
         function shuffle(array) {
@@ -675,75 +662,98 @@
             return array;
         }
 
-        function startGame() {
-            document.getElementById('startScreen').style.display = 'none';
-            document.getElementById('gameArea').classList.add('active');
-            gameStarted = true;
+        function initGame() {
             vocab = shuffle(vocab);
             renderBadges();
             loadNextWord();
         }
 
         function loadNextWord() {
-            if (currentWordIndex >= vocab.length) { endGame(); return; }
+            if (currentWordIndex >= vocab.length) {
+                endGame();
+                return;
+            }
+
             currentWord = vocab[currentWordIndex];
             revealedLetters = new Array(currentWord.w.length).fill(false);
             wordLocked = false;
             document.getElementById('nextBtn').classList.remove('show');
             setControls(true);
-            wrongGuessCount = 0;
             document.getElementById('guessInput').value = '';
             document.getElementById('feedback').style.display = 'none';
-            document.getElementById('hintText').innerHTML =
-                `<div class="hint-en">${currentWord.en}</div><div class="hint-fr">${currentWord.fr}</div>`;
+            document.getElementById('hintText').textContent = currentWord.h;
+            
             wordStartTime = Date.now();
             timeElapsed = 0;
             startTimer();
+            
             displayWord();
             updateRevealButton();
-            document.getElementById('guessInput').focus();
         }
 
         function startTimer() {
             if (timerInterval) clearInterval(timerInterval);
+            
             timerInterval = setInterval(() => {
                 timeElapsed++;
                 const minutes = Math.floor(timeElapsed / 60);
                 const seconds = timeElapsed % 60;
                 const timerDisplay = document.getElementById('timerDisplay');
                 timerDisplay.textContent = `⏱️ ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Change color based on time
                 timerDisplay.className = 'timer-display';
-                if (timeElapsed > 120) timerDisplay.classList.add('danger');
-                else if (timeElapsed > 60) timerDisplay.classList.add('warning');
+                if (timeElapsed > 120) {
+                    timerDisplay.classList.add('danger');
+                } else if (timeElapsed > 60) {
+                    timerDisplay.classList.add('warning');
+                }
             }, 1000);
         }
 
         function stopTimer() {
-            if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
         }
 
         function displayWord() {
             const display = document.getElementById('letterDisplay');
             display.innerHTML = '';
+            
             for (let i = 0; i < currentWord.w.length; i++) {
                 const box = document.createElement('div');
                 box.className = 'letter-box';
-                if (revealedLetters[i]) { box.textContent = currentWord.w[i]; box.classList.add('revealed'); }
-                else box.textContent = '_';
+                if (revealedLetters[i]) {
+                    box.textContent = currentWord.w[i];
+                    box.classList.add('revealed');
+                } else {
+                    box.textContent = '_';
+                }
                 display.appendChild(box);
             }
         }
 
         function revealLetter() {
             if (wordLocked) return;
-            if (score < revealCost) { showFeedback('Not enough points to reveal!', false); return; }
+            if (score < revealCost) {
+                showFeedback('Not enough points to reveal!', false);
+                return;
+            }
+
             const unrevealed = revealedLetters.map((r, i) => r ? -1 : i).filter(i => i >= 0);
             if (unrevealed.length === 0) return;
+
             const randomIndex = unrevealed[Math.floor(Math.random() * unrevealed.length)];
             revealedLetters[randomIndex] = true;
             score -= revealCost;
             totalLettersRevealed++;
-            displayWord(); updateScore(); updateRevealButton();
+            
+            displayWord();
+            updateScore();
+            updateRevealButton();
+            
             document.getElementById('lettersRevealed').textContent = totalLettersRevealed;
         }
 
@@ -751,7 +761,12 @@
             const btn = document.getElementById('revealBtn');
             if (wordLocked) { btn.disabled = true; return; }
             const unrevealed = revealedLetters.filter(r => !r).length;
-            btn.disabled = (unrevealed === 0 || score < revealCost);
+            
+            if (unrevealed === 0 || score < revealCost) {
+                btn.disabled = true;
+            } else {
+                btn.disabled = false;
+            }
         }
 
         // Locks the current word once it is solved or skipped, so a second Enter
@@ -791,58 +806,87 @@
 
         function submitGuess() {
             if (wordLocked) return;
-            const guess = document.getElementById('guessInput').value.trim().toLowerCase().replace(/\s+/g, '');
-            if (!guess) { showFeedback('Please type a word!', false); return; }
+            const guess = document.getElementById('guessInput').value.trim().toLowerCase();
+            
+            if (!guess) {
+                showFeedback('Please type a word!', false);
+                return;
+            }
 
             if (guess === currentWord.w.toLowerCase()) {
                 wordLocked = true;
                 setControls(false);
                 stopTimer();
+                
+                // Base points
                 let earnedPoints = 50;
                 const unrevealed = revealedLetters.filter(r => !r).length;
-                earnedPoints += unrevealed * 5;
-                if (unrevealed === 0) unlockBadge('letter_lover');
-
+                const letterBonus = unrevealed * 5;
+                earnedPoints += letterBonus;
+                
+                // Speed bonus
                 let speedBonus = 0;
-                if (timeElapsed <= 15) { speedBonus = 50; unlockBadge('speed_demon'); showBonusPopup('⚡ SPEED DEMON! +50'); }
-                else if (timeElapsed <= 30) { speedBonus = 25; showBonusPopup('🚀 Quick! +25'); }
+                if (timeElapsed <= 15) {
+                    speedBonus = 50;
+                    unlockBadge('speed_demon');
+                    showBonusPopup('⚡ SPEED DEMON! +50');
+                } else if (timeElapsed <= 30) {
+                    speedBonus = 25;
+                    showBonusPopup('🚀 Quick! +25');
+                }
                 earnedPoints += speedBonus;
-
-                if (timeElapsed > 120) { unlockBadge('slow_steady'); showBonusPopup('🐌 SLOW & STEADY!'); }
-
-                const revealedCount = revealedLetters.filter(r => r).length;
-                if (revealedCount === 0) { earnedPoints += 30; unlockBadge('perfect_guess'); showBonusPopup('🔮 MIND READER! +30'); }
-                else if (revealedCount === 1) { unlockBadge('lucky_guess'); showBonusPopup('🎲 LUCKY GUESS!'); }
-
+                
+                // Perfect guess bonus
+                if (totalLettersRevealed === 0 || revealedLetters.every(r => !r)) {
+                    earnedPoints += 30;
+                    unlockBadge('perfect_guess');
+                    showBonusPopup('🔮 MIND READER! +30');
+                }
+                
+                // Update streak
                 currentStreak++;
                 if (currentStreak > bestStreak) bestStreak = currentStreak;
+                
+                // Streak bonuses
                 if (currentStreak >= 3) {
-                    const streakBonus = 20 * Math.floor(currentStreak / 3);
+                    const streakMultiplier = Math.floor(currentStreak / 3);
+                    const streakBonus = 20 * streakMultiplier;
                     earnedPoints += streakBonus;
                     unlockBadge('streak_3');
                     showBonusPopup(`🔥 ${currentStreak} STREAK! +${streakBonus}`);
                 }
-                if (currentStreak >= 5) unlockBadge('streak_5');
-
+                
+                if (currentStreak >= 5) {
+                    unlockBadge('streak_5');
+                }
+                
                 score += earnedPoints;
                 completedWords.push(currentWord.w);
+                
+                // Check achievement badges
                 if (completedWords.length === 1) unlockBadge('first_word');
                 if (completedWords.length >= 10) unlockBadge('ten_words');
                 if (score >= 500) unlockBadge('high_score');
-
-                updateCompletedList(); updateScore(); updateStreak();
-
+                
+                updateCompletedList();
+                updateScore();
+                updateStreak();
+                
                 let feedbackMsg = `✅ Correct! +${earnedPoints} points!`;
                 if (speedBonus > 0) feedbackMsg += ` (⚡ Speed!)`;
                 if (currentStreak >= 3) feedbackMsg += ` (🔥 ${currentStreak} streak!)`;
+                
                 showFeedback(feedbackMsg, true);
-
-                setTimeout(() => { currentWordIndex++; loadNextWord(); }, 2000);
+                
+                setTimeout(() => {
+                    currentWordIndex++;
+                    loadNextWord();
+                }, 2000);
             } else {
-                wrongGuessCount++;
                 score = Math.max(0, score - 5);
-                if (wrongGuessCount >= 3) unlockBadge('typo_king');
+                currentStreak = 0;
                 updateScore();
+                updateStreak();
                 showFeedback('❌ Not quite... try again!', false);
             }
         }
@@ -851,7 +895,10 @@
             const popup = document.getElementById('bonusPopup');
             popup.textContent = message;
             popup.classList.add('show');
-            setTimeout(() => popup.classList.remove('show'), 1500);
+            
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 1500);
         }
 
         let feedbackTimer = null;
@@ -871,48 +918,83 @@
 
         function updateStreak() {
             document.getElementById('streakCount').textContent = currentStreak;
-            document.getElementById('streakIndicator').classList.toggle('active', currentStreak >= 3);
+            const streakIndicator = document.getElementById('streakIndicator');
+            
+            if (currentStreak >= 3) {
+                streakIndicator.classList.add('active');
+            } else {
+                streakIndicator.classList.remove('active');
+            }
         }
 
         function updateCompletedList() {
-            document.getElementById('completedList').innerHTML =
-                completedWords.map(word => `<div class="completed-word">${word}</div>`).join('');
+            const list = document.getElementById('completedList');
+            list.innerHTML = completedWords.map(word => 
+                `<div class="completed-word">${word}</div>`
+            ).join('');
         }
 
-        function handleKeyPress(event) { if (event.key === 'Enter') submitGuess(); }
-
-        function badgeHTML(badge, withId) {
-            return `<div class="badge ${badge.unlocked ? 'unlocked' : ''} ${badge.goofy ? 'goofy' : ''}"${withId ? ` id="badge-${badge.id}"` : ''}>
-                <div class="badge-icon">${badge.icon}</div>
-                <div class="badge-name">${badge.name}</div>
-                <div class="badge-desc">${badge.desc}</div>
-            </div>`;
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                submitGuess();
+            }
         }
 
         function renderBadges() {
-            document.getElementById('badgesGrid').innerHTML = badges.map(b => badgeHTML(b, true)).join('');
+            const grid = document.getElementById('badgesGrid');
+            grid.innerHTML = badges.map(badge => `
+                <div class="badge ${badge.unlocked ? 'unlocked' : ''}" id="badge-${badge.id}">
+                    <div class="badge-icon">${badge.icon}</div>
+                    <div class="badge-name">${badge.name}</div>
+                    <div class="badge-desc">${badge.desc}</div>
+                </div>
+            `).join('');
         }
 
         function unlockBadge(badgeId) {
             const badge = badges.find(b => b.id === badgeId);
             if (badge && !badge.unlocked) {
                 badge.unlocked = true;
-                const el = document.getElementById('badge-' + badgeId);
-                if (el) el.classList.add('unlocked');
+                const badgeElement = document.getElementById('badge-' + badgeId);
+                if (badgeElement) {
+                    badgeElement.classList.add('unlocked');
+                }
             }
         }
 
         function endGame() {
             stopTimer();
             unlockBadge('completionist');
-            document.getElementById('gameArea').style.display = 'none';
-            document.getElementById('gameOver').classList.add('show');
+            
+            document.querySelector('.word-display').style.display = 'none';
+            document.querySelector('.input-section').style.display = 'none';
+            document.querySelector('.completed-words').style.display = 'none';
+            document.querySelector('.badges-section').style.display = 'none';
+            document.querySelector('.timer-display').style.display = 'none';
+            
+            const gameOver = document.getElementById('gameOver');
+            gameOver.classList.add('show');
+            
             document.getElementById('finalScore').textContent = score;
             document.getElementById('finalWords').textContent = completedWords.length;
             document.getElementById('finalStreak').textContent = bestStreak;
-            document.getElementById('finalBadges').textContent = badges.filter(b => b.unlocked).length + '/' + badges.length;
-            document.getElementById('finalBadgesGrid').innerHTML = badges.map(b => badgeHTML(b, false)).join('');
+            
+            const unlockedBadges = badges.filter(b => b.unlocked).length;
+            document.getElementById('finalBadges').textContent = unlockedBadges + '/' + badges.length;
+            
+            // Show final badges
+            const finalGrid = document.getElementById('finalBadgesGrid');
+            finalGrid.innerHTML = badges.map(badge => `
+                <div class="badge ${badge.unlocked ? 'unlocked' : ''}">
+                    <div class="badge-icon">${badge.icon}</div>
+                    <div class="badge-name">${badge.name}</div>
+                    <div class="badge-desc">${badge.desc}</div>
+                </div>
+            `).join('');
         }
+
+        // Initialize game on load
+        initGame();
     </script>
 </body>
 </html>
