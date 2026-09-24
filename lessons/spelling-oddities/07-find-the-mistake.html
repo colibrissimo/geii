@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spelling oddities: Find the mistake</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="so7">
+  <style>
+    #so7{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #so7 *{box-sizing:border-box;}
+    #so7 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #so7 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #so7 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #so7 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #so7 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #so7 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #so7 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #so7 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #so7 button:hover{background:#0f4a5c;}
+    #so7 button.ghost{background:transparent;color:var(--teal);}
+    #so7 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #so7 button:disabled{opacity:.45;cursor:default;}
+    #so7 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;}
+    #so7 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so7 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #so7 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #so7 .fb{font-weight:bold;margin-top:8px;font-size:16px;}
+    #so7 .fb.ok{color:var(--ok);} #so7 .fb.no{color:var(--no);}
+    #so7 .plain{font-weight:normal;color:var(--ink);}
+    #so7 input[type=text],#so7 textarea{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #so7 textarea{min-height:84px;resize:vertical;}
+    #so7 input[type=text]:focus,#so7 textarea:focus{outline:none;border-color:var(--teal);}
+    #so7 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);max-width:100%;}
+    #so7 select.ok{border-color:var(--ok);background:var(--ok-bg);} #so7 select.no{border-color:var(--no);background:var(--no-bg);}
+    #so7 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #so7 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #so7 .talk p{margin:0 0 6px;}
+    #so7 .note{font-size:14px;color:var(--muted);}
+    #so7 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;}
+    #so7 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center;font-weight:bold;font-size:19px;color:var(--teal);cursor:pointer;}
+    #so7 .card:hover{border-color:var(--teal);}
+    #so7 .card.on{border-color:var(--terra);background:var(--terra-bg);color:var(--terra);}
+    #so7 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #so7 .item:first-child{border-top:none;}
+    #so7 .item > b{color:var(--teal);}
+    #so7 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #so7 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #so7 .letters{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;}
+    #so7 .letters button{min-width:38px;padding:8px 0;font-size:20px;font-family:"Courier New",monospace;background:#fff;color:var(--ink);border-color:var(--line);}
+    #so7 .letters button:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so7 .letters button.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);opacity:1;}
+    #so7 .letters button.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #so7 .words span.w{cursor:pointer;padding:2px 3px;border-radius:5px;border:2px solid transparent;}
+    #so7 .words span.w:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #so7 .words.done span.w{cursor:default;} #so7 .words.done span.w:hover{border-color:transparent;background:none;}
+    #so7 span.w.no{background:var(--no-bg)!important;border-color:var(--no)!important;color:var(--no);text-decoration:line-through;}
+    #so7 span.w.ok{background:var(--ok-bg)!important;border-color:var(--ok)!important;color:var(--ok);font-weight:bold;}
+    #so7 .diff{font-size:17px;line-height:2;}
+    #so7 .diff .lab{display:inline-block;min-width:80px;font-size:13px;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+    #so7 .diff del{background:var(--no-bg);color:var(--no);border-radius:4px;padding:1px 3px;}
+    #so7 .diff ins{background:var(--ok-bg);color:var(--ok);text-decoration:none;font-weight:bold;border-radius:4px;padding:1px 3px;}
+    #so7 .resp{font-family:"Courier New",monospace;font-size:19px;font-weight:bold;color:var(--terra);}
+    #so7 .play{padding:6px 12px;font-size:15px;}
+    #so7 .hide{display:none;}
+  </style>
+
+  <h1>Find the mistake</h1>
+  <p class="sub">Each sentence has <strong>one</strong> spelling mistake, except two that are correct. Click the wrong word, or <strong>No mistake</strong>. One try each.</p>
+  <div class="panel" id="so7-l"><div class="item" data-i="0"><b>A</b><div><div class="words"><span class="w" data-k="0">A</span> <span class="w" data-k="1">coop</span> <span class="w" data-k="2">can</span> <span class="w" data-k="3">sometimes</span> <span class="w" data-k="4">be</span> <span class="w" data-k="5">justified</span> <span class="w" data-k="6">if</span> <span class="w" data-k="7">a</span> <span class="w" data-k="8">government</span> <span class="w" data-k="9">fails.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="1"><b>B</b><div><div class="words"><span class="w" data-k="0">Giving</span> <span class="w" data-k="1">a</span> <span class="w" data-k="2">bouquei</span> <span class="w" data-k="3">to</span> <span class="w" data-k="4">your</span> <span class="w" data-k="5">date</span> <span class="w" data-k="6">is</span> <span class="w" data-k="7">considered</span> <span class="w" data-k="8">outdated</span> <span class="w" data-k="9">today.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="2"><b>C</b><div><div class="words"><span class="w" data-k="0">Genres</span> <span class="w" data-k="1">are</span> <span class="w" data-k="2">unnecessary</span> <span class="w" data-k="3">labels</span> <span class="w" data-k="4">that</span> <span class="w" data-k="5">restrict</span> <span class="w" data-k="6">us</span> <span class="w" data-k="7">from</span> <span class="w" data-k="8">developing</span> <span class="w" data-k="9">new</span> <span class="w" data-k="10">tastes.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="3"><b>D</b><div><div class="words"><span class="w" data-k="0">Enniu</span> <span class="w" data-k="1">is</span> <span class="w" data-k="2">the</span> <span class="w" data-k="3">biggest</span> <span class="w" data-k="4">problem</span> <span class="w" data-k="5">of</span> <span class="w" data-k="6">modern</span> <span class="w" data-k="7">society.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="4"><b>E</b><div><div class="words"><span class="w" data-k="0">One</span> <span class="w" data-k="1">bad</span> <span class="w" data-k="2">foux</span> <span class="w" data-k="3">pas</span> <span class="w" data-k="4">can</span> <span class="w" data-k="5">outweigh</span> <span class="w" data-k="6">years</span> <span class="w" data-k="7">of</span> <span class="w" data-k="8">hard</span> <span class="w" data-k="9">work.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="5"><b>F</b><div><div class="words"><span class="w" data-k="0">Performers</span> <span class="w" data-k="1">shouldn't</span> <span class="w" data-k="2">be</span> <span class="w" data-k="3">judged</span> <span class="w" data-k="4">by</span> <span class="w" data-k="5">their</span> <span class="w" data-k="6">debues.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="6"><b>G</b><div><div class="words"><span class="w" data-k="0">Adding</span> <span class="w" data-k="1">strong</span> <span class="w" data-k="2">ingredients,</span> <span class="w" data-k="3">like</span> <span class="w" data-k="4">Wostershire</span> <span class="w" data-k="5">sauce,</span> <span class="w" data-k="6">only</span> <span class="w" data-k="7">overpowers</span> <span class="w" data-k="8">other</span> <span class="w" data-k="9">flavours.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="7"><b>H</b><div><div class="words"><span class="w" data-k="0">Mnemonics</span> <span class="w" data-k="1">don't</span> <span class="w" data-k="2">make</span> <span class="w" data-k="3">words</span> <span class="w" data-k="4">easier</span> <span class="w" data-k="5">to</span> <span class="w" data-k="6">learn;</span> <span class="w" data-k="7">they're</span> <span class="w" data-k="8">just</span> <span class="w" data-k="9">another</span> <span class="w" data-k="10">thing</span> <span class="w" data-k="11">to</span> <span class="w" data-k="12">remember.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="8"><b>I</b><div><div class="words"><span class="w" data-k="0">Bouys</span> <span class="w" data-k="1">rarely</span> <span class="w" data-k="2">facilitate</span> <span class="w" data-k="3">water</span> <span class="w" data-k="4">safety</span> <span class="w" data-k="5">as</span> <span class="w" data-k="6">people</span> <span class="w" data-k="7">usually</span> <span class="w" data-k="8">ignore</span> <span class="w" data-k="9">them.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="9"><b>J</b><div><div class="words"><span class="w" data-k="0">It's</span> <span class="w" data-k="1">difficult</span> <span class="w" data-k="2">to</span> <span class="w" data-k="3">go</span> <span class="w" data-k="4">from</span> <span class="w" data-k="5">lieuftenant</span> <span class="w" data-k="6">to</span> <span class="w" data-k="7">colonel</span> <span class="w" data-k="8">without</span> <span class="w" data-k="9">having</span> <span class="w" data-k="10">the</span> <span class="w" data-k="11">right</span> <span class="w" data-k="12">experience.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div></div>
+  <div class="score" id="so7-score"></div>
+  <div class="talk hide" id="so7-talk">
+    <p><strong>Now argue.</strong> Choose at least three of the sentences. Do you agree with them? Your partner has to disagree, whatever they really think.</p>
+  </div>
+
+
+  <script>
+  (function(){
+    var box=document.getElementById('so7-l'); if(!box) return;
+    var D=[{"k": 1, "c": "coup"}, {"k": 2, "c": "bouquet"}, {"k": -1, "c": ""}, {"k": 0, "c": "Ennui"}, {"k": 2, "c": "faux"}, {"k": 6, "c": "debuts"}, {"k": 4, "c": "Worcestershire"}, {"k": -1, "c": ""}, {"k": 0, "c": "Buoys"}, {"k": 5, "c": "lieutenant"}], done=0, right=0;
+    box.addEventListener('click',function(e){
+      var t=e.target; var it=t.closest?t.closest('.item'):null; if(!it||it.getAttribute('data-done')) return;
+      var isW=t.classList.contains('w'), isN=t.classList.contains('nomis'); if(!isW&&!isN) return;
+      it.setAttribute('data-done','1'); it.querySelector('.words').classList.add('done'); it.querySelector('.nomis').disabled=true;
+      var d=D[+it.getAttribute('data-i')], pick=isW?+t.getAttribute('data-k'):-1, ok=pick===d.k, ws=it.querySelectorAll('.w');
+      done++; if(ok) right++;
+      var fb=it.querySelector('.fb'); fb.className='fb '+(ok?'ok':'no');
+      if(d.k>=0){
+        var bad=ws[d.k]; bad.className='w '+(ok?'ok':'no');
+        if(!ok&&pick>=0) ws[pick].style.outline='2px dashed #b23a3a';
+        fb.innerHTML=(ok?'Yes. ':(pick<0?'You said no mistake. ':'You clicked <em>'+ws[pick].textContent+'</em>. '))+'<span class="plain"><del style="color:#b23a3a">'+bad.textContent.replace(/[.,;]$/,'')+'</del> &rarr; <strong style="color:#1f8a4c">'+d.c+'</strong></span>';
+      } else {
+        if(pick>=0) ws[pick].className='w no';
+        fb.innerHTML=ok?'Yes, this one is correct.':'You clicked <em>'+ws[pick].textContent+'</em>. <span class="plain">It is spelled right: this sentence has no mistake.</span>';
+      }
+      document.getElementById('so7-score').textContent=right+' of '+done;
+      if(done===D.length) document.getElementById('so7-talk').classList.remove('hide');
+    });
+  })();
+  </script>
+</div>
+</body>
+</html>

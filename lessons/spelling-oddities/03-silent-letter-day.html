@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spelling oddities: Silent Letter Day</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="so3">
+  <style>
+    #so3{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #so3 *{box-sizing:border-box;}
+    #so3 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #so3 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #so3 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #so3 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #so3 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #so3 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #so3 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #so3 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #so3 button:hover{background:#0f4a5c;}
+    #so3 button.ghost{background:transparent;color:var(--teal);}
+    #so3 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #so3 button:disabled{opacity:.45;cursor:default;}
+    #so3 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;}
+    #so3 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so3 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #so3 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #so3 .fb{font-weight:bold;margin-top:8px;font-size:16px;}
+    #so3 .fb.ok{color:var(--ok);} #so3 .fb.no{color:var(--no);}
+    #so3 .plain{font-weight:normal;color:var(--ink);}
+    #so3 input[type=text],#so3 textarea{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #so3 textarea{min-height:84px;resize:vertical;}
+    #so3 input[type=text]:focus,#so3 textarea:focus{outline:none;border-color:var(--teal);}
+    #so3 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);max-width:100%;}
+    #so3 select.ok{border-color:var(--ok);background:var(--ok-bg);} #so3 select.no{border-color:var(--no);background:var(--no-bg);}
+    #so3 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #so3 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #so3 .talk p{margin:0 0 6px;}
+    #so3 .note{font-size:14px;color:var(--muted);}
+    #so3 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;}
+    #so3 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center;font-weight:bold;font-size:19px;color:var(--teal);cursor:pointer;}
+    #so3 .card:hover{border-color:var(--teal);}
+    #so3 .card.on{border-color:var(--terra);background:var(--terra-bg);color:var(--terra);}
+    #so3 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #so3 .item:first-child{border-top:none;}
+    #so3 .item > b{color:var(--teal);}
+    #so3 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #so3 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #so3 .letters{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;}
+    #so3 .letters button{min-width:38px;padding:8px 0;font-size:20px;font-family:"Courier New",monospace;background:#fff;color:var(--ink);border-color:var(--line);}
+    #so3 .letters button:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so3 .letters button.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);opacity:1;}
+    #so3 .letters button.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #so3 .words span.w{cursor:pointer;padding:2px 3px;border-radius:5px;border:2px solid transparent;}
+    #so3 .words span.w:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #so3 .words.done span.w{cursor:default;} #so3 .words.done span.w:hover{border-color:transparent;background:none;}
+    #so3 span.w.no{background:var(--no-bg)!important;border-color:var(--no)!important;color:var(--no);text-decoration:line-through;}
+    #so3 span.w.ok{background:var(--ok-bg)!important;border-color:var(--ok)!important;color:var(--ok);font-weight:bold;}
+    #so3 .diff{font-size:17px;line-height:2;}
+    #so3 .diff .lab{display:inline-block;min-width:80px;font-size:13px;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+    #so3 .diff del{background:var(--no-bg);color:var(--no);border-radius:4px;padding:1px 3px;}
+    #so3 .diff ins{background:var(--ok-bg);color:var(--ok);text-decoration:none;font-weight:bold;border-radius:4px;padding:1px 3px;}
+    #so3 .resp{font-family:"Courier New",monospace;font-size:19px;font-weight:bold;color:var(--terra);}
+    #so3 .play{padding:6px 12px;font-size:15px;}
+    #so3 .hide{display:none;}
+  </style>
+
+  <h1>Silent Letter Day</h1>
+  <p class="sub">The comedian imagines a special day to celebrate silent letters. Every idea he has uses words <em>with</em> silent letters. Guess his ideas first.</p>
+  <div class="panel" id="so3-p"><div class="item"><b>A</b><div>When will people celebrate it?<input type="text" data-i="0" autocomplete="off"></div></div><div class="item"><b>B</b><div>What will people do?<input type="text" data-i="1" autocomplete="off"></div></div><div class="item"><b>C</b><div>What food and drinks will there be?<input type="text" data-i="2" autocomplete="off"></div></div><div class="item"><b>D</b><div>What creature will be the symbol of the day?<input type="text" data-i="3" autocomplete="off"></div></div>
+    <div class="btns"><button id="so3-lock">Lock my guesses</button></div>
+  </div>
+
+  <div class="hide" id="so3-watch">
+    <p class="sub" style="margin-top:14px">Now watch from <strong>01:32</strong> to the end and check.</p>
+    <div class="video"><iframe id="so3-yt" src="" title="Stand-up comedy clip, part 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+    <div class="btns"><button id="so3-reveal">Reveal the answers</button></div>
+    <div class="panel hide" id="so3-ans" style="margin-top:12px"></div>
+  </div>
+
+  <div class="hide" id="so3-tap">
+    <h1 style="margin-top:26px">Find the silent letter</h1>
+    <p class="sub">All fifteen words are from the video. Tap the <strong>consonant</strong> you do not hear. One tap per word.</p>
+    <div class="panel" id="so3-w"><div class="item" data-w="0"><b>1</b><div><div class="letters"><button data-l="0">W</button><button data-l="1">e</button><button data-l="2">d</button><button data-l="3">n</button><button data-l="4">e</button><button data-l="5">s</button><button data-l="6">d</button><button data-l="7">a</button><button data-l="8">y</button></div><div class="fb"></div></div></div><div class="item" data-w="1"><b>2</b><div><div class="letters"><button data-l="0">a</button><button data-l="1">u</button><button data-l="2">t</button><button data-l="3">u</button><button data-l="4">m</button><button data-l="5">n</button></div><div class="fb"></div></div></div><div class="item" data-w="2"><b>3</b><div><div class="letters"><button data-l="0">F</button><button data-l="1">e</button><button data-l="2">b</button><button data-l="3">r</button><button data-l="4">u</button><button data-l="5">a</button><button data-l="6">r</button><button data-l="7">y</button></div><div class="fb"></div></div></div><div class="item" data-w="3"><b>4</b><div><div class="letters"><button data-l="0">t</button><button data-l="1">a</button><button data-l="2">l</button><button data-l="3">k</button><button data-l="4">i</button><button data-l="5">n</button><button data-l="6">g</button></div><div class="fb"></div></div></div><div class="item" data-w="4"><b>5</b><div><div class="letters"><button data-l="0">w</button><button data-l="1">a</button><button data-l="2">l</button><button data-l="3">k</button><button data-l="4">i</button><button data-l="5">n</button><button data-l="6">g</button></div><div class="fb"></div></div></div><div class="item" data-w="5"><b>6</b><div><div class="letters"><button data-l="0">c</button><button data-l="1">l</button><button data-l="2">i</button><button data-l="3">m</button><button data-l="4">b</button><button data-l="5">i</button><button data-l="6">n</button><button data-l="7">g</button></div><div class="fb"></div></div></div><div class="item" data-w="6"><b>7</b><div><div class="letters"><button data-l="0">k</button><button data-l="1">n</button><button data-l="2">i</button><button data-l="3">t</button><button data-l="4">t</button><button data-l="5">i</button><button data-l="6">n</button><button data-l="7">g</button></div><div class="fb"></div></div></div><div class="item" data-w="7"><b>8</b><div><div class="letters"><button data-l="0">b</button><button data-l="1">u</button><button data-l="2">f</button><button data-l="3">f</button><button data-l="4">e</button><button data-l="5">t</button></div><div class="fb"></div></div></div><div class="item" data-w="8"><b>9</b><div><div class="letters"><button data-l="0">s</button><button data-l="1">a</button><button data-l="2">l</button><button data-l="3">m</button><button data-l="4">o</button><button data-l="5">n</button></div><div class="fb"></div></div></div><div class="item" data-w="9"><b>10</b><div><div class="letters"><button data-l="0">s</button><button data-l="1">w</button><button data-l="2">o</button><button data-l="3">r</button><button data-l="4">d</button><button data-l="5">f</button><button data-l="6">i</button><button data-l="7">s</button><button data-l="8">h</button></div><div class="fb"></div></div></div><div class="item" data-w="10"><b>11</b><div><div class="letters"><button data-l="0">s</button><button data-l="1">a</button><button data-l="2">n</button><button data-l="3">d</button><button data-l="4">w</button><button data-l="5">i</button><button data-l="6">c</button><button data-l="7">h</button><button data-l="8">e</button><button data-l="9">s</button></div><div class="fb"></div></div></div><div class="item" data-w="11"><b>12</b><div><div class="letters"><button data-l="0">y</button><button data-l="1">o</button><button data-l="2">g</button><button data-l="3">h</button><button data-l="4">u</button><button data-l="5">r</button><button data-l="6">t</button></div><div class="fb"></div></div></div><div class="item" data-w="12"><b>13</b><div><div class="letters"><button data-l="0">s</button><button data-l="1">u</button><button data-l="2">b</button><button data-l="3">t</button><button data-l="4">l</button><button data-l="5">e</button></div><div class="fb"></div></div></div><div class="item" data-w="13"><b>14</b><div><div class="letters"><button data-l="0">g</button><button data-l="1">n</button><button data-l="2">o</button><button data-l="3">m</button><button data-l="4">e</button></div><div class="fb"></div></div></div><div class="item" data-w="14"><b>15</b><div><div class="letters"><button data-l="0">c</button><button data-l="1">h</button><button data-l="2">a</button><button data-l="3">m</button><button data-l="4">p</button><button data-l="5">a</button><button data-l="6">g</button><button data-l="7">n</button><button data-l="8">e</button></div><div class="fb"></div></div></div></div>
+    <div class="score" id="so3-score"></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var p=document.getElementById('so3-p'); if(!p) return;
+    var A=[["on a Wednesday, sometime in the autumn, or maybe in February", "01:44"], ["talking, walking, climbing and knitting", "02:04"], ["a buffet with salmon, swordfish, sandwiches and yoghurt, all very subtle flavours; and champagne", "02:30, 03:51"], ["the gnome", "02:53"]], W=[2, 5, 3, 2, 2, 4, 0, 5, 2, 1, 3, 3, 2, 0, 6], done=0, right=0;
+    document.getElementById('so3-lock').addEventListener('click',function(){
+      var ins=p.querySelectorAll('input'); for(var i=0;i<ins.length;i++) ins[i].readOnly=true;
+      this.disabled=true; this.textContent='Guesses locked';
+      document.getElementById('so3-yt').src='https://www.youtube.com/embed/BrJv_wUEKko?rel=0&start=92';
+      document.getElementById('so3-watch').classList.remove('hide');
+    });
+    document.getElementById('so3-reveal').addEventListener('click',function(){
+      var ins=p.querySelectorAll('input'), h='<h2 style="margin-top:0">What he suggests</h2>';
+      for(var i=0;i<A.length;i++){
+        var v=ins[i].value.trim().replace(/</g,'&lt;');
+        h+='<div class="item"><b>'+'ABCD'[i]+'</b><div><strong>'+A[i][0]+'</strong> <span class="note">['+A[i][1]+']</span>'+(v?'<br><span class="note">You guessed: '+v+'</span>':'')+'</div></div>';
+      }
+      var a=document.getElementById('so3-ans'); a.innerHTML=h; a.classList.remove('hide'); this.disabled=true;
+      document.getElementById('so3-tap').classList.remove('hide');
+    });
+    var box=document.getElementById('so3-w');
+    box.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b||b.disabled) return;
+      var it=b.closest('.item'), k=W[+it.getAttribute('data-w')], l=+b.getAttribute('data-l');
+      var bs=it.querySelectorAll('button'); for(var j=0;j<bs.length;j++) bs[j].disabled=true;
+      bs[k].className='ok'; if(l!==k) b.className='no';
+      done++; if(l===k) right++;
+      var fb=it.querySelector('.fb'); fb.className='fb '+(l===k?'ok':'no');
+      fb.textContent=l===k?'Yes, the '+bs[k].textContent+' is silent.':'You tapped '+b.textContent+'. The silent one is '+bs[k].textContent+'.';
+      document.getElementById('so3-score').textContent=right+' of '+done+(done===W.length?'. Which one surprised you?':'');
+    });
+  })();
+  </script>
+</div>
+</body>
+</html>

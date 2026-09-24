@@ -1,0 +1,733 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Preview: spelling oddities</title><style>body{margin:0;background:#e5e9ef;padding:24px 12px}hr{border:0;height:2px;background:#155E75;margin:40px auto;max-width:820px}</style></head><body><div id="so1">
+  <style>
+    #so1{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #so1 *{box-sizing:border-box;}
+    #so1 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #so1 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #so1 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #so1 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #so1 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #so1 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #so1 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #so1 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #so1 button:hover{background:#0f4a5c;}
+    #so1 button.ghost{background:transparent;color:var(--teal);}
+    #so1 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #so1 button:disabled{opacity:.45;cursor:default;}
+    #so1 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;}
+    #so1 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so1 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #so1 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #so1 .fb{font-weight:bold;margin-top:8px;font-size:16px;}
+    #so1 .fb.ok{color:var(--ok);} #so1 .fb.no{color:var(--no);}
+    #so1 .plain{font-weight:normal;color:var(--ink);}
+    #so1 input[type=text],#so1 textarea{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #so1 textarea{min-height:84px;resize:vertical;}
+    #so1 input[type=text]:focus,#so1 textarea:focus{outline:none;border-color:var(--teal);}
+    #so1 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);max-width:100%;}
+    #so1 select.ok{border-color:var(--ok);background:var(--ok-bg);} #so1 select.no{border-color:var(--no);background:var(--no-bg);}
+    #so1 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #so1 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #so1 .talk p{margin:0 0 6px;}
+    #so1 .note{font-size:14px;color:var(--muted);}
+    #so1 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;}
+    #so1 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center;font-weight:bold;font-size:19px;color:var(--teal);cursor:pointer;}
+    #so1 .card:hover{border-color:var(--teal);}
+    #so1 .card.on{border-color:var(--terra);background:var(--terra-bg);color:var(--terra);}
+    #so1 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #so1 .item:first-child{border-top:none;}
+    #so1 .item > b{color:var(--teal);}
+    #so1 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #so1 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #so1 .letters{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;}
+    #so1 .letters button{min-width:38px;padding:8px 0;font-size:20px;font-family:"Courier New",monospace;background:#fff;color:var(--ink);border-color:var(--line);}
+    #so1 .letters button:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so1 .letters button.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);opacity:1;}
+    #so1 .letters button.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #so1 .words span.w{cursor:pointer;padding:2px 3px;border-radius:5px;border:2px solid transparent;}
+    #so1 .words span.w:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #so1 .words.done span.w{cursor:default;} #so1 .words.done span.w:hover{border-color:transparent;background:none;}
+    #so1 span.w.no{background:var(--no-bg)!important;border-color:var(--no)!important;color:var(--no);text-decoration:line-through;}
+    #so1 span.w.ok{background:var(--ok-bg)!important;border-color:var(--ok)!important;color:var(--ok);font-weight:bold;}
+    #so1 .diff{font-size:17px;line-height:2;}
+    #so1 .diff .lab{display:inline-block;min-width:80px;font-size:13px;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+    #so1 .diff del{background:var(--no-bg);color:var(--no);border-radius:4px;padding:1px 3px;}
+    #so1 .diff ins{background:var(--ok-bg);color:var(--ok);text-decoration:none;font-weight:bold;border-radius:4px;padding:1px 3px;}
+    #so1 .resp{font-family:"Courier New",monospace;font-size:19px;font-weight:bold;color:var(--terra);}
+    #so1 .play{padding:6px 12px;font-size:15px;}
+    #so1 .hide{display:none;}
+  </style>
+
+  <h1>Pronunciation and spelling oddities</h1>
+  <p class="sub">Look at the twelve words. Click the one you would <strong>least</strong> like to say out loud, in front of everyone.</p>
+  <div class="grid" id="so1-g"><div class="card" data-i="0">squirrel</div><div class="card" data-i="1">rural</div><div class="card" data-i="2">thorough</div><div class="card" data-i="3">clothes</div><div class="card" data-i="4">sixth</div><div class="card" data-i="5">world</div><div class="card" data-i="6">February</div><div class="card" data-i="7">specifically</div><div class="card" data-i="8">hierarchy</div><div class="card" data-i="9">comfortable</div><div class="card" data-i="10">Leicester</div><div class="card" data-i="11">anemone</div></div>
+  <div class="hide" id="so1-talk">
+    <div class="talk">
+      <p><strong>You chose <span id="so1-w"></span>.</strong> Tell your partner: why that one? Which part of it is the problem?</p>
+      <p class="note" style="margin:0">Then try to say it. Your partner decides if it worked.</p>
+    </div>
+    <h2>Then talk</h2>
+    <div class="q"><b>1</b><span>A word you are never sure how to spell.</span></div>
+    <div class="q"><b>2</b><span>Two words you mix up because they sound the same or very similar.</span></div>
+    <div class="q"><b>3</b><span>A word you avoid, or used to avoid, because of its pronunciation. What do you say instead?</span></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var g=document.getElementById('so1-g'); if(!g) return;
+    g.addEventListener('click',function(e){
+      var c=e.target.closest?e.target.closest('.card'):null; if(!c) return;
+      var cs=g.querySelectorAll('.card'); for(var i=0;i<cs.length;i++) cs[i].classList.remove('on');
+      c.classList.add('on'); document.getElementById('so1-w').textContent=c.textContent;
+      document.getElementById('so1-talk').classList.remove('hide');
+    });
+  })();
+  </script>
+</div>
+<hr><div id="so2">
+  <style>
+    #so2{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #so2 *{box-sizing:border-box;}
+    #so2 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #so2 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #so2 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #so2 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #so2 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #so2 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #so2 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #so2 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #so2 button:hover{background:#0f4a5c;}
+    #so2 button.ghost{background:transparent;color:var(--teal);}
+    #so2 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #so2 button:disabled{opacity:.45;cursor:default;}
+    #so2 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;}
+    #so2 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so2 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #so2 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #so2 .fb{font-weight:bold;margin-top:8px;font-size:16px;}
+    #so2 .fb.ok{color:var(--ok);} #so2 .fb.no{color:var(--no);}
+    #so2 .plain{font-weight:normal;color:var(--ink);}
+    #so2 input[type=text],#so2 textarea{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #so2 textarea{min-height:84px;resize:vertical;}
+    #so2 input[type=text]:focus,#so2 textarea:focus{outline:none;border-color:var(--teal);}
+    #so2 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);max-width:100%;}
+    #so2 select.ok{border-color:var(--ok);background:var(--ok-bg);} #so2 select.no{border-color:var(--no);background:var(--no-bg);}
+    #so2 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #so2 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #so2 .talk p{margin:0 0 6px;}
+    #so2 .note{font-size:14px;color:var(--muted);}
+    #so2 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;}
+    #so2 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center;font-weight:bold;font-size:19px;color:var(--teal);cursor:pointer;}
+    #so2 .card:hover{border-color:var(--teal);}
+    #so2 .card.on{border-color:var(--terra);background:var(--terra-bg);color:var(--terra);}
+    #so2 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #so2 .item:first-child{border-top:none;}
+    #so2 .item > b{color:var(--teal);}
+    #so2 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #so2 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #so2 .letters{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;}
+    #so2 .letters button{min-width:38px;padding:8px 0;font-size:20px;font-family:"Courier New",monospace;background:#fff;color:var(--ink);border-color:var(--line);}
+    #so2 .letters button:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so2 .letters button.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);opacity:1;}
+    #so2 .letters button.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #so2 .words span.w{cursor:pointer;padding:2px 3px;border-radius:5px;border:2px solid transparent;}
+    #so2 .words span.w:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #so2 .words.done span.w{cursor:default;} #so2 .words.done span.w:hover{border-color:transparent;background:none;}
+    #so2 span.w.no{background:var(--no-bg)!important;border-color:var(--no)!important;color:var(--no);text-decoration:line-through;}
+    #so2 span.w.ok{background:var(--ok-bg)!important;border-color:var(--ok)!important;color:var(--ok);font-weight:bold;}
+    #so2 .diff{font-size:17px;line-height:2;}
+    #so2 .diff .lab{display:inline-block;min-width:80px;font-size:13px;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+    #so2 .diff del{background:var(--no-bg);color:var(--no);border-radius:4px;padding:1px 3px;}
+    #so2 .diff ins{background:var(--ok-bg);color:var(--ok);text-decoration:none;font-weight:bold;border-radius:4px;padding:1px 3px;}
+    #so2 .resp{font-family:"Courier New",monospace;font-size:19px;font-weight:bold;color:var(--terra);}
+    #so2 .play{padding:6px 12px;font-size:15px;}
+    #so2 .hide{display:none;}
+  </style>
+
+  <h1>What is the joke about?</h1>
+  <p class="sub">A stand-up comedian jokes about English. Watch to <strong>01:32</strong>. The video stops there.</p>
+  <div class="video"><iframe src="https://www.youtube.com/embed/BrJv_wUEKko?rel=0&end=92" title="Stand-up comedy clip" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="panel">
+    <div>The joke is about this: <strong>&hellip;</strong></div>
+    <div class="btns" id="so2-o"><button class="choice" data-j="0">English spelling keeps changing</button><button class="choice" data-j="1">Many English words have letters nobody says</button><button class="choice" data-j="2">British people speak too fast</button><button class="choice" data-j="3">English has too many words from French</button></div>
+    <div class="fb" id="so2-fb"></div>
+  </div>
+  <div class="talk hide" id="so2-talk">
+    <p><strong>Which examples did he use?</strong> How many can you and your partner remember?</p>
+  </div>
+
+
+  <script>
+  (function(){
+    var box=document.getElementById('so2-o'); if(!box) return; var K=1;
+    box.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b||b.disabled) return;
+      var j=+b.getAttribute('data-j'), bs=box.querySelectorAll('button');
+      for(var k=0;k<bs.length;k++){ bs[k].disabled=true; if(k===K) bs[k].className='choice ok'; }
+      if(j!==K) b.className='choice no';
+      var fb=document.getElementById('so2-fb'); fb.className='fb '+(j===K?'ok':'no');
+      fb.innerHTML=(j===K?'Yes. ':'Not quite. ')+'<span class="plain">He jokes about <strong>silent letters</strong>: letters we write but never say.</span>';
+      document.getElementById('so2-talk').classList.remove('hide');
+    });
+  })();
+  </script>
+</div>
+<hr><div id="so3">
+  <style>
+    #so3{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #so3 *{box-sizing:border-box;}
+    #so3 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #so3 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #so3 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #so3 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #so3 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #so3 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #so3 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #so3 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #so3 button:hover{background:#0f4a5c;}
+    #so3 button.ghost{background:transparent;color:var(--teal);}
+    #so3 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #so3 button:disabled{opacity:.45;cursor:default;}
+    #so3 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;}
+    #so3 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so3 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #so3 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #so3 .fb{font-weight:bold;margin-top:8px;font-size:16px;}
+    #so3 .fb.ok{color:var(--ok);} #so3 .fb.no{color:var(--no);}
+    #so3 .plain{font-weight:normal;color:var(--ink);}
+    #so3 input[type=text],#so3 textarea{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #so3 textarea{min-height:84px;resize:vertical;}
+    #so3 input[type=text]:focus,#so3 textarea:focus{outline:none;border-color:var(--teal);}
+    #so3 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);max-width:100%;}
+    #so3 select.ok{border-color:var(--ok);background:var(--ok-bg);} #so3 select.no{border-color:var(--no);background:var(--no-bg);}
+    #so3 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #so3 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #so3 .talk p{margin:0 0 6px;}
+    #so3 .note{font-size:14px;color:var(--muted);}
+    #so3 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;}
+    #so3 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center;font-weight:bold;font-size:19px;color:var(--teal);cursor:pointer;}
+    #so3 .card:hover{border-color:var(--teal);}
+    #so3 .card.on{border-color:var(--terra);background:var(--terra-bg);color:var(--terra);}
+    #so3 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #so3 .item:first-child{border-top:none;}
+    #so3 .item > b{color:var(--teal);}
+    #so3 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #so3 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #so3 .letters{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;}
+    #so3 .letters button{min-width:38px;padding:8px 0;font-size:20px;font-family:"Courier New",monospace;background:#fff;color:var(--ink);border-color:var(--line);}
+    #so3 .letters button:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so3 .letters button.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);opacity:1;}
+    #so3 .letters button.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #so3 .words span.w{cursor:pointer;padding:2px 3px;border-radius:5px;border:2px solid transparent;}
+    #so3 .words span.w:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #so3 .words.done span.w{cursor:default;} #so3 .words.done span.w:hover{border-color:transparent;background:none;}
+    #so3 span.w.no{background:var(--no-bg)!important;border-color:var(--no)!important;color:var(--no);text-decoration:line-through;}
+    #so3 span.w.ok{background:var(--ok-bg)!important;border-color:var(--ok)!important;color:var(--ok);font-weight:bold;}
+    #so3 .diff{font-size:17px;line-height:2;}
+    #so3 .diff .lab{display:inline-block;min-width:80px;font-size:13px;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+    #so3 .diff del{background:var(--no-bg);color:var(--no);border-radius:4px;padding:1px 3px;}
+    #so3 .diff ins{background:var(--ok-bg);color:var(--ok);text-decoration:none;font-weight:bold;border-radius:4px;padding:1px 3px;}
+    #so3 .resp{font-family:"Courier New",monospace;font-size:19px;font-weight:bold;color:var(--terra);}
+    #so3 .play{padding:6px 12px;font-size:15px;}
+    #so3 .hide{display:none;}
+  </style>
+
+  <h1>Silent Letter Day</h1>
+  <p class="sub">The comedian imagines a special day to celebrate silent letters. Every idea he has uses words <em>with</em> silent letters. Guess his ideas first.</p>
+  <div class="panel" id="so3-p"><div class="item"><b>A</b><div>When will people celebrate it?<input type="text" data-i="0" autocomplete="off"></div></div><div class="item"><b>B</b><div>What will people do?<input type="text" data-i="1" autocomplete="off"></div></div><div class="item"><b>C</b><div>What food and drinks will there be?<input type="text" data-i="2" autocomplete="off"></div></div><div class="item"><b>D</b><div>What creature will be the symbol of the day?<input type="text" data-i="3" autocomplete="off"></div></div>
+    <div class="btns"><button id="so3-lock">Lock my guesses</button></div>
+  </div>
+
+  <div class="hide" id="so3-watch">
+    <p class="sub" style="margin-top:14px">Now watch from <strong>01:32</strong> to the end and check.</p>
+    <div class="video"><iframe id="so3-yt" src="" title="Stand-up comedy clip, part 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+    <div class="btns"><button id="so3-reveal">Reveal the answers</button></div>
+    <div class="panel hide" id="so3-ans" style="margin-top:12px"></div>
+  </div>
+
+  <div class="hide" id="so3-tap">
+    <h1 style="margin-top:26px">Find the silent letter</h1>
+    <p class="sub">All fifteen words are from the video. Tap the <strong>consonant</strong> you do not hear. One tap per word.</p>
+    <div class="panel" id="so3-w"><div class="item" data-w="0"><b>1</b><div><div class="letters"><button data-l="0">W</button><button data-l="1">e</button><button data-l="2">d</button><button data-l="3">n</button><button data-l="4">e</button><button data-l="5">s</button><button data-l="6">d</button><button data-l="7">a</button><button data-l="8">y</button></div><div class="fb"></div></div></div><div class="item" data-w="1"><b>2</b><div><div class="letters"><button data-l="0">a</button><button data-l="1">u</button><button data-l="2">t</button><button data-l="3">u</button><button data-l="4">m</button><button data-l="5">n</button></div><div class="fb"></div></div></div><div class="item" data-w="2"><b>3</b><div><div class="letters"><button data-l="0">F</button><button data-l="1">e</button><button data-l="2">b</button><button data-l="3">r</button><button data-l="4">u</button><button data-l="5">a</button><button data-l="6">r</button><button data-l="7">y</button></div><div class="fb"></div></div></div><div class="item" data-w="3"><b>4</b><div><div class="letters"><button data-l="0">t</button><button data-l="1">a</button><button data-l="2">l</button><button data-l="3">k</button><button data-l="4">i</button><button data-l="5">n</button><button data-l="6">g</button></div><div class="fb"></div></div></div><div class="item" data-w="4"><b>5</b><div><div class="letters"><button data-l="0">w</button><button data-l="1">a</button><button data-l="2">l</button><button data-l="3">k</button><button data-l="4">i</button><button data-l="5">n</button><button data-l="6">g</button></div><div class="fb"></div></div></div><div class="item" data-w="5"><b>6</b><div><div class="letters"><button data-l="0">c</button><button data-l="1">l</button><button data-l="2">i</button><button data-l="3">m</button><button data-l="4">b</button><button data-l="5">i</button><button data-l="6">n</button><button data-l="7">g</button></div><div class="fb"></div></div></div><div class="item" data-w="6"><b>7</b><div><div class="letters"><button data-l="0">k</button><button data-l="1">n</button><button data-l="2">i</button><button data-l="3">t</button><button data-l="4">t</button><button data-l="5">i</button><button data-l="6">n</button><button data-l="7">g</button></div><div class="fb"></div></div></div><div class="item" data-w="7"><b>8</b><div><div class="letters"><button data-l="0">b</button><button data-l="1">u</button><button data-l="2">f</button><button data-l="3">f</button><button data-l="4">e</button><button data-l="5">t</button></div><div class="fb"></div></div></div><div class="item" data-w="8"><b>9</b><div><div class="letters"><button data-l="0">s</button><button data-l="1">a</button><button data-l="2">l</button><button data-l="3">m</button><button data-l="4">o</button><button data-l="5">n</button></div><div class="fb"></div></div></div><div class="item" data-w="9"><b>10</b><div><div class="letters"><button data-l="0">s</button><button data-l="1">w</button><button data-l="2">o</button><button data-l="3">r</button><button data-l="4">d</button><button data-l="5">f</button><button data-l="6">i</button><button data-l="7">s</button><button data-l="8">h</button></div><div class="fb"></div></div></div><div class="item" data-w="10"><b>11</b><div><div class="letters"><button data-l="0">s</button><button data-l="1">a</button><button data-l="2">n</button><button data-l="3">d</button><button data-l="4">w</button><button data-l="5">i</button><button data-l="6">c</button><button data-l="7">h</button><button data-l="8">e</button><button data-l="9">s</button></div><div class="fb"></div></div></div><div class="item" data-w="11"><b>12</b><div><div class="letters"><button data-l="0">y</button><button data-l="1">o</button><button data-l="2">g</button><button data-l="3">h</button><button data-l="4">u</button><button data-l="5">r</button><button data-l="6">t</button></div><div class="fb"></div></div></div><div class="item" data-w="12"><b>13</b><div><div class="letters"><button data-l="0">s</button><button data-l="1">u</button><button data-l="2">b</button><button data-l="3">t</button><button data-l="4">l</button><button data-l="5">e</button></div><div class="fb"></div></div></div><div class="item" data-w="13"><b>14</b><div><div class="letters"><button data-l="0">g</button><button data-l="1">n</button><button data-l="2">o</button><button data-l="3">m</button><button data-l="4">e</button></div><div class="fb"></div></div></div><div class="item" data-w="14"><b>15</b><div><div class="letters"><button data-l="0">c</button><button data-l="1">h</button><button data-l="2">a</button><button data-l="3">m</button><button data-l="4">p</button><button data-l="5">a</button><button data-l="6">g</button><button data-l="7">n</button><button data-l="8">e</button></div><div class="fb"></div></div></div></div>
+    <div class="score" id="so3-score"></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var p=document.getElementById('so3-p'); if(!p) return;
+    var A=[["on a Wednesday, sometime in the autumn, or maybe in February", "01:44"], ["talking, walking, climbing and knitting", "02:04"], ["a buffet with salmon, swordfish, sandwiches and yoghurt, all very subtle flavours; and champagne", "02:30, 03:51"], ["the gnome", "02:53"]], W=[2, 5, 3, 2, 2, 4, 0, 5, 2, 1, 3, 3, 2, 0, 6], done=0, right=0;
+    document.getElementById('so3-lock').addEventListener('click',function(){
+      var ins=p.querySelectorAll('input'); for(var i=0;i<ins.length;i++) ins[i].readOnly=true;
+      this.disabled=true; this.textContent='Guesses locked';
+      document.getElementById('so3-yt').src='https://www.youtube.com/embed/BrJv_wUEKko?rel=0&start=92';
+      document.getElementById('so3-watch').classList.remove('hide');
+    });
+    document.getElementById('so3-reveal').addEventListener('click',function(){
+      var ins=p.querySelectorAll('input'), h='<h2 style="margin-top:0">What he suggests</h2>';
+      for(var i=0;i<A.length;i++){
+        var v=ins[i].value.trim().replace(/</g,'&lt;');
+        h+='<div class="item"><b>'+'ABCD'[i]+'</b><div><strong>'+A[i][0]+'</strong> <span class="note">['+A[i][1]+']</span>'+(v?'<br><span class="note">You guessed: '+v+'</span>':'')+'</div></div>';
+      }
+      var a=document.getElementById('so3-ans'); a.innerHTML=h; a.classList.remove('hide'); this.disabled=true;
+      document.getElementById('so3-tap').classList.remove('hide');
+    });
+    var box=document.getElementById('so3-w');
+    box.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b||b.disabled) return;
+      var it=b.closest('.item'), k=W[+it.getAttribute('data-w')], l=+b.getAttribute('data-l');
+      var bs=it.querySelectorAll('button'); for(var j=0;j<bs.length;j++) bs[j].disabled=true;
+      bs[k].className='ok'; if(l!==k) b.className='no';
+      done++; if(l===k) right++;
+      var fb=it.querySelector('.fb'); fb.className='fb '+(l===k?'ok':'no');
+      fb.textContent=l===k?'Yes, the '+bs[k].textContent+' is silent.':'You tapped '+b.textContent+'. The silent one is '+bs[k].textContent+'.';
+      document.getElementById('so3-score').textContent=right+' of '+done+(done===W.length?'. Which one surprised you?':'');
+    });
+  })();
+  </script>
+</div>
+<hr><div id="so4">
+  <style>
+    #so4{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #so4 *{box-sizing:border-box;}
+    #so4 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #so4 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #so4 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #so4 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #so4 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #so4 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #so4 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #so4 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #so4 button:hover{background:#0f4a5c;}
+    #so4 button.ghost{background:transparent;color:var(--teal);}
+    #so4 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #so4 button:disabled{opacity:.45;cursor:default;}
+    #so4 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;}
+    #so4 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so4 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #so4 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #so4 .fb{font-weight:bold;margin-top:8px;font-size:16px;}
+    #so4 .fb.ok{color:var(--ok);} #so4 .fb.no{color:var(--no);}
+    #so4 .plain{font-weight:normal;color:var(--ink);}
+    #so4 input[type=text],#so4 textarea{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #so4 textarea{min-height:84px;resize:vertical;}
+    #so4 input[type=text]:focus,#so4 textarea:focus{outline:none;border-color:var(--teal);}
+    #so4 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);max-width:100%;}
+    #so4 select.ok{border-color:var(--ok);background:var(--ok-bg);} #so4 select.no{border-color:var(--no);background:var(--no-bg);}
+    #so4 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #so4 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #so4 .talk p{margin:0 0 6px;}
+    #so4 .note{font-size:14px;color:var(--muted);}
+    #so4 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;}
+    #so4 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center;font-weight:bold;font-size:19px;color:var(--teal);cursor:pointer;}
+    #so4 .card:hover{border-color:var(--teal);}
+    #so4 .card.on{border-color:var(--terra);background:var(--terra-bg);color:var(--terra);}
+    #so4 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #so4 .item:first-child{border-top:none;}
+    #so4 .item > b{color:var(--teal);}
+    #so4 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #so4 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #so4 .letters{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;}
+    #so4 .letters button{min-width:38px;padding:8px 0;font-size:20px;font-family:"Courier New",monospace;background:#fff;color:var(--ink);border-color:var(--line);}
+    #so4 .letters button:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so4 .letters button.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);opacity:1;}
+    #so4 .letters button.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #so4 .words span.w{cursor:pointer;padding:2px 3px;border-radius:5px;border:2px solid transparent;}
+    #so4 .words span.w:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #so4 .words.done span.w{cursor:default;} #so4 .words.done span.w:hover{border-color:transparent;background:none;}
+    #so4 span.w.no{background:var(--no-bg)!important;border-color:var(--no)!important;color:var(--no);text-decoration:line-through;}
+    #so4 span.w.ok{background:var(--ok-bg)!important;border-color:var(--ok)!important;color:var(--ok);font-weight:bold;}
+    #so4 .diff{font-size:17px;line-height:2;}
+    #so4 .diff .lab{display:inline-block;min-width:80px;font-size:13px;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+    #so4 .diff del{background:var(--no-bg);color:var(--no);border-radius:4px;padding:1px 3px;}
+    #so4 .diff ins{background:var(--ok-bg);color:var(--ok);text-decoration:none;font-weight:bold;border-radius:4px;padding:1px 3px;}
+    #so4 .resp{font-family:"Courier New",monospace;font-size:19px;font-weight:bold;color:var(--terra);}
+    #so4 .play{padding:6px 12px;font-size:15px;}
+    #so4 .hide{display:none;}
+  </style>
+
+  <h1>Why is English like this?</h1>
+  <p class="sub">Eight claims about silent letters. Some are true, some are myths. Talk to your partner, then decide.</p>
+  <div class="panel" id="so4-l"></div>
+  <div class="score" id="so4-score"></div>
+  <div class="hide" id="so4-talk">
+    <h2>Then talk</h2>
+    <div class="q"><b>1</b><span>Did you find the video funny? Why, or why not?</span></div>
+    <div class="q"><b>2</b><span>Are there silent letters in French? Give as many examples as you can in one minute.</span></div>
+    <div class="q"><b>3</b><span>If a comedian made a routine about French spelling, what would they mention?</span></div>
+    <div class="q"><b>4</b><span>What tricks do you use to remember how to spell or pronounce a difficult English word?</span></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var D=[{"s": "The <b>b</b> in <em>debt</em> was added on purpose, by scholars who wanted to show the word came from Latin <em>debitum</em>.", "k": 1, "w": "Nobody ever pronounced it. The word came into English from French <em>dette</em>, and scholars later slipped the b in to honour the Latin.", "src": "Merriam-Webster, <em>Why is 'debt' spelled like that?</em>"}, {"s": "The <b>s</b> in <em>island</em> used to be pronounced.", "k": 0, "w": "Never. The Old English word was <em>&iacute;gland</em>, with no s. In the 1500s people wrongly linked it to <em>isle</em> (from French and Latin) and added the s.", "src": "Etymonline, <em>island</em>"}, {"s": "The <b>k</b> in <em>knight</em> used to be pronounced.", "k": 1, "w": "In Old and Middle English it was a real k: <em>cniht</em>. It went quiet around the 1400s.", "src": "Etymonline, <em>knight</em>"}, {"s": "The <b>gh</b> in <em>night</em> was once a real sound, like the <em>ch</em> in German <em>Nacht</em>.", "k": 1, "w": "Scribes wrote gh for that rough h sound. The sound disappeared; the spelling stayed.", "src": "Etymonline, <em>night</em> and <em>fight</em>"}, {"s": "We say <em>colonel</em> like &ldquo;kernel&rdquo; because English first borrowed it from French as <em>coronel</em>.", "k": 1, "w": "In 1548 it arrived as <em>coronel</em>, with an r. The spelling later went back to the Italian l. The r pronunciation stayed.", "src": "Merriam-Webster; Grammarphobia"}, {"s": "The writer George Bernard Shaw invented <em>ghoti</em> (gh as in <em>enough</em>, o as in <em>women</em>, ti as in <em>nation</em> = fish) to show that English spelling is mad.", "k": 0, "w": "It appears in a letter from 1855, by Charles Ollier. Shaw was born in 1856. Nobody has found it in anything Shaw wrote.", "src": "Language Log, <em>&ldquo;Ghoti&rdquo; before Shaw</em>"}, {"s": "If a letter is silent, it has no job.", "k": 0, "w": "Silent e changes the vowel before it: <em>hat / hate</em>, <em>bit / bite</em>, <em>not / note</em>. It is silent and very busy.", "src": "any English spelling guide"}, {"s": "All of English's silent letters come from French.", "k": 0, "w": "<em>Knight</em>, <em>knife</em>, <em>write</em> and <em>night</em> are old Germanic words, English long before French arrived.", "src": "Etymonline, <em>knight</em>"}], box=document.getElementById('so4-l'), sc=document.getElementById('so4-score'); if(!box) return;
+    var N=['MYTH','FACT'], order=[], done=0, right=0;
+    for(var i=0;i<D.length;i++) order.push(i);
+    for(var i=order.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=order[i]; order[i]=order[j]; order[j]=t; }
+    var h=''; for(var n=0;n<order.length;n++) h+='<div class="item" data-q="'+order[n]+'"><b>'+(n+1)+'</b><div>'+D[order[n]].s+'<div class="btns"><button class="choice" data-v="1">Fact</button><button class="choice" data-v="0">Myth</button></div><div class="fb"></div></div></div>';
+    box.innerHTML=h;
+    box.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b||b.disabled) return;
+      var it=b.closest('.item'), d=D[+it.getAttribute('data-q')], v=+b.getAttribute('data-v'), ok=v===d.k;
+      var bs=it.querySelectorAll('button'); for(var k=0;k<bs.length;k++){ bs[k].disabled=true; if(+bs[k].getAttribute('data-v')===d.k) bs[k].className='choice ok'; }
+      if(!ok) b.className='choice no'; done++; if(ok) right++;
+      var fb=it.querySelector('.fb'); fb.className='fb '+(ok?'ok':'no');
+      fb.innerHTML=(ok?'Yes, ':'You said '+N[v]+'. It is a ')+N[d.k]+'. <span class="plain">'+d.w+'</span><br><span class="note" style="font-weight:normal">Source: '+d.src+'</span>';
+      sc.textContent=right+' right out of '+done;
+      if(done===D.length) document.getElementById('so4-talk').classList.remove('hide');
+    });
+  })();
+  </script>
+</div>
+<hr><div id="so5">
+  <style>
+    #so5{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #so5 *{box-sizing:border-box;}
+    #so5 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #so5 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #so5 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #so5 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #so5 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #so5 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #so5 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #so5 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #so5 button:hover{background:#0f4a5c;}
+    #so5 button.ghost{background:transparent;color:var(--teal);}
+    #so5 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #so5 button:disabled{opacity:.45;cursor:default;}
+    #so5 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;}
+    #so5 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so5 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #so5 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #so5 .fb{font-weight:bold;margin-top:8px;font-size:16px;}
+    #so5 .fb.ok{color:var(--ok);} #so5 .fb.no{color:var(--no);}
+    #so5 .plain{font-weight:normal;color:var(--ink);}
+    #so5 input[type=text],#so5 textarea{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #so5 textarea{min-height:84px;resize:vertical;}
+    #so5 input[type=text]:focus,#so5 textarea:focus{outline:none;border-color:var(--teal);}
+    #so5 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);max-width:100%;}
+    #so5 select.ok{border-color:var(--ok);background:var(--ok-bg);} #so5 select.no{border-color:var(--no);background:var(--no-bg);}
+    #so5 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #so5 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #so5 .talk p{margin:0 0 6px;}
+    #so5 .note{font-size:14px;color:var(--muted);}
+    #so5 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;}
+    #so5 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center;font-weight:bold;font-size:19px;color:var(--teal);cursor:pointer;}
+    #so5 .card:hover{border-color:var(--teal);}
+    #so5 .card.on{border-color:var(--terra);background:var(--terra-bg);color:var(--terra);}
+    #so5 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #so5 .item:first-child{border-top:none;}
+    #so5 .item > b{color:var(--teal);}
+    #so5 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #so5 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #so5 .letters{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;}
+    #so5 .letters button{min-width:38px;padding:8px 0;font-size:20px;font-family:"Courier New",monospace;background:#fff;color:var(--ink);border-color:var(--line);}
+    #so5 .letters button:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so5 .letters button.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);opacity:1;}
+    #so5 .letters button.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #so5 .words span.w{cursor:pointer;padding:2px 3px;border-radius:5px;border:2px solid transparent;}
+    #so5 .words span.w:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #so5 .words.done span.w{cursor:default;} #so5 .words.done span.w:hover{border-color:transparent;background:none;}
+    #so5 span.w.no{background:var(--no-bg)!important;border-color:var(--no)!important;color:var(--no);text-decoration:line-through;}
+    #so5 span.w.ok{background:var(--ok-bg)!important;border-color:var(--ok)!important;color:var(--ok);font-weight:bold;}
+    #so5 .diff{font-size:17px;line-height:2;}
+    #so5 .diff .lab{display:inline-block;min-width:80px;font-size:13px;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+    #so5 .diff del{background:var(--no-bg);color:var(--no);border-radius:4px;padding:1px 3px;}
+    #so5 .diff ins{background:var(--ok-bg);color:var(--ok);text-decoration:none;font-weight:bold;border-radius:4px;padding:1px 3px;}
+    #so5 .resp{font-family:"Courier New",monospace;font-size:19px;font-weight:bold;color:var(--terra);}
+    #so5 .play{padding:6px 12px;font-size:15px;}
+    #so5 .hide{display:none;}
+  </style>
+
+  <h1>Dictation</h1>
+  <p class="sub">Your teacher reads three sentences, twice each. Type what you hear. Some of the words are famous for being hard to spell. Do your best, then check.</p>
+  <div class="panel" id="so5-p"><div class="item"><b>A</b><div><textarea data-i="0" autocomplete="off" spellcheck="false"></textarea><div class="res"></div></div></div><div class="item"><b>B</b><div><textarea data-i="1" autocomplete="off" spellcheck="false"></textarea><div class="res"></div></div></div><div class="item"><b>C</b><div><textarea data-i="2" autocomplete="off" spellcheck="false"></textarea><div class="res"></div></div></div>
+    <div class="btns"><button id="so5-check">Check my sentences</button></div>
+    <p class="note">Spell-check is off on purpose. Capitals and punctuation do not count.</p>
+  </div>
+  <div class="score" id="so5-score"></div>
+
+
+  <script>
+  (function(){
+    var box=document.getElementById('so5-p'); if(!box) return;
+    var D=["The colonel and his clever lieutenant planned a secret coup, with a clever mnemonic to remember every rule.", "At her grand debut, she danced gracefully through every genre, but then dropped the bouquet of flowers: a tiny faux pas the audience talked about for hours.", "Filled with ennui, I watched a buoy by the bay, spilling Worcestershire sauce in my tray and sighing, 'What a day!'"], T=["colonel", "lieutenant", "coup", "mnemonic", "debut", "genre", "bouquet", "faux", "pas", "ennui", "buoy", "worcestershire"], locked=false;
+    function toks(s){ return (s.toLowerCase().replace(/[’‘]/g,"'").match(/[a-z']+/g)||[]).map(function(t){return t.replace(/^'+|'+$/g,'');}).filter(Boolean); }
+    function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function lcs(a,b){
+      var m=a.length,n=b.length,L=[],i,j; for(i=0;i<=m;i++){ L.push(new Array(n+1).fill(0)); }
+      for(i=m-1;i>=0;i--) for(j=n-1;j>=0;j--) L[i][j]=a[i]===b[j]?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+      var ka={},kb={}; i=0;j=0; while(i<m&&j<n){ if(a[i]===b[j]){ka[i]=1;kb[j]=1;i++;j++;} else if(L[i+1][j]>=L[i][j+1]) i++; else j++; }
+      return [ka,kb];
+    }
+    document.getElementById('so5-check').addEventListener('click',function(){
+      if(locked) return; locked=true; this.disabled=true; this.textContent='Checked';
+      var tas=box.querySelectorAll('textarea'), totalT=0, gotT=0;
+      for(var i=0;i<tas.length;i++){
+        tas[i].readOnly=true;
+        var you=toks(tas[i].value), ref=toks(D[i]), m=lcs(you,ref), a=m[0], b=m[1], y='', r='';
+        for(var k=0;k<you.length;k++) y+=(a[k]?esc(you[k]):'<del>'+esc(you[k])+'</del>')+' ';
+        for(var k=0;k<ref.length;k++){
+          var tgt=T.indexOf(ref[k])>=0; if(tgt){ totalT++; if(b[k]) gotT++; }
+          r+=(b[k]?(tgt?'<strong>'+esc(ref[k])+'</strong>':esc(ref[k])):'<ins>'+esc(ref[k])+'</ins>')+' ';
+        }
+        tas[i].parentNode.querySelector('.res').innerHTML='<div class="diff" style="margin-top:8px"><div><span class="lab">You</span> '+(you.length?y:'<span class="note">(nothing typed)</span>')+'</div><div><span class="lab">Correct</span> '+r+'</div></div>';
+      }
+      document.getElementById('so5-score').textContent='The hard words: '+gotT+' of '+totalT+' spelled right. Red is what you wrote; green is what was missing or different.';
+    });
+  })();
+  </script>
+</div>
+<hr><div id="so6">
+  <style>
+    #so6{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #so6 *{box-sizing:border-box;}
+    #so6 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #so6 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #so6 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #so6 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #so6 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #so6 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #so6 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #so6 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #so6 button:hover{background:#0f4a5c;}
+    #so6 button.ghost{background:transparent;color:var(--teal);}
+    #so6 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #so6 button:disabled{opacity:.45;cursor:default;}
+    #so6 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;}
+    #so6 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so6 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #so6 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #so6 .fb{font-weight:bold;margin-top:8px;font-size:16px;}
+    #so6 .fb.ok{color:var(--ok);} #so6 .fb.no{color:var(--no);}
+    #so6 .plain{font-weight:normal;color:var(--ink);}
+    #so6 input[type=text],#so6 textarea{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #so6 textarea{min-height:84px;resize:vertical;}
+    #so6 input[type=text]:focus,#so6 textarea:focus{outline:none;border-color:var(--teal);}
+    #so6 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);max-width:100%;}
+    #so6 select.ok{border-color:var(--ok);background:var(--ok-bg);} #so6 select.no{border-color:var(--no);background:var(--no-bg);}
+    #so6 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #so6 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #so6 .talk p{margin:0 0 6px;}
+    #so6 .note{font-size:14px;color:var(--muted);}
+    #so6 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;}
+    #so6 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center;font-weight:bold;font-size:19px;color:var(--teal);cursor:pointer;}
+    #so6 .card:hover{border-color:var(--teal);}
+    #so6 .card.on{border-color:var(--terra);background:var(--terra-bg);color:var(--terra);}
+    #so6 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #so6 .item:first-child{border-top:none;}
+    #so6 .item > b{color:var(--teal);}
+    #so6 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #so6 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #so6 .letters{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;}
+    #so6 .letters button{min-width:38px;padding:8px 0;font-size:20px;font-family:"Courier New",monospace;background:#fff;color:var(--ink);border-color:var(--line);}
+    #so6 .letters button:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so6 .letters button.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);opacity:1;}
+    #so6 .letters button.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #so6 .words span.w{cursor:pointer;padding:2px 3px;border-radius:5px;border:2px solid transparent;}
+    #so6 .words span.w:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #so6 .words.done span.w{cursor:default;} #so6 .words.done span.w:hover{border-color:transparent;background:none;}
+    #so6 span.w.no{background:var(--no-bg)!important;border-color:var(--no)!important;color:var(--no);text-decoration:line-through;}
+    #so6 span.w.ok{background:var(--ok-bg)!important;border-color:var(--ok)!important;color:var(--ok);font-weight:bold;}
+    #so6 .diff{font-size:17px;line-height:2;}
+    #so6 .diff .lab{display:inline-block;min-width:80px;font-size:13px;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+    #so6 .diff del{background:var(--no-bg);color:var(--no);border-radius:4px;padding:1px 3px;}
+    #so6 .diff ins{background:var(--ok-bg);color:var(--ok);text-decoration:none;font-weight:bold;border-radius:4px;padding:1px 3px;}
+    #so6 .resp{font-family:"Courier New",monospace;font-size:19px;font-weight:bold;color:var(--terra);}
+    #so6 .play{padding:6px 12px;font-size:15px;}
+    #so6 .hide{display:none;}
+  </style>
+
+  <h1>The French trap</h1>
+  <p class="sub">These are the hard words from the dictation. First, match each one to its meaning.</p>
+  <div class="panel" id="so6m"><div class="item"><b>1</b><div>a style of art, music, literature or film with particular characteristics<br><select data-n="0"><option value="">choose the word</option><option value="5">bouquet</option><option value="9">buoy</option><option value="0">colonel</option><option value="2">coup</option><option value="3">debut</option><option value="7">ennui</option><option value="6">faux pas</option><option value="4">genre</option><option value="1">lieutenant</option><option value="8">mnemonic</option><option value="10">Worcestershire sauce</option></select></div></div><div class="item"><b>2</b><div>a floating marker in the water that guides boats<br><select data-n="1"><option value="">choose the word</option><option value="5">bouquet</option><option value="9">buoy</option><option value="0">colonel</option><option value="2">coup</option><option value="3">debut</option><option value="7">ennui</option><option value="6">faux pas</option><option value="4">genre</option><option value="1">lieutenant</option><option value="8">mnemonic</option><option value="10">Worcestershire sauce</option></select></div></div><div class="item"><b>3</b><div>a military officer of high rank, below a general<br><select data-n="2"><option value="">choose the word</option><option value="5">bouquet</option><option value="9">buoy</option><option value="0">colonel</option><option value="2">coup</option><option value="3">debut</option><option value="7">ennui</option><option value="6">faux pas</option><option value="4">genre</option><option value="1">lieutenant</option><option value="8">mnemonic</option><option value="10">Worcestershire sauce</option></select></div></div><div class="item"><b>4</b><div>a feeling of boredom and dissatisfaction<br><select data-n="3"><option value="">choose the word</option><option value="5">bouquet</option><option value="9">buoy</option><option value="0">colonel</option><option value="2">coup</option><option value="3">debut</option><option value="7">ennui</option><option value="6">faux pas</option><option value="4">genre</option><option value="1">lieutenant</option><option value="8">mnemonic</option><option value="10">Worcestershire sauce</option></select></div></div><div class="item"><b>5</b><div>a sudden, illegal seizure of government power, usually by the military<br><select data-n="4"><option value="">choose the word</option><option value="5">bouquet</option><option value="9">buoy</option><option value="0">colonel</option><option value="2">coup</option><option value="3">debut</option><option value="7">ennui</option><option value="6">faux pas</option><option value="4">genre</option><option value="1">lieutenant</option><option value="8">mnemonic</option><option value="10">Worcestershire sauce</option></select></div></div><div class="item"><b>6</b><div>a dark brown, thin sauce of vinegar, sugar and spices<br><select data-n="5"><option value="">choose the word</option><option value="5">bouquet</option><option value="9">buoy</option><option value="0">colonel</option><option value="2">coup</option><option value="3">debut</option><option value="7">ennui</option><option value="6">faux pas</option><option value="4">genre</option><option value="1">lieutenant</option><option value="8">mnemonic</option><option value="10">Worcestershire sauce</option></select></div></div><div class="item"><b>7</b><div>an attractively arranged group of flowers, given as a gift<br><select data-n="6"><option value="">choose the word</option><option value="5">bouquet</option><option value="9">buoy</option><option value="0">colonel</option><option value="2">coup</option><option value="3">debut</option><option value="7">ennui</option><option value="6">faux pas</option><option value="4">genre</option><option value="1">lieutenant</option><option value="8">mnemonic</option><option value="10">Worcestershire sauce</option></select></div></div><div class="item"><b>8</b><div>a military officer of middle rank<br><select data-n="7"><option value="">choose the word</option><option value="5">bouquet</option><option value="9">buoy</option><option value="0">colonel</option><option value="2">coup</option><option value="3">debut</option><option value="7">ennui</option><option value="6">faux pas</option><option value="4">genre</option><option value="1">lieutenant</option><option value="8">mnemonic</option><option value="10">Worcestershire sauce</option></select></div></div><div class="item"><b>9</b><div>a memory aid, such as a word, sentence or rhyme<br><select data-n="8"><option value="">choose the word</option><option value="5">bouquet</option><option value="9">buoy</option><option value="0">colonel</option><option value="2">coup</option><option value="3">debut</option><option value="7">ennui</option><option value="6">faux pas</option><option value="4">genre</option><option value="1">lieutenant</option><option value="8">mnemonic</option><option value="10">Worcestershire sauce</option></select></div></div><div class="item"><b>10</b><div>a person's first public appearance or performance<br><select data-n="9"><option value="">choose the word</option><option value="5">bouquet</option><option value="9">buoy</option><option value="0">colonel</option><option value="2">coup</option><option value="3">debut</option><option value="7">ennui</option><option value="6">faux pas</option><option value="4">genre</option><option value="1">lieutenant</option><option value="8">mnemonic</option><option value="10">Worcestershire sauce</option></select></div></div><div class="item"><b>11</b><div>embarrassing or tactless words or behaviour in a social situation<br><select data-n="10"><option value="">choose the word</option><option value="5">bouquet</option><option value="9">buoy</option><option value="0">colonel</option><option value="2">coup</option><option value="3">debut</option><option value="7">ennui</option><option value="6">faux pas</option><option value="4">genre</option><option value="1">lieutenant</option><option value="8">mnemonic</option><option value="10">Worcestershire sauce</option></select></div></div>
+    <div class="btns"><button id="so6-check">Check</button></div>
+    <div class="fb" id="so6-fb"></div>
+  </div>
+
+  <div class="hide" id="so6-sort">
+    <h1 style="margin-top:26px">Do they say it the French way?</h1>
+    <p class="sub">Eight of these words came from French. You know how to say them <em>in French</em>. But how does an English speaker say them? Guess, then listen.</p>
+    <div class="panel" id="so6s"></div>
+    <div class="score" id="so6-score"></div>
+  </div>
+
+  <div class="hide" id="so6-all">
+    <h2>All eleven, the English way</h2>
+    <p class="sub">Listen, then say each one to your partner.</p>
+    <div class="panel" id="so6a"></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var m=document.getElementById('so6m'); if(!m) return;
+    var D=[{"s": "colonel", "w": "colonel", "r": "KER-nl", "v": 2, "n": "Nothing like the French. It came in as <em>coronel</em>, hence the r (page 4)."}, {"s": "lieutenant", "w": "lieutenant", "r": "lef-TEN-ənt", "v": 2, "n": "British English says <em>lef</em>. Americans say <em>loo-TEN-ənt</em>. Nobody says it the French way."}, {"s": "coup", "w": "coup", "r": "KOO", "v": 0, "n": "Exactly the French: the p stays silent. Warning: many English speakers get this wrong."}, {"s": "debut", "w": "debut", "r": "DAY-byoo", "v": 1, "n": "The t stays silent, as in French. But the u becomes <em>you</em>, and the stress moves to the front."}, {"s": "genre", "w": "genre", "r": "ZHON-ruh", "v": 1, "n": "The French zh stays. The nasal vowel does not, and English adds a <em>ruh</em> at the end."}, {"s": "bouquet", "w": "bouquet", "r": "boo-KAY", "v": 0, "n": "Very close to French. Just stress the second part."}, {"s": "faux-pas", "w": "faux pas", "r": "foh-PAH", "v": 0, "n": "The French way, x and s both silent."}, {"s": "ennui", "w": "ennui", "r": "on-WEE", "v": 1, "n": "Recognisably French, but the nasal vowel turns into a plain <em>on</em>."}, {"s": "mnemonic", "w": "mnemonic", "r": "ni-MON-ik", "v": null, "n": "Greek, not French. The m is silent."}, {"s": "buoy", "w": "buoy", "r": "BOY", "v": null, "n": "British English: exactly like <em>boy</em>."}, {"s": "worcestershire-sauce", "w": "Worcestershire sauce", "r": "WUSS-tə-shə sauce", "v": null, "n": "An English county. Three letters silent in the middle, and <em>-shire</em> reduced to <em>shə</em>."}], O=[4, 9, 0, 7, 2, 10, 5, 1, 8, 3, 6], V=['the French way','halfway','the English way'], cur=null, locked=false;
+    function play(slug){ if(cur) cur.pause(); cur=new Audio('audio/'+slug+'.mp3'); cur.play(); }
+    function playBtn(slug){ return '<button class="ghost play" data-a="'+slug+'">&#9654; Listen</button>'; }
+    document.addEventListener('click',function(e){ var b=e.target.closest?e.target.closest('#so6 [data-a]'):null; if(b) play(b.getAttribute('data-a')); });
+    document.getElementById('so6-check').addEventListener('click',function(){
+      if(locked) return;
+      var ss=m.querySelectorAll('select'), r=0, blank=0;
+      for(var i=0;i<ss.length;i++){ if(ss[i].value===''){ blank++; continue; } }
+      if(blank){ var f=document.getElementById('so6-fb'); f.className='fb no'; f.textContent=blank+' still empty. Choose a word for each meaning.'; return; }
+      locked=true; this.disabled=true;
+      for(var i=0;i<ss.length;i++){
+        var want=O[+ss[i].getAttribute('data-n')], got=+ss[i].value, ok=got===want; ss[i].disabled=true;
+        ss[i].className=ok?'ok':'no'; if(ok) r++;
+        else { var n=document.createElement('div'); n.className='fb no'; n.innerHTML='You chose <em>'+D[got].w+'</em>. It is <strong>'+D[want].w+'</strong>.'; ss[i].parentNode.appendChild(n); }
+      }
+      var f=document.getElementById('so6-fb'); f.className='fb '+(r===ss.length?'ok':'no'); f.textContent=r+' of '+ss.length+'. Now the trap.';
+      buildSort();
+    });
+    function buildSort(){
+      var s=document.getElementById('so6s'), h='', n=0, done=0, right=0, total=0;
+      for(var i=0;i<D.length;i++){ if(D[i].v===null) continue; total++; n++;
+        h+='<div class="item" data-i="'+i+'"><b>'+n+'</b><div><strong style="font-size:20px">'+D[i].w+'</strong><div class="btns">'+
+           '<button class="choice" data-v="0">French way</button><button class="choice" data-v="1">Halfway</button><button class="choice" data-v="2">English way</button></div><div class="res"></div></div></div>'; }
+      s.innerHTML=h; document.getElementById('so6-sort').classList.remove('hide');
+      s.addEventListener('click',function(e){
+        var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||b.disabled) return;
+        var it=b.closest('.item'), d=D[+it.getAttribute('data-i')], v=+b.getAttribute('data-v'), ok=v===d.v;
+        var bs=it.querySelectorAll('button.choice'); for(var k=0;k<bs.length;k++){ bs[k].disabled=true; if(+bs[k].getAttribute('data-v')===d.v) bs[k].className='choice ok'; }
+        if(!ok) b.className='choice no'; done++; if(ok) right++;
+        it.querySelector('.res').innerHTML='<div class="fb '+(ok?'ok':'no')+'">'+(ok?'Yes: ':'You said '+V[v]+'. It is ')+V[d.v]+'.</div>'+
+          '<div class="btns"><span class="resp">'+d.r+'</span>'+playBtn(d.s)+'</div><div class="note" style="margin-top:6px">'+d.n+'</div>';
+        play(d.s);
+        document.getElementById('so6-score').textContent=right+' of '+done;
+        if(done===total) buildAll();
+      });
+    }
+    function buildAll(){
+      var a=document.getElementById('so6a'), h='';
+      for(var i=0;i<D.length;i++) h+='<div class="item"><b>'+(i+1)+'</b><div><strong>'+D[i].w+'</strong><div class="btns"><span class="resp">'+D[i].r+'</span>'+playBtn(D[i].s)+'</div></div></div>';
+      a.innerHTML=h; document.getElementById('so6-all').classList.remove('hide');
+    }
+  })();
+  </script>
+</div>
+<hr><div id="so7">
+  <style>
+    #so7{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #so7 *{box-sizing:border-box;}
+    #so7 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #so7 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #so7 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #so7 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #so7 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #so7 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #so7 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #so7 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #so7 button:hover{background:#0f4a5c;}
+    #so7 button.ghost{background:transparent;color:var(--teal);}
+    #so7 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #so7 button:disabled{opacity:.45;cursor:default;}
+    #so7 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;}
+    #so7 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so7 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #so7 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #so7 .fb{font-weight:bold;margin-top:8px;font-size:16px;}
+    #so7 .fb.ok{color:var(--ok);} #so7 .fb.no{color:var(--no);}
+    #so7 .plain{font-weight:normal;color:var(--ink);}
+    #so7 input[type=text],#so7 textarea{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #so7 textarea{min-height:84px;resize:vertical;}
+    #so7 input[type=text]:focus,#so7 textarea:focus{outline:none;border-color:var(--teal);}
+    #so7 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);max-width:100%;}
+    #so7 select.ok{border-color:var(--ok);background:var(--ok-bg);} #so7 select.no{border-color:var(--no);background:var(--no-bg);}
+    #so7 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #so7 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #so7 .talk p{margin:0 0 6px;}
+    #so7 .note{font-size:14px;color:var(--muted);}
+    #so7 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;}
+    #so7 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center;font-weight:bold;font-size:19px;color:var(--teal);cursor:pointer;}
+    #so7 .card:hover{border-color:var(--teal);}
+    #so7 .card.on{border-color:var(--terra);background:var(--terra-bg);color:var(--terra);}
+    #so7 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #so7 .item:first-child{border-top:none;}
+    #so7 .item > b{color:var(--teal);}
+    #so7 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #so7 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #so7 .letters{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;}
+    #so7 .letters button{min-width:38px;padding:8px 0;font-size:20px;font-family:"Courier New",monospace;background:#fff;color:var(--ink);border-color:var(--line);}
+    #so7 .letters button:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so7 .letters button.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);opacity:1;}
+    #so7 .letters button.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #so7 .words span.w{cursor:pointer;padding:2px 3px;border-radius:5px;border:2px solid transparent;}
+    #so7 .words span.w:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #so7 .words.done span.w{cursor:default;} #so7 .words.done span.w:hover{border-color:transparent;background:none;}
+    #so7 span.w.no{background:var(--no-bg)!important;border-color:var(--no)!important;color:var(--no);text-decoration:line-through;}
+    #so7 span.w.ok{background:var(--ok-bg)!important;border-color:var(--ok)!important;color:var(--ok);font-weight:bold;}
+    #so7 .diff{font-size:17px;line-height:2;}
+    #so7 .diff .lab{display:inline-block;min-width:80px;font-size:13px;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+    #so7 .diff del{background:var(--no-bg);color:var(--no);border-radius:4px;padding:1px 3px;}
+    #so7 .diff ins{background:var(--ok-bg);color:var(--ok);text-decoration:none;font-weight:bold;border-radius:4px;padding:1px 3px;}
+    #so7 .resp{font-family:"Courier New",monospace;font-size:19px;font-weight:bold;color:var(--terra);}
+    #so7 .play{padding:6px 12px;font-size:15px;}
+    #so7 .hide{display:none;}
+  </style>
+
+  <h1>Find the mistake</h1>
+  <p class="sub">Each sentence has <strong>one</strong> spelling mistake, except two that are correct. Click the wrong word, or <strong>No mistake</strong>. One try each.</p>
+  <div class="panel" id="so7-l"><div class="item" data-i="0"><b>A</b><div><div class="words"><span class="w" data-k="0">A</span> <span class="w" data-k="1">coop</span> <span class="w" data-k="2">can</span> <span class="w" data-k="3">sometimes</span> <span class="w" data-k="4">be</span> <span class="w" data-k="5">justified</span> <span class="w" data-k="6">if</span> <span class="w" data-k="7">a</span> <span class="w" data-k="8">government</span> <span class="w" data-k="9">fails.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="1"><b>B</b><div><div class="words"><span class="w" data-k="0">Giving</span> <span class="w" data-k="1">a</span> <span class="w" data-k="2">bouquei</span> <span class="w" data-k="3">to</span> <span class="w" data-k="4">your</span> <span class="w" data-k="5">date</span> <span class="w" data-k="6">is</span> <span class="w" data-k="7">considered</span> <span class="w" data-k="8">outdated</span> <span class="w" data-k="9">today.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="2"><b>C</b><div><div class="words"><span class="w" data-k="0">Genres</span> <span class="w" data-k="1">are</span> <span class="w" data-k="2">unnecessary</span> <span class="w" data-k="3">labels</span> <span class="w" data-k="4">that</span> <span class="w" data-k="5">restrict</span> <span class="w" data-k="6">us</span> <span class="w" data-k="7">from</span> <span class="w" data-k="8">developing</span> <span class="w" data-k="9">new</span> <span class="w" data-k="10">tastes.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="3"><b>D</b><div><div class="words"><span class="w" data-k="0">Enniu</span> <span class="w" data-k="1">is</span> <span class="w" data-k="2">the</span> <span class="w" data-k="3">biggest</span> <span class="w" data-k="4">problem</span> <span class="w" data-k="5">of</span> <span class="w" data-k="6">modern</span> <span class="w" data-k="7">society.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="4"><b>E</b><div><div class="words"><span class="w" data-k="0">One</span> <span class="w" data-k="1">bad</span> <span class="w" data-k="2">foux</span> <span class="w" data-k="3">pas</span> <span class="w" data-k="4">can</span> <span class="w" data-k="5">outweigh</span> <span class="w" data-k="6">years</span> <span class="w" data-k="7">of</span> <span class="w" data-k="8">hard</span> <span class="w" data-k="9">work.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="5"><b>F</b><div><div class="words"><span class="w" data-k="0">Performers</span> <span class="w" data-k="1">shouldn't</span> <span class="w" data-k="2">be</span> <span class="w" data-k="3">judged</span> <span class="w" data-k="4">by</span> <span class="w" data-k="5">their</span> <span class="w" data-k="6">debues.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="6"><b>G</b><div><div class="words"><span class="w" data-k="0">Adding</span> <span class="w" data-k="1">strong</span> <span class="w" data-k="2">ingredients,</span> <span class="w" data-k="3">like</span> <span class="w" data-k="4">Wostershire</span> <span class="w" data-k="5">sauce,</span> <span class="w" data-k="6">only</span> <span class="w" data-k="7">overpowers</span> <span class="w" data-k="8">other</span> <span class="w" data-k="9">flavours.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="7"><b>H</b><div><div class="words"><span class="w" data-k="0">Mnemonics</span> <span class="w" data-k="1">don't</span> <span class="w" data-k="2">make</span> <span class="w" data-k="3">words</span> <span class="w" data-k="4">easier</span> <span class="w" data-k="5">to</span> <span class="w" data-k="6">learn;</span> <span class="w" data-k="7">they're</span> <span class="w" data-k="8">just</span> <span class="w" data-k="9">another</span> <span class="w" data-k="10">thing</span> <span class="w" data-k="11">to</span> <span class="w" data-k="12">remember.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="8"><b>I</b><div><div class="words"><span class="w" data-k="0">Bouys</span> <span class="w" data-k="1">rarely</span> <span class="w" data-k="2">facilitate</span> <span class="w" data-k="3">water</span> <span class="w" data-k="4">safety</span> <span class="w" data-k="5">as</span> <span class="w" data-k="6">people</span> <span class="w" data-k="7">usually</span> <span class="w" data-k="8">ignore</span> <span class="w" data-k="9">them.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div><div class="item" data-i="9"><b>J</b><div><div class="words"><span class="w" data-k="0">It's</span> <span class="w" data-k="1">difficult</span> <span class="w" data-k="2">to</span> <span class="w" data-k="3">go</span> <span class="w" data-k="4">from</span> <span class="w" data-k="5">lieuftenant</span> <span class="w" data-k="6">to</span> <span class="w" data-k="7">colonel</span> <span class="w" data-k="8">without</span> <span class="w" data-k="9">having</span> <span class="w" data-k="10">the</span> <span class="w" data-k="11">right</span> <span class="w" data-k="12">experience.</span> </div><div class="btns"><button class="ghost nomis">No mistake</button></div><div class="fb"></div></div></div></div>
+  <div class="score" id="so7-score"></div>
+  <div class="talk hide" id="so7-talk">
+    <p><strong>Now argue.</strong> Choose at least three of the sentences. Do you agree with them? Your partner has to disagree, whatever they really think.</p>
+  </div>
+
+
+  <script>
+  (function(){
+    var box=document.getElementById('so7-l'); if(!box) return;
+    var D=[{"k": 1, "c": "coup"}, {"k": 2, "c": "bouquet"}, {"k": -1, "c": ""}, {"k": 0, "c": "Ennui"}, {"k": 2, "c": "faux"}, {"k": 6, "c": "debuts"}, {"k": 4, "c": "Worcestershire"}, {"k": -1, "c": ""}, {"k": 0, "c": "Buoys"}, {"k": 5, "c": "lieutenant"}], done=0, right=0;
+    box.addEventListener('click',function(e){
+      var t=e.target; var it=t.closest?t.closest('.item'):null; if(!it||it.getAttribute('data-done')) return;
+      var isW=t.classList.contains('w'), isN=t.classList.contains('nomis'); if(!isW&&!isN) return;
+      it.setAttribute('data-done','1'); it.querySelector('.words').classList.add('done'); it.querySelector('.nomis').disabled=true;
+      var d=D[+it.getAttribute('data-i')], pick=isW?+t.getAttribute('data-k'):-1, ok=pick===d.k, ws=it.querySelectorAll('.w');
+      done++; if(ok) right++;
+      var fb=it.querySelector('.fb'); fb.className='fb '+(ok?'ok':'no');
+      if(d.k>=0){
+        var bad=ws[d.k]; bad.className='w '+(ok?'ok':'no');
+        if(!ok&&pick>=0) ws[pick].style.outline='2px dashed #b23a3a';
+        fb.innerHTML=(ok?'Yes. ':(pick<0?'You said no mistake. ':'You clicked <em>'+ws[pick].textContent+'</em>. '))+'<span class="plain"><del style="color:#b23a3a">'+bad.textContent.replace(/[.,;]$/,'')+'</del> &rarr; <strong style="color:#1f8a4c">'+d.c+'</strong></span>';
+      } else {
+        if(pick>=0) ws[pick].className='w no';
+        fb.innerHTML=ok?'Yes, this one is correct.':'You clicked <em>'+ws[pick].textContent+'</em>. <span class="plain">It is spelled right: this sentence has no mistake.</span>';
+      }
+      document.getElementById('so7-score').textContent=right+' of '+done;
+      if(done===D.length) document.getElementById('so7-talk').classList.remove('hide');
+    });
+  })();
+  </script>
+</div>
+</body></html>
