@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!--
+  Year 1 GEII - present simple vs present continuous, warm-up. Built 27 Sep 2026.
+  The point: they say they know this, so most items make them PRODUCE the form
+  (typed), not recognise it. The end screen scores each skill separately so the
+  student sees which one has gone rusty, rather than one flattering total.
+
+  Solo drill (classroom-game-hardening §6b): a wrong answer shows the student's own
+  answer struck through beside the correct one, plus the one-line rule. Answer locks
+  on first submit; nothing advances until "Next". No localStorage (§11).
+  No sentence here is reused from MiniEval_ME2_s4_present.gift, so the warm-up does
+  not pre-teach the graded items.
+  Typed answers: case, final punctuation, extra spaces and contractions are all
+  normalised (doesn't = does not, I'm = I am), curly or straight apostrophes.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Present Tenses Warm-up</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Trebuchet MS', Verdana, Arial, sans-serif;
+         background:linear-gradient(135deg,#e0f7fa 0%,#fff3e0 100%);
+         padding:20px; min-height:100vh; color:#1c2530; }
+  .container { max-width:760px; margin:0 auto; background:#fff; border-radius:20px;
+               padding:28px; box-shadow:0 10px 30px rgba(0,0,0,.18); }
+  h1 { text-align:center; color:#00897b; font-size:1.9em; margin-bottom:4px; }
+  .subtitle { text-align:center; color:#ff6f00; font-weight:bold; margin-bottom:18px; }
+  .statusbar { display:flex; justify-content:space-between; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
+  .chip { background:#00897b; color:#fff; padding:7px 14px; border-radius:10px; font-weight:bold; }
+  .chip.orange { background:#ff6f00; }
+  .card { background:#f5f5f5; border-radius:14px; padding:22px; margin-bottom:16px; }
+  .skill { font-size:.8em; text-transform:uppercase; letter-spacing:.08em; color:#00897b; font-weight:bold; margin-bottom:8px; }
+  .instr { color:#455a64; margin-bottom:10px; }
+  .stem { font-size:1.3em; line-height:1.5; margin-bottom:16px; }
+  .stem em { color:#e65100; font-style:normal; font-weight:bold; }
+  .opts { display:flex; flex-direction:column; gap:8px; }
+  .opt { text-align:left; background:#fff; border:3px solid #b0bec5; border-radius:10px; padding:12px 14px;
+         font-size:1.05em; cursor:pointer; font-family:inherit; }
+  .opt:hover:not(:disabled) { border-color:#00897b; }
+  .opt:disabled { cursor:default; }
+  .opt.right { border-color:#2e7d32; background:#e8f5e9; }
+  .opt.wrong { border-color:#c62828; background:#ffebee; text-decoration:line-through; }
+  input[type=text] { width:100%; padding:12px 14px; font-size:1.15em; border:3px solid #b0bec5;
+                     border-radius:10px; font-family:inherit; }
+  input[type=text]:focus { outline:none; border-color:#00897b; }
+  .buttons { display:flex; gap:12px; justify-content:center; margin-top:14px; flex-wrap:wrap; }
+  button.act { font-family:inherit; font-size:1em; font-weight:bold; padding:12px 26px; border:none;
+               border-radius:10px; cursor:pointer; color:#fff; }
+  .btn-primary { background:#00897b; } .btn-next { background:#2e7d32; display:none; }
+  button.act:disabled { opacity:.45; cursor:not-allowed; }
+  .fb { display:none; margin-top:14px; padding:12px 14px; border-radius:10px; line-height:1.5; }
+  .fb.show { display:block; }
+  .fb.ok { background:#e8f5e9; border:3px solid #2e7d32; color:#1b5e20; font-weight:bold; }
+  .fb.no { background:#fff3e0; border:3px solid #ff6f00; }
+  .row { display:flex; gap:8px; align-items:baseline; }
+  .tag { font-size:.7em; text-transform:uppercase; letter-spacing:.07em; min-width:62px; font-weight:bold; }
+  .yours { color:#b71c1c; text-decoration:line-through; }
+  .right-ans { color:#1b5e20; font-weight:bold; }
+  .rule { margin-top:8px; color:#37474f; font-size:.95em; }
+  .end { display:none; text-align:center; }
+  .end.show { display:block; }
+  .end table { margin:16px auto; border-collapse:collapse; }
+  .end td { padding:7px 16px; border-bottom:1px solid #cfd8dc; text-align:left; }
+  .end td.rusty { color:#c62828; font-weight:bold; }
+  .end td.fine { color:#2e7d32; font-weight:bold; }
+  .start p { line-height:1.6; margin-bottom:16px; text-align:center; }
+  @media (max-width:600px){ .container{padding:18px;} h1{font-size:1.5em;} .stem{font-size:1.1em;} }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Present Tenses: How Rusty Are You?</h1>
+  <div class="subtitle">Present simple &middot; present continuous &middot; 20 questions</div>
+
+  <div class="start" id="start">
+    <p>You know this. Prove it.<br>Most answers are <strong>typed</strong>: no choices to guess from.<br>
+    <em>Vous connaissez. Prouvez-le. La plupart des réponses sont à taper.</em></p>
+    <div class="buttons"><button class="act btn-primary" onclick="begin()">Start</button></div>
+  </div>
+
+  <div id="game" style="display:none">
+    <div class="statusbar">
+      <div class="chip" id="counter">1 / 20</div>
+      <div class="chip orange" id="scoreChip">0 correct</div>
+    </div>
+    <div class="card">
+      <div class="skill" id="skill"></div>
+      <div class="instr" id="instr"></div>
+      <div class="stem" id="stem"></div>
+      <div id="answerArea"></div>
+      <div class="buttons">
+        <button class="act btn-primary" id="checkBtn" onclick="check()">Check</button>
+        <button class="act btn-next" id="nextBtn" onclick="next()">Next &rarr;</button>
+      </div>
+      <div class="fb" id="fb"></div>
+    </div>
+  </div>
+
+  <div class="end" id="end">
+    <h2 style="color:#00897b">Your rust report</h2>
+    <p id="endLine" style="margin-top:8px"></p>
+    <table id="endTable"></table>
+    <div class="buttons"><button class="act btn-primary" onclick="location.reload()">Try again</button></div>
+  </div>
+</div>
+
+<script>
+// type: 'mcq' (opts, first = correct, shuffled at render) or 'type' (a = accepted answers)
+const SKILLS = {
+  when: 'Which tense?',
+  s:    'The third person -s',
+  neg:  'The negative',
+  q:    'The question',
+  err:  'Spot the mistake'
+};
+const ITEMS = [
+  {k:'when', t:'mcq', i:'Choose the right form.', s:'Our lab technician <em>___</em> the oscilloscopes every Friday.',
+   opts:['calibrates','is calibrating','calibrate'], r:'"Every Friday" is a routine: present simple, with the -s for he/she/it.'},
+  {k:'when', t:'mcq', i:'Choose the right form.', s:'Be quiet! The teacher <em>___</em> to the head of department.',
+   opts:['is talking','talks','talking'], r:'"Be quiet!" means it is happening now: present continuous (be + -ing).'},
+  {k:'when', t:'mcq', i:'Choose the right form.', s:'Water <em>___</em> at 100 degrees.',
+   opts:['boils','is boiling','boil'], r:'A fact that is always true: present simple.'},
+  {k:'when', t:'mcq', i:'Choose the right form.', s:'I can\'t come out, I <em>___</em> for my electronics test this week.',
+   opts:['am revising','revise','revising'], r:'"This week", temporary and in progress: present continuous.'},
+
+  {k:'s', t:'type', i:'Write the verb in the present simple.', s:'My brother <em>___</em> (fix) old bikes at the weekend.',
+   a:['fixes'], r:'After -x, -s, -sh, -ch, -o, add -es: fixes, watches, goes.'},
+  {k:'s', t:'type', i:'Write the verb in the present simple.', s:'The battery <em>___</em> (have) a capacity of 5000 mAh.',
+   a:['has'], r:'have becomes HAS with he/she/it. Never "haves".'},
+  {k:'s', t:'type', i:'Write the verb in the present simple.', s:'The conveyor belt <em>___</em> (carry) the boxes to the robot.',
+   a:['carries'], r:'Consonant + y: the y becomes -ies. carry, carries (but play, plays).'},
+  {k:'s', t:'type', i:'Write the verb in the present simple.', s:'She <em>___</em> (go) to the gym before class.',
+   a:['goes'], r:'go becomes GOES, do becomes DOES.'},
+  {k:'s', t:'type', i:'Write the verb in the present simple.', s:'The alarm <em>___</em> (switch) itself off after ten minutes.',
+   a:['switches'], r:'After -ch, add -es: switches. You hear the extra syllable: SWITCH-iz.'},
+
+  {k:'neg', t:'type', i:'Write the negative sentence.', s:'The printer works.',
+   a:['the printer does not work'], r:'Present simple negative: doesn\'t + BASE verb. The -s moves to does: it doesn\'t work (not "doesn\'t works").'},
+  {k:'neg', t:'type', i:'Write the negative sentence.', s:'Tom is using the soldering iron.',
+   a:['tom is not using the soldering iron'], r:'Present continuous negative: just add not after be. Tom isn\'t using.'},
+  {k:'neg', t:'type', i:'Write the negative sentence.', s:'They play rugby on Sundays.',
+   a:['they do not play rugby on sundays'], r:'I / you / we / they: don\'t + base verb.'},
+  {k:'neg', t:'type', i:'Write the negative sentence.', s:'I am sleeping.',
+   a:['i am not sleeping'], r:'I\'m not sleeping. Never "I amn\'t" and never "I don\'t sleeping".'},
+
+  {k:'q', t:'type', i:'Write the question.', s:'She speaks Spanish.',
+   a:['does she speak spanish'], r:'Does + subject + BASE verb. The -s has gone to does: Does she speak (not "Does she speaks").'},
+  {k:'q', t:'type', i:'Write the question.', s:'The motor is running.',
+   a:['is the motor running'], r:'Continuous: swap subject and be. The motor is → Is the motor...?'},
+  {k:'q', t:'type', i:'Write the question.', s:'You live near the IUT.',
+   a:['do you live near the iut'], r:'Do + you + base verb. Word order alone ("You live near...?") is spoken French, not English.'},
+  {k:'q', t:'type', i:'Write the missing word.', s:'Where <em>___</em> your sister work?',
+   a:['does'], r:'Question word + does + he/she/it + base verb.'},
+
+  {k:'err', t:'mcq', i:'Only one sentence is correct. Which one?', s:'',
+   opts:['Does the sensor detect metal?','Does the sensor detects metal?','Is the sensor detect metal?'], r:'One -s per sentence: it goes on does, so the verb stays bare.'},
+  {k:'err', t:'mcq', i:'Only one sentence is correct. Which one?', s:'',
+   opts:['I know the answer.','I am knowing the answer.','I knowing the answer.'], r:'know, want, like, need, believe describe states, not actions: no -ing.'},
+  {k:'err', t:'mcq', i:'Only one sentence is correct. Which one?', s:'',
+   opts:['I agree with you.','I am agree with you.','I am agreeing with you.'], r:'agree is a verb in English, not an adjective: I agree. "Je suis d\'accord" misleads here.'}
+];
+
+let idx=0, locked=false, order=[], results=[];
+
+function shuffle(a){ const r=[...a]; for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];} return r; }
+
+// Contractions are expanded on BOTH sides, so either form passes.
+function norm(s){
+  return s.toLowerCase().replace(/[‘’`]/g,"'")
+    .replace(/\bdoesn't\b/g,'does not').replace(/\bdon't\b/g,'do not')
+    .replace(/\bisn't\b/g,'is not').replace(/\baren't\b/g,'are not')
+    .replace(/\bi'm\b/g,'i am').replace(/\bcan't\b/g,'cannot')
+    .replace(/[.?!,]+/g,' ').replace(/\s+/g,' ').trim();
+}
+
+function begin(){
+  document.getElementById('start').style.display='none';
+  document.getElementById('game').style.display='block';
+  render();
+}
+
+function render(){
+  const it=ITEMS[idx];
+  locked=false;
+  document.getElementById('counter').textContent=`${idx+1} / ${ITEMS.length}`;
+  document.getElementById('skill').textContent=SKILLS[it.k];
+  document.getElementById('instr').textContent=it.i;
+  document.getElementById('stem').innerHTML=it.s;
+  document.getElementById('stem').style.display=it.s?'block':'none';
+  const fb=document.getElementById('fb'); fb.className='fb'; fb.innerHTML='';
+  document.getElementById('nextBtn').style.display='none';
+  const check=document.getElementById('checkBtn'); check.style.display=''; check.disabled=false;
+  const area=document.getElementById('answerArea'); area.innerHTML='';
+  if(it.t==='mcq'){
+    check.style.display='none';          // clicking an option is the submission
+    order=shuffle(it.opts.map((o,n)=>n));
+    const box=document.createElement('div'); box.className='opts';
+    order.forEach(n=>{
+      const b=document.createElement('button'); b.className='opt'; b.textContent=it.opts[n];
+      b.addEventListener('click',()=>pick(n,b));
+      box.appendChild(b);
+    });
+    area.appendChild(box);
+  } else {
+    const inp=document.createElement('input'); inp.type='text'; inp.id='ans';
+    inp.autocomplete='off'; inp.spellcheck=false; inp.setAttribute('autocapitalize','off'); inp.setAttribute('autocorrect','off');
+    inp.placeholder='Type your answer...';
+    inp.addEventListener('keydown',e=>{ if(e.key==='Enter'){ if(!locked) check(); else next(); } });
+    area.appendChild(inp); inp.focus();
+  }
+}
+
+function pick(n,btn){
+  if(locked) return; locked=true;
+  const it=ITEMS[idx], ok=(n===0);
+  document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+  if(!ok) btn.classList.add('wrong');
+  [...document.querySelectorAll('.opt')].find(b=>b.textContent===it.opts[0]).classList.add('right');
+  finish(ok, it.opts[n], it.opts[0]);
+}
+
+function check(){
+  if(locked) return;
+  const it=ITEMS[idx], inp=document.getElementById('ans'), raw=inp.value.trim();
+  if(!raw){ inp.focus(); return; }
+  locked=true;
+  inp.disabled=true; document.getElementById('checkBtn').disabled=true;
+  const ok=it.a.some(a=>norm(a)===norm(raw));
+  finish(ok, raw, display(it));
+}
+
+// The model answer as it should be written, capital and punctuation restored.
+function display(it){
+  let a=it.a[0].replace(/\biut\b/,'IUT').replace(/\bspanish\b/,'Spanish').replace(/\bsundays\b/,'Sundays');
+  if(it.s && /[.?]$/.test(it.s)){
+    a=a.replace(/\bdoes not\b/,"doesn't").replace(/\bis not\b/,"isn't").replace(/\bdo not\b/,"don't").replace(/^i am not\b/,"I'm not");
+    a=a.charAt(0).toUpperCase()+a.slice(1)+(it.i.includes('question')?'?':'.');
+  }
+  return a;
+}
+
+function finish(ok, yours, correct){
+  const it=ITEMS[idx]; results.push({k:it.k, ok});
+  const fb=document.getElementById('fb');
+  fb.className='fb show '+(ok?'ok':'no');
+  if(ok){ fb.innerHTML='Correct.'; }
+  else {
+    fb.innerHTML='<div class="row"><span class="tag">You</span><span class="yours"></span></div>'+
+                 '<div class="row"><span class="tag">Correct</span><span class="right-ans"></span></div>'+
+                 '<div class="rule"></div>';
+    fb.querySelector('.yours').textContent=yours;
+    fb.querySelector('.right-ans').textContent=correct;
+    fb.querySelector('.rule').textContent=it.r;
+  }
+  document.getElementById('scoreChip').textContent=results.filter(r=>r.ok).length+' correct';
+  const nb=document.getElementById('nextBtn'); nb.style.display='inline-block'; nb.focus();
+}
+
+function next(){
+  if(!locked) return;
+  idx++;
+  if(idx<ITEMS.length) render(); else end();
+}
+
+function end(){
+  document.getElementById('game').style.display='none';
+  document.getElementById('end').classList.add('show');
+  const total=results.filter(r=>r.ok).length;
+  document.getElementById('endLine').textContent=`${total} / ${ITEMS.length}. The table shows where the rust is.`;
+  document.getElementById('endTable').innerHTML=Object.keys(SKILLS).map(k=>{
+    const rs=results.filter(r=>r.k===k), got=rs.filter(r=>r.ok).length, all=got===rs.length;
+    return `<tr><td>${SKILLS[k]}</td><td>${got} / ${rs.length}</td><td class="${all?'fine':'rusty'}">${all?'solid':'rusty'}</td></tr>`;
+  }).join('');
+}
+</script>
+</body>
+</html>
