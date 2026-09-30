@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Present Simple vs Present Continuous - Interactive Learning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            background: #f8fafc;
+            padding: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+        }
+
+        .nav-button.active {
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);
+        }
+
+        .section {
+            display: none;
+            padding: 40px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0891b2;
+            border-radius: 15px;
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(8, 145, 178, 0.15);
+        }
+
+        .concept-card h3 {
+            color: #0891b2;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #f97316;
+            padding-bottom: 8px;
+        }
+
+        .example {
+            background: #fef3c7;
+            border-left: 4px solid #f97316;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-style: italic;
+        }
+
+        .quiz-container {
+            margin-top: 30px;
+        }
+
+        .question {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .context-hint {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f97316;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .context-hint::before {
+            content: "💡 Context Hint: ";
+            font-weight: 700;
+            color: #ea580c;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #334155;
+            font-weight: 600;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .option:hover {
+            background: #f1f5f9;
+            border-color: #0891b2;
+            transform: translateX(5px);
+        }
+
+        .option.correct {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            border-color: #16a34a;
+            color: #15803d;
+        }
+
+        .option.incorrect {
+            background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+            border-color: #dc2626;
+            color: #b91c1c;
+        }
+
+        .explanation {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border-left: 4px solid #0891b2;
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .explanation.show {
+            display: block;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; height: 0; }
+            to { opacity: 1; height: auto; }
+        }
+
+        .explanation h4 {
+            color: #0e7490;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0891b2, #f97316);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 4px;
+        }
+
+        .score {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0891b2;
+            margin-bottom: 20px;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 300px;
+            background-color: #1e293b;
+            color: white;
+            text-align: left;
+            border-radius: 8px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -150px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .completion-badge {
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .tense-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .tense-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .concept-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .reset-button {
+            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .reset-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(107, 114, 128, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Present Simple vs Present Continuous</h1>
+            <p>Master English tenses with interactive exercises</p>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-button active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-button" onclick="showSection('forms', this)">Forms & Structure</button>
+            <button class="nav-button" onclick="showSection('uses', this)">Uses & Examples</button>
+            <button class="nav-button" onclick="showSection('quiz', this)">Interactive Quiz</button>
+        </div>
+
+        <div id="overview" class="section active">
+            <h2 style="color: #0891b2; margin-bottom: 25px; font-size: 2rem;">Tense Overview</h2>
+            
+            <div class="tense-comparison">
+                <div class="concept-card">
+                    <h3>Present Simple</h3>
+                    <p><strong>Purpose:</strong> Facts, habits, routines, permanent situations</p>
+                    <div class="example">I work here every day.</div>
+                    <div class="example">Water boils at 100 degrees.</div>
+                    <div class="example">She plays tennis on Tuesdays.</div>
+                    <p style="margin-top: 15px;"><strong>Time words:</strong> always, usually, often, sometimes, never, every day/week/month</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>Present Continuous</h3>
+                    <p><strong>Purpose:</strong> Actions happening now, temporary situations, future plans</p>
+                    <div class="example">I'm working right now.</div>
+                    <div class="example">She's living in London for a few weeks.</div>
+                    <div class="example">We're meeting tomorrow at 5pm.</div>
+                    <p style="margin-top: 15px;"><strong>Time words:</strong> now, at the moment, currently, these days, tonight, tomorrow</p>
+                </div>
+            </div>
+
+            <div style="background: #fef3c7; border-left: 4px solid #f97316; padding: 20px; border-radius: 8px; margin-top: 30px;">
+                <h4 style="color: #ea580c; margin-bottom: 10px;">🔑 Key Difference</h4>
+                <p><strong>Present simple</strong> gives the big picture: habits, routines, facts and permanent situations.</p>
+                <p><strong>Present continuous</strong> gives a snapshot: actions in progress now, or temporary situations around now.</p>
+            </div>
+        </div>
+
+        <div id="forms" class="section">
+            <h2 style="color: #0891b2; margin-bottom: 25px; font-size: 2rem;">Forms & Structure</h2>
+            
+            <div class="concept-grid">
+                <div class="concept-card tooltip">
+                    <h3>Present Simple - Positive</h3>
+                    <p><strong>With 'be':</strong> I am / You are / He is</p>
+                    <p><strong>Other verbs:</strong> I work / You work / He work<strong>s</strong></p>
+                    <div class="example">I am a teacher.</div>
+                    <div class="example">She works in London.</div>
+                    <div class="tooltiptext">
+                        Remember: Add 's' to the verb with he/she/it. 
+                        Special cases: go→goes, do→does, have→has
+                    </div>
+                </div>
+
+                <div class="concept-card tooltip">
+                    <h3>Present Simple - Negative</h3>
+                    <p><strong>With 'be':</strong> I'm not / You aren't / He isn't</p>
+                    <p><strong>Other verbs:</strong> I don't work / He doesn't work</p>
+                    <div class="example">I'm not hungry.</div>
+                    <div class="example">She doesn't like coffee.</div>
+                    <div class="tooltiptext">
+                        Use 'don't' with I/you/we/they and 'doesn't' with he/she/it.
+                        The main verb stays in base form (no 's').
+                    </div>
+                </div>
+
+                <div class="concept-card tooltip">
+                    <h3>Present Continuous - Positive</h3>
+                    <p><strong>Form:</strong> am/is/are + verb-ing</p>
+                    <div class="example">I am working now.</div>
+                    <div class="example">She is reading a book.</div>
+                    <div class="example">They are playing football.</div>
+                    <div class="tooltiptext">
+                        Spelling rules: work→working, make→making (drop 'e'), 
+                        run→running (double consonant), study→studying (keep the y)
+                    </div>
+                </div>
+
+                <div class="concept-card tooltip">
+                    <h3>Present Continuous - Negative</h3>
+                    <p><strong>Form:</strong> am/is/are + not + verb-ing</p>
+                    <div class="example">I'm not working today.</div>
+                    <div class="example">She isn't coming to the party.</div>
+                    <div class="example">We aren't watching TV.</div>
+                    <div class="tooltiptext">
+                        Contractions: I'm not, isn't, aren't.
+                        The -ing form stays the same in negatives.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="uses" class="section">
+            <h2 style="color: #0891b2; margin-bottom: 25px; font-size: 2rem;">Uses & Examples</h2>
+            
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3>Present Simple Uses</h3>
+                    <p><strong>1. Habits & Routines (A1)</strong></p>
+                    <div class="example">She plays tennis every Tuesday.</div>
+                    
+                    <p style="margin-top: 15px;"><strong>2. Permanent Situations (A1)</strong></p>
+                    <div class="example">I live in London. / She's a lawyer.</div>
+                    
+                    <p style="margin-top: 15px;"><strong>3. Always True Facts (A1)</strong></p>
+                    <div class="example">Water boils at 100 degrees.</div>
+                    
+                    <p style="margin-top: 15px;"><strong>4. Future Timetables (A2)</strong></p>
+                    <div class="example">Our train leaves at 11am.</div>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Present Continuous Uses</h3>
+                    <p><strong>1. Actions Happening Now (A1)</strong></p>
+                    <div class="example">I'm having dinner at the moment.</div>
+                    
+                    <p style="margin-top: 15px;"><strong>2. Temporary Situations (A2)</strong></p>
+                    <div class="example">I'm living in London for a few weeks.</div>
+                    
+                    <p style="margin-top: 15px;"><strong>3. Future Plans (A2)</strong></p>
+                    <div class="example">I'm meeting my father tomorrow.</div>
+                    
+                    <p style="margin-top: 15px;"><strong>4. Annoying Habits, with always/forever (B1)</strong></p>
+                    <div class="example">You're forever losing your keys!</div>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Time Expressions</h3>
+                    <p><strong>Present Simple:</strong></p>
+                    <p>always, usually, often, sometimes, never, every day/week, on Mondays, twice a month</p>
+                    
+                    <p style="margin-top: 15px;"><strong>Present Continuous:</strong></p>
+                    <p>now, right now, at the moment, currently, these days, tonight, tomorrow, next week</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Common Mistakes</h3>
+                    <p><strong>❌ I am work here.</strong></p>
+                    <p><strong>✅ I work here.</strong></p>
+                    
+                    <p style="margin-top: 10px;"><strong>❌ She working now.</strong></p>
+                    <p><strong>✅ She is working now.</strong></p>
+                    
+                    <p style="margin-top: 10px;"><strong>❌ I'm knowing the answer.</strong></p>
+                    <p><strong>✅ I know the answer.</strong></p>
+                    <p style="font-size: 0.9rem; color: #6b7280; margin-top: 5px;">*State verbs don't use continuous</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="section">
+            <h2 style="color: #0891b2; margin-bottom: 25px; font-size: 2rem;">Interactive Quiz</h2>
+            <div class="score">Score: <span id="score">0</span>/<span id="total">0</span></div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            <button class="reset-button" onclick="resetQuiz()">Reset Quiz</button>
+            
+            <div class="quiz-container" id="quiz-container">
+                <!-- Questions will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentScore = 0;
+        let totalQuestions = 0;
+        let answeredQuestions = new Set();
+
+        const quizQuestions = [
+            {
+                hint: "Think about whether this is a routine/habit or something happening right now.",
+                question: "I usually _____ coffee in the morning, but today I _____ tea.",
+                options: [
+                    "drink / am drinking",
+                    "am drinking / drink", 
+                    "drink / drink",
+                    "am drinking / am drinking"
+                ],
+                correct: 0,
+                explanation: "Use present simple 'drink' for the habitual action (usually), and present continuous 'am drinking' for the temporary action happening today."
+            },
+            {
+                hint: "Consider if this is a permanent fact about the person or a temporary situation.",
+                question: "She _____ in Manchester, but this week she _____ in London for work.",
+                options: [
+                    "is living / lives",
+                    "lives / is staying",
+                    "is living / is staying", 
+                    "lives / lives"
+                ],
+                correct: 1,
+                explanation: "Use present simple 'lives' for her permanent home, and present continuous 'is staying' for the temporary situation this week."
+            },
+            {
+                hint: "Look at the time expressions - do they indicate routine or current action?",
+                question: "Right now, the children _____ outside. They _____ there every afternoon.",
+                options: [
+                    "play / are playing",
+                    "are playing / play",
+                    "play / play",
+                    "are playing / are playing"
+                ],
+                correct: 1,
+                explanation: "'Right now' indicates present continuous 'are playing', while 'every afternoon' indicates a routine, so present simple 'play'."
+            },
+            {
+                hint: "Think about scientific facts vs. current weather conditions.",
+                question: "Water _____ at 100°C, but it _____ outside right now.",
+                options: [
+                    "is boiling / rains",
+                    "boils / is raining",
+                    "is boiling / is raining",
+                    "boils / rains"
+                ],
+                correct: 1,
+                explanation: "Use present simple 'boils' for the scientific fact, and present continuous 'is raining' for the current weather condition."
+            },
+            {
+                hint: "Consider whether these are arranged future plans or general habits.",
+                question: "I _____ my grandmother every Sunday, but this Sunday I _____ my friends instead.",
+                options: [
+                    "am visiting / visit",
+                    "visit / am visiting",
+                    "visit / visit",
+                    "am visiting / am visiting"
+                ],
+                correct: 1,
+                explanation: "Use present simple 'visit' for the regular habit, and present continuous 'am visiting' for the specific planned change this Sunday."
+            },
+            {
+                hint: "Think about ongoing temporary situations vs. permanent jobs.",
+                question: "My brother _____ as an engineer, but currently he _____ at a restaurant to earn extra money.",
+                options: [
+                    "is working / works",
+                    "works / is working",
+                    "works / works",
+                    "is working / is working"
+                ],
+                correct: 1,
+                explanation: "Use present simple 'works' for his permanent profession, and present continuous 'is working' for his temporary current job."
+            },
+            {
+                hint: "One of these verbs is a state verb. State verbs don't usually take -ing.",
+                question: "I _____ what you mean, but right now I _____ about something else.",
+                options: [
+                    "am knowing / think",
+                    "know / am thinking",
+                    "know / think",
+                    "am knowing / am thinking"
+                ],
+                correct: 1,
+                explanation: "'Know' is a state verb, so present simple 'know'. 'Think about' here is a mental activity in progress right now, so present continuous 'am thinking'."
+            },
+            {
+                hint: "Think about timetabled events vs. personal arrangements.",
+                question: "The train _____ at 6:30 PM, so we _____ dinner early tonight.",
+                options: [
+                    "is leaving / have",
+                    "leaves / are having",
+                    "is leaving / are having",
+                    "leaves / have"
+                ],
+                correct: 1,
+                explanation: "Use present simple 'leaves' for timetabled events, and present continuous 'are having' for planned arrangements tonight."
+            },
+            {
+                hint: "Consider whether this describes current temporary behavior or permanent character.",
+                question: "John _____ usually very polite, but today he _____ quite rude to everyone.",
+                options: [
+                    "is being / is",
+                    "is / is being",
+                    "is / is",
+                    "is being / is being"
+                ],
+                correct: 1,
+                explanation: "Use present simple 'is' for his usual character, and present continuous 'is being' for his temporary behavior today."
+            },
+            {
+                hint: "Think about her normal routine vs. a temporary change this week.",
+                question: "She usually _____ her homework after school, but this week she _____ it at night because she has football practice.",
+                options: [
+                    "is doing / does",
+                    "does / is doing",
+                    "does / does",
+                    "is doing / is doing"
+                ],
+                correct: 1,
+                explanation: "Use present simple 'does' for her normal routine, and present continuous 'is doing' for the temporary change this week."
+            }
+        ];
+
+        function showSection(sectionId, button) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            button.classList.add('active');
+        }
+
+        function loadQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+            totalQuestions = quizQuestions.length;
+            document.getElementById('total').textContent = totalQuestions;
+            
+            quizQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="context-hint">${q.hint}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, i) => 
+                            `<div class="option" onclick="selectAnswer(${index}, ${i}, this)">${option}</div>`
+                        ).join('')}
+                    </div>
+                    <div class="explanation" id="explanation-${index}">
+                        <h4>📚 Explanation:</h4>
+                        <p>${q.explanation}</p>
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function selectAnswer(questionIndex, selectedOption, element) {
+            if (answeredQuestions.has(questionIndex)) return;
+            
+            const question = quizQuestions[questionIndex];
+            const isCorrect = selectedOption === question.correct;
+            const options = element.parentNode.children;
+            
+            // Mark all options
+            for (let i = 0; i < options.length; i++) {
+                if (i === question.correct) {
+                    options[i].classList.add('correct');
+                } else if (i === selectedOption && !isCorrect) {
+                    options[i].classList.add('incorrect');
+                }
+                options[i].style.pointerEvents = 'none';
+            }
+            
+            // Show explanation
+            document.getElementById(`explanation-${questionIndex}`).classList.add('show');
+            
+            // Update score
+            if (isCorrect) {
+                currentScore++;
+                document.getElementById('score').textContent = currentScore;
+            }
+            
+            answeredQuestions.add(questionIndex);
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = (answeredQuestions.size / totalQuestions) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function resetQuiz() {
+            currentScore = 0;
+            answeredQuestions.clear();
+            document.getElementById('score').textContent = '0';
+            document.getElementById('progress').style.width = '0%';
+            loadQuiz();
+        }
+
+        // Initialize quiz when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadQuiz();
+        });
+    </script>
+</body>
+</html>
