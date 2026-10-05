@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Better. Faster. Stronger. Make your own clues</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="bf11p">
+  <style>
+    #bf11p{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #bf11p *{box-sizing:border-box;}
+    #bf11p h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #bf11p h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #bf11p .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #bf11p .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #bf11p .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #bf11p .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #bf11p .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #bf11p .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #bf11p button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #bf11p button:hover{background:#0f4a5c;}
+    #bf11p button.ghost{background:transparent;color:var(--teal);}
+    #bf11p button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #bf11p button.amber:hover{background:#e0a52a;}
+    #bf11p button:disabled{opacity:.45;cursor:default;}
+    #bf11p .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #bf11p .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #bf11p .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #bf11p .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #bf11p .choice:disabled{opacity:.9;}
+    #bf11p .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #bf11p .fb.ok{color:var(--ok);} #bf11p .fb.no{color:var(--no);}
+    #bf11p .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #bf11p .tag.c{background:var(--teal-bg);color:var(--teal);} #bf11p .tag.s{background:var(--terra-bg);color:var(--terra);} #bf11p .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #bf11p input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #bf11p input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #bf11p input.gap{width:auto;min-width:120px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #bf11p input.ok{border-color:var(--ok);background:var(--ok-bg);} #bf11p input.no{border-color:var(--no);background:var(--no-bg);}
+    #bf11p textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;}
+    #bf11p select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);margin:0 4px;}
+    #bf11p select.ok{border-color:var(--ok);background:var(--ok-bg);} #bf11p select.no{border-color:var(--no);background:var(--no-bg);}
+    #bf11p .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #bf11p .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #bf11p .talk p{margin:0 0 6px;}
+    #bf11p .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #bf11p .ex p{margin:4px 0;}
+    #bf11p .note{font-size:14px;color:var(--muted);}
+    #bf11p .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+    #bf11p .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;}
+    #bf11p .card h3{margin:0 0 6px;font-size:18px;color:var(--teal);}
+    #bf11p .card p{margin:0;font-size:15px;color:var(--muted);}
+    #bf11p .card.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf11p .rule{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+    #bf11p .rule:first-child{border-top:none;}
+    #bf11p .form{font-family:"Courier New",monospace;font-size:16px;}
+    #bf11p .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #bf11p .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #bf11p .hide{display:none;}
+    #bf11p .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:start;}
+    #bf11p .item:first-child{border-top:none;}
+    #bf11p .item b{color:var(--teal);}
+    #bf11p .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #bf11p .pics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 4px;}
+    #bf11p .pics figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+    #bf11p .pics img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+    #bf11p .pics figcaption{text-align:center;font-size:15px;font-weight:bold;padding:6px 4px;color:var(--teal);}
+    #bf11p table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #bf11p table.t th,#bf11p table.t td{border:1px solid var(--line);padding:8px;vertical-align:middle;}
+    #bf11p table.t th{background:var(--slate-bg);text-align:left;}
+    #bf11p .teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+    #bf11p .team{border:3px solid var(--line);border-radius:12px;padding:10px 14px;text-align:center;background:#fff;}
+    #bf11p .team .n{font-size:15px;font-weight:bold;letter-spacing:.05em;}
+    #bf11p .team .p{font-size:34px;font-weight:bold;}
+    #bf11p .team.a .n,#bf11p .team.a .p{color:var(--teal);} #bf11p .team.b .n,#bf11p .team.b .p{color:var(--terra);}
+    #bf11p .team.a.on{border-color:var(--teal);background:var(--teal-bg);} #bf11p .team.b.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf11p .clue{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);}
+    #bf11p .clue:first-child{border-top:none;}
+    #bf11p .clue .v{min-width:64px;text-align:center;font-weight:bold;border-radius:999px;background:var(--amber-bg);border:2px solid #f1d9a6;font-size:14px;padding:2px 6px;}
+    @media (max-width:560px){ #bf11p .pics{grid-template-columns:1fr 1fr 1fr;gap:6px;} #bf11p .rule{grid-template-columns:1fr;} }
+  </style>
+
+  <h1>Your turn: make five clues</h1>
+  <p class="sub">In groups. Choose a gadget or a technology most people know. Write five clues, from the most difficult to the easiest. Every clue uses a comparative or a superlative. Then the other team guesses, one clue at a time.</p>
+  <div class="ex"><p><em>It's lighter than a book. &middot; It's one of the most expensive things in your bag. &middot; ...</em></p></div>
+  <div class="panel" id="bf11-w">
+    <div class="item"><b>?</b><div>Your gadget (the answer)<input type="text" id="bf11-a" autocomplete="off"></div></div>
+    <div class="item"><b>5</b><div><input type="text" class="cl" autocomplete="off" placeholder="the most difficult clue"></div></div>
+    <div class="item"><b>4</b><div><input type="text" class="cl" autocomplete="off"></div></div>
+    <div class="item"><b>3</b><div><input type="text" class="cl" autocomplete="off"></div></div>
+    <div class="item"><b>2</b><div><input type="text" class="cl" autocomplete="off"></div></div>
+    <div class="item"><b>1</b><div><input type="text" class="cl" autocomplete="off" placeholder="the easiest clue"></div></div>
+    <div class="btns"><button id="bf11-play">Hide and play</button></div>
+    <div class="fb no" id="bf11-fb"></div>
+  </div>
+  <div class="panel hide" id="bf11-p">
+    <div id="bf11-c"></div>
+    <div class="btns"><button id="bf11-n">Next clue</button><button id="bf11-r" class="amber">They guessed it / show the answer</button><button id="bf11-e" class="ghost">Edit</button></div>
+    <div class="fb ok" id="bf11-ans"></div>
+  </div>
+  <p class="note">Nothing is sent anywhere. Your clues stay on this screen only.</p>
+
+
+  <script>
+  (function(){
+    var w=document.getElementById('bf11-w'), p=document.getElementById('bf11-p'), c=document.getElementById('bf11-c'); if(!w) return;
+    var L=[], k=0;
+    function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function add(){ var d=document.createElement('div'); d.className='clue'; d.innerHTML='<span class="v">'+(5-k)+' pt'+(k===4?'':'s')+'</span><span>'+esc(L[k])+'</span>'; c.appendChild(d); k++; if(k>=L.length) document.getElementById('bf11-n').disabled=true; }
+    document.getElementById('bf11-play').addEventListener('click',function(){
+      var ins=w.querySelectorAll('.cl'); L=[]; for(var i=0;i<ins.length;i++) if(ins[i].value.trim()) L.push(ins[i].value.trim());
+      var fb=document.getElementById('bf11-fb');
+      if(!document.getElementById('bf11-a').value.trim()||L.length<5){ fb.textContent='You need the answer and five clues.'; return; }
+      fb.textContent=''; w.classList.add('hide'); p.classList.remove('hide'); c.innerHTML=''; k=0;
+      document.getElementById('bf11-n').disabled=false; document.getElementById('bf11-ans').textContent=''; add();
+    });
+    document.getElementById('bf11-n').addEventListener('click',add);
+    document.getElementById('bf11-r').addEventListener('click',function(){ document.getElementById('bf11-ans').textContent='The answer: '+document.getElementById('bf11-a').value.trim(); });
+    document.getElementById('bf11-e').addEventListener('click',function(){ p.classList.add('hide'); w.classList.remove('hide'); });
+  })();
+  </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Better. Faster. Stronger. Technology then and now</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="bf23">
+  <style>
+    #bf23{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #bf23 *{box-sizing:border-box;}
+    #bf23 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #bf23 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #bf23 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #bf23 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #bf23 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #bf23 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #bf23 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #bf23 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #bf23 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #bf23 button:hover{background:#0f4a5c;}
+    #bf23 button.ghost{background:transparent;color:var(--teal);}
+    #bf23 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #bf23 button.amber:hover{background:#e0a52a;}
+    #bf23 button:disabled{opacity:.45;cursor:default;}
+    #bf23 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #bf23 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #bf23 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #bf23 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #bf23 .choice:disabled{opacity:.9;}
+    #bf23 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #bf23 .fb.ok{color:var(--ok);} #bf23 .fb.no{color:var(--no);}
+    #bf23 .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #bf23 .tag.c{background:var(--teal-bg);color:var(--teal);} #bf23 .tag.s{background:var(--terra-bg);color:var(--terra);} #bf23 .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #bf23 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #bf23 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #bf23 input.gap{width:auto;min-width:120px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #bf23 input.ok{border-color:var(--ok);background:var(--ok-bg);} #bf23 input.no{border-color:var(--no);background:var(--no-bg);}
+    #bf23 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;}
+    #bf23 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);margin:0 4px;}
+    #bf23 select.ok{border-color:var(--ok);background:var(--ok-bg);} #bf23 select.no{border-color:var(--no);background:var(--no-bg);}
+    #bf23 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #bf23 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #bf23 .talk p{margin:0 0 6px;}
+    #bf23 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #bf23 .ex p{margin:4px 0;}
+    #bf23 .note{font-size:14px;color:var(--muted);}
+    #bf23 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+    #bf23 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;}
+    #bf23 .card h3{margin:0 0 6px;font-size:18px;color:var(--teal);}
+    #bf23 .card p{margin:0;font-size:15px;color:var(--muted);}
+    #bf23 .card.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf23 .rule{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+    #bf23 .rule:first-child{border-top:none;}
+    #bf23 .form{font-family:"Courier New",monospace;font-size:16px;}
+    #bf23 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #bf23 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #bf23 .hide{display:none;}
+    #bf23 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:start;}
+    #bf23 .item:first-child{border-top:none;}
+    #bf23 .item b{color:var(--teal);}
+    #bf23 .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #bf23 .pics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 4px;}
+    #bf23 .pics figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+    #bf23 .pics img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+    #bf23 .pics figcaption{text-align:center;font-size:15px;font-weight:bold;padding:6px 4px;color:var(--teal);}
+    #bf23 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #bf23 table.t th,#bf23 table.t td{border:1px solid var(--line);padding:8px;vertical-align:middle;}
+    #bf23 table.t th{background:var(--slate-bg);text-align:left;}
+    #bf23 .teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+    #bf23 .team{border:3px solid var(--line);border-radius:12px;padding:10px 14px;text-align:center;background:#fff;}
+    #bf23 .team .n{font-size:15px;font-weight:bold;letter-spacing:.05em;}
+    #bf23 .team .p{font-size:34px;font-weight:bold;}
+    #bf23 .team.a .n,#bf23 .team.a .p{color:var(--teal);} #bf23 .team.b .n,#bf23 .team.b .p{color:var(--terra);}
+    #bf23 .team.a.on{border-color:var(--teal);background:var(--teal-bg);} #bf23 .team.b.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf23 .clue{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);}
+    #bf23 .clue:first-child{border-top:none;}
+    #bf23 .clue .v{min-width:64px;text-align:center;font-weight:bold;border-radius:999px;background:var(--amber-bg);border:2px solid #f1d9a6;font-size:14px;padding:2px 6px;}
+    @media (max-width:560px){ #bf23 .pics{grid-template-columns:1fr 1fr 1fr;gap:6px;} #bf23 .rule{grid-template-columns:1fr;} }
+  </style>
+
+  <h1>Technology then and now</h1>
+  <p class="sub">You are going to watch a video called <em>Past and present: technology then and now</em>. <strong>Before</strong> you watch: which technologies do you think it compares? Write three or four.</p>
+  <div class="panel" id="bf2-pred">
+    <textarea id="bf2-t" placeholder="phones, ..."></textarea>
+    <div class="btns"><button id="bf2-lock">Lock my guesses</button></div>
+  </div>
+
+  <div class="hide" id="bf2-watch">
+    <h2>Watch two parts</h2>
+    <p class="sub">Part 1 is 01:04 to 01:56. Part 2 is 02:56 to 04:13. Which technologies are compared?</p>
+    <div class="video"><iframe id="bf2-yt" src="" title="Technology then and now" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+    <div class="btns"><button id="bf2-p1">Play part 1</button><button id="bf2-p2">Play part 2</button><button id="bf2-tech" class="ghost">Show the technologies</button></div>
+    <div class="panel hide" id="bf2-techans" style="margin-top:12px">
+      <p style="margin:0 0 6px"><strong>Part 1:</strong> paper books and the ebook reader (Kindle) &middot; cars (Ford Model T and Ford GT)</p>
+      <p style="margin:0"><strong>Part 2:</strong> laptops &middot; mobile phones</p>
+      <p class="note" id="bf2-yours" style="margin:8px 0 0"></p>
+    </div>
+
+    <h2>Guess the numbers</h2>
+    <p class="sub">Do not watch yet. Guess the missing numbers, lock them, then watch both parts again and check.</p>
+    <div class="panel" id="bf3"><div class="item"><b>A</b><div>ebook readers: the cheapest version can hold <input type="text" class="gap" data-i="0" autocomplete="off" inputmode="decimal"> books in digital form.</div></div><div class="item"><b>B</b><div>cars: the 1908 model had a top speed of <input type="text" class="gap" data-i="1" autocomplete="off" inputmode="decimal"> mph.</div></div><div class="item"><b>C</b><div>The 2017 model has a top speed of more than <input type="text" class="gap" data-i="2" autocomplete="off" inputmode="decimal"> mph.</div></div><div class="item"><b>D</b><div>laptops: the first laptop had a <input type="text" class="gap" data-i="3" autocomplete="off" inputmode="decimal"> -inch screen.</div></div><div class="item"><b>E</b><div>It weighed <input type="text" class="gap" data-i="4" autocomplete="off" inputmode="decimal"> pounds. The new models have 13 to 15-inch screens.</div></div><div class="item"><b>F</b><div>mobile phones: the 1973 model weighed <input type="text" class="gap" data-i="5" autocomplete="off" inputmode="decimal"> kg.</div></div><div class="item"><b>G</b><div>It took <input type="text" class="gap" data-i="6" autocomplete="off" inputmode="decimal"> hours to recharge.</div></div>
+      <div class="btns"><button id="bf3-lock">Lock my numbers</button><button id="bf3-reveal" disabled>Reveal the answers</button></div>
+      <div class="score" id="bf3-score"></div>
+    </div>
+
+    <div class="talk">
+      <p><strong>Then:</strong> this video was made around 2017. Its &ldquo;modern&rdquo; models are already old.</p>
+      <p>Compare the 2017 laptop or phone with the one in your bag. <em>My phone is thinner than..., it has a better camera than...</em></p>
+    </div>
+  </div>
+
+
+  <script>
+  (function(){
+    var D=[{"a": ["1400", "1,400", "1 400"], "s": "1,400", "t": "01:22"}, {"a": ["45"], "s": "45", "t": "01:37"}, {"a": ["200"], "s": "200", "t": "01:52"}, {"a": ["5", "five"], "s": "five", "t": "03:09"}, {"a": ["24", "twenty-four", "twenty four"], "s": "24", "t": "03:09"}, {"a": ["1.1", "1,1"], "s": "1.1", "t": "03:46"}, {"a": ["10", "ten"], "s": "10", "t": "03:46"}], yt=document.getElementById('bf2-yt'), base='https://www.youtube.com/embed/DENG7Q7VRgo?rel=0'; if(!yt) return;
+    document.getElementById('bf2-lock').addEventListener('click',function(){
+      var t=document.getElementById('bf2-t'); t.readOnly=true; this.disabled=true; this.textContent='Guesses locked';
+      document.getElementById('bf2-watch').classList.remove('hide'); yt.src=base+'&start=64&end=116';
+    });
+    document.getElementById('bf2-p1').addEventListener('click',function(){ yt.src=base+'&start=64&end=116&autoplay=1'; });
+    document.getElementById('bf2-p2').addEventListener('click',function(){ yt.src=base+'&start=176&end=253&autoplay=1'; });
+    document.getElementById('bf2-tech').addEventListener('click',function(){
+      var v=document.getElementById('bf2-t').value.trim();
+      document.getElementById('bf2-yours').textContent=v?'You guessed: '+v:'';
+      document.getElementById('bf2-techans').classList.remove('hide'); this.disabled=true;
+    });
+    var box=document.getElementById('bf3'), locked=false, shown=false;
+    function norm(s){ return s.toLowerCase().replace(/\s+/g,' ').trim(); }
+    document.getElementById('bf3-lock').addEventListener('click',function(){
+      if(locked) return; locked=true;
+      var ins=box.querySelectorAll('input'); for(var i=0;i<ins.length;i++) ins[i].readOnly=true;
+      this.disabled=true; this.textContent='Numbers locked. Watch both parts again.';
+      document.getElementById('bf3-reveal').disabled=false;
+    });
+    document.getElementById('bf3-reveal').addEventListener('click',function(){
+      if(shown) return; shown=true; this.disabled=true;
+      var ins=box.querySelectorAll('input'), r=0;
+      for(var i=0;i<ins.length;i++){
+        var v=norm(ins[i].value), ok=D[i].a.indexOf(v)>-1; if(ok) r++;
+        ins[i].className='gap '+(ok?'ok':'no');
+        var fb=document.createElement('div'); fb.className='fb '+(ok?'ok':'no');
+        fb.innerHTML=(ok?'Right: ':(v?'You guessed '+v.replace(/</g,'&lt;')+'. It is ':'It is '))+'<strong>'+D[i].s+'</strong> <span class="note">['+D[i].t+']</span>';
+        ins[i].parentNode.appendChild(fb);
+      }
+      document.getElementById('bf3-score').textContent=r+' of '+D.length+' guessed right before watching.';
+    });
+  })();
+  </script>
+</div>
+</body>
+</html>

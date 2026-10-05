@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Better. Faster. Stronger. Guess the gadget</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="bf10">
+  <style>
+    #bf10{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #bf10 *{box-sizing:border-box;}
+    #bf10 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #bf10 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #bf10 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #bf10 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #bf10 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #bf10 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #bf10 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #bf10 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #bf10 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #bf10 button:hover{background:#0f4a5c;}
+    #bf10 button.ghost{background:transparent;color:var(--teal);}
+    #bf10 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #bf10 button.amber:hover{background:#e0a52a;}
+    #bf10 button:disabled{opacity:.45;cursor:default;}
+    #bf10 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #bf10 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #bf10 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #bf10 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #bf10 .choice:disabled{opacity:.9;}
+    #bf10 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #bf10 .fb.ok{color:var(--ok);} #bf10 .fb.no{color:var(--no);}
+    #bf10 .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #bf10 .tag.c{background:var(--teal-bg);color:var(--teal);} #bf10 .tag.s{background:var(--terra-bg);color:var(--terra);} #bf10 .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #bf10 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #bf10 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #bf10 input.gap{width:auto;min-width:120px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #bf10 input.ok{border-color:var(--ok);background:var(--ok-bg);} #bf10 input.no{border-color:var(--no);background:var(--no-bg);}
+    #bf10 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;}
+    #bf10 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);margin:0 4px;}
+    #bf10 select.ok{border-color:var(--ok);background:var(--ok-bg);} #bf10 select.no{border-color:var(--no);background:var(--no-bg);}
+    #bf10 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #bf10 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #bf10 .talk p{margin:0 0 6px;}
+    #bf10 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #bf10 .ex p{margin:4px 0;}
+    #bf10 .note{font-size:14px;color:var(--muted);}
+    #bf10 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+    #bf10 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;}
+    #bf10 .card h3{margin:0 0 6px;font-size:18px;color:var(--teal);}
+    #bf10 .card p{margin:0;font-size:15px;color:var(--muted);}
+    #bf10 .card.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf10 .rule{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+    #bf10 .rule:first-child{border-top:none;}
+    #bf10 .form{font-family:"Courier New",monospace;font-size:16px;}
+    #bf10 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #bf10 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #bf10 .hide{display:none;}
+    #bf10 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:start;}
+    #bf10 .item:first-child{border-top:none;}
+    #bf10 .item b{color:var(--teal);}
+    #bf10 .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #bf10 .pics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 4px;}
+    #bf10 .pics figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+    #bf10 .pics img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+    #bf10 .pics figcaption{text-align:center;font-size:15px;font-weight:bold;padding:6px 4px;color:var(--teal);}
+    #bf10 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #bf10 table.t th,#bf10 table.t td{border:1px solid var(--line);padding:8px;vertical-align:middle;}
+    #bf10 table.t th{background:var(--slate-bg);text-align:left;}
+    #bf10 .teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+    #bf10 .team{border:3px solid var(--line);border-radius:12px;padding:10px 14px;text-align:center;background:#fff;}
+    #bf10 .team .n{font-size:15px;font-weight:bold;letter-spacing:.05em;}
+    #bf10 .team .p{font-size:34px;font-weight:bold;}
+    #bf10 .team.a .n,#bf10 .team.a .p{color:var(--teal);} #bf10 .team.b .n,#bf10 .team.b .p{color:var(--terra);}
+    #bf10 .team.a.on{border-color:var(--teal);background:var(--teal-bg);} #bf10 .team.b.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf10 .clue{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);}
+    #bf10 .clue:first-child{border-top:none;}
+    #bf10 .clue .v{min-width:64px;text-align:center;font-weight:bold;border-radius:999px;background:var(--amber-bg);border:2px solid #f1d9a6;font-size:14px;padding:2px 6px;}
+    @media (max-width:560px){ #bf10 .pics{grid-template-columns:1fr 1fr 1fr;gap:6px;} #bf10 .rule{grid-template-columns:1fr;} }
+  </style>
+
+  <h1>Guess the gadget</h1>
+  <p class="sub">Two teams, one screen. Your team gets one clue at a time. Type your guess. The fewer clues you need, the more points you win: 5, 4, 3, 2, 1. A wrong guess opens the next clue. Turns go one object each.</p>
+  <div class="teams"><div class="team a" id="gg-ta"><div class="n">TEAM A</div><div class="p" id="gg-pa">0</div></div><div class="team b" id="gg-tb"><div class="n">TEAM B</div><div class="p" id="gg-pb">0</div></div></div>
+  <div class="panel" id="gg-play">
+    <div class="who" id="gg-who" style="font-weight:bold;margin-bottom:6px"></div>
+    <div id="gg-clues"></div>
+    <div id="gg-in" style="margin-top:12px">
+      <input type="text" id="gg-g" autocomplete="off" placeholder="Your guess, in English">
+      <div class="btns"><button id="gg-go">Guess</button><button id="gg-pass" class="ghost">Next clue, no guess</button></div>
+    </div>
+    <div class="fb" id="gg-fb"></div>
+    <div class="btns hide" id="gg-nextw"><button id="gg-next" class="amber">Next turn</button></div>
+  </div>
+  <div class="panel hide" id="gg-end">
+    <h2 style="margin-top:0" id="gg-res"></h2>
+    <p>Now make your own: next page.</p>
+    <div class="btns"><button id="gg-new" class="ghost">New game</button></div>
+  </div>
+  <p class="note">The page checks the answer. Objects are shuffled and the starting team is drawn at random every game.</p>
+
+
+  <script>
+  (function(){
+    var G=[{"n": "TEVEIEJVTEI=", "a": ["bGVkIGJ1bGI=", "bGVk", "bGVkIGxpZ2h0", "bGVkIGxhbXA=", "bGlnaHQgYnVsYg==", "YnVsYg==", "bGlnaHRidWxi", "bGFtcA=="], "c": ["It's cheaper than a sandwich.", "It stays much cooler than the old version when it's on.", "It lasts longer than the old version: up to 25 times longer.", "It uses at least 75% less energy than the old version.", "It makes a dark room brighter."]}, {"n": "V0lSRUxFU1MgRUFSQlVEUw==", "a": ["ZWFyYnVkcw==", "d2lyZWxlc3MgZWFyYnVkcw==", "ZWFyYnVk", "YWlycG9kcw==", "ZWFycGhvbmVz", "d2lyZWxlc3MgZWFycGhvbmVz", "aGVhZHBob25lcw==", "YnVkcw==", "ZWNvdXRldXJz"], "c": ["It's smaller than a matchbox.", "It's easier to lose than your keys, and usually you only lose half of it.", "One piece is lighter than a 2-euro coin.", "The best ones make the world around you quieter.", "You put them in your ears to listen to music without a cable."]}, {"n": "VVNCLUMgUE9SVA==", "a": ["dXNiIGM=", "dXNiYw==", "dXNiIGMgcG9ydA==", "dHlwZSBj", "dXNiIHR5cGUgYw==", "dXNi", "dXNiIGMgY2hhcmdlcg==", "dXNiIGMgY2FibGU=", "dXNiIHBvcnQ=", "dXNiIGMgY29ubmVjdG9y"], "c": ["It's smaller than your fingernail.", "It's easier to use than the older type: there is no wrong way up.", "It's faster than the older members of its family.", "Since the end of 2024, every new phone sold in the EU must have one.", "You plug your charger cable into it."]}, {"n": "SU5EVUNUSU9OIEhPQg==", "a": ["aW5kdWN0aW9uIGhvYg==", "aW5kdWN0aW9u", "aW5kdWN0aW9uIGNvb2tlcg==", "aW5kdWN0aW9uIHN0b3Zl", "aW5kdWN0aW9uIGNvb2t0b3A=", "aW5kdWN0aW9uIHBsYXRl", "aG9i", "Y29va2Vy", "c3RvdmU=", "Y29va3RvcA==", "cGxhcXVlIGEgaW5kdWN0aW9u", "cGxhcXVlIGluZHVjdGlvbg=="], "c": ["It's one of the most efficient ways to do something you do every day.", "It's safer than the gas version: there is no flame.", "It boils water faster than gas.", "It's fussier than the old type: it only works with magnetic pans.", "You cook on it in the kitchen."]}, {"n": "UE9XRVIgQkFOSw==", "a": ["cG93ZXIgYmFuaw==", "cG93ZXJiYW5r", "YmF0dGVyeQ==", "ZXh0ZXJuYWwgYmF0dGVyeQ==", "cG9ydGFibGUgY2hhcmdlcg==", "YmF0dGVyeSBwYWNr", "YmF0dGVyaWUgZXh0ZXJuZQ=="], "c": ["It can be heavier than your phone.", "The bigger it is, the longer it keeps you going.", "It's one of the most useful things to take on a long trip.", "On a plane, it must go in your cabin bag, not in the bigger suitcase.", "It charges your phone when there's no socket near you."]}, {"n": "UVIgQ09ERQ==", "a": ["cXIgY29kZQ==", "cXI=", "cXJjb2Rl", "Zmxhc2hjb2Rl"], "c": ["It's flatter than anything else in this game.", "It's older than you think: it was invented in Japan in 1994, for car factories.", "It holds much more information than a barcode.", "It's faster to scan than typing a web address.", "You scan this black-and-white square with your phone camera."]}, {"n": "M0QgUFJJTlRFUg==", "a": ["M2QgcHJpbnRlcg==", "MyBkIHByaW50ZXI=", "M2QgcHJpbnRpbmc=", "aW1wcmltYW50ZSAzZA==", "cHJpbnRlciAzZA=="], "c": ["It's one of the most popular machines in a fab lab.", "It's much slower than a normal printer: one object can take hours.", "It's cheaper than it was ten years ago: a basic one costs less than a smartphone.", "It makes objects layer by layer, usually in plastic.", "It's like a printer, but what comes out is three-dimensional."]}, {"n": "Uk9CT1QgVkFDVVVNIENMRUFORVI=", "a": ["cm9ib3QgdmFjdXVt", "cm9ib3QgdmFjdXVtIGNsZWFuZXI=", "cm9ib3QgaG9vdmVy", "dmFjdXVtIHJvYm90", "cm9vbWJh", "cm9ib3QgY2xlYW5lcg==", "YXNwaXJhdGV1ciByb2JvdA==", "cm9ib3QgYXNwaXJhdGV1cg==", "dmFjdXVtIGNsZWFuZXI=", "dmFjdXVt", "aG9vdmVy"], "c": ["It's one of the most modern gadgets in the house.", "It's more convenient than its standard version.", "It might be more entertaining for pets than their toys.", "It makes housework easier.", "It makes your house cleaner."]}]; if(!document.getElementById('gg-play')) return;
+    function dec(s){ return decodeURIComponent(escape(atob(s))); }
+    function norm(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[-_.,!?']/g,' ').replace(/^(an?|the)\s+/,'').replace(/\s+/g,' ').trim(); }
+    var order, idx, team, clue, done, pts, start;
+    var $=function(i){ return document.getElementById(i); };
+    function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+    function newGame(){
+      order=shuffle(G.map(function(_,i){return i;})); idx=0; pts=[0,0]; start=Math.random()<.5?0:1; team=start;
+      $('gg-pa').textContent='0'; $('gg-pb').textContent='0'; $('gg-end').classList.add('hide'); $('gg-play').classList.remove('hide'); turn();
+    }
+    function turn(){
+      clue=0; done=false; $('gg-clues').innerHTML=''; $('gg-fb').textContent=''; $('gg-fb').className='fb';
+      $('gg-g').value=''; $('gg-g').disabled=false; $('gg-in').classList.remove('hide'); $('gg-nextw').classList.add('hide');
+      $('gg-ta').className='team a'+(team===0?' on':''); $('gg-tb').className='team b'+(team===1?' on':'');
+      $('gg-who').textContent='Object '+(idx+1)+' of '+G.length+' \u00b7 Team '+(team?'B':'A')+', this one is yours.';
+      $('gg-who').style.color=team?'#D97757':'#155E75';
+      show(); $('gg-g').focus();
+    }
+    function show(){
+      var c=G[order[idx]].c[clue], d=document.createElement('div'); d.className='clue';
+      d.innerHTML='<span class="v">'+(5-clue)+' pt'+(clue===4?'':'s')+'</span><span>'+c+'</span>'; $('gg-clues').appendChild(d);
+    }
+    function finish(win){
+      done=true; var o=G[order[idx]], p=win?5-clue:0;
+      pts[team]+=p; $('gg-pa').textContent=pts[0]; $('gg-pb').textContent=pts[1];
+      $('gg-g').disabled=true; $('gg-in').classList.add('hide');
+      $('gg-fb').className='fb '+(win?'ok':'no');
+      $('gg-fb').innerHTML=(win?'Yes! ':'No more clues. ')+'It was: <strong>'+dec(o.n)+'</strong>. Team '+(team?'B':'A')+' wins '+p+' point'+(p===1?'':'s')+'.';
+      $('gg-nextw').classList.remove('hide');
+    }
+    function wrong(msg){
+      clue++; if(clue>4){ finish(false); return; }
+      $('gg-fb').className='fb no'; $('gg-fb').textContent=msg; show(); $('gg-g').value=''; $('gg-g').focus();
+    }
+    function guess(){
+      if(done) return; var v=norm($('gg-g').value); if(!v) return;
+      var o=G[order[idx]], ok=false; for(var i=0;i<o.a.length;i++) if(v===norm(dec(o.a[i]))) ok=true;
+      if(ok) finish(true); else wrong('Not this time. Here is the next clue.');
+    }
+    $('gg-go').addEventListener('click',guess);
+    $('gg-g').addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); guess(); } });
+    $('gg-pass').addEventListener('click',function(){ if(!done) wrong('Next clue.'); });
+    $('gg-next').addEventListener('click',function(){
+      if(!done) return; idx++; team=1-team;
+      if(idx>=G.length){
+        $('gg-play').classList.add('hide'); $('gg-end').classList.remove('hide');
+        $('gg-res').textContent=pts[0]===pts[1]?'A draw! '+pts[0]+' points each.':'Team '+(pts[0]>pts[1]?'A':'B')+' wins, '+Math.max(pts[0],pts[1])+' to '+Math.min(pts[0],pts[1])+'.';
+        return;
+      }
+      turn();
+    });
+    $('gg-new').addEventListener('click',newGame);
+    window.__gg={newGame:newGame,state:function(){return{idx:idx,team:team,pts:pts.slice(),done:done,start:start};}};
+    newGame();
+  })();
+  </script>
+</div>
+</body>
+</html>

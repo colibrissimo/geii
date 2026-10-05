@@ -1,0 +1,906 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Preview: Better. Faster. Stronger.</title><style>body{margin:0;background:#e5e9ef;padding:24px 12px}hr{border:0;height:2px;background:#155E75;margin:40px auto;max-width:820px}</style></head><body><div id="bf1">
+  <style>
+    #bf1{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #bf1 *{box-sizing:border-box;}
+    #bf1 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #bf1 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #bf1 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #bf1 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #bf1 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #bf1 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #bf1 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #bf1 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #bf1 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #bf1 button:hover{background:#0f4a5c;}
+    #bf1 button.ghost{background:transparent;color:var(--teal);}
+    #bf1 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #bf1 button.amber:hover{background:#e0a52a;}
+    #bf1 button:disabled{opacity:.45;cursor:default;}
+    #bf1 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #bf1 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #bf1 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #bf1 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #bf1 .choice:disabled{opacity:.9;}
+    #bf1 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #bf1 .fb.ok{color:var(--ok);} #bf1 .fb.no{color:var(--no);}
+    #bf1 .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #bf1 .tag.c{background:var(--teal-bg);color:var(--teal);} #bf1 .tag.s{background:var(--terra-bg);color:var(--terra);} #bf1 .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #bf1 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #bf1 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #bf1 input.gap{width:auto;min-width:120px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #bf1 input.ok{border-color:var(--ok);background:var(--ok-bg);} #bf1 input.no{border-color:var(--no);background:var(--no-bg);}
+    #bf1 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;}
+    #bf1 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);margin:0 4px;}
+    #bf1 select.ok{border-color:var(--ok);background:var(--ok-bg);} #bf1 select.no{border-color:var(--no);background:var(--no-bg);}
+    #bf1 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #bf1 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #bf1 .talk p{margin:0 0 6px;}
+    #bf1 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #bf1 .ex p{margin:4px 0;}
+    #bf1 .note{font-size:14px;color:var(--muted);}
+    #bf1 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+    #bf1 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;}
+    #bf1 .card h3{margin:0 0 6px;font-size:18px;color:var(--teal);}
+    #bf1 .card p{margin:0;font-size:15px;color:var(--muted);}
+    #bf1 .card.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf1 .rule{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+    #bf1 .rule:first-child{border-top:none;}
+    #bf1 .form{font-family:"Courier New",monospace;font-size:16px;}
+    #bf1 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #bf1 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #bf1 .hide{display:none;}
+    #bf1 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:start;}
+    #bf1 .item:first-child{border-top:none;}
+    #bf1 .item b{color:var(--teal);}
+    #bf1 .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #bf1 .pics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 4px;}
+    #bf1 .pics figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+    #bf1 .pics img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+    #bf1 .pics figcaption{text-align:center;font-size:15px;font-weight:bold;padding:6px 4px;color:var(--teal);}
+    #bf1 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #bf1 table.t th,#bf1 table.t td{border:1px solid var(--line);padding:8px;vertical-align:middle;}
+    #bf1 table.t th{background:var(--slate-bg);text-align:left;}
+    #bf1 .teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+    #bf1 .team{border:3px solid var(--line);border-radius:12px;padding:10px 14px;text-align:center;background:#fff;}
+    #bf1 .team .n{font-size:15px;font-weight:bold;letter-spacing:.05em;}
+    #bf1 .team .p{font-size:34px;font-weight:bold;}
+    #bf1 .team.a .n,#bf1 .team.a .p{color:var(--teal);} #bf1 .team.b .n,#bf1 .team.b .p{color:var(--terra);}
+    #bf1 .team.a.on{border-color:var(--teal);background:var(--teal-bg);} #bf1 .team.b.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf1 .clue{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);}
+    #bf1 .clue:first-child{border-top:none;}
+    #bf1 .clue .v{min-width:64px;text-align:center;font-weight:bold;border-radius:999px;background:var(--amber-bg);border:2px solid #f1d9a6;font-size:14px;padding:2px 6px;}
+    @media (max-width:560px){ #bf1 .pics{grid-template-columns:1fr 1fr 1fr;gap:6px;} #bf1 .rule{grid-template-columns:1fr;} }
+  </style>
+
+  <h1>Better. Faster. Stronger.</h1>
+  <p class="sub">In pairs. Two minutes a question, then swap who starts.</p>
+  <div class="q"><b>1</b><span>What three gadgets do you use most often? Have they changed in your lifetime?</span></div>
+  <div class="q"><b>2</b><span>Which of your gadgets would you like to update? Why?</span></div>
+  <div class="q"><b>3</b><span>What modern technology makes your life easier? What makes it a bit more difficult?</span></div>
+  <div class="btns" style="justify-content:center"><button id="bf1-pick" class="amber">Pick one for me</button></div>
+  <p class="note" style="text-align:center">The button chooses a question at random, so nobody argues about which one.</p>
+
+
+  <script>
+  (function(){
+    var qs=document.querySelectorAll('#bf1 .q'), b=document.getElementById('bf1-pick'), last=-1;
+    if(!b) return;
+    b.addEventListener('click',function(){
+      var i; do{ i=Math.floor(Math.random()*qs.length); }while(i===last&&qs.length>1); last=i;
+      for(var k=0;k<qs.length;k++) qs[k].className='q'+(k===i?' on':'');
+    });
+  })();
+  </script>
+</div>
+<hr><div id="bf23">
+  <style>
+    #bf23{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #bf23 *{box-sizing:border-box;}
+    #bf23 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #bf23 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #bf23 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #bf23 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #bf23 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #bf23 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #bf23 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #bf23 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #bf23 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #bf23 button:hover{background:#0f4a5c;}
+    #bf23 button.ghost{background:transparent;color:var(--teal);}
+    #bf23 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #bf23 button.amber:hover{background:#e0a52a;}
+    #bf23 button:disabled{opacity:.45;cursor:default;}
+    #bf23 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #bf23 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #bf23 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #bf23 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #bf23 .choice:disabled{opacity:.9;}
+    #bf23 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #bf23 .fb.ok{color:var(--ok);} #bf23 .fb.no{color:var(--no);}
+    #bf23 .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #bf23 .tag.c{background:var(--teal-bg);color:var(--teal);} #bf23 .tag.s{background:var(--terra-bg);color:var(--terra);} #bf23 .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #bf23 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #bf23 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #bf23 input.gap{width:auto;min-width:120px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #bf23 input.ok{border-color:var(--ok);background:var(--ok-bg);} #bf23 input.no{border-color:var(--no);background:var(--no-bg);}
+    #bf23 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;}
+    #bf23 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);margin:0 4px;}
+    #bf23 select.ok{border-color:var(--ok);background:var(--ok-bg);} #bf23 select.no{border-color:var(--no);background:var(--no-bg);}
+    #bf23 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #bf23 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #bf23 .talk p{margin:0 0 6px;}
+    #bf23 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #bf23 .ex p{margin:4px 0;}
+    #bf23 .note{font-size:14px;color:var(--muted);}
+    #bf23 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+    #bf23 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;}
+    #bf23 .card h3{margin:0 0 6px;font-size:18px;color:var(--teal);}
+    #bf23 .card p{margin:0;font-size:15px;color:var(--muted);}
+    #bf23 .card.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf23 .rule{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+    #bf23 .rule:first-child{border-top:none;}
+    #bf23 .form{font-family:"Courier New",monospace;font-size:16px;}
+    #bf23 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #bf23 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #bf23 .hide{display:none;}
+    #bf23 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:start;}
+    #bf23 .item:first-child{border-top:none;}
+    #bf23 .item b{color:var(--teal);}
+    #bf23 .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #bf23 .pics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 4px;}
+    #bf23 .pics figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+    #bf23 .pics img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+    #bf23 .pics figcaption{text-align:center;font-size:15px;font-weight:bold;padding:6px 4px;color:var(--teal);}
+    #bf23 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #bf23 table.t th,#bf23 table.t td{border:1px solid var(--line);padding:8px;vertical-align:middle;}
+    #bf23 table.t th{background:var(--slate-bg);text-align:left;}
+    #bf23 .teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+    #bf23 .team{border:3px solid var(--line);border-radius:12px;padding:10px 14px;text-align:center;background:#fff;}
+    #bf23 .team .n{font-size:15px;font-weight:bold;letter-spacing:.05em;}
+    #bf23 .team .p{font-size:34px;font-weight:bold;}
+    #bf23 .team.a .n,#bf23 .team.a .p{color:var(--teal);} #bf23 .team.b .n,#bf23 .team.b .p{color:var(--terra);}
+    #bf23 .team.a.on{border-color:var(--teal);background:var(--teal-bg);} #bf23 .team.b.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf23 .clue{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);}
+    #bf23 .clue:first-child{border-top:none;}
+    #bf23 .clue .v{min-width:64px;text-align:center;font-weight:bold;border-radius:999px;background:var(--amber-bg);border:2px solid #f1d9a6;font-size:14px;padding:2px 6px;}
+    @media (max-width:560px){ #bf23 .pics{grid-template-columns:1fr 1fr 1fr;gap:6px;} #bf23 .rule{grid-template-columns:1fr;} }
+  </style>
+
+  <h1>Technology then and now</h1>
+  <p class="sub">You are going to watch a video called <em>Past and present: technology then and now</em>. <strong>Before</strong> you watch: which technologies do you think it compares? Write three or four.</p>
+  <div class="panel" id="bf2-pred">
+    <textarea id="bf2-t" placeholder="phones, ..."></textarea>
+    <div class="btns"><button id="bf2-lock">Lock my guesses</button></div>
+  </div>
+
+  <div class="hide" id="bf2-watch">
+    <h2>Watch two parts</h2>
+    <p class="sub">Part 1 is 01:04 to 01:56. Part 2 is 02:56 to 04:13. Which technologies are compared?</p>
+    <div class="video"><iframe id="bf2-yt" src="" title="Technology then and now" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+    <div class="btns"><button id="bf2-p1">Play part 1</button><button id="bf2-p2">Play part 2</button><button id="bf2-tech" class="ghost">Show the technologies</button></div>
+    <div class="panel hide" id="bf2-techans" style="margin-top:12px">
+      <p style="margin:0 0 6px"><strong>Part 1:</strong> paper books and the ebook reader (Kindle) &middot; cars (Ford Model T and Ford GT)</p>
+      <p style="margin:0"><strong>Part 2:</strong> laptops &middot; mobile phones</p>
+      <p class="note" id="bf2-yours" style="margin:8px 0 0"></p>
+    </div>
+
+    <h2>Guess the numbers</h2>
+    <p class="sub">Do not watch yet. Guess the missing numbers, lock them, then watch both parts again and check.</p>
+    <div class="panel" id="bf3"><div class="item"><b>A</b><div>ebook readers: the cheapest version can hold <input type="text" class="gap" data-i="0" autocomplete="off" inputmode="decimal"> books in digital form.</div></div><div class="item"><b>B</b><div>cars: the 1908 model had a top speed of <input type="text" class="gap" data-i="1" autocomplete="off" inputmode="decimal"> mph.</div></div><div class="item"><b>C</b><div>The 2017 model has a top speed of more than <input type="text" class="gap" data-i="2" autocomplete="off" inputmode="decimal"> mph.</div></div><div class="item"><b>D</b><div>laptops: the first laptop had a <input type="text" class="gap" data-i="3" autocomplete="off" inputmode="decimal"> -inch screen.</div></div><div class="item"><b>E</b><div>It weighed <input type="text" class="gap" data-i="4" autocomplete="off" inputmode="decimal"> pounds. The new models have 13 to 15-inch screens.</div></div><div class="item"><b>F</b><div>mobile phones: the 1973 model weighed <input type="text" class="gap" data-i="5" autocomplete="off" inputmode="decimal"> kg.</div></div><div class="item"><b>G</b><div>It took <input type="text" class="gap" data-i="6" autocomplete="off" inputmode="decimal"> hours to recharge.</div></div>
+      <div class="btns"><button id="bf3-lock">Lock my numbers</button><button id="bf3-reveal" disabled>Reveal the answers</button></div>
+      <div class="score" id="bf3-score"></div>
+    </div>
+
+    <div class="talk">
+      <p><strong>Then:</strong> this video was made around 2017. Its &ldquo;modern&rdquo; models are already old.</p>
+      <p>Compare the 2017 laptop or phone with the one in your bag. <em>My phone is thinner than..., it has a better camera than...</em></p>
+    </div>
+  </div>
+
+
+  <script>
+  (function(){
+    var D=[{"a": ["1400", "1,400", "1 400"], "s": "1,400", "t": "01:22"}, {"a": ["45"], "s": "45", "t": "01:37"}, {"a": ["200"], "s": "200", "t": "01:52"}, {"a": ["5", "five"], "s": "five", "t": "03:09"}, {"a": ["24", "twenty-four", "twenty four"], "s": "24", "t": "03:09"}, {"a": ["1.1", "1,1"], "s": "1.1", "t": "03:46"}, {"a": ["10", "ten"], "s": "10", "t": "03:46"}], yt=document.getElementById('bf2-yt'), base='https://www.youtube.com/embed/DENG7Q7VRgo?rel=0'; if(!yt) return;
+    document.getElementById('bf2-lock').addEventListener('click',function(){
+      var t=document.getElementById('bf2-t'); t.readOnly=true; this.disabled=true; this.textContent='Guesses locked';
+      document.getElementById('bf2-watch').classList.remove('hide'); yt.src=base+'&start=64&end=116';
+    });
+    document.getElementById('bf2-p1').addEventListener('click',function(){ yt.src=base+'&start=64&end=116&autoplay=1'; });
+    document.getElementById('bf2-p2').addEventListener('click',function(){ yt.src=base+'&start=176&end=253&autoplay=1'; });
+    document.getElementById('bf2-tech').addEventListener('click',function(){
+      var v=document.getElementById('bf2-t').value.trim();
+      document.getElementById('bf2-yours').textContent=v?'You guessed: '+v:'';
+      document.getElementById('bf2-techans').classList.remove('hide'); this.disabled=true;
+    });
+    var box=document.getElementById('bf3'), locked=false, shown=false;
+    function norm(s){ return s.toLowerCase().replace(/\s+/g,' ').trim(); }
+    document.getElementById('bf3-lock').addEventListener('click',function(){
+      if(locked) return; locked=true;
+      var ins=box.querySelectorAll('input'); for(var i=0;i<ins.length;i++) ins[i].readOnly=true;
+      this.disabled=true; this.textContent='Numbers locked. Watch both parts again.';
+      document.getElementById('bf3-reveal').disabled=false;
+    });
+    document.getElementById('bf3-reveal').addEventListener('click',function(){
+      if(shown) return; shown=true; this.disabled=true;
+      var ins=box.querySelectorAll('input'), r=0;
+      for(var i=0;i<ins.length;i++){
+        var v=norm(ins[i].value), ok=D[i].a.indexOf(v)>-1; if(ok) r++;
+        ins[i].className='gap '+(ok?'ok':'no');
+        var fb=document.createElement('div'); fb.className='fb '+(ok?'ok':'no');
+        fb.innerHTML=(ok?'Right: ':(v?'You guessed '+v.replace(/</g,'&lt;')+'. It is ':'It is '))+'<strong>'+D[i].s+'</strong> <span class="note">['+D[i].t+']</span>';
+        ins[i].parentNode.appendChild(fb);
+      }
+      document.getElementById('bf3-score').textContent=r+' of '+D.length+' guessed right before watching.';
+    });
+  })();
+  </script>
+</div>
+<hr><div id="bf46">
+  <style>
+    #bf46{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #bf46 *{box-sizing:border-box;}
+    #bf46 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #bf46 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #bf46 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #bf46 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #bf46 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #bf46 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #bf46 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #bf46 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #bf46 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #bf46 button:hover{background:#0f4a5c;}
+    #bf46 button.ghost{background:transparent;color:var(--teal);}
+    #bf46 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #bf46 button.amber:hover{background:#e0a52a;}
+    #bf46 button:disabled{opacity:.45;cursor:default;}
+    #bf46 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #bf46 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #bf46 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #bf46 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #bf46 .choice:disabled{opacity:.9;}
+    #bf46 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #bf46 .fb.ok{color:var(--ok);} #bf46 .fb.no{color:var(--no);}
+    #bf46 .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #bf46 .tag.c{background:var(--teal-bg);color:var(--teal);} #bf46 .tag.s{background:var(--terra-bg);color:var(--terra);} #bf46 .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #bf46 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #bf46 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #bf46 input.gap{width:auto;min-width:120px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #bf46 input.ok{border-color:var(--ok);background:var(--ok-bg);} #bf46 input.no{border-color:var(--no);background:var(--no-bg);}
+    #bf46 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;}
+    #bf46 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);margin:0 4px;}
+    #bf46 select.ok{border-color:var(--ok);background:var(--ok-bg);} #bf46 select.no{border-color:var(--no);background:var(--no-bg);}
+    #bf46 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #bf46 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #bf46 .talk p{margin:0 0 6px;}
+    #bf46 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #bf46 .ex p{margin:4px 0;}
+    #bf46 .note{font-size:14px;color:var(--muted);}
+    #bf46 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+    #bf46 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;}
+    #bf46 .card h3{margin:0 0 6px;font-size:18px;color:var(--teal);}
+    #bf46 .card p{margin:0;font-size:15px;color:var(--muted);}
+    #bf46 .card.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf46 .rule{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+    #bf46 .rule:first-child{border-top:none;}
+    #bf46 .form{font-family:"Courier New",monospace;font-size:16px;}
+    #bf46 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #bf46 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #bf46 .hide{display:none;}
+    #bf46 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:start;}
+    #bf46 .item:first-child{border-top:none;}
+    #bf46 .item b{color:var(--teal);}
+    #bf46 .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #bf46 .pics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 4px;}
+    #bf46 .pics figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+    #bf46 .pics img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+    #bf46 .pics figcaption{text-align:center;font-size:15px;font-weight:bold;padding:6px 4px;color:var(--teal);}
+    #bf46 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #bf46 table.t th,#bf46 table.t td{border:1px solid var(--line);padding:8px;vertical-align:middle;}
+    #bf46 table.t th{background:var(--slate-bg);text-align:left;}
+    #bf46 .teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+    #bf46 .team{border:3px solid var(--line);border-radius:12px;padding:10px 14px;text-align:center;background:#fff;}
+    #bf46 .team .n{font-size:15px;font-weight:bold;letter-spacing:.05em;}
+    #bf46 .team .p{font-size:34px;font-weight:bold;}
+    #bf46 .team.a .n,#bf46 .team.a .p{color:var(--teal);} #bf46 .team.b .n,#bf46 .team.b .p{color:var(--terra);}
+    #bf46 .team.a.on{border-color:var(--teal);background:var(--teal-bg);} #bf46 .team.b.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf46 .clue{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);}
+    #bf46 .clue:first-child{border-top:none;}
+    #bf46 .clue .v{min-width:64px;text-align:center;font-weight:bold;border-radius:999px;background:var(--amber-bg);border:2px solid #f1d9a6;font-size:14px;padding:2px 6px;}
+    @media (max-width:560px){ #bf46 .pics{grid-template-columns:1fr 1fr 1fr;gap:6px;} #bf46 .rule{grid-template-columns:1fr;} }
+  </style>
+
+  <h1>What are they about?</h1>
+  <p class="sub">Each sentence is about one technology from the video. Click it.</p>
+  <div class="panel" id="bf4"><div class="item" data-i="0"><b>a</b><div>This modern model has a longer talk time than the old model.<div class="opt"><button class="choice" data-j="0">ebook reader</button><button class="choice" data-j="1">car</button><button class="choice" data-j="2">laptop</button><button class="choice" data-j="3">mobile phone</button></div><div class="fb"></div></div></div><div class="item" data-i="1"><b>b</b><div>It's the best gadget for reading.<div class="opt"><button class="choice" data-j="0">ebook reader</button><button class="choice" data-j="1">car</button><button class="choice" data-j="2">laptop</button><button class="choice" data-j="3">mobile phone</button></div><div class="fb"></div></div></div><div class="item" data-i="2"><b>c</b><div>This gadget is the most multifunctional of all the objects shown in the video.<div class="opt"><button class="choice" data-j="0">ebook reader</button><button class="choice" data-j="1">car</button><button class="choice" data-j="2">laptop</button><button class="choice" data-j="3">mobile phone</button></div><div class="fb"></div></div></div><div class="item" data-i="3"><b>d</b><div>This gadget has the biggest screen.<div class="opt"><button class="choice" data-j="0">ebook reader</button><button class="choice" data-j="1">car</button><button class="choice" data-j="2">laptop</button><button class="choice" data-j="3">mobile phone</button></div><div class="fb"></div></div></div><div class="item" data-i="4"><b>e</b><div>The modern model has a more powerful engine than the old one.<div class="opt"><button class="choice" data-j="0">ebook reader</button><button class="choice" data-j="1">car</button><button class="choice" data-j="2">laptop</button><button class="choice" data-j="3">mobile phone</button></div><div class="fb"></div></div></div><div class="item" data-i="5"><b>f</b><div>This is the heaviest thing in the video.<div class="opt"><button class="choice" data-j="0">ebook reader</button><button class="choice" data-j="1">car</button><button class="choice" data-j="2">laptop</button><button class="choice" data-j="3">mobile phone</button></div><div class="fb"></div></div></div><div class="item" data-i="6"><b>g</b><div>Some people say that it's worse for your eyes than the paper version.<div class="opt"><button class="choice" data-j="0">ebook reader</button><button class="choice" data-j="1">car</button><button class="choice" data-j="2">laptop</button><button class="choice" data-j="3">mobile phone</button></div><div class="fb"></div></div></div></div>
+  <div class="score" id="bf4-score"></div>
+
+  <div class="hide" id="bf5-wrap">
+  <h1 style="margin-top:26px">Find the rules</h1>
+  <p class="sub">Sentences <strong>a, e, g</strong> compare <strong>two</strong> things. Sentences <strong>b, c, d, f</strong> compare <strong>three or more</strong>. Look at them again and choose.</p>
+  <div class="panel" id="bf5"><div class="item" data-i="0"><b>1</b><div><span class="tag c">COMPARATIVE</span> To compare <strong>two</strong> things with a short adjective (<em>long</em>), we add<div class="opt"><button class="choice" data-j="0">-er</button><button class="choice" data-j="1">-est</button><button class="choice" data-j="2">more</button></div><div class="fb"></div></div></div><div class="item" data-i="1"><b>2</b><div><span class="tag c">COMPARATIVE</span> Before a long adjective (<em>powerful</em>), to compare two things, we use<div class="opt"><button class="choice" data-j="0">most</button><button class="choice" data-j="1">more</button><button class="choice" data-j="2">-er</button></div><div class="fb"></div></div></div><div class="item" data-i="2"><b>3</b><div><span class="tag c">COMPARATIVE</span> After the adjective, when we compare two things, we use<div class="opt"><button class="choice" data-j="0">that</button><button class="choice" data-j="1">then</button><button class="choice" data-j="2">than</button></div><div class="fb"></div></div></div><div class="item" data-i="3"><b>4</b><div><span class="tag s">SUPERLATIVE</span> To compare <strong>three or more</strong> things with a short adjective, we add<div class="opt"><button class="choice" data-j="0">-est</button><button class="choice" data-j="1">-er</button><button class="choice" data-j="2">most</button></div><div class="fb"></div></div></div><div class="item" data-i="4"><b>5</b><div><span class="tag s">SUPERLATIVE</span> Before a long adjective, to compare three or more things, we use<div class="opt"><button class="choice" data-j="0">more</button><button class="choice" data-j="1">most</button><button class="choice" data-j="2">-est</button></div><div class="fb"></div></div></div><div class="item" data-i="5"><b>6</b><div><span class="tag s">SUPERLATIVE</span> Before <em>-est</em> adjectives and before <em>most</em> + adjective, we use<div class="opt"><button class="choice" data-j="0">a</button><button class="choice" data-j="1">the</button><button class="choice" data-j="2">than</button></div><div class="fb"></div></div></div></div>
+
+  <h2>Three words that break the rules</h2>
+  <p class="sub">Why are these different? Talk to your partner first, then open each one.</p>
+  <div class="grid" id="bf5x">
+    <div class="card"><h3>big</h3><button class="ghost">Why?</button><p class="hide">We double the last letter: <strong>big, bigger, the biggest</strong>. Same with <em>hot, hotter, the hottest</em>.</p></div>
+    <div class="card"><h3>heavy</h3><button class="ghost">Why?</button><p class="hide">The <strong>-y</strong> becomes <strong>-i</strong>: <strong>heavier, the heaviest</strong>. Two-syllable -y words can go both ways: <em>healthier</em> or <em>more healthy</em>.</p></div>
+    <div class="card"><h3>good / bad</h3><button class="ghost">Why?</button><p class="hide">They change completely: <strong>good, better, the best</strong>; <strong>bad, worse, the worst</strong>.</p></div>
+  </div>
+
+  <h2>Complete the table</h2>
+  <div class="panel" id="bf6">
+    <div style="overflow-x:auto"><table class="t">
+      <tr><th></th><th>short adjectives<br><span class="note">one syllable</span></th><th>long adjectives<br><span class="note">two or more syllables</span></th><th>exceptions</th></tr>
+      <tr><th><span class="tag c">TWO THINGS</span></th><td><select data-a="adjective + -er"><option value="">…</option><option>adjective + -er</option><option>more + adjective</option><option>the + adjective + -est</option><option>the most + adjective</option></select></td><td><select data-a="more + adjective"><option value="">…</option><option>adjective + -er</option><option>more + adjective</option><option>the + adjective + -est</option><option>the most + adjective</option></select></td>
+        <td>good &rarr; <select data-a="better"><option value="">…</option><option>gooder</option><option>better</option><option>best</option></select><br>bad &rarr; <select data-a="worse"><option value="">…</option><option>badder</option><option>worse</option><option>worst</option></select></td></tr>
+      <tr><th><span class="tag s">THREE OR MORE</span></th><td><select data-a="the + adjective + -est"><option value="">…</option><option>adjective + -er</option><option>more + adjective</option><option>the + adjective + -est</option><option>the most + adjective</option></select></td><td><select data-a="the most + adjective"><option value="">…</option><option>adjective + -er</option><option>more + adjective</option><option>the + adjective + -est</option><option>the most + adjective</option></select></td>
+        <td>good &rarr; <select data-a="the best"><option value="">…</option><option>the better</option><option>the best</option><option>the goodest</option></select><br>bad &rarr; <select data-a="the worst"><option value="">…</option><option>the worse</option><option>the worst</option><option>the baddest</option></select></td></tr>
+    </table></div>
+    <div class="btns"><button id="bf6-check">Check</button></div>
+    <div class="fb" id="bf6-fb"></div>
+  </div>
+  <div class="panel hide" id="bf6-sum">
+    <h2 style="margin-top:0">The whole system</h2>
+    <div class="rule"><span class="tag c">TWO THINGS</span><span class="form">long<b>er</b> than &middot; <b>more</b> powerful than &middot; better / worse than</span></div>
+    <div class="rule"><span class="tag s">THREE OR MORE</span><span class="form"><b>the</b> long<b>est</b> &middot; <b>the most</b> powerful &middot; the best / the worst</span></div>
+  </div>
+  </div>
+
+
+  <script>
+  (function(){
+    var D4=[{"k": 3, "t": "c"}, {"k": 0, "t": "s"}, {"k": 3, "t": "s"}, {"k": 2, "t": "s"}, {"k": 1, "t": "c"}, {"k": 1, "t": "s"}, {"k": 0, "t": "c"}], D5=[0, 1, 2, 0, 1, 1], b4=document.getElementById('bf4'); if(!b4) return;
+    var n4=0, r4=0, why={c:'It compares two things.',s:'It compares three or more things.'};
+    function one(box,cb){
+      box.addEventListener('click',function(e){
+        var b=e.target.closest?e.target.closest('button'):null; if(!b||b.disabled) return;
+        var it=b.closest('.item'); if(it.getAttribute('data-done')) return; it.setAttribute('data-done','1');
+        cb(it,+it.getAttribute('data-i'),+b.getAttribute('data-j'),b);
+      });
+    }
+    function mark(it,k,j,b){
+      var bs=it.querySelectorAll('button'); for(var x=0;x<bs.length;x++){ bs[x].disabled=true; if(x===k) bs[x].className='choice ok'; }
+      if(j!==k) b.className='choice no'; return j===k;
+    }
+    one(b4,function(it,i,j,b){
+      var ok=mark(it,D4[i].k,j,b); n4++; if(ok) r4++;
+      var fb=it.querySelector('.fb'); fb.className='fb '+(ok?'ok':'no');
+      fb.innerHTML='<span class="tag '+D4[i].t+'">'+(D4[i].t==='c'?'COMPARATIVE':'SUPERLATIVE')+'</span> <span style="font-weight:normal">'+why[D4[i].t]+'</span>';
+      document.getElementById('bf4-score').textContent=r4+' right out of '+n4+(n4===D4.length?'. Now look at the grammar, below.':'');
+      if(n4===D4.length) document.getElementById('bf5-wrap').classList.remove('hide');
+    });
+    one(document.getElementById('bf5'),function(it,i,j,b){
+      var ok=mark(it,D5[i],j,b), fb=it.querySelector('.fb'); fb.className='fb '+(ok?'ok':'no'); fb.textContent=ok?'Yes.':'Not this one. Look at the sentences again.';
+    });
+    document.getElementById('bf5x').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b) return;
+      b.nextElementSibling.classList.remove('hide'); b.classList.add('hide');
+    });
+    var t6=document.getElementById('bf6');
+    document.getElementById('bf6-check').addEventListener('click',function(){
+      var ss=t6.querySelectorAll('select'), r=0;
+      for(var i=0;i<ss.length;i++){ var ok=ss[i].value===ss[i].getAttribute('data-a'); ss[i].className=ok?'ok':'no'; if(ok) r++; }
+      var fb=document.getElementById('bf6-fb'); fb.className='fb '+(r===ss.length?'ok':'no');
+      fb.textContent=r===ss.length?'All '+r+'. That is the whole system.':r+' of '+ss.length+'. Look at the red ones again.';
+      if(r===ss.length) document.getElementById('bf6-sum').classList.remove('hide');
+    });
+  })();
+  </script>
+</div>
+<hr><div id="bf7p">
+  <style>
+    #bf7p{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #bf7p *{box-sizing:border-box;}
+    #bf7p h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #bf7p h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #bf7p .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #bf7p .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #bf7p .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #bf7p .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #bf7p .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #bf7p .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #bf7p button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #bf7p button:hover{background:#0f4a5c;}
+    #bf7p button.ghost{background:transparent;color:var(--teal);}
+    #bf7p button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #bf7p button.amber:hover{background:#e0a52a;}
+    #bf7p button:disabled{opacity:.45;cursor:default;}
+    #bf7p .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #bf7p .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #bf7p .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #bf7p .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #bf7p .choice:disabled{opacity:.9;}
+    #bf7p .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #bf7p .fb.ok{color:var(--ok);} #bf7p .fb.no{color:var(--no);}
+    #bf7p .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #bf7p .tag.c{background:var(--teal-bg);color:var(--teal);} #bf7p .tag.s{background:var(--terra-bg);color:var(--terra);} #bf7p .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #bf7p input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #bf7p input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #bf7p input.gap{width:auto;min-width:120px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #bf7p input.ok{border-color:var(--ok);background:var(--ok-bg);} #bf7p input.no{border-color:var(--no);background:var(--no-bg);}
+    #bf7p textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;}
+    #bf7p select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);margin:0 4px;}
+    #bf7p select.ok{border-color:var(--ok);background:var(--ok-bg);} #bf7p select.no{border-color:var(--no);background:var(--no-bg);}
+    #bf7p .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #bf7p .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #bf7p .talk p{margin:0 0 6px;}
+    #bf7p .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #bf7p .ex p{margin:4px 0;}
+    #bf7p .note{font-size:14px;color:var(--muted);}
+    #bf7p .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+    #bf7p .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;}
+    #bf7p .card h3{margin:0 0 6px;font-size:18px;color:var(--teal);}
+    #bf7p .card p{margin:0;font-size:15px;color:var(--muted);}
+    #bf7p .card.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf7p .rule{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+    #bf7p .rule:first-child{border-top:none;}
+    #bf7p .form{font-family:"Courier New",monospace;font-size:16px;}
+    #bf7p .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #bf7p .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #bf7p .hide{display:none;}
+    #bf7p .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:start;}
+    #bf7p .item:first-child{border-top:none;}
+    #bf7p .item b{color:var(--teal);}
+    #bf7p .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #bf7p .pics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 4px;}
+    #bf7p .pics figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+    #bf7p .pics img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+    #bf7p .pics figcaption{text-align:center;font-size:15px;font-weight:bold;padding:6px 4px;color:var(--teal);}
+    #bf7p table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #bf7p table.t th,#bf7p table.t td{border:1px solid var(--line);padding:8px;vertical-align:middle;}
+    #bf7p table.t th{background:var(--slate-bg);text-align:left;}
+    #bf7p .teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+    #bf7p .team{border:3px solid var(--line);border-radius:12px;padding:10px 14px;text-align:center;background:#fff;}
+    #bf7p .team .n{font-size:15px;font-weight:bold;letter-spacing:.05em;}
+    #bf7p .team .p{font-size:34px;font-weight:bold;}
+    #bf7p .team.a .n,#bf7p .team.a .p{color:var(--teal);} #bf7p .team.b .n,#bf7p .team.b .p{color:var(--terra);}
+    #bf7p .team.a.on{border-color:var(--teal);background:var(--teal-bg);} #bf7p .team.b.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf7p .clue{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);}
+    #bf7p .clue:first-child{border-top:none;}
+    #bf7p .clue .v{min-width:64px;text-align:center;font-weight:bold;border-radius:999px;background:var(--amber-bg);border:2px solid #f1d9a6;font-size:14px;padding:2px 6px;}
+    @media (max-width:560px){ #bf7p .pics{grid-template-columns:1fr 1fr 1fr;gap:6px;} #bf7p .rule{grid-template-columns:1fr;} }
+  </style>
+
+  <h1>Put the adjective in the correct form</h1>
+  <p class="sub">Type the word in brackets in the form that fits. First ask: two things, or three or more?</p>
+  <div class="panel" id="bf7"><div class="item" data-i="0"><b>A</b><div>I think I need a new phone. I want one with a <input type="text" class="gap" data-g="0" autocomplete="off"> screen than my old one. <span class="note">(big)</span><div class="fb"></div></div></div><div class="item" data-i="1"><b>B</b><div>If you want to impress them, buy this tablet. It's <input type="text" class="gap" data-g="1" autocomplete="off"> one in the store. <span class="note">(expensive)</span><div class="fb"></div></div></div><div class="item" data-i="2"><b>C</b><div>They upgraded their computers to the ones with a <input type="text" class="gap" data-g="2" autocomplete="off"> processor. <span class="note">(fast)</span><div class="fb"></div></div></div><div class="item" data-i="3"><b>D</b><div>My smartwatch has really helped me to be <input type="text" class="gap" data-g="3" autocomplete="off"> than before. I move more and I'm in <input type="text" class="gap" data-g="4" autocomplete="off"> shape. <span class="note">(healthy, good)</span><div class="fb"></div></div></div><div class="item" data-i="4"><b>E</b><div>This is <input type="text" class="gap" data-g="5" autocomplete="off"> phone I've ever used. The battery is always low and the camera takes terrible pictures. <span class="note">(bad)</span><div class="fb"></div></div></div><div class="item" data-i="5"><b>F</b><div>Out of all the music subscription services, this one is <input type="text" class="gap" data-g="6" autocomplete="off">: they have a good UI, and the price is <input type="text" class="gap" data-g="7" autocomplete="off">, too. <span class="note">(convenient, cheap)</span><div class="fb"></div></div></div>
+    <div class="btns"><button id="bf7-check">Check</button><button id="bf7-show" class="ghost">Show answers</button></div>
+    <div class="score" id="bf7-score"></div>
+  </div>
+  <div class="talk"><p><strong>Then:</strong> which of these sentences could be true for you? Change one detail to make it true and tell your partner.</p></div>
+
+
+  <script>
+  (function(){
+    var D={"k": [{"a": ["bigger"], "q": 0}, {"a": ["the most expensive"], "q": 1}, {"a": ["faster"], "q": 2}, {"a": ["healthier", "more healthy"], "q": 3}, {"a": ["better"], "q": 3}, {"a": ["the worst"], "q": 4}, {"a": ["the most convenient"], "q": 5}, {"a": ["the cheapest"], "q": 5}], "w": [{"t": "c", "w": "Two phones, short adjective, double the g: <em>bigger</em>."}, {"t": "s", "w": "All the tablets in the store, long adjective: <em>the most expensive</em>."}, {"t": "c", "w": "New against old, short adjective: <em>faster</em>."}, {"t": "c", "w": "<em>healthy</em> ends in -y, so both <em>healthier</em> and <em>more healthy</em> work. <em>good</em> is an exception: <em>better</em>."}, {"t": "s", "w": "<em>ever</em> means all the phones you have used: <em>the worst</em>."}, {"t": "s", "w": "<em>Out of all</em> means three or more: <em>the most convenient</em>, <em>the cheapest</em>."}]}, box=document.getElementById('bf7'); if(!box) return;
+    var names={c:'COMPARATIVE',s:'SUPERLATIVE'};
+    function norm(s){ return s.toLowerCase().replace(/[’‘]/g,"'").replace(/\s+/g,' ').trim(); }
+    function check(show){
+      var ins=box.querySelectorAll('input'), r=0, qok={};
+      for(var i=0;i<ins.length;i++){
+        var k=D.k[i], v=norm(ins[i].value), ok=k.a.indexOf(v)>-1;
+        if(show){ ins[i].value=k.a[0]; ok=true; }
+        ins[i].className='gap '+(ok?'ok':'no'); if(ok) r++;
+        qok[k.q]=(qok[k.q]===undefined?true:qok[k.q])&&ok;
+      }
+      var its=box.querySelectorAll('.item');
+      for(var q=0;q<its.length;q++){
+        var fb=its[q].querySelector('.fb'), w=D.w[q];
+        if(qok[q]){ fb.className='fb ok'; fb.innerHTML='<span class="tag '+w.t+'">'+names[w.t]+'</span> <span style="font-weight:normal">'+w.w+'</span>'; }
+        else { fb.className='fb no'; fb.textContent='Not quite. Two things, or three or more?'; }
+      }
+      document.getElementById('bf7-score').textContent=show?'':r+' of '+ins.length+' correct.';
+    }
+    document.getElementById('bf7-check').addEventListener('click',function(){ check(false); });
+    document.getElementById('bf7-show').addEventListener('click',function(){ check(true); });
+    box.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); check(false); } });
+  })();
+  </script>
+</div>
+<hr><div id="bf89">
+  <style>
+    #bf89{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #bf89 *{box-sizing:border-box;}
+    #bf89 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #bf89 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #bf89 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #bf89 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #bf89 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #bf89 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #bf89 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #bf89 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #bf89 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #bf89 button:hover{background:#0f4a5c;}
+    #bf89 button.ghost{background:transparent;color:var(--teal);}
+    #bf89 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #bf89 button.amber:hover{background:#e0a52a;}
+    #bf89 button:disabled{opacity:.45;cursor:default;}
+    #bf89 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #bf89 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #bf89 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #bf89 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #bf89 .choice:disabled{opacity:.9;}
+    #bf89 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #bf89 .fb.ok{color:var(--ok);} #bf89 .fb.no{color:var(--no);}
+    #bf89 .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #bf89 .tag.c{background:var(--teal-bg);color:var(--teal);} #bf89 .tag.s{background:var(--terra-bg);color:var(--terra);} #bf89 .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #bf89 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #bf89 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #bf89 input.gap{width:auto;min-width:120px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #bf89 input.ok{border-color:var(--ok);background:var(--ok-bg);} #bf89 input.no{border-color:var(--no);background:var(--no-bg);}
+    #bf89 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;}
+    #bf89 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);margin:0 4px;}
+    #bf89 select.ok{border-color:var(--ok);background:var(--ok-bg);} #bf89 select.no{border-color:var(--no);background:var(--no-bg);}
+    #bf89 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #bf89 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #bf89 .talk p{margin:0 0 6px;}
+    #bf89 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #bf89 .ex p{margin:4px 0;}
+    #bf89 .note{font-size:14px;color:var(--muted);}
+    #bf89 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+    #bf89 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;}
+    #bf89 .card h3{margin:0 0 6px;font-size:18px;color:var(--teal);}
+    #bf89 .card p{margin:0;font-size:15px;color:var(--muted);}
+    #bf89 .card.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf89 .rule{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+    #bf89 .rule:first-child{border-top:none;}
+    #bf89 .form{font-family:"Courier New",monospace;font-size:16px;}
+    #bf89 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #bf89 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #bf89 .hide{display:none;}
+    #bf89 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:start;}
+    #bf89 .item:first-child{border-top:none;}
+    #bf89 .item b{color:var(--teal);}
+    #bf89 .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #bf89 .pics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 4px;}
+    #bf89 .pics figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+    #bf89 .pics img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+    #bf89 .pics figcaption{text-align:center;font-size:15px;font-weight:bold;padding:6px 4px;color:var(--teal);}
+    #bf89 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #bf89 table.t th,#bf89 table.t td{border:1px solid var(--line);padding:8px;vertical-align:middle;}
+    #bf89 table.t th{background:var(--slate-bg);text-align:left;}
+    #bf89 .teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+    #bf89 .team{border:3px solid var(--line);border-radius:12px;padding:10px 14px;text-align:center;background:#fff;}
+    #bf89 .team .n{font-size:15px;font-weight:bold;letter-spacing:.05em;}
+    #bf89 .team .p{font-size:34px;font-weight:bold;}
+    #bf89 .team.a .n,#bf89 .team.a .p{color:var(--teal);} #bf89 .team.b .n,#bf89 .team.b .p{color:var(--terra);}
+    #bf89 .team.a.on{border-color:var(--teal);background:var(--teal-bg);} #bf89 .team.b.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf89 .clue{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);}
+    #bf89 .clue:first-child{border-top:none;}
+    #bf89 .clue .v{min-width:64px;text-align:center;font-weight:bold;border-radius:999px;background:var(--amber-bg);border:2px solid #f1d9a6;font-size:14px;padding:2px 6px;}
+    @media (max-width:560px){ #bf89 .pics{grid-template-columns:1fr 1fr 1fr;gap:6px;} #bf89 .rule{grid-template-columns:1fr;} }
+  </style>
+
+  <h1>Compare the objects</h1>
+  <p class="sub">In pairs. For each set, say <strong>three sentences</strong>: one with <span class="tag c">-er / more ... than</span>, one with <span class="tag s">the -est / the most</span>, and one with <em>better / worse / the best / the worst</em>.</p>
+  <div class="ex"><p><em>A memory stick is smaller than a CD. The floppy disk is the oldest. A CD is better than a floppy disk for music.</em></p></div>
+  <p class="note">Useful adjectives: small, big, heavy, light, cheap, expensive, fast, slow, old, modern, useful, convenient, fragile, reliable, practical</p>
+  <div id="bf8"><div class="panel bf8-set"><h2 style="margin-top:0">1 of 3 &middot; Storing information</h2><div class="pics"><figure><img src="img/floppy-disk.jpg" alt="floppy disk"><figcaption>floppy disk</figcaption></figure><figure><img src="img/compact-disc.jpg" alt="compact disc"><figcaption>compact disc</figcaption></figure><figure><img src="img/memory-stick.jpg" alt="memory stick"><figcaption>memory stick</figcaption></figure></div></div><div class="panel bf8-set hide"><h2 style="margin-top:0">2 of 3 &middot; Listening to music</h2><div class="pics"><figure><img src="img/record-player.jpg" alt="record player"><figcaption>record player</figcaption></figure><figure><img src="img/old-ipod.jpg" alt="old iPod"><figcaption>old iPod</figcaption></figure><figure><img src="img/modern-ipod.jpg" alt="modern iPod"><figcaption>modern iPod</figcaption></figure></div></div><div class="panel bf8-set hide"><h2 style="margin-top:0">3 of 3 &middot; Checking the time</h2><div class="pics"><figure><img src="img/clock.jpg" alt="clock"><figcaption>clock</figcaption></figure><figure><img src="img/wristwatch.jpg" alt="wristwatch"><figcaption>wristwatch</figcaption></figure><figure><img src="img/smartwatch.jpg" alt="smartwatch"><figcaption>smartwatch</figcaption></figure></div></div></div>
+  <div class="btns" style="justify-content:center"><button id="bf8-next">Next set</button></div>
+
+  <div class="hide" id="bf9">
+  <h1 style="margin-top:26px">Talk about it</h1>
+  <div class="q"><b>1</b><span>Which of the objects is the most useful for you?</span></div>
+  <div class="q"><b>2</b><span>Are there more convenient ways to listen to music, store information or check the time?</span></div>
+  <div class="q"><b>3</b><span>Which of the objects has changed the most over time?</span></div>
+  <div class="btns" style="justify-content:center"><button id="bf9-pick" class="amber">Pick one for me</button></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var s=document.querySelectorAll('#bf8 .bf8-set'), b=document.getElementById('bf8-next'), n=0; if(!b) return;
+    b.addEventListener('click',function(){
+      n++; if(n<s.length){ s[n].classList.remove('hide'); s[n].scrollIntoView({behavior:'smooth',block:'start'}); }
+      if(n>=s.length-1){ b.classList.add('hide'); document.getElementById('bf9').classList.remove('hide'); }
+    });
+  })();
+  </script>
+  <script>
+  (function(){
+    var qs=document.querySelectorAll('#bf9 .q'), b=document.getElementById('bf9-pick'), last=-1;
+    if(!b) return;
+    b.addEventListener('click',function(){
+      var i; do{ i=Math.floor(Math.random()*qs.length); }while(i===last&&qs.length>1); last=i;
+      for(var k=0;k<qs.length;k++) qs[k].className='q'+(k===i?' on':'');
+    });
+  })();
+  </script>
+</div>
+<hr><div id="bf10">
+  <style>
+    #bf10{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #bf10 *{box-sizing:border-box;}
+    #bf10 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #bf10 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #bf10 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #bf10 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #bf10 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #bf10 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #bf10 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #bf10 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #bf10 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #bf10 button:hover{background:#0f4a5c;}
+    #bf10 button.ghost{background:transparent;color:var(--teal);}
+    #bf10 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #bf10 button.amber:hover{background:#e0a52a;}
+    #bf10 button:disabled{opacity:.45;cursor:default;}
+    #bf10 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #bf10 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #bf10 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #bf10 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #bf10 .choice:disabled{opacity:.9;}
+    #bf10 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #bf10 .fb.ok{color:var(--ok);} #bf10 .fb.no{color:var(--no);}
+    #bf10 .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #bf10 .tag.c{background:var(--teal-bg);color:var(--teal);} #bf10 .tag.s{background:var(--terra-bg);color:var(--terra);} #bf10 .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #bf10 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #bf10 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #bf10 input.gap{width:auto;min-width:120px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #bf10 input.ok{border-color:var(--ok);background:var(--ok-bg);} #bf10 input.no{border-color:var(--no);background:var(--no-bg);}
+    #bf10 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;}
+    #bf10 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);margin:0 4px;}
+    #bf10 select.ok{border-color:var(--ok);background:var(--ok-bg);} #bf10 select.no{border-color:var(--no);background:var(--no-bg);}
+    #bf10 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #bf10 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #bf10 .talk p{margin:0 0 6px;}
+    #bf10 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #bf10 .ex p{margin:4px 0;}
+    #bf10 .note{font-size:14px;color:var(--muted);}
+    #bf10 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+    #bf10 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;}
+    #bf10 .card h3{margin:0 0 6px;font-size:18px;color:var(--teal);}
+    #bf10 .card p{margin:0;font-size:15px;color:var(--muted);}
+    #bf10 .card.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf10 .rule{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+    #bf10 .rule:first-child{border-top:none;}
+    #bf10 .form{font-family:"Courier New",monospace;font-size:16px;}
+    #bf10 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #bf10 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #bf10 .hide{display:none;}
+    #bf10 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:start;}
+    #bf10 .item:first-child{border-top:none;}
+    #bf10 .item b{color:var(--teal);}
+    #bf10 .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #bf10 .pics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 4px;}
+    #bf10 .pics figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+    #bf10 .pics img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+    #bf10 .pics figcaption{text-align:center;font-size:15px;font-weight:bold;padding:6px 4px;color:var(--teal);}
+    #bf10 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #bf10 table.t th,#bf10 table.t td{border:1px solid var(--line);padding:8px;vertical-align:middle;}
+    #bf10 table.t th{background:var(--slate-bg);text-align:left;}
+    #bf10 .teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+    #bf10 .team{border:3px solid var(--line);border-radius:12px;padding:10px 14px;text-align:center;background:#fff;}
+    #bf10 .team .n{font-size:15px;font-weight:bold;letter-spacing:.05em;}
+    #bf10 .team .p{font-size:34px;font-weight:bold;}
+    #bf10 .team.a .n,#bf10 .team.a .p{color:var(--teal);} #bf10 .team.b .n,#bf10 .team.b .p{color:var(--terra);}
+    #bf10 .team.a.on{border-color:var(--teal);background:var(--teal-bg);} #bf10 .team.b.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf10 .clue{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);}
+    #bf10 .clue:first-child{border-top:none;}
+    #bf10 .clue .v{min-width:64px;text-align:center;font-weight:bold;border-radius:999px;background:var(--amber-bg);border:2px solid #f1d9a6;font-size:14px;padding:2px 6px;}
+    @media (max-width:560px){ #bf10 .pics{grid-template-columns:1fr 1fr 1fr;gap:6px;} #bf10 .rule{grid-template-columns:1fr;} }
+  </style>
+
+  <h1>Guess the gadget</h1>
+  <p class="sub">Two teams, one screen. Your team gets one clue at a time. Type your guess. The fewer clues you need, the more points you win: 5, 4, 3, 2, 1. A wrong guess opens the next clue. Turns go one object each.</p>
+  <div class="teams"><div class="team a" id="gg-ta"><div class="n">TEAM A</div><div class="p" id="gg-pa">0</div></div><div class="team b" id="gg-tb"><div class="n">TEAM B</div><div class="p" id="gg-pb">0</div></div></div>
+  <div class="panel" id="gg-play">
+    <div class="who" id="gg-who" style="font-weight:bold;margin-bottom:6px"></div>
+    <div id="gg-clues"></div>
+    <div id="gg-in" style="margin-top:12px">
+      <input type="text" id="gg-g" autocomplete="off" placeholder="Your guess, in English">
+      <div class="btns"><button id="gg-go">Guess</button><button id="gg-pass" class="ghost">Next clue, no guess</button></div>
+    </div>
+    <div class="fb" id="gg-fb"></div>
+    <div class="btns hide" id="gg-nextw"><button id="gg-next" class="amber">Next turn</button></div>
+  </div>
+  <div class="panel hide" id="gg-end">
+    <h2 style="margin-top:0" id="gg-res"></h2>
+    <p>Now make your own: next page.</p>
+    <div class="btns"><button id="gg-new" class="ghost">New game</button></div>
+  </div>
+  <p class="note">The page checks the answer. Objects are shuffled and the starting team is drawn at random every game.</p>
+
+
+  <script>
+  (function(){
+    var G=[{"n": "TEVEIEJVTEI=", "a": ["bGVkIGJ1bGI=", "bGVk", "bGVkIGxpZ2h0", "bGVkIGxhbXA=", "bGlnaHQgYnVsYg==", "YnVsYg==", "bGlnaHRidWxi", "bGFtcA=="], "c": ["It's cheaper than a sandwich.", "It stays much cooler than the old version when it's on.", "It lasts longer than the old version: up to 25 times longer.", "It uses at least 75% less energy than the old version.", "It makes a dark room brighter."]}, {"n": "V0lSRUxFU1MgRUFSQlVEUw==", "a": ["ZWFyYnVkcw==", "d2lyZWxlc3MgZWFyYnVkcw==", "ZWFyYnVk", "YWlycG9kcw==", "ZWFycGhvbmVz", "d2lyZWxlc3MgZWFycGhvbmVz", "aGVhZHBob25lcw==", "YnVkcw==", "ZWNvdXRldXJz"], "c": ["It's smaller than a matchbox.", "It's easier to lose than your keys, and usually you only lose half of it.", "One piece is lighter than a 2-euro coin.", "The best ones make the world around you quieter.", "You put them in your ears to listen to music without a cable."]}, {"n": "VVNCLUMgUE9SVA==", "a": ["dXNiIGM=", "dXNiYw==", "dXNiIGMgcG9ydA==", "dHlwZSBj", "dXNiIHR5cGUgYw==", "dXNi", "dXNiIGMgY2hhcmdlcg==", "dXNiIGMgY2FibGU=", "dXNiIHBvcnQ=", "dXNiIGMgY29ubmVjdG9y"], "c": ["It's smaller than your fingernail.", "It's easier to use than the older type: there is no wrong way up.", "It's faster than the older members of its family.", "Since the end of 2024, every new phone sold in the EU must have one.", "You plug your charger cable into it."]}, {"n": "SU5EVUNUSU9OIEhPQg==", "a": ["aW5kdWN0aW9uIGhvYg==", "aW5kdWN0aW9u", "aW5kdWN0aW9uIGNvb2tlcg==", "aW5kdWN0aW9uIHN0b3Zl", "aW5kdWN0aW9uIGNvb2t0b3A=", "aW5kdWN0aW9uIHBsYXRl", "aG9i", "Y29va2Vy", "c3RvdmU=", "Y29va3RvcA==", "cGxhcXVlIGEgaW5kdWN0aW9u", "cGxhcXVlIGluZHVjdGlvbg=="], "c": ["It's one of the most efficient ways to do something you do every day.", "It's safer than the gas version: there is no flame.", "It boils water faster than gas.", "It's fussier than the old type: it only works with magnetic pans.", "You cook on it in the kitchen."]}, {"n": "UE9XRVIgQkFOSw==", "a": ["cG93ZXIgYmFuaw==", "cG93ZXJiYW5r", "YmF0dGVyeQ==", "ZXh0ZXJuYWwgYmF0dGVyeQ==", "cG9ydGFibGUgY2hhcmdlcg==", "YmF0dGVyeSBwYWNr", "YmF0dGVyaWUgZXh0ZXJuZQ=="], "c": ["It can be heavier than your phone.", "The bigger it is, the longer it keeps you going.", "It's one of the most useful things to take on a long trip.", "On a plane, it must go in your cabin bag, not in the bigger suitcase.", "It charges your phone when there's no socket near you."]}, {"n": "UVIgQ09ERQ==", "a": ["cXIgY29kZQ==", "cXI=", "cXJjb2Rl", "Zmxhc2hjb2Rl"], "c": ["It's flatter than anything else in this game.", "It's older than you think: it was invented in Japan in 1994, for car factories.", "It holds much more information than a barcode.", "It's faster to scan than typing a web address.", "You scan this black-and-white square with your phone camera."]}, {"n": "M0QgUFJJTlRFUg==", "a": ["M2QgcHJpbnRlcg==", "MyBkIHByaW50ZXI=", "M2QgcHJpbnRpbmc=", "aW1wcmltYW50ZSAzZA==", "cHJpbnRlciAzZA=="], "c": ["It's one of the most popular machines in a fab lab.", "It's much slower than a normal printer: one object can take hours.", "It's cheaper than it was ten years ago: a basic one costs less than a smartphone.", "It makes objects layer by layer, usually in plastic.", "It's like a printer, but what comes out is three-dimensional."]}, {"n": "Uk9CT1QgVkFDVVVNIENMRUFORVI=", "a": ["cm9ib3QgdmFjdXVt", "cm9ib3QgdmFjdXVtIGNsZWFuZXI=", "cm9ib3QgaG9vdmVy", "dmFjdXVtIHJvYm90", "cm9vbWJh", "cm9ib3QgY2xlYW5lcg==", "YXNwaXJhdGV1ciByb2JvdA==", "cm9ib3QgYXNwaXJhdGV1cg==", "dmFjdXVtIGNsZWFuZXI=", "dmFjdXVt", "aG9vdmVy"], "c": ["It's one of the most modern gadgets in the house.", "It's more convenient than its standard version.", "It might be more entertaining for pets than their toys.", "It makes housework easier.", "It makes your house cleaner."]}]; if(!document.getElementById('gg-play')) return;
+    function dec(s){ return decodeURIComponent(escape(atob(s))); }
+    function norm(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[-_.,!?']/g,' ').replace(/^(an?|the)\s+/,'').replace(/\s+/g,' ').trim(); }
+    var order, idx, team, clue, done, pts, start;
+    var $=function(i){ return document.getElementById(i); };
+    function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+    function newGame(){
+      order=shuffle(G.map(function(_,i){return i;})); idx=0; pts=[0,0]; start=Math.random()<.5?0:1; team=start;
+      $('gg-pa').textContent='0'; $('gg-pb').textContent='0'; $('gg-end').classList.add('hide'); $('gg-play').classList.remove('hide'); turn();
+    }
+    function turn(){
+      clue=0; done=false; $('gg-clues').innerHTML=''; $('gg-fb').textContent=''; $('gg-fb').className='fb';
+      $('gg-g').value=''; $('gg-g').disabled=false; $('gg-in').classList.remove('hide'); $('gg-nextw').classList.add('hide');
+      $('gg-ta').className='team a'+(team===0?' on':''); $('gg-tb').className='team b'+(team===1?' on':'');
+      $('gg-who').textContent='Object '+(idx+1)+' of '+G.length+' \u00b7 Team '+(team?'B':'A')+', this one is yours.';
+      $('gg-who').style.color=team?'#D97757':'#155E75';
+      show(); $('gg-g').focus();
+    }
+    function show(){
+      var c=G[order[idx]].c[clue], d=document.createElement('div'); d.className='clue';
+      d.innerHTML='<span class="v">'+(5-clue)+' pt'+(clue===4?'':'s')+'</span><span>'+c+'</span>'; $('gg-clues').appendChild(d);
+    }
+    function finish(win){
+      done=true; var o=G[order[idx]], p=win?5-clue:0;
+      pts[team]+=p; $('gg-pa').textContent=pts[0]; $('gg-pb').textContent=pts[1];
+      $('gg-g').disabled=true; $('gg-in').classList.add('hide');
+      $('gg-fb').className='fb '+(win?'ok':'no');
+      $('gg-fb').innerHTML=(win?'Yes! ':'No more clues. ')+'It was: <strong>'+dec(o.n)+'</strong>. Team '+(team?'B':'A')+' wins '+p+' point'+(p===1?'':'s')+'.';
+      $('gg-nextw').classList.remove('hide');
+    }
+    function wrong(msg){
+      clue++; if(clue>4){ finish(false); return; }
+      $('gg-fb').className='fb no'; $('gg-fb').textContent=msg; show(); $('gg-g').value=''; $('gg-g').focus();
+    }
+    function guess(){
+      if(done) return; var v=norm($('gg-g').value); if(!v) return;
+      var o=G[order[idx]], ok=false; for(var i=0;i<o.a.length;i++) if(v===norm(dec(o.a[i]))) ok=true;
+      if(ok) finish(true); else wrong('Not this time. Here is the next clue.');
+    }
+    $('gg-go').addEventListener('click',guess);
+    $('gg-g').addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); guess(); } });
+    $('gg-pass').addEventListener('click',function(){ if(!done) wrong('Next clue.'); });
+    $('gg-next').addEventListener('click',function(){
+      if(!done) return; idx++; team=1-team;
+      if(idx>=G.length){
+        $('gg-play').classList.add('hide'); $('gg-end').classList.remove('hide');
+        $('gg-res').textContent=pts[0]===pts[1]?'A draw! '+pts[0]+' points each.':'Team '+(pts[0]>pts[1]?'A':'B')+' wins, '+Math.max(pts[0],pts[1])+' to '+Math.min(pts[0],pts[1])+'.';
+        return;
+      }
+      turn();
+    });
+    $('gg-new').addEventListener('click',newGame);
+    window.__gg={newGame:newGame,state:function(){return{idx:idx,team:team,pts:pts.slice(),done:done,start:start};}};
+    newGame();
+  })();
+  </script>
+</div>
+<hr><div id="bf11p">
+  <style>
+    #bf11p{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #bf11p *{box-sizing:border-box;}
+    #bf11p h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #bf11p h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #bf11p .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #bf11p .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #bf11p .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #bf11p .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #bf11p .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #bf11p .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #bf11p button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #bf11p button:hover{background:#0f4a5c;}
+    #bf11p button.ghost{background:transparent;color:var(--teal);}
+    #bf11p button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #bf11p button.amber:hover{background:#e0a52a;}
+    #bf11p button:disabled{opacity:.45;cursor:default;}
+    #bf11p .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #bf11p .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #bf11p .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #bf11p .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #bf11p .choice:disabled{opacity:.9;}
+    #bf11p .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #bf11p .fb.ok{color:var(--ok);} #bf11p .fb.no{color:var(--no);}
+    #bf11p .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #bf11p .tag.c{background:var(--teal-bg);color:var(--teal);} #bf11p .tag.s{background:var(--terra-bg);color:var(--terra);} #bf11p .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #bf11p input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #bf11p input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #bf11p input.gap{width:auto;min-width:120px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #bf11p input.ok{border-color:var(--ok);background:var(--ok-bg);} #bf11p input.no{border-color:var(--no);background:var(--no-bg);}
+    #bf11p textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;}
+    #bf11p select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);margin:0 4px;}
+    #bf11p select.ok{border-color:var(--ok);background:var(--ok-bg);} #bf11p select.no{border-color:var(--no);background:var(--no-bg);}
+    #bf11p .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #bf11p .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #bf11p .talk p{margin:0 0 6px;}
+    #bf11p .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #bf11p .ex p{margin:4px 0;}
+    #bf11p .note{font-size:14px;color:var(--muted);}
+    #bf11p .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+    #bf11p .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;}
+    #bf11p .card h3{margin:0 0 6px;font-size:18px;color:var(--teal);}
+    #bf11p .card p{margin:0;font-size:15px;color:var(--muted);}
+    #bf11p .card.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf11p .rule{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+    #bf11p .rule:first-child{border-top:none;}
+    #bf11p .form{font-family:"Courier New",monospace;font-size:16px;}
+    #bf11p .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #bf11p .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #bf11p .hide{display:none;}
+    #bf11p .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:start;}
+    #bf11p .item:first-child{border-top:none;}
+    #bf11p .item b{color:var(--teal);}
+    #bf11p .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #bf11p .pics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 4px;}
+    #bf11p .pics figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+    #bf11p .pics img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+    #bf11p .pics figcaption{text-align:center;font-size:15px;font-weight:bold;padding:6px 4px;color:var(--teal);}
+    #bf11p table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #bf11p table.t th,#bf11p table.t td{border:1px solid var(--line);padding:8px;vertical-align:middle;}
+    #bf11p table.t th{background:var(--slate-bg);text-align:left;}
+    #bf11p .teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+    #bf11p .team{border:3px solid var(--line);border-radius:12px;padding:10px 14px;text-align:center;background:#fff;}
+    #bf11p .team .n{font-size:15px;font-weight:bold;letter-spacing:.05em;}
+    #bf11p .team .p{font-size:34px;font-weight:bold;}
+    #bf11p .team.a .n,#bf11p .team.a .p{color:var(--teal);} #bf11p .team.b .n,#bf11p .team.b .p{color:var(--terra);}
+    #bf11p .team.a.on{border-color:var(--teal);background:var(--teal-bg);} #bf11p .team.b.on{border-color:var(--terra);background:var(--terra-bg);}
+    #bf11p .clue{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);}
+    #bf11p .clue:first-child{border-top:none;}
+    #bf11p .clue .v{min-width:64px;text-align:center;font-weight:bold;border-radius:999px;background:var(--amber-bg);border:2px solid #f1d9a6;font-size:14px;padding:2px 6px;}
+    @media (max-width:560px){ #bf11p .pics{grid-template-columns:1fr 1fr 1fr;gap:6px;} #bf11p .rule{grid-template-columns:1fr;} }
+  </style>
+
+  <h1>Your turn: make five clues</h1>
+  <p class="sub">In groups. Choose a gadget or a technology most people know. Write five clues, from the most difficult to the easiest. Every clue uses a comparative or a superlative. Then the other team guesses, one clue at a time.</p>
+  <div class="ex"><p><em>It's lighter than a book. &middot; It's one of the most expensive things in your bag. &middot; ...</em></p></div>
+  <div class="panel" id="bf11-w">
+    <div class="item"><b>?</b><div>Your gadget (the answer)<input type="text" id="bf11-a" autocomplete="off"></div></div>
+    <div class="item"><b>5</b><div><input type="text" class="cl" autocomplete="off" placeholder="the most difficult clue"></div></div>
+    <div class="item"><b>4</b><div><input type="text" class="cl" autocomplete="off"></div></div>
+    <div class="item"><b>3</b><div><input type="text" class="cl" autocomplete="off"></div></div>
+    <div class="item"><b>2</b><div><input type="text" class="cl" autocomplete="off"></div></div>
+    <div class="item"><b>1</b><div><input type="text" class="cl" autocomplete="off" placeholder="the easiest clue"></div></div>
+    <div class="btns"><button id="bf11-play">Hide and play</button></div>
+    <div class="fb no" id="bf11-fb"></div>
+  </div>
+  <div class="panel hide" id="bf11-p">
+    <div id="bf11-c"></div>
+    <div class="btns"><button id="bf11-n">Next clue</button><button id="bf11-r" class="amber">They guessed it / show the answer</button><button id="bf11-e" class="ghost">Edit</button></div>
+    <div class="fb ok" id="bf11-ans"></div>
+  </div>
+  <p class="note">Nothing is sent anywhere. Your clues stay on this screen only.</p>
+
+
+  <script>
+  (function(){
+    var w=document.getElementById('bf11-w'), p=document.getElementById('bf11-p'), c=document.getElementById('bf11-c'); if(!w) return;
+    var L=[], k=0;
+    function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function add(){ var d=document.createElement('div'); d.className='clue'; d.innerHTML='<span class="v">'+(5-k)+' pt'+(k===4?'':'s')+'</span><span>'+esc(L[k])+'</span>'; c.appendChild(d); k++; if(k>=L.length) document.getElementById('bf11-n').disabled=true; }
+    document.getElementById('bf11-play').addEventListener('click',function(){
+      var ins=w.querySelectorAll('.cl'); L=[]; for(var i=0;i<ins.length;i++) if(ins[i].value.trim()) L.push(ins[i].value.trim());
+      var fb=document.getElementById('bf11-fb');
+      if(!document.getElementById('bf11-a').value.trim()||L.length<5){ fb.textContent='You need the answer and five clues.'; return; }
+      fb.textContent=''; w.classList.add('hide'); p.classList.remove('hide'); c.innerHTML=''; k=0;
+      document.getElementById('bf11-n').disabled=false; document.getElementById('bf11-ans').textContent=''; add();
+    });
+    document.getElementById('bf11-n').addEventListener('click',add);
+    document.getElementById('bf11-r').addEventListener('click',function(){ document.getElementById('bf11-ans').textContent='The answer: '+document.getElementById('bf11-a').value.trim(); });
+    document.getElementById('bf11-e').addEventListener('click',function(){ p.classList.add('hide'); w.classList.remove('hide'); });
+  })();
+  </script>
+</div>
+</body></html>
