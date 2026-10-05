@@ -199,7 +199,7 @@
   var $ = function(id){ return document.getElementById(id); };
   var choice = { set:"A", mode:"classic" };
   var best = {};            // this session only: shared lab machines
-  var bonusOpen = false;    // unlocked by finishing a Twist game; resets on reload, same reason
+  var bonusLevel = 0;       // highest Bonus unlocked: a Twist game opens 1, each Bonus opens the next; resets on reload, same reason
   var g = null;             // current game state
   var timerId = null;
 
@@ -214,14 +214,18 @@
   }
   function renderSets(){
     var box = $("setChoices"), keys = SETS_FOR[choice.mode];
-    if (keys.indexOf(choice.set) === -1) choice.set = keys[0];
+    var locked = function(k){ return choice.mode==="bonus" && Number(k) > bonusLevel; };
+    if (keys.indexOf(choice.set) === -1 || locked(choice.set))
+      choice.set = choice.mode==="bonus" ? String(Math.min(bonusLevel,3)) : keys[0];
     box.innerHTML = "";
     keys.forEach(function(k){
       var b = document.createElement("button");
       b.className = "choice";
       b.innerHTML = "<b></b><span></span>";
-      b.querySelector("b").textContent = SETS[k].name;
-      b.querySelector("span").textContent = SETS[k].words.length+" words";
+      b.querySelector("b").textContent = SETS[k].name + (locked(k) ? " 🔒" : "");
+      b.querySelector("span").textContent = locked(k) ? "Finish Bonus "+(Number(k)-1)+" to unlock"
+                                                      : SETS[k].words.length+" words";
+      b.disabled = locked(k);
       b.setAttribute("aria-pressed", k===choice.set ? "true" : "false");
       b.addEventListener("click", function(){ choice.set = k; press(box, b); });
       box.appendChild(b);
@@ -242,6 +246,7 @@
   }
 
   function show(id){
+    if (id==="startScreen") renderSets();   // pick up anything unlocked since
     ["startScreen","gameScreen","endScreen"].forEach(function(s){ $(s).hidden = (s!==id); });
   }
 
@@ -384,13 +389,20 @@
     var prev = best[key];
     var isBest = !prev || g.moves < prev.moves || (g.moves===prev.moves && g.secs < prev.secs);
     if (isBest) best[key] = {moves:g.moves, secs:g.secs};
-    var justUnlocked = g.mode==="twist" && !bonusOpen;
-    if (justUnlocked){ bonusOpen = true; unlockBonus(); }
+    var unlockMsg = "";
+    if (g.mode==="twist" && bonusLevel===0){
+      bonusLevel = 1; unlockBonus();
+      unlockMsg = 'Bonus level unlocked! Try it from "Change game".';
+    } else if (g.mode==="bonus" && Number(choice.set)===bonusLevel){
+      if (bonusLevel < 3){ bonusLevel++; unlockMsg = "Bonus "+bonusLevel+" unlocked!"; }
+      else { bonusLevel = 4; unlockMsg = "You finished all three Bonus levels. Well done!"; }
+    }
     setTimeout(function(){
       $("result").textContent = g.total+" pairs in "+g.moves+" moves and "+fmt(g.secs)+".";
       $("best").textContent = isBest && prev ? "New best this session!"
         : prev ? "Your best this session: "+best[key].moves+" moves, "+fmt(best[key].secs)+"." : "";
-      $("unlocked").hidden = !justUnlocked;
+      $("unlocked").textContent = unlockMsg;
+      $("unlocked").hidden = !unlockMsg;
       var tb = $("review"); tb.innerHTML = "";
       g.words.forEach(function(w){
         var tr = document.createElement("tr");
