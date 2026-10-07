@@ -1,0 +1,1549 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Preview: Things we use every day</title><style>body{margin:0;background:#e5e9ef;padding:24px 12px}hr{border:0;height:2px;background:#155E75;margin:40px auto;max-width:820px}</style></head><body><div id="td1">
+  <style>
+    #td1{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #td1 *{box-sizing:border-box;}
+    #td1 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #td1 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #td1 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #td1 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #td1 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #td1 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #td1 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #td1 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #td1 .q.on .start{display:block;}
+    #td1 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #td1 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #td1 button:hover{background:#0f4a5c;}
+    #td1 button.ghost{background:transparent;color:var(--teal);}
+    #td1 button.ghost:hover{background:var(--teal-bg);}
+    #td1 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #td1 button.amber:hover{background:#e0a52a;}
+    #td1 button:disabled{opacity:.45;cursor:default;}
+    #td1 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #td1 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #td1 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #td1 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #td1 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #td1 .choice:disabled{opacity:.9;cursor:default;}
+    #td1 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #td1 .fb.ok{color:var(--ok);} #td1 .fb.no{color:var(--no);}
+    #td1 .fb .plain{font-weight:normal;color:var(--ink);}
+    #td1 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #td1 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #td1 input.ok{border-color:var(--ok);background:var(--ok-bg);} #td1 input.no{border-color:var(--no);background:var(--no-bg);}
+    #td1 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:80px;}
+    #td1 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #td1 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #td1 .talk p{margin:0 0 6px;}
+    #td1 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #td1 .ex p{margin:4px 0;}
+    #td1 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #td1 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #td1 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #td1 .note{font-size:14px;color:var(--muted);}
+    #td1 .hide{display:none !important;}
+    #td1 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #td1 .item:first-child{border-top:none;}
+    #td1 .item > b{color:var(--teal);}
+    #td1 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #td1 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #td1 .video iframe,#td1 .video video,#td1 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #td1 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:flex-end;}
+    #td1 .tg{display:inline-flex;flex-direction:column;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:3px 10px;font-size:16px;}
+    #td1 .tg small{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+    #td1 .tg.bad{border-color:var(--terra);background:var(--terra-bg);}
+    #td1 .tg.noun{border-style:dashed;}
+    #td1 .tg.unk{border-style:dotted;}
+    #td1 .strip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:15px;font-weight:bold;}
+    #td1 .strip span{background:var(--teal-bg);color:var(--teal);border-radius:8px;padding:6px 10px;}
+    #td1 .strip span.n{background:var(--slate-bg);color:var(--slate);}
+    #td1 .strip span.x{background:var(--amber-bg);color:#8a6510;border:2px dashed var(--amber);}
+    #td1 .strip i{color:var(--muted);font-style:normal;}
+    #td1 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #td1 table.t th,#td1 table.t td{border:1px solid var(--line);padding:7px;text-align:center;}
+    #td1 table.t th{background:var(--slate-bg);}
+    #td1 table.t td.f{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #td1 table.t td.n{font-weight:bold;color:var(--slate);}
+    #td1 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #td1 .pic{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+    #td1 .pic img{width:100%;display:block;}
+    #td1 .pic.tall img{height:300px;object-fit:contain;background:#fff;}
+    #td1 .pic figcaption{text-align:center;font-weight:bold;padding:6px;color:var(--teal);font-size:15px;}
+    #td1 .hold{user-select:none;-webkit-user-select:none;touch-action:none;text-align:center;border:3px dashed var(--teal);border-radius:14px;padding:22px 14px;background:var(--teal-bg);cursor:pointer;font-weight:bold;color:var(--teal);}
+    #td1 .hold.on{background:#fff;border-style:solid;}
+    #td1 .hold .secret{font-size:30px;color:var(--ink);}
+    #td1 .timer{font-size:34px;font-weight:bold;text-align:center;color:var(--teal);font-variant-numeric:tabular-nums;}
+    @media (max-width:560px){ #td1 .grid2{grid-template-columns:1fr;} #td1 table.t{font-size:12px;} #td1 table.t th,#td1 table.t td{padding:4px;} }
+  </style>
+
+  <h1>Things we use every day</h1>
+  <p class="sub">In pairs, one screen. Choose a picture. <strong>A</strong> holds the button to see a secret object and describes it, without saying its name. <strong>B</strong> guesses. Then swap.</p>
+  <div class="ex"><p><em>It&rsquo;s something you can eat. It&rsquo;s a fruit. It can be red or green.</em> (an apple)</p></div>
+  <div class="btns" style="margin:0 0 12px"><button class="ghost" data-p="0" id="td1-b0">The desk</button><button class="ghost" data-p="1" id="td1-b1">The room</button></div>
+  <div class="grid2" id="td1-pics">
+    <figure class="pic" data-p="0"><img src="img/desk.jpg" alt="a desk with stationery"><figcaption>The desk</figcaption></figure>
+    <figure class="pic" data-p="1"><img src="img/room.jpg" alt="a bright living room"><figcaption>The room</figcaption></figure>
+  </div>
+  <div class="panel hide" id="td1-play" style="margin-top:14px">
+    <div class="hold" id="td1-hold" tabindex="0" role="button" aria-label="Press and hold to see your secret object">
+      <span id="td1-cover">Describer only: press and hold</span><span class="secret hide" id="td1-sec"></span>
+    </div>
+    <div class="btns" style="justify-content:center"><button id="td1-got">Guessed it: next object</button><button id="td1-swap" class="amber">Swap roles</button></div>
+    <p class="score" id="td1-n"></p>
+  </div>
+  <div class="lang"><b>USEFUL LANGUAGE</b><span>It&rsquo;s something you use to...</span><span>It&rsquo;s made of...</span><span>It&rsquo;s small / big / round...</span><span>You find it in / on...</span></div>
+
+
+  <script>
+  (function(){
+    var L=[["a calculator", "a pair of glasses", "a pencil", "a pen", "a ruler", "a glass of tea", "a notebook", "a plant", "a picture frame", "a rubber (an eraser)", "a clip", "sticky notes", "a pencil pot"], ["a table", "a chair", "a fruit basket", "a sofa", "an armchair", "a lamp", "a plant", "a radiator", "a window", "a cupboard", "candles", "a vase", "a coffee table"]], pics=document.querySelectorAll('#td1-pics .pic'), play=document.getElementById('td1-play'); if(!play) return;
+    var hold=document.getElementById('td1-hold'), sec=document.getElementById('td1-sec'), cov=document.getElementById('td1-cover');
+    var deck=[], pos=0, p=-1, role='A', n=0;
+    function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+    function choose(k){
+      p=k; deck=shuffle(L[k].slice()); pos=0; n=0; play.classList.remove('hide');
+      for(var i=0;i<pics.length;i++) pics[i].classList.toggle('hide',i!==k);
+      document.getElementById('td1-pics').style.gridTemplateColumns='1fr';
+      document.getElementById('td1-b0').className=k===0?'':'ghost'; document.getElementById('td1-b1').className=k===1?'':'ghost'; deal();
+    }
+    function deal(){ sec.textContent=deck[pos%deck.length]; document.getElementById('td1-n').textContent=role+' describes. Objects guessed so far: '+n+'.'; }
+    function show(){ sec.classList.remove('hide'); cov.classList.add('hide'); hold.classList.add('on'); }
+    function hide(){ sec.classList.add('hide'); cov.classList.remove('hide'); hold.classList.remove('on'); }
+    hold.addEventListener('pointerdown',function(e){ e.preventDefault(); try{ hold.setPointerCapture(e.pointerId); }catch(_){ } show(); });
+    ['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){ hold.addEventListener(ev,hide); });
+    hold.addEventListener('contextmenu',function(e){ e.preventDefault(); });
+    hold.addEventListener('keydown',function(e){ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); show(); } });
+    hold.addEventListener('keyup',function(e){ if(e.key===' '||e.key==='Enter') hide(); });
+    window.addEventListener('blur',hide);
+    document.getElementById('td1-b0').addEventListener('click',function(){ choose(0); });
+    document.getElementById('td1-b1').addEventListener('click',function(){ choose(1); });
+    for(var i=0;i<pics.length;i++) pics[i].addEventListener('click',(function(k){ return function(){ choose(k); }; })(i));
+    document.getElementById('td1-got').addEventListener('click',function(){ n++; pos++; hide(); deal(); });
+    document.getElementById('td1-swap').addEventListener('click',function(){ role=role==='A'?'B':'A'; pos++; hide(); deal(); });
+  })();
+  </script>
+</div>
+<hr><div id="td2">
+  <style>
+    #td2{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #td2 *{box-sizing:border-box;}
+    #td2 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #td2 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #td2 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #td2 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #td2 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #td2 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #td2 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #td2 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #td2 .q.on .start{display:block;}
+    #td2 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #td2 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #td2 button:hover{background:#0f4a5c;}
+    #td2 button.ghost{background:transparent;color:var(--teal);}
+    #td2 button.ghost:hover{background:var(--teal-bg);}
+    #td2 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #td2 button.amber:hover{background:#e0a52a;}
+    #td2 button:disabled{opacity:.45;cursor:default;}
+    #td2 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #td2 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #td2 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #td2 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #td2 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #td2 .choice:disabled{opacity:.9;cursor:default;}
+    #td2 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #td2 .fb.ok{color:var(--ok);} #td2 .fb.no{color:var(--no);}
+    #td2 .fb .plain{font-weight:normal;color:var(--ink);}
+    #td2 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #td2 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #td2 input.ok{border-color:var(--ok);background:var(--ok-bg);} #td2 input.no{border-color:var(--no);background:var(--no-bg);}
+    #td2 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:80px;}
+    #td2 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #td2 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #td2 .talk p{margin:0 0 6px;}
+    #td2 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #td2 .ex p{margin:4px 0;}
+    #td2 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #td2 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #td2 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #td2 .note{font-size:14px;color:var(--muted);}
+    #td2 .hide{display:none !important;}
+    #td2 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #td2 .item:first-child{border-top:none;}
+    #td2 .item > b{color:var(--teal);}
+    #td2 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #td2 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #td2 .video iframe,#td2 .video video,#td2 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #td2 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:flex-end;}
+    #td2 .tg{display:inline-flex;flex-direction:column;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:3px 10px;font-size:16px;}
+    #td2 .tg small{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+    #td2 .tg.bad{border-color:var(--terra);background:var(--terra-bg);}
+    #td2 .tg.noun{border-style:dashed;}
+    #td2 .tg.unk{border-style:dotted;}
+    #td2 .strip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:15px;font-weight:bold;}
+    #td2 .strip span{background:var(--teal-bg);color:var(--teal);border-radius:8px;padding:6px 10px;}
+    #td2 .strip span.n{background:var(--slate-bg);color:var(--slate);}
+    #td2 .strip span.x{background:var(--amber-bg);color:#8a6510;border:2px dashed var(--amber);}
+    #td2 .strip i{color:var(--muted);font-style:normal;}
+    #td2 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #td2 table.t th,#td2 table.t td{border:1px solid var(--line);padding:7px;text-align:center;}
+    #td2 table.t th{background:var(--slate-bg);}
+    #td2 table.t td.f{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #td2 table.t td.n{font-weight:bold;color:var(--slate);}
+    #td2 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #td2 .pic{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+    #td2 .pic img{width:100%;display:block;}
+    #td2 .pic.tall img{height:300px;object-fit:contain;background:#fff;}
+    #td2 .pic figcaption{text-align:center;font-weight:bold;padding:6px;color:var(--teal);font-size:15px;}
+    #td2 .hold{user-select:none;-webkit-user-select:none;touch-action:none;text-align:center;border:3px dashed var(--teal);border-radius:14px;padding:22px 14px;background:var(--teal-bg);cursor:pointer;font-weight:bold;color:var(--teal);}
+    #td2 .hold.on{background:#fff;border-style:solid;}
+    #td2 .hold .secret{font-size:30px;color:var(--ink);}
+    #td2 .timer{font-size:34px;font-weight:bold;text-align:center;color:var(--teal);font-variant-numeric:tabular-nums;}
+    @media (max-width:560px){ #td2 .grid2{grid-template-columns:1fr;} #td2 table.t{font-size:12px;} #td2 table.t th,#td2 table.t td{padding:4px;} }
+  </style>
+
+  <h1>What is it?</h1>
+  <p class="sub">Eight things we use every day, filmed very, very close. The video stops before each one is revealed. Hands up: what is it?</p>
+  <div class="lang"><b>USEFUL LANGUAGE</b><span>It could be...</span><span>It might be...</span><span>It looks like...</span></div>
+  <div id="td2-stage">
+    <div class="video"><div id="td2-yt"></div></div>
+    <div class="btns" style="align-items:center">
+      <button id="td2-play">Play</button>
+      <button id="td2-back" class="ghost">Back 5 s</button>
+      <button id="td2-again" class="ghost">Watch this one again</button>
+      <button id="td2-fs" class="ghost">Big screen</button>
+      <span class="score" id="td2-n" style="margin:0 0 0 auto">Object 1 of 8</span>
+    </div>
+    <div class="panel hide" id="td2-ask" style="margin-top:12px;border-left:6px solid var(--amber)">
+      <h2 style="margin-top:0" id="td2-askh">What is it?</h2>
+      <p style="margin:0 0 8px"><em>It could be... It might be... It looks like...</em></p>
+      <input type="text" id="td2-g" autocomplete="off" placeholder="Your guess (optional)">
+      <div class="btns"><button id="td2-show" class="amber">Show me</button></div>
+    </div>
+    <div class="panel hide" id="td2-ans" style="margin-top:12px;border-left:6px solid var(--ok)"></div>
+  </div>
+  <div class="hide" id="td2-end">
+    <h1 style="margin-top:26px">Talk about it</h1>
+    <div class="panel" id="td2-rec"></div>
+    <div class="q"><b>1</b><div><span>Which object was the hardest to guess? Which one was the easiest?</span><div class="start">The hardest one was the... because it looked like...</div></div></div>
+    <div class="q"><b>2</b><div><span>What are three objects you use every day that you would like to see in this video?</span><div class="start">I&rsquo;d like to see my... It would look like...</div></div></div>
+    <div class="btns" style="justify-content:center"><button id="td2-pick" class="amber">Pick one for me</button></div>
+  </div>
+  <p class="note" style="margin-top:14px">Video: <em>Can You Identify This Object? Everyday Objects In Super Macro</em>, Doable (YouTube). <a href="#" id="td2-skip">Skip to the questions</a></p>
+
+  <style>
+    #td2-stage:fullscreen{background:#0b1015;padding:18px 28px;overflow:auto;display:flex;flex-direction:column;justify-content:center;}
+    #td2-stage:fullscreen .video{align-self:center;padding-top:0;height:calc(100vh - 290px);aspect-ratio:16/9;width:auto;max-width:100%;margin:0 auto;}
+    #td2-stage:fullscreen .btns{justify-content:center;}
+    #td2-stage:fullscreen .score{color:#cbd5e1;}
+    #td2-stage:fullscreen .panel{max-width:900px;margin-left:auto;margin-right:auto;font-size:22px;}
+    #td2-stage:fullscreen h2{font-size:30px;}
+  </style>
+
+  <script>
+  (function(){
+    var O=[{"s": 0.0, "p": 11.5, "r": 17.0, "n": "broccoli", "x": "", "a": ["broccoli", "brocoli", "brocolli", "brocoli", "a broccoli"]}, {"s": 21.4, "p": 29.8, "r": 37.5, "n": "a kitchen sponge", "x": "", "a": ["sponge", "kitchen sponge", "dish sponge", "scouring pad", "scrubber", "eponge"]}, {"s": 42.0, "p": 53.5, "r": 56.5, "n": "a mushroom", "x": "", "a": ["mushroom", "champignon"]}, {"s": 60.0, "p": 75.0, "r": 81.0, "n": "a basketball", "x": "", "a": ["basketball", "basket ball", "basketball ball", "ball", "basket"]}, {"s": 87.0, "p": 99.0, "r": 101.5, "n": "a coconut", "x": "", "a": ["coconut", "coco", "coconut shell", "noix de coco"]}, {"s": 105.1, "p": 119.5, "r": 125.5, "n": "a utility knife", "x": "UK also <em>a Stanley knife</em>, US <em>a box cutter</em>. In French: <em>un cutter</em>.", "a": ["utility knife", "cutter", "box cutter", "stanley knife", "craft knife", "knife", "blade", "boxcutter"]}, {"s": 129.4, "p": 143.5, "r": 147.0, "n": "a corkscrew", "x": "With a bottle opener at the end. Waiters call it <em>a waiter&rsquo;s friend</em>.", "a": ["corkscrew", "cork screw", "bottle opener", "opener", "wine opener", "tire bouchon", "tire-bouchon", "decapsuleur"]}, {"s": 150.0, "p": 161.5, "r": 165.0, "n": "toothpicks", "x": "A pot of wooden toothpicks.", "a": ["toothpick", "toothpicks", "tooth pick", "tooth picks", "cocktail sticks", "wooden sticks", "sticks", "cure dent", "cure dents"]}]; if(!document.getElementById('td2-stage')) return;
+    var $=function(i){ return document.getElementById(i); };
+    var asked=[], shown=[], G=[], cur=0, ended=false;
+    
+    var P=null, rdy=false, st=-1;
+    var V={ok:function(){return rdy;}, play:function(){ if(rdy) P.playVideo(); }, pause:function(){ if(rdy) P.pauseVideo(); },
+      t:function(){ return rdy?P.getCurrentTime():0; }, seek:function(s){ if(rdy) P.seekTo(s,true); }, playing:function(){ return st===1; }};
+    function make(){ P=new YT.Player('td2-yt',{videoId:'IFq_KQBSz5c',playerVars:{rel:0,playsinline:1,modestbranding:1},
+      events:{onReady:function(){ rdy=true; },onStateChange:function(e){ st=e.data; }}}); }
+    if(window.YT&&window.YT.Player) make();
+    else { var prev=window.onYouTubeIframeAPIReady; window.onYouTubeIframeAPIReady=function(){ if(prev) prev(); make(); };
+      var sc=document.createElement('script'); sc.src='https://www.youtube.com/iframe_api'; document.head.appendChild(sc); }
+    function norm(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[-_.,!?']/g,' ').replace(/^(an?|the|some)\s+/,'').replace(/\s+/g,' ').trim(); }
+    function idx(t){ var i=0; for(var k=0;k<O.length;k++) if(t>=O[k].s-0.2) i=k; return i; }
+    function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function ask(i){
+      $('td2-askh').textContent='Object '+(i+1)+' of '+O.length+': what is it?';
+      $('td2-g').value=G[i]||''; $('td2-ans').classList.add('hide'); $('td2-ask').classList.remove('hide');
+    }
+    function answer(i){
+      if(!$('td2-ask').classList.contains('hide')){ G[i]=$('td2-g').value.trim(); }
+      $('td2-ask').classList.add('hide');
+      var o=O[i], g=G[i]||'', ok=g&&o.a.map(norm).indexOf(norm(g))>-1;
+      var be=/^(an? |broccoli)/.test(o.n)?'it&rsquo;s':'they&rsquo;re';
+      var h='<h2 style="margin-top:0">Object '+(i+1)+': '+be+' <span style="color:var(--ok)">'+o.n+'</span>.</h2>';
+      if(o.x) h+='<p class="note" style="margin:0 0 6px">'+o.x+'</p>';
+      if(g) h+='<p style="margin:0">You said: <strong>'+esc(g)+'</strong> '+(ok?'<span style="color:var(--ok)">&#10003;</span>':'')+'</p>';
+      $('td2-ans').innerHTML=h; $('td2-ans').classList.remove('hide');
+    }
+    function end(){
+      if(ended) return; ended=true; var h='<h2 style="margin-top:0">The eight objects</h2>';
+      O.forEach(function(o,i){ var g=G[i]||'', ok=g&&o.a.map(norm).indexOf(norm(g))>-1;
+        h+='<div class="item"><b>'+(i+1)+'</b><div><strong>'+o.n+'</strong>'+(g?' <span class="note">&middot; you said: '+esc(g)+'</span> '+(ok?'<span style="color:var(--ok)">&#10003;</span>':''):'')+'</div></div>'; });
+      $('td2-rec').innerHTML=h; $('td2-end').classList.remove('hide');
+    }
+    function tick(){
+      if(!V.ok()) return; var t=V.t(), i=idx(t); cur=i;
+      $('td2-n').textContent='Object '+(i+1)+' of '+O.length;
+      var o=O[i];
+      if(V.playing()&&!asked[i]&&t>=o.p-0.15&&t<o.r){ V.pause(); asked[i]=true; ask(i); return; }
+      if(t>=o.r&&!shown[i]){ shown[i]=true; answer(i); if(i===O.length-1) end(); }
+    }
+    setInterval(tick,100);
+    $('td2-play').addEventListener('click',function(){ V.play(); });
+    $('td2-show').addEventListener('click',function(){ G[cur]=$('td2-g').value.trim(); V.play(); });
+    $('td2-g').addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); G[cur]=this.value.trim(); V.play(); } });
+    $('td2-back').addEventListener('click',function(){ V.seek(Math.max(0,V.t()-5)); });
+    $('td2-again').addEventListener('click',function(){ var i=idx(V.t()); asked[i]=false; shown[i]=false; $('td2-ans').classList.add('hide'); V.seek(O[i].s); V.play(); });
+    $('td2-skip').addEventListener('click',function(e){ e.preventDefault(); end(); $('td2-end').scrollIntoView({behavior:'smooth'}); });
+    var stage=$('td2-stage');
+    $('td2-fs').addEventListener('click',function(){
+      if(document.fullscreenElement){ document.exitFullscreen(); return; }
+      if(document.fullscreenEnabled&&stage.requestFullscreen) stage.requestFullscreen();
+      else window.open(location.href,'_blank');
+    });
+    document.addEventListener('fullscreenchange',function(){ $('td2-fs').textContent=document.fullscreenElement?'Exit big screen':'Big screen'; });
+  })();
+  </script>
+  <script>
+  (function(){
+    var qs=document.querySelectorAll('#td2 .q'), b=document.getElementById('td2-pick'), last=-1;
+    if(!b) return;
+    b.addEventListener('click',function(){
+      var i; do{ i=Math.floor(Math.random()*qs.length); }while(i===last&&qs.length>1); last=i;
+      for(var k=0;k<qs.length;k++) qs[k].classList.toggle('on',k===i);
+      qs[i].scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+  })();
+  </script>
+</div>
+<hr><div id="td34">
+  <style>
+    #td34{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #td34 *{box-sizing:border-box;}
+    #td34 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #td34 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #td34 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #td34 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #td34 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #td34 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #td34 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #td34 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #td34 .q.on .start{display:block;}
+    #td34 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #td34 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #td34 button:hover{background:#0f4a5c;}
+    #td34 button.ghost{background:transparent;color:var(--teal);}
+    #td34 button.ghost:hover{background:var(--teal-bg);}
+    #td34 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #td34 button.amber:hover{background:#e0a52a;}
+    #td34 button:disabled{opacity:.45;cursor:default;}
+    #td34 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #td34 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #td34 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #td34 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #td34 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #td34 .choice:disabled{opacity:.9;cursor:default;}
+    #td34 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #td34 .fb.ok{color:var(--ok);} #td34 .fb.no{color:var(--no);}
+    #td34 .fb .plain{font-weight:normal;color:var(--ink);}
+    #td34 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #td34 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #td34 input.ok{border-color:var(--ok);background:var(--ok-bg);} #td34 input.no{border-color:var(--no);background:var(--no-bg);}
+    #td34 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:80px;}
+    #td34 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #td34 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #td34 .talk p{margin:0 0 6px;}
+    #td34 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #td34 .ex p{margin:4px 0;}
+    #td34 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #td34 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #td34 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #td34 .note{font-size:14px;color:var(--muted);}
+    #td34 .hide{display:none !important;}
+    #td34 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #td34 .item:first-child{border-top:none;}
+    #td34 .item > b{color:var(--teal);}
+    #td34 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #td34 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #td34 .video iframe,#td34 .video video,#td34 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #td34 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:flex-end;}
+    #td34 .tg{display:inline-flex;flex-direction:column;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:3px 10px;font-size:16px;}
+    #td34 .tg small{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+    #td34 .tg.bad{border-color:var(--terra);background:var(--terra-bg);}
+    #td34 .tg.noun{border-style:dashed;}
+    #td34 .tg.unk{border-style:dotted;}
+    #td34 .strip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:15px;font-weight:bold;}
+    #td34 .strip span{background:var(--teal-bg);color:var(--teal);border-radius:8px;padding:6px 10px;}
+    #td34 .strip span.n{background:var(--slate-bg);color:var(--slate);}
+    #td34 .strip span.x{background:var(--amber-bg);color:#8a6510;border:2px dashed var(--amber);}
+    #td34 .strip i{color:var(--muted);font-style:normal;}
+    #td34 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #td34 table.t th,#td34 table.t td{border:1px solid var(--line);padding:7px;text-align:center;}
+    #td34 table.t th{background:var(--slate-bg);}
+    #td34 table.t td.f{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #td34 table.t td.n{font-weight:bold;color:var(--slate);}
+    #td34 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #td34 .pic{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+    #td34 .pic img{width:100%;display:block;}
+    #td34 .pic.tall img{height:300px;object-fit:contain;background:#fff;}
+    #td34 .pic figcaption{text-align:center;font-weight:bold;padding:6px;color:var(--teal);font-size:15px;}
+    #td34 .hold{user-select:none;-webkit-user-select:none;touch-action:none;text-align:center;border:3px dashed var(--teal);border-radius:14px;padding:22px 14px;background:var(--teal-bg);cursor:pointer;font-weight:bold;color:var(--teal);}
+    #td34 .hold.on{background:#fff;border-style:solid;}
+    #td34 .hold .secret{font-size:30px;color:var(--ink);}
+    #td34 .timer{font-size:34px;font-weight:bold;text-align:center;color:var(--teal);font-variant-numeric:tabular-nums;}
+    @media (max-width:560px){ #td34 .grid2{grid-template-columns:1fr;} #td34 table.t{font-size:12px;} #td34 table.t th,#td34 table.t td{padding:4px;} }
+  </style>
+
+  <h1>Questions and answers</h1>
+  <p class="sub">Six people answer six questions. Click a question, then the answer that goes with it.</p>
+  <div class="grid2" id="td3">
+    <div><button class="choice" data-q="0" style="display:block;width:100%;margin:0 0 8px"><b style="color:var(--teal)">A</b>&nbsp; What is the oldest object in your home?</button><button class="choice" data-q="1" style="display:block;width:100%;margin:0 0 8px"><b style="color:var(--teal)">B</b>&nbsp; What did you buy when you last went shopping?</button><button class="choice" data-q="2" style="display:block;width:100%;margin:0 0 8px"><b style="color:var(--teal)">C</b>&nbsp; What object do you always carry with you?</button><button class="choice" data-q="3" style="display:block;width:100%;margin:0 0 8px"><b style="color:var(--teal)">D</b>&nbsp; What is something in your kitchen you use every day?</button><button class="choice" data-q="4" style="display:block;width:100%;margin:0 0 8px"><b style="color:var(--teal)">E</b>&nbsp; What everyday objects mean &lsquo;comfort&rsquo; to you?</button><button class="choice" data-q="5" style="display:block;width:100%;margin:0 0 8px"><b style="color:var(--teal)">F</b>&nbsp; What would you like to get as a birthday present?</button></div>
+    <div><button class="choice" data-a="0" style="display:block;width:100%;margin:0 0 8px"><b style="color:var(--slate)">1</b>&nbsp; In my bag, I always have a <strong>tiny round mirror</strong> I bought in Thailand. It&rsquo;s really pretty.</button><button class="choice" data-a="1" style="display:block;width:100%;margin:0 0 8px"><b style="color:var(--slate)">2</b>&nbsp; If I&rsquo;ve had a hard day, I love a <strong>soft woollen blanket</strong> and a cup of warm tea.</button><button class="choice" data-a="2" style="display:block;width:100%;margin:0 0 8px"><b style="color:var(--slate)">3</b>&nbsp; The <strong>old wooden clock</strong> in the hall. I got it from my grandmother, who got it from her grandmother.</button><button class="choice" data-a="3" style="display:block;width:100%;margin:0 0 8px"><b style="color:var(--slate)">4</b>&nbsp; I needed some clothes for a party, so I got a <strong>black cotton dress</strong> and some jewellery.</button><button class="choice" data-a="4" style="display:block;width:100%;margin:0 0 8px"><b style="color:var(--slate)">5</b>&nbsp; In the cupboard, I have a <strong>huge sharp knife</strong> for cutting fruit and vegetables. I got it a year ago in Germany.</button><button class="choice" data-a="5" style="display:block;width:100%;margin:0 0 8px"><b style="color:var(--slate)">6</b>&nbsp; I dream of getting one of the <strong>colourful glass vases</strong> by this talented artist.</button></div>
+  </div>
+  <div class="fb" id="td3-fb"></div>
+
+  <div class="hide" id="td3b">
+    <h1 style="margin-top:26px">The words in bold</h1>
+    <p class="sub">Which word means...?</p>
+    <div class="panel" id="td3m"><div class="item" data-i="0"><b>1</b><div>Which word means <strong>made from wood</strong>?<div class="opt"></div><div class="fb"></div></div></div><div class="item" data-i="1"><b>2</b><div>Which word means <strong>made from sheep&rsquo;s hair</strong>?<div class="opt"></div><div class="fb"></div></div></div><div class="item" data-i="2"><b>3</b><div>Which word means <strong>very small</strong>?<div class="opt"></div><div class="fb"></div></div></div><div class="item" data-i="3"><b>4</b><div>Which word means <strong>very big</strong>?<div class="opt"></div><div class="fb"></div></div></div><div class="item" data-i="4"><b>5</b><div>Which word means <strong>the material most T-shirts are made of</strong>?<div class="opt"></div><div class="fb"></div></div></div><div class="item" data-i="5"><b>6</b><div>Which word means <strong>the opposite of hard</strong>?<div class="opt"></div><div class="fb"></div></div></div><div class="item" data-i="6"><b>7</b><div>Which word means <strong>what a knife needs to be to cut well</strong>?<div class="opt"></div><div class="fb"></div></div></div><div class="item" data-i="7"><b>8</b><div>Which word means <strong>full of different colours</strong>?<div class="opt"></div><div class="fb"></div></div></div><div class="item" data-i="8"><b>9</b><div>Which word means <strong>in the shape of a circle</strong>?<div class="opt"></div><div class="fb"></div></div></div></div>
+    <div class="score" id="td3m-s"></div>
+  </div>
+
+  <div class="hide" id="td4w">
+    <h1 style="margin-top:26px">Where does each word go?</h1>
+    <p class="sub">Each adjective tells us one kind of thing about the object. Which kind? The table fills in as you go.</p>
+    <div class="panel" id="td4"><div class="item" data-k="0"><b>tiny</b><div><div class="opt"><button class="choice" data-c="0">size</button><button class="choice" data-c="1">quality</button><button class="choice" data-c="2">age</button><button class="choice" data-c="3">shape</button><button class="choice" data-c="4">colour</button><button class="choice" data-c="5">material</button></div></div></div><div class="item" data-k="1"><b>round</b><div><div class="opt"><button class="choice" data-c="0">size</button><button class="choice" data-c="1">quality</button><button class="choice" data-c="2">age</button><button class="choice" data-c="3">shape</button><button class="choice" data-c="4">colour</button><button class="choice" data-c="5">material</button></div></div></div><div class="item" data-k="2"><b>soft</b><div><div class="opt"><button class="choice" data-c="0">size</button><button class="choice" data-c="1">quality</button><button class="choice" data-c="2">age</button><button class="choice" data-c="3">shape</button><button class="choice" data-c="4">colour</button><button class="choice" data-c="5">material</button></div></div></div><div class="item" data-k="3"><b>woollen</b><div><div class="opt"><button class="choice" data-c="0">size</button><button class="choice" data-c="1">quality</button><button class="choice" data-c="2">age</button><button class="choice" data-c="3">shape</button><button class="choice" data-c="4">colour</button><button class="choice" data-c="5">material</button></div></div></div><div class="item" data-k="4"><b>old</b><div><div class="opt"><button class="choice" data-c="0">size</button><button class="choice" data-c="1">quality</button><button class="choice" data-c="2">age</button><button class="choice" data-c="3">shape</button><button class="choice" data-c="4">colour</button><button class="choice" data-c="5">material</button></div></div></div><div class="item" data-k="5"><b>wooden</b><div><div class="opt"><button class="choice" data-c="0">size</button><button class="choice" data-c="1">quality</button><button class="choice" data-c="2">age</button><button class="choice" data-c="3">shape</button><button class="choice" data-c="4">colour</button><button class="choice" data-c="5">material</button></div></div></div><div class="item" data-k="6"><b>black</b><div><div class="opt"><button class="choice" data-c="0">size</button><button class="choice" data-c="1">quality</button><button class="choice" data-c="2">age</button><button class="choice" data-c="3">shape</button><button class="choice" data-c="4">colour</button><button class="choice" data-c="5">material</button></div></div></div><div class="item" data-k="7"><b>cotton</b><div><div class="opt"><button class="choice" data-c="0">size</button><button class="choice" data-c="1">quality</button><button class="choice" data-c="2">age</button><button class="choice" data-c="3">shape</button><button class="choice" data-c="4">colour</button><button class="choice" data-c="5">material</button></div></div></div><div class="item" data-k="8"><b>huge</b><div><div class="opt"><button class="choice" data-c="0">size</button><button class="choice" data-c="1">quality</button><button class="choice" data-c="2">age</button><button class="choice" data-c="3">shape</button><button class="choice" data-c="4">colour</button><button class="choice" data-c="5">material</button></div></div></div><div class="item" data-k="9"><b>sharp</b><div><div class="opt"><button class="choice" data-c="0">size</button><button class="choice" data-c="1">quality</button><button class="choice" data-c="2">age</button><button class="choice" data-c="3">shape</button><button class="choice" data-c="4">colour</button><button class="choice" data-c="5">material</button></div></div></div><div class="item" data-k="10"><b>colourful</b><div><div class="opt"><button class="choice" data-c="0">size</button><button class="choice" data-c="1">quality</button><button class="choice" data-c="2">age</button><button class="choice" data-c="3">shape</button><button class="choice" data-c="4">colour</button><button class="choice" data-c="5">material</button></div></div></div><div class="item" data-k="11"><b>glass</b><div><div class="opt"><button class="choice" data-c="0">size</button><button class="choice" data-c="1">quality</button><button class="choice" data-c="2">age</button><button class="choice" data-c="3">shape</button><button class="choice" data-c="4">colour</button><button class="choice" data-c="5">material</button></div></div></div></div>
+    <div class="panel" style="overflow-x:auto"><table class="t" id="td4t"><tr><th>size</th><th>quality</th><th>age</th><th>shape</th><th>colour</th><th>material</th><th>noun</th></tr><tr data-n="mirror"><td data-c="0"></td><td data-c="1"></td><td data-c="2"></td><td data-c="3"></td><td data-c="4"></td><td data-c="5"></td><td class="n">mirror</td></tr><tr data-n="blanket"><td data-c="0"></td><td data-c="1"></td><td data-c="2"></td><td data-c="3"></td><td data-c="4"></td><td data-c="5"></td><td class="n">blanket</td></tr><tr data-n="clock"><td data-c="0"></td><td data-c="1"></td><td data-c="2"></td><td data-c="3"></td><td data-c="4"></td><td data-c="5"></td><td class="n">clock</td></tr><tr data-n="dress"><td data-c="0"></td><td data-c="1"></td><td data-c="2"></td><td data-c="3"></td><td data-c="4"></td><td data-c="5"></td><td class="n">dress</td></tr><tr data-n="knife"><td data-c="0"></td><td data-c="1"></td><td data-c="2"></td><td data-c="3"></td><td data-c="4"></td><td data-c="5"></td><td class="n">knife</td></tr><tr data-n="vase"><td data-c="0"></td><td data-c="1"></td><td data-c="2"></td><td data-c="3"></td><td data-c="4"></td><td data-c="5"></td><td class="n">vase</td></tr></table></div>
+    <div class="score" id="td4-s"></div>
+  </div>
+
+  <div class="panel hide" id="td4r" style="border-left:6px solid var(--teal)">
+    <h2 style="margin-top:0">Read each row from left to right. That is the order.</h2>
+    <div class="strip"><span>size</span><i>&rarr;</i><span>quality</span><i>&rarr;</i><span>age</span><i>&rarr;</i><span>shape</span><i>&rarr;</i><span>colour</span><i>&rarr;</i><span>material</span><i>&rarr;</i><span class="n">noun</span></div>
+    <p style="margin:12px 0 4px"><em>a huge sharp knife &middot; an old wooden clock &middot; a big soft round black woollen hat</em></p>
+    <p class="note" style="margin:0 0 12px">Nobody says five adjectives in real life. Two, sometimes three.</p>
+    <h2>Two more places you will see</h2>
+    <div class="strip"><span class="x">opinion</span><i>&rarr;</i><span>size</span><i>&rarr;</i><span>quality</span><i>&rarr;</i><span>age</span><i>&rarr;</i><span>shape</span><i>&rarr;</i><span>colour</span><i>&rarr;</i><span class="x">origin</span><i>&rarr;</i><span>material</span><i>&rarr;</i><span class="n">noun</span></div>
+    <p style="margin:12px 0 4px"><em>a <strong>lovely</strong> old clock &middot; a <strong>Japanese</strong> steel knife &middot; a <strong>beautiful</strong> black <strong>Italian</strong> leather jacket</em></p>
+    <p class="note" style="margin:8px 0 0">A pattern that helps: the closer to the noun, the more the word says what the thing <em>is</em>. A knife can stop being sharp. It can&rsquo;t stop being steel.</p>
+  </div>
+
+
+  <script>
+  (function(){
+    var K=[2, 4, 0, 1, 3, 5], M=[{"a": "wooden", "d": ["woollen", "cotton"]}, {"a": "woollen", "d": ["cotton", "soft"]}, {"a": "tiny", "d": ["round", "sharp"]}, {"a": "huge", "d": ["old", "tiny"]}, {"a": "cotton", "d": ["glass", "woollen"]}, {"a": "soft", "d": ["sharp", "round"]}, {"a": "sharp", "d": ["huge", "soft"]}, {"a": "colourful", "d": ["black", "glass"]}, {"a": "round", "d": ["tiny", "huge"]}], T=[["mirror", "tiny", 0], ["mirror", "round", 3], ["blanket", "soft", 1], ["blanket", "woollen", 5], ["clock", "old", 2], ["clock", "wooden", 5], ["dress", "black", 4], ["dress", "cotton", 5], ["knife", "huge", 0], ["knife", "sharp", 1], ["vase", "colourful", 4], ["vase", "glass", 5]], COLS=["size", "quality", "age", "shape", "colour", "material"], box=document.getElementById('td3'); if(!box) return;
+    var $=function(i){ return document.getElementById(i); };
+    // 1. matching
+    var selQ=null, done=0, miss=0, fb=$('td3-fb');
+    box.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b||b.disabled) return;
+      if(b.hasAttribute('data-q')){ if(selQ) selQ.classList.remove('sel'); selQ=b; b.classList.add('sel'); fb.textContent=''; return; }
+      if(!selQ){ fb.className='fb no'; fb.textContent='Click a question first.'; return; }
+      var q=+selQ.getAttribute('data-q'), a=+b.getAttribute('data-a');
+      if(K[a]===q){
+        selQ.className='choice ok'; b.className='choice ok'; selQ.disabled=b.disabled=true;
+        b.querySelector('b').textContent='ABCDEF'[q]+' '+(a+1); selQ=null; done++;
+        fb.className='fb ok'; fb.textContent=done<6?'Yes. '+(6-done)+' to go.':'All six'+(miss?' ('+(miss===1?'one wrong try':miss+' wrong tries')+' on the way).':'. No mistakes.');
+        if(done===6){ $('td3b').classList.remove('hide'); }
+      } else {
+        miss++; fb.className='fb no'; fb.textContent='Not this one. Read the answer again: what question does it answer?';
+        b.classList.add('no'); setTimeout(function(){ b.classList.remove('no'); },700);
+      }
+    });
+    // 2. meanings
+    function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+    var its=$('td3m').querySelectorAll('.item'), n2=0, r2=0;
+    for(var i=0;i<its.length;i++){
+      var o=shuffle([M[i].a].concat(M[i].d)), op=its[i].querySelector('.opt');
+      o.forEach(function(w){ var b=document.createElement('button'); b.className='choice'; b.textContent=w; op.appendChild(b); });
+    }
+    $('td3m').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b||b.disabled) return;
+      var it=b.closest('.item'), i=+it.getAttribute('data-i'), bs=it.querySelectorAll('button'), ok=b.textContent===M[i].a;
+      for(var k=0;k<bs.length;k++){ bs[k].disabled=true; if(bs[k].textContent===M[i].a) bs[k].className='choice ok'; }
+      if(!ok) b.className='choice no';
+      var f=it.querySelector('.fb'); f.className='fb '+(ok?'ok':'no'); f.textContent=ok?'Yes.':'You chose '+b.textContent+'. It is '+M[i].a+'.';
+      n2++; if(ok) r2++; $('td3m-s').textContent=r2+' of '+n2+' right.';
+      if(n2===M.length){ $('td4w').classList.remove('hide'); }
+    });
+    // 3. the table
+    var n4=0, r4=0;
+    $('td4').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b||b.disabled) return;
+      var it=b.closest('.item'), k=+it.getAttribute('data-k'), c=+b.getAttribute('data-c'), t=T[k], ok=c===t[2];
+      var bs=it.querySelectorAll('button'); for(var x=0;x<bs.length;x++){ bs[x].disabled=true; if(x===t[2]) bs[x].className='choice ok'; }
+      if(!ok) b.className='choice no';
+      var cell=document.querySelector('#td4t tr[data-n="'+t[0]+'"] td[data-c="'+t[2]+'"]'); cell.textContent=t[1]; cell.className='f';
+      n4++; if(ok) r4++; $('td4-s').textContent=r4+' of '+n4+' right.';
+      if(n4===T.length){ $('td4r').classList.remove('hide'); $('td4r').scrollIntoView({behavior:'smooth',block:'start'}); }
+    });
+  })();
+  </script>
+</div>
+<hr><div id="td56">
+  <style>
+    #td56{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #td56 *{box-sizing:border-box;}
+    #td56 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #td56 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #td56 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #td56 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #td56 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #td56 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #td56 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #td56 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #td56 .q.on .start{display:block;}
+    #td56 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #td56 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #td56 button:hover{background:#0f4a5c;}
+    #td56 button.ghost{background:transparent;color:var(--teal);}
+    #td56 button.ghost:hover{background:var(--teal-bg);}
+    #td56 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #td56 button.amber:hover{background:#e0a52a;}
+    #td56 button:disabled{opacity:.45;cursor:default;}
+    #td56 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #td56 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #td56 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #td56 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #td56 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #td56 .choice:disabled{opacity:.9;cursor:default;}
+    #td56 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #td56 .fb.ok{color:var(--ok);} #td56 .fb.no{color:var(--no);}
+    #td56 .fb .plain{font-weight:normal;color:var(--ink);}
+    #td56 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #td56 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #td56 input.ok{border-color:var(--ok);background:var(--ok-bg);} #td56 input.no{border-color:var(--no);background:var(--no-bg);}
+    #td56 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:80px;}
+    #td56 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #td56 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #td56 .talk p{margin:0 0 6px;}
+    #td56 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #td56 .ex p{margin:4px 0;}
+    #td56 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #td56 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #td56 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #td56 .note{font-size:14px;color:var(--muted);}
+    #td56 .hide{display:none !important;}
+    #td56 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #td56 .item:first-child{border-top:none;}
+    #td56 .item > b{color:var(--teal);}
+    #td56 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #td56 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #td56 .video iframe,#td56 .video video,#td56 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #td56 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:flex-end;}
+    #td56 .tg{display:inline-flex;flex-direction:column;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:3px 10px;font-size:16px;}
+    #td56 .tg small{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+    #td56 .tg.bad{border-color:var(--terra);background:var(--terra-bg);}
+    #td56 .tg.noun{border-style:dashed;}
+    #td56 .tg.unk{border-style:dotted;}
+    #td56 .strip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:15px;font-weight:bold;}
+    #td56 .strip span{background:var(--teal-bg);color:var(--teal);border-radius:8px;padding:6px 10px;}
+    #td56 .strip span.n{background:var(--slate-bg);color:var(--slate);}
+    #td56 .strip span.x{background:var(--amber-bg);color:#8a6510;border:2px dashed var(--amber);}
+    #td56 .strip i{color:var(--muted);font-style:normal;}
+    #td56 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #td56 table.t th,#td56 table.t td{border:1px solid var(--line);padding:7px;text-align:center;}
+    #td56 table.t th{background:var(--slate-bg);}
+    #td56 table.t td.f{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #td56 table.t td.n{font-weight:bold;color:var(--slate);}
+    #td56 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #td56 .pic{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+    #td56 .pic img{width:100%;display:block;}
+    #td56 .pic.tall img{height:300px;object-fit:contain;background:#fff;}
+    #td56 .pic figcaption{text-align:center;font-weight:bold;padding:6px;color:var(--teal);font-size:15px;}
+    #td56 .hold{user-select:none;-webkit-user-select:none;touch-action:none;text-align:center;border:3px dashed var(--teal);border-radius:14px;padding:22px 14px;background:var(--teal-bg);cursor:pointer;font-weight:bold;color:var(--teal);}
+    #td56 .hold.on{background:#fff;border-style:solid;}
+    #td56 .hold .secret{font-size:30px;color:var(--ink);}
+    #td56 .timer{font-size:34px;font-weight:bold;text-align:center;color:var(--teal);font-variant-numeric:tabular-nums;}
+    @media (max-width:560px){ #td56 .grid2{grid-template-columns:1fr;} #td56 table.t{font-size:12px;} #td56 table.t th,#td56 table.t td{padding:4px;} }
+  </style>
+
+  <h1>Which slot?</h1>
+  <p class="sub">One word at a time. Where does it go in the order?</p>
+  <div class="strip" style="margin-bottom:12px"><span>size</span><i>&rarr;</i><span>quality</span><i>&rarr;</i><span>age</span><i>&rarr;</i><span>shape</span><i>&rarr;</i><span>colour</span><i>&rarr;</i><span>material</span><i>&rarr;</i><span class="n">noun</span></div>
+  <div class="panel" id="td5" style="text-align:center">
+    <div class="note" id="td5-n"></div>
+    <div style="font-size:34px;font-weight:bold;margin:6px 0 4px" id="td5-w"></div>
+    <div class="opt" style="justify-content:center" id="td5-o"><button class="choice" data-c="0">size</button><button class="choice" data-c="1">quality</button><button class="choice" data-c="2">age</button><button class="choice" data-c="3">shape</button><button class="choice" data-c="4">colour</button><button class="choice" data-c="5">material</button></div>
+    <div class="fb" id="td5-fb"></div>
+    <div class="btns" style="justify-content:center"><button id="td5-next" class="hide">Next word</button></div>
+  </div>
+  <div class="panel hide" id="td5-end"></div>
+
+  <h2>Your own words</h2>
+  <p class="sub">Add two more adjectives to each slot. The page tells you if it would put a word somewhere else.</p>
+  <div class="panel" id="td5o"><div class="item"><b>1</b><div><strong>size</strong>: <input type="text" class="own" data-c="0" autocomplete="off" placeholder="two more size words"><div class="fb"></div></div></div><div class="item"><b>2</b><div><strong>quality</strong>: <input type="text" class="own" data-c="1" autocomplete="off" placeholder="two more quality words"><div class="fb"></div></div></div><div class="item"><b>3</b><div><strong>age</strong>: <input type="text" class="own" data-c="2" autocomplete="off" placeholder="two more age words"><div class="fb"></div></div></div><div class="item"><b>4</b><div><strong>shape</strong>: <input type="text" class="own" data-c="3" autocomplete="off" placeholder="two more shape words"><div class="fb"></div></div></div><div class="item"><b>5</b><div><strong>colour</strong>: <input type="text" class="own" data-c="4" autocomplete="off" placeholder="two more colour words"><div class="fb"></div></div></div><div class="item"><b>6</b><div><strong>material</strong>: <input type="text" class="own" data-c="5" autocomplete="off" placeholder="two more material words"><div class="fb"></div></div></div></div>
+
+  <h1 style="margin-top:26px">Put them in order</h1>
+  <p class="sub">Click the two adjectives in the order they go in the sentence.</p>
+  <div class="ex"><p>I think this room will look better with a <strong>big white</strong> carpet on the floor. <span class="note">(white, big)</span></p>
+  <p>Add one more: a <strong>big white <span style="color:var(--terra)">woollen</span></strong> carpet.</p></div>
+  <div class="panel" id="td6"><div class="item" data-i="0"><b>A</b><div>I love my <span class="gap" style="display:inline-block;min-width:150px;border-bottom:2px solid var(--line);font-weight:bold;color:var(--teal)">&nbsp;</span> table in the dining room. <span class="note">(wooden, new)</span><div class="opt"><button class="choice" data-w="wooden">wooden</button><button class="choice" data-w="new">new</button></div><div class="fb"></div><div class="more hide" style="margin-top:8px"><span class="note">Now add one adjective of your own. Write the three adjectives and <em>table</em>:</span><input type="text" class="m" autocomplete="off" placeholder="... table"><div class="btns"><button class="ghost mchk">Check the order</button><button class="ghost mshow">A possible answer</button></div><div class="mres"></div></div></div></div><div class="item" data-i="1"><b>B</b><div>I&rsquo;m happy I bought this <span class="gap" style="display:inline-block;min-width:150px;border-bottom:2px solid var(--line);font-weight:bold;color:var(--teal)">&nbsp;</span> blanket. The children love it! <span class="note">(soft, colourful)</span><div class="opt"><button class="choice" data-w="soft">soft</button><button class="choice" data-w="colourful">colourful</button></div><div class="fb"></div><div class="more hide" style="margin-top:8px"><span class="note">Now add one adjective of your own. Write the three adjectives and <em>blanket</em>:</span><input type="text" class="m" autocomplete="off" placeholder="... blanket"><div class="btns"><button class="ghost mchk">Check the order</button><button class="ghost mshow">A possible answer</button></div><div class="mres"></div></div></div></div><div class="item" data-i="2"><b>C</b><div>Did you see the <span class="gap" style="display:inline-block;min-width:150px;border-bottom:2px solid var(--line);font-weight:bold;color:var(--teal)">&nbsp;</span> building in the city centre? <span class="note">(huge, glass)</span><div class="opt"><button class="choice" data-w="huge">huge</button><button class="choice" data-w="glass">glass</button></div><div class="fb"></div><div class="more hide" style="margin-top:8px"><span class="note">Now add one adjective of your own. Write the three adjectives and <em>building</em>:</span><input type="text" class="m" autocomplete="off" placeholder="... building"><div class="btns"><button class="ghost mchk">Check the order</button><button class="ghost mshow">A possible answer</button></div><div class="mres"></div></div></div></div><div class="item" data-i="3"><b>D</b><div>Look what I&rsquo;ve found in the attic! My <span class="gap" style="display:inline-block;min-width:150px;border-bottom:2px solid var(--line);font-weight:bold;color:var(--teal)">&nbsp;</span> jacket! <span class="note">(leather, old)</span><div class="opt"><button class="choice" data-w="leather">leather</button><button class="choice" data-w="old">old</button></div><div class="fb"></div><div class="more hide" style="margin-top:8px"><span class="note">Now add one adjective of your own. Write the three adjectives and <em>jacket</em>:</span><input type="text" class="m" autocomplete="off" placeholder="... jacket"><div class="btns"><button class="ghost mchk">Check the order</button><button class="ghost mshow">A possible answer</button></div><div class="mres"></div></div></div></div><div class="item" data-i="4"><b>E</b><div>Why don&rsquo;t you wear your <span class="gap" style="display:inline-block;min-width:150px;border-bottom:2px solid var(--line);font-weight:bold;color:var(--teal)">&nbsp;</span> scarf tonight? It gets so cold in the evenings. <span class="note">(big, thick)</span><div class="opt"><button class="choice" data-w="big">big</button><button class="choice" data-w="thick">thick</button></div><div class="fb"></div><div class="more hide" style="margin-top:8px"><span class="note">Now add one adjective of your own. Write the three adjectives and <em>scarf</em>:</span><input type="text" class="m" autocomplete="off" placeholder="... scarf"><div class="btns"><button class="ghost mchk">Check the order</button><button class="ghost mshow">A possible answer</button></div><div class="mres"></div></div></div></div></div>
+  <div class="score" id="td6-s"></div>
+
+
+  <script>
+  (function(){
+    var POOL=[["big", 0], ["small", 0], ["long", 0], ["short", 0], ["dirty", 1], ["tidy", 1], ["thick", 1], ["heavy", 1], ["new", 2], ["modern", 2], ["ancient", 2], ["square", 3], ["rectangular", 3], ["flat", 3], ["red", 4], ["white", 4], ["blue", 4], ["plastic", 5], ["rubber", 5], ["leather", 5], ["metal", 5], ["paper", 5]], COLS=["size", "quality", "age", "shape", "colour", "material"], D6=[{"k": "new wooden", "p": "big new wooden table"}, {"k": "soft colourful", "p": "soft colourful cotton blanket"}, {"k": "huge glass", "p": "huge round glass building"}, {"k": "old leather", "p": "old black leather jacket"}, {"k": "big thick", "p": "big thick woollen scarf"}]; if(!document.getElementById('td5')) return;
+    var $=function(i){ return document.getElementById(i); };
+    
+    var SLOTS=["opinion", "size", "quality", "age", "shape", "colour", "origin", "material"], LEX={"lovely": 0, "beautiful": 0, "pretty": 0, "nice": 0, "ugly": 0, "horrible": 0, "amazing": 0, "wonderful": 0, "cute": 0, "great": 0, "awful": 0, "terrible": 0, "perfect": 0, "fantastic": 0, "strange": 0, "funny": 0, "boring": 0, "interesting": 0, "gorgeous": 0, "elegant": 0, "stylish": 0, "delicious": 0, "useful": 0, "useless": 0, "favourite": 0, "crazy": 0, "silly": 0, "weird": 0, "fancy": 0, "brilliant": 0, "excellent": 0, "ridiculous": 0, "lucky": 0, "special": 0, "unusual": 0, "cosy": 0, "cozy": 0, "charming": 0, "cool": 0, "tiny": 1, "small": 1, "little": 1, "big": 1, "large": 1, "huge": 1, "enormous": 1, "giant": 1, "long": 1, "short": 1, "tall": 1, "wide": 1, "narrow": 1, "massive": 1, "mini": 1, "soft": 2, "hard": 2, "sharp": 2, "thick": 2, "thin": 2, "heavy": 2, "light": 2, "clean": 2, "dirty": 2, "tidy": 2, "messy": 2, "comfortable": 2, "uncomfortable": 2, "warm": 2, "cold": 2, "hot": 2, "smooth": 2, "rough": 2, "shiny": 2, "broken": 2, "expensive": 2, "cheap": 2, "strong": 2, "fragile": 2, "wet": 2, "dry": 2, "loud": 2, "quiet": 2, "bright": 2, "fast": 2, "slow": 2, "simple": 2, "practical": 2, "powerful": 2, "noisy": 2, "sticky": 2, "fluffy": 2, "fresh": 2, "empty": 2, "full": 2, "famous": 2, "safe": 2, "dangerous": 2, "old": 3, "new": 3, "ancient": 3, "modern": 3, "young": 3, "antique": 3, "vintage": 3, "brand-new": 3, "second-hand": 3, "retro": 3, "round": 4, "square": 4, "rectangular": 4, "triangular": 4, "oval": 4, "flat": 4, "circular": 4, "curved": 4, "straight": 4, "spherical": 4, "red": 5, "white": 5, "blue": 5, "black": 5, "green": 5, "yellow": 5, "orange": 5, "pink": 5, "purple": 5, "brown": 5, "grey": 5, "gray": 5, "colourful": 5, "colorful": 5, "golden": 5, "beige": 5, "turquoise": 5, "navy": 5, "italian": 6, "french": 6, "japanese": 6, "german": 6, "chinese": 6, "british": 6, "english": 6, "american": 6, "spanish": 6, "thai": 6, "swiss": 6, "korean": 6, "indian": 6, "mexican": 6, "belgian": 6, "dutch": 6, "scandinavian": 6, "african": 6, "irish": 6, "wooden": 7, "plastic": 7, "metal": 7, "glass": 7, "cotton": 7, "woollen": 7, "wool": 7, "leather": 7, "rubber": 7, "paper": 7, "silk": 7, "steel": 7, "gold": 7, "silver": 7, "stone": 7, "ceramic": 7, "denim": 7, "cardboard": 7, "velvet": 7, "nylon": 7, "concrete": 7, "bamboo": 7, "porcelain": 7, "linen": 7, "aluminium": 7, "aluminum": 7, "copper": 7, "iron": 7, "clay": 7, "marble": 7};
+    var STOP={'in':1,on:1,at:1,'with':1,'for':1,from:1,to:1,of:1,that:1,which:1,who:1,because:1,by:1,near:1,i:1,it:1,is:1,'and':0};
+    var DET={a:1,an:1,the:1,my:1,your:1,his:1,her:1,our:1,their:1,this:1,that:1,these:1,those:1,some:1};
+    function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+    function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function toks(s){ return s.toLowerCase().replace(/[’‘]/g,"'").replace(/[^a-z\-' ]/g,' ').split(/\s+/).filter(Boolean); }
+    function slot(w){ return Object.prototype.hasOwnProperty.call(LEX,w)?LEX[w]:-1; }
+    function anWord(w){ if(/^(hour|honest|honour)/.test(w)) return true; if(/^(uni|use|usu|eu|one|once)/.test(w)) return false; return /^[aeiou]/.test(w); }
+    // Checks one noun phrase: [det] adj adj ... noun. Returns {det, words:[{w,r,bad,noun}], errs:[], unk:[]}
+    function check(s){
+      var t=toks(s), det=null, errs=[], unk=[];
+      if(t.length&&DET[t[0]]) det=t.shift();
+      // the phrase ends before a preposition or a relative word: "an old wooden clock in the hall"
+      for(var q=1;q<t.length;q++) if(STOP[t[q]]){ t=t.slice(0,q); break; }
+      var W=t.map(function(w,i){ return {w:w,r:slot(w),noun:i===t.length-1,bad:false}; });
+      var A=W.filter(function(x){ return !x.noun; });
+      for(var i=0;i<A.length;i++){
+        if(A[i].r<0){ unk.push(A[i].w); continue; }
+        for(var j=i+1;j<A.length;j++){
+          if(A[j].r>=0&&A[i].r>A[j].r){ A[i].bad=A[j].bad=true;
+            errs.push('<em>'+esc(cap(A[j].w))+'</em> is '+SLOTS[A[j].r]+' and <em>'+esc(A[i].w)+'</em> is '+SLOTS[A[i].r]+': '+SLOTS[A[j].r]+' comes first.'); }
+        }
+      }
+      if(W.length&&(det==='a'||det==='an')){
+        var f=W[0].w, want=anWord(f)?'an':'a';
+        if(det!==want) errs.push('<em>'+want+' '+esc(f)+'</em>, not <em>'+det+' '+esc(f)+'</em>: '+(want==='an'?'it starts with a vowel sound.':'it starts with a consonant sound.'));
+      }
+      return {det:det,words:W,errs:errs,unk:unk};
+    }
+    function tags(c){
+      var h=c.det?'<span class="tg noun" style="border-style:solid;opacity:.7">'+esc(c.det)+'<small>&nbsp;</small></span>':'';
+      c.words.forEach(function(x){
+        var lab=x.noun?'noun':(x.r>=0?SLOTS[x.r]:'?');
+        h+='<span class="tg'+(x.noun?' noun':'')+(x.bad?' bad':'')+(!x.noun&&x.r<0?' unk':'')+'">'+esc(x.w)+'<small>'+lab+'</small></span>';
+      });
+      return '<div class="tags">'+h+'</div>';
+    }
+    function verdict(c){
+      if(c.errs.length) return '<div class="fb no">'+c.errs.join('<br>')+'</div>';
+      var m='<div class="fb ok">The order works.</div>';
+      if(c.unk.length) m='<div class="fb ok">The order works for the words I know.</div><div class="note">I don&rsquo;t know <em>'+c.unk.map(esc).join('</em>, <em>')+'</em>, so I can&rsquo;t say where it goes. Ask your partner.</div>';
+      return m;
+    }
+
+    // 1. one word at a time
+    function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+    var deck, pos, right, miss, busy;
+    function start(){ deck=shuffle(POOL.slice()).slice(0,12); pos=0; right=0; miss=[]; $('td5-end').classList.add('hide'); $('td5').classList.remove('hide'); deal(); }
+    function deal(){
+      busy=false; var w=deck[pos]; $('td5-w').textContent=w[0]; $('td5-n').textContent='Word '+(pos+1)+' of '+deck.length;
+      var bs=$('td5-o').querySelectorAll('button'); for(var i=0;i<bs.length;i++){ bs[i].disabled=false; bs[i].className='choice'; }
+      $('td5-fb').textContent=''; $('td5-next').classList.add('hide');
+    }
+    $('td5-o').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b||busy) return; busy=true;
+      var w=deck[pos], c=+b.getAttribute('data-c'), k=w[1], ok=c===k, bs=$('td5-o').querySelectorAll('button');
+      for(var i=0;i<bs.length;i++){ bs[i].disabled=true; if(i===k) bs[i].className='choice ok'; }
+      if(!ok){ b.className='choice no'; miss.push(w[0]+' is '+COLS[k]+' (you said '+COLS[c]+')'); } else right++;
+      $('td5-fb').className='fb '+(ok?'ok':'no'); $('td5-fb').textContent=ok?'Yes: '+COLS[k]+'.':'You said '+COLS[c]+'. '+w[0].charAt(0).toUpperCase()+w[0].slice(1)+' is '+COLS[k]+'.';
+      $('td5-next').textContent=pos<deck.length-1?'Next word':'See my score'; $('td5-next').classList.remove('hide'); $('td5-next').focus();
+    });
+    $('td5-next').addEventListener('click',function(){
+      pos++; if(pos<deck.length){ deal(); return; }
+      $('td5').classList.add('hide'); var h='<h2 style="margin-top:0">'+right+' of '+deck.length+'</h2>';
+      h+=miss.length?'<p style="margin:0 0 6px">Look at these again:</p><ul style="margin:0">'+miss.map(function(m){ return '<li>'+m+'</li>'; }).join('')+'</ul>':'<p>No mistakes.</p>';
+      h+='<div class="btns"><button id="td5-again" class="ghost">Another twelve</button></div>';
+      $('td5-end').innerHTML=h; $('td5-end').classList.remove('hide'); $('td5-again').addEventListener('click',start);
+    });
+    start();
+    // 2. your own words
+    $('td5o').addEventListener('change',function(e){
+      var inp=e.target; if(!inp.classList.contains('own')) return;
+      var c=[1,2,3,4,5,7][+inp.getAttribute('data-c')], f=inp.parentNode.querySelector('.fb'), ws=toks(inp.value), msg=[];
+      ws.forEach(function(w){ var r=slot(w); if(r>=0&&r!==c) msg.push('I would put <em>'+esc(w)+'</em> in <strong>'+SLOTS[r]+'</strong>.'); });
+      f.className='fb '+(msg.length?'no':'ok'); f.innerHTML=msg.join(' ');
+    });
+    // 3. put them in order
+    var n6=0, r6=0;
+    $('td6').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b||b.disabled) return;
+      var it=b.closest('.item'), i=+it.getAttribute('data-i'), gap=it.querySelector('.gap');
+      if(b.hasAttribute('data-w')){
+        b.disabled=true; b.className='choice sel'; var got=(gap.getAttribute('data-v')||'')+(gap.getAttribute('data-v')?' ':'')+b.getAttribute('data-w');
+        gap.setAttribute('data-v',got); gap.textContent=got;
+        if(got.split(' ').length===2){
+          var ok=got===D6[i].k, f=it.querySelector('.fb'); n6++; if(ok) r6++;
+          var c=check(D6[i].k+' x');
+          f.className='fb '+(ok?'ok':'no');
+          f.innerHTML=ok?'Yes: '+SLOTS[c.words[0].r]+' before '+SLOTS[c.words[1].r]+'.'
+            :'You wrote <span style="text-decoration:line-through">'+got+'</span>. It is <strong>'+D6[i].k+'</strong>: '+SLOTS[c.words[0].r]+' before '+SLOTS[c.words[1].r]+'.';
+          gap.style.color=ok?'var(--ok)':'var(--no)'; if(!ok){ gap.textContent=D6[i].k; }
+          it.querySelector('.more').classList.remove('hide'); $('td6-s').textContent=r6+' of '+n6+' right.';
+        }
+        return;
+      }
+      var res=it.querySelector('.mres');
+      if(b.classList.contains('mchk')){ var v=it.querySelector('input.m').value; if(!v.trim()) return; var c2=check(v); res.innerHTML=tags(c2)+verdict(c2); }
+      if(b.classList.contains('mshow')){ res.innerHTML+='<p class="note" style="margin:6px 0 0">A possible answer: <strong>'+D6[i].p+'</strong></p>'; b.disabled=true; }
+    });
+    $('td6').addEventListener('keydown',function(e){ if(e.key==='Enter'&&e.target.classList.contains('m')){ e.preventDefault(); e.target.parentNode.querySelector('.mchk').click(); } });
+  })();
+  </script>
+</div>
+<hr><div id="td78">
+  <style>
+    #td78{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #td78 *{box-sizing:border-box;}
+    #td78 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #td78 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #td78 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #td78 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #td78 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #td78 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #td78 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #td78 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #td78 .q.on .start{display:block;}
+    #td78 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #td78 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #td78 button:hover{background:#0f4a5c;}
+    #td78 button.ghost{background:transparent;color:var(--teal);}
+    #td78 button.ghost:hover{background:var(--teal-bg);}
+    #td78 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #td78 button.amber:hover{background:#e0a52a;}
+    #td78 button:disabled{opacity:.45;cursor:default;}
+    #td78 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #td78 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #td78 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #td78 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #td78 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #td78 .choice:disabled{opacity:.9;cursor:default;}
+    #td78 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #td78 .fb.ok{color:var(--ok);} #td78 .fb.no{color:var(--no);}
+    #td78 .fb .plain{font-weight:normal;color:var(--ink);}
+    #td78 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #td78 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #td78 input.ok{border-color:var(--ok);background:var(--ok-bg);} #td78 input.no{border-color:var(--no);background:var(--no-bg);}
+    #td78 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:80px;}
+    #td78 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #td78 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #td78 .talk p{margin:0 0 6px;}
+    #td78 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #td78 .ex p{margin:4px 0;}
+    #td78 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #td78 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #td78 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #td78 .note{font-size:14px;color:var(--muted);}
+    #td78 .hide{display:none !important;}
+    #td78 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #td78 .item:first-child{border-top:none;}
+    #td78 .item > b{color:var(--teal);}
+    #td78 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #td78 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #td78 .video iframe,#td78 .video video,#td78 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #td78 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:flex-end;}
+    #td78 .tg{display:inline-flex;flex-direction:column;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:3px 10px;font-size:16px;}
+    #td78 .tg small{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+    #td78 .tg.bad{border-color:var(--terra);background:var(--terra-bg);}
+    #td78 .tg.noun{border-style:dashed;}
+    #td78 .tg.unk{border-style:dotted;}
+    #td78 .strip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:15px;font-weight:bold;}
+    #td78 .strip span{background:var(--teal-bg);color:var(--teal);border-radius:8px;padding:6px 10px;}
+    #td78 .strip span.n{background:var(--slate-bg);color:var(--slate);}
+    #td78 .strip span.x{background:var(--amber-bg);color:#8a6510;border:2px dashed var(--amber);}
+    #td78 .strip i{color:var(--muted);font-style:normal;}
+    #td78 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #td78 table.t th,#td78 table.t td{border:1px solid var(--line);padding:7px;text-align:center;}
+    #td78 table.t th{background:var(--slate-bg);}
+    #td78 table.t td.f{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #td78 table.t td.n{font-weight:bold;color:var(--slate);}
+    #td78 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #td78 .pic{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+    #td78 .pic img{width:100%;display:block;}
+    #td78 .pic.tall img{height:300px;object-fit:contain;background:#fff;}
+    #td78 .pic figcaption{text-align:center;font-weight:bold;padding:6px;color:var(--teal);font-size:15px;}
+    #td78 .hold{user-select:none;-webkit-user-select:none;touch-action:none;text-align:center;border:3px dashed var(--teal);border-radius:14px;padding:22px 14px;background:var(--teal-bg);cursor:pointer;font-weight:bold;color:var(--teal);}
+    #td78 .hold.on{background:#fff;border-style:solid;}
+    #td78 .hold .secret{font-size:30px;color:var(--ink);}
+    #td78 .timer{font-size:34px;font-weight:bold;text-align:center;color:var(--teal);font-variant-numeric:tabular-nums;}
+    @media (max-width:560px){ #td78 .grid2{grid-template-columns:1fr;} #td78 table.t{font-size:12px;} #td78 table.t th,#td78 table.t td{padding:4px;} }
+  </style>
+
+  <h1>This or that?</h1>
+  <p class="sub">In pairs. For each pair, click the one <strong>you</strong> would choose. Then talk. At least two pairs.</p>
+  <div id="td8"><div class="panel pair" data-i="0"><div class="opt" style="align-items:center"><button class="choice" data-s="0">an old wooden cupboard</button><strong style="color:var(--muted)">OR</strong><button class="choice" data-s="1">a new plastic table</button></div><div class="talkp hide" style="margin-top:12px"><p style="margin:0 0 6px"><strong>1.</strong> When might somebody need to choose between these two?</p><p style="margin:0 0 6px"><strong>2.</strong> Explain your choice to your partner. Start like this:</p><p class="start" style="margin:0 0 8px;color:var(--teal);font-style:italic"></p><button class="ghost sit">A possible situation</button><p class="note sitp hide" style="margin:8px 0 0"></p></div></div><div class="panel pair" data-i="1"><div class="opt" style="align-items:center"><button class="choice" data-s="0">a black leather jacket</button><strong style="color:var(--muted)">OR</strong><button class="choice" data-s="1">a brown woollen coat</button></div><div class="talkp hide" style="margin-top:12px"><p style="margin:0 0 6px"><strong>1.</strong> When might somebody need to choose between these two?</p><p style="margin:0 0 6px"><strong>2.</strong> Explain your choice to your partner. Start like this:</p><p class="start" style="margin:0 0 8px;color:var(--teal);font-style:italic"></p><button class="ghost sit">A possible situation</button><p class="note sitp hide" style="margin:8px 0 0"></p></div></div><div class="panel pair" data-i="2"><div class="opt" style="align-items:center"><button class="choice" data-s="0">a colourful cotton tablecloth</button><strong style="color:var(--muted)">OR</strong><button class="choice" data-s="1">a black rubber yoga mat</button></div><div class="talkp hide" style="margin-top:12px"><p style="margin:0 0 6px"><strong>1.</strong> When might somebody need to choose between these two?</p><p style="margin:0 0 6px"><strong>2.</strong> Explain your choice to your partner. Start like this:</p><p class="start" style="margin:0 0 8px;color:var(--teal);font-style:italic"></p><button class="ghost sit">A possible situation</button><p class="note sitp hide" style="margin:8px 0 0"></p></div></div><div class="panel pair" data-i="3"><div class="opt" style="align-items:center"><button class="choice" data-s="0">a shirt with huge wooden buttons</button><strong style="color:var(--muted)">OR</strong><button class="choice" data-s="1">a red woollen hat</button></div><div class="talkp hide" style="margin-top:12px"><p style="margin:0 0 6px"><strong>1.</strong> When might somebody need to choose between these two?</p><p style="margin:0 0 6px"><strong>2.</strong> Explain your choice to your partner. Start like this:</p><p class="start" style="margin:0 0 8px;color:var(--teal);font-style:italic"></p><button class="ghost sit">A possible situation</button><p class="note sitp hide" style="margin:8px 0 0"></p></div></div></div>
+  <div class="score" id="td8-s"></div>
+
+  <h1 style="margin-top:26px">Your things</h1>
+  <p class="sub">Answer with <strong>at least two adjectives</strong>. Your partner asks a follow-up question: <em>Where did you get it? Why that one?</em></p>
+  <div id="td7"><div class="q" data-i="0"><b>1</b><div style="flex:1"><span>What is the oldest object in your home?</span><div class="start">The oldest object in my home is a/an...</div><div class="qa hide" style="margin-top:8px"><input type="text" class="m" autocomplete="off" placeholder="your object, with two adjectives: an old wooden clock"><div class="btns"><button class="ghost qchk">Check my order</button></div><div class="res"></div></div></div></div><div class="q" data-i="1"><b>2</b><div style="flex:1"><span>What did you buy when you last went shopping?</span><div class="start">Last time, I bought a/an...</div><div class="qa hide" style="margin-top:8px"><input type="text" class="m" autocomplete="off" placeholder="your object, with two adjectives: an old wooden clock"><div class="btns"><button class="ghost qchk">Check my order</button></div><div class="res"></div></div></div></div><div class="q" data-i="2"><b>3</b><div style="flex:1"><span>What object do you always carry with you?</span><div class="start">I always carry a/an...</div><div class="qa hide" style="margin-top:8px"><input type="text" class="m" autocomplete="off" placeholder="your object, with two adjectives: an old wooden clock"><div class="btns"><button class="ghost qchk">Check my order</button></div><div class="res"></div></div></div></div><div class="q" data-i="3"><b>4</b><div style="flex:1"><span>What is something in your kitchen you use every day?</span><div class="start">Every day, I use a/an...</div><div class="qa hide" style="margin-top:8px"><input type="text" class="m" autocomplete="off" placeholder="your object, with two adjectives: an old wooden clock"><div class="btns"><button class="ghost qchk">Check my order</button></div><div class="res"></div></div></div></div><div class="q" data-i="4"><b>5</b><div style="flex:1"><span>What everyday objects mean &lsquo;comfort&rsquo; to you?</span><div class="start">For me, comfort is a/an...</div><div class="qa hide" style="margin-top:8px"><input type="text" class="m" autocomplete="off" placeholder="your object, with two adjectives: an old wooden clock"><div class="btns"><button class="ghost qchk">Check my order</button></div><div class="res"></div></div></div></div><div class="q" data-i="5"><b>6</b><div style="flex:1"><span>What would you like to get as a birthday present?</span><div class="start">I&rsquo;d love to get a/an...</div><div class="qa hide" style="margin-top:8px"><input type="text" class="m" autocomplete="off" placeholder="your object, with two adjectives: an old wooden clock"><div class="btns"><button class="ghost qchk">Check my order</button></div><div class="res"></div></div></div></div></div>
+  <div class="btns" style="justify-content:center"><button id="td7-pick" class="amber">Pick one for me</button></div>
+  <p class="note" style="text-align:center">You can type your object to check the order before you say it. Nothing is sent anywhere.</p>
+
+
+  <script>
+  (function(){
+    var D=[{"o": ["an old wooden cupboard", "a new plastic table"], "s": "Choosing a new piece of furniture for your flat"}, {"o": ["a black leather jacket", "a brown woollen coat"], "s": "Deciding what to wear on a cold day"}, {"o": ["a colourful cotton tablecloth", "a black rubber yoga mat"], "s": "Choosing a present for someone you don&rsquo;t know well"}, {"o": ["a shirt with huge wooden buttons", "a red woollen hat"], "s": "Choosing something to wear that shows your style"}]; if(!document.getElementById('td8')) return;
+    
+    var SLOTS=["opinion", "size", "quality", "age", "shape", "colour", "origin", "material"], LEX={"lovely": 0, "beautiful": 0, "pretty": 0, "nice": 0, "ugly": 0, "horrible": 0, "amazing": 0, "wonderful": 0, "cute": 0, "great": 0, "awful": 0, "terrible": 0, "perfect": 0, "fantastic": 0, "strange": 0, "funny": 0, "boring": 0, "interesting": 0, "gorgeous": 0, "elegant": 0, "stylish": 0, "delicious": 0, "useful": 0, "useless": 0, "favourite": 0, "crazy": 0, "silly": 0, "weird": 0, "fancy": 0, "brilliant": 0, "excellent": 0, "ridiculous": 0, "lucky": 0, "special": 0, "unusual": 0, "cosy": 0, "cozy": 0, "charming": 0, "cool": 0, "tiny": 1, "small": 1, "little": 1, "big": 1, "large": 1, "huge": 1, "enormous": 1, "giant": 1, "long": 1, "short": 1, "tall": 1, "wide": 1, "narrow": 1, "massive": 1, "mini": 1, "soft": 2, "hard": 2, "sharp": 2, "thick": 2, "thin": 2, "heavy": 2, "light": 2, "clean": 2, "dirty": 2, "tidy": 2, "messy": 2, "comfortable": 2, "uncomfortable": 2, "warm": 2, "cold": 2, "hot": 2, "smooth": 2, "rough": 2, "shiny": 2, "broken": 2, "expensive": 2, "cheap": 2, "strong": 2, "fragile": 2, "wet": 2, "dry": 2, "loud": 2, "quiet": 2, "bright": 2, "fast": 2, "slow": 2, "simple": 2, "practical": 2, "powerful": 2, "noisy": 2, "sticky": 2, "fluffy": 2, "fresh": 2, "empty": 2, "full": 2, "famous": 2, "safe": 2, "dangerous": 2, "old": 3, "new": 3, "ancient": 3, "modern": 3, "young": 3, "antique": 3, "vintage": 3, "brand-new": 3, "second-hand": 3, "retro": 3, "round": 4, "square": 4, "rectangular": 4, "triangular": 4, "oval": 4, "flat": 4, "circular": 4, "curved": 4, "straight": 4, "spherical": 4, "red": 5, "white": 5, "blue": 5, "black": 5, "green": 5, "yellow": 5, "orange": 5, "pink": 5, "purple": 5, "brown": 5, "grey": 5, "gray": 5, "colourful": 5, "colorful": 5, "golden": 5, "beige": 5, "turquoise": 5, "navy": 5, "italian": 6, "french": 6, "japanese": 6, "german": 6, "chinese": 6, "british": 6, "english": 6, "american": 6, "spanish": 6, "thai": 6, "swiss": 6, "korean": 6, "indian": 6, "mexican": 6, "belgian": 6, "dutch": 6, "scandinavian": 6, "african": 6, "irish": 6, "wooden": 7, "plastic": 7, "metal": 7, "glass": 7, "cotton": 7, "woollen": 7, "wool": 7, "leather": 7, "rubber": 7, "paper": 7, "silk": 7, "steel": 7, "gold": 7, "silver": 7, "stone": 7, "ceramic": 7, "denim": 7, "cardboard": 7, "velvet": 7, "nylon": 7, "concrete": 7, "bamboo": 7, "porcelain": 7, "linen": 7, "aluminium": 7, "aluminum": 7, "copper": 7, "iron": 7, "clay": 7, "marble": 7};
+    var STOP={'in':1,on:1,at:1,'with':1,'for':1,from:1,to:1,of:1,that:1,which:1,who:1,because:1,by:1,near:1,i:1,it:1,is:1,'and':0};
+    var DET={a:1,an:1,the:1,my:1,your:1,his:1,her:1,our:1,their:1,this:1,that:1,these:1,those:1,some:1};
+    function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+    function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function toks(s){ return s.toLowerCase().replace(/[’‘]/g,"'").replace(/[^a-z\-' ]/g,' ').split(/\s+/).filter(Boolean); }
+    function slot(w){ return Object.prototype.hasOwnProperty.call(LEX,w)?LEX[w]:-1; }
+    function anWord(w){ if(/^(hour|honest|honour)/.test(w)) return true; if(/^(uni|use|usu|eu|one|once)/.test(w)) return false; return /^[aeiou]/.test(w); }
+    // Checks one noun phrase: [det] adj adj ... noun. Returns {det, words:[{w,r,bad,noun}], errs:[], unk:[]}
+    function check(s){
+      var t=toks(s), det=null, errs=[], unk=[];
+      if(t.length&&DET[t[0]]) det=t.shift();
+      // the phrase ends before a preposition or a relative word: "an old wooden clock in the hall"
+      for(var q=1;q<t.length;q++) if(STOP[t[q]]){ t=t.slice(0,q); break; }
+      var W=t.map(function(w,i){ return {w:w,r:slot(w),noun:i===t.length-1,bad:false}; });
+      var A=W.filter(function(x){ return !x.noun; });
+      for(var i=0;i<A.length;i++){
+        if(A[i].r<0){ unk.push(A[i].w); continue; }
+        for(var j=i+1;j<A.length;j++){
+          if(A[j].r>=0&&A[i].r>A[j].r){ A[i].bad=A[j].bad=true;
+            errs.push('<em>'+esc(cap(A[j].w))+'</em> is '+SLOTS[A[j].r]+' and <em>'+esc(A[i].w)+'</em> is '+SLOTS[A[i].r]+': '+SLOTS[A[j].r]+' comes first.'); }
+        }
+      }
+      if(W.length&&(det==='a'||det==='an')){
+        var f=W[0].w, want=anWord(f)?'an':'a';
+        if(det!==want) errs.push('<em>'+want+' '+esc(f)+'</em>, not <em>'+det+' '+esc(f)+'</em>: '+(want==='an'?'it starts with a vowel sound.':'it starts with a consonant sound.'));
+      }
+      return {det:det,words:W,errs:errs,unk:unk};
+    }
+    function tags(c){
+      var h=c.det?'<span class="tg noun" style="border-style:solid;opacity:.7">'+esc(c.det)+'<small>&nbsp;</small></span>':'';
+      c.words.forEach(function(x){
+        var lab=x.noun?'noun':(x.r>=0?SLOTS[x.r]:'?');
+        h+='<span class="tg'+(x.noun?' noun':'')+(x.bad?' bad':'')+(!x.noun&&x.r<0?' unk':'')+'">'+esc(x.w)+'<small>'+lab+'</small></span>';
+      });
+      return '<div class="tags">'+h+'</div>';
+    }
+    function verdict(c){
+      if(c.errs.length) return '<div class="fb no">'+c.errs.join('<br>')+'</div>';
+      var m='<div class="fb ok">The order works.</div>';
+      if(c.unk.length) m='<div class="fb ok">The order works for the words I know.</div><div class="note">I don&rsquo;t know <em>'+c.unk.map(esc).join('</em>, <em>')+'</em>, so I can&rsquo;t say where it goes. Ask your partner.</div>';
+      return m;
+    }
+
+    var done=0;
+    document.getElementById('td8').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b) return;
+      var card=b.closest('.pair'), i=+card.getAttribute('data-i');
+      if(b.hasAttribute('data-s')){
+        var s=+b.getAttribute('data-s'), bs=card.querySelectorAll('[data-s]');
+        for(var k=0;k<bs.length;k++) bs[k].className='choice'+(k===s?' sel':'');
+        var first=!card.getAttribute('data-done'); card.setAttribute('data-done','1');
+        card.querySelector('.start').textContent='I\u2019d choose '+D[i].o[s]+' because...';
+        card.querySelector('.talkp').classList.remove('hide');
+        if(first){ done++; document.getElementById('td8-s').textContent=done+' of '+D.length+' pairs talked about'+(done>=2?'. Good.':'.'); }
+      }
+      if(b.classList.contains('sit')){ var p=card.querySelector('.sitp'); p.textContent=D[i].s.replace(/&rsquo;/g,'\u2019')+'.'; p.classList.remove('hide'); b.disabled=true; }
+    });
+    var t7=document.getElementById('td7');
+    t7.addEventListener('click',function(e){
+      var q=e.target.closest?e.target.closest('.q'):null; if(!q) return;
+      var b=e.target.closest('button');
+      if(!b){ var all=t7.querySelectorAll('.q'); for(var k=0;k<all.length;k++) all[k].classList.toggle('on',all[k]===q); }
+      if(b&&b.classList.contains('qchk')){ var v=q.querySelector('input').value; if(!v.trim()) return; var c=check(v.replace(/^.*?\b(is|bought|carry|use|get|are)\s+/i,'')); q.querySelector('.res').innerHTML=tags(c)+verdict(c); }
+    });
+    t7.addEventListener('keydown',function(e){ if(e.key==='Enter'&&e.target.classList.contains('m')){ e.preventDefault(); e.target.closest('.q').querySelector('.qchk').click(); } });
+    var obs=new MutationObserver(function(){ var all=t7.querySelectorAll('.q'); for(var k=0;k<all.length;k++) all[k].querySelector('.qa').classList.toggle('hide',!all[k].classList.contains('on')); });
+    obs.observe(t7,{subtree:true,attributes:true,attributeFilter:['class']});
+  })();
+  </script>
+  <script>
+  (function(){
+    var qs=document.querySelectorAll('#td7 .q'), b=document.getElementById('td7-pick'), last=-1;
+    if(!b) return;
+    b.addEventListener('click',function(){
+      var i; do{ i=Math.floor(Math.random()*qs.length); }while(i===last&&qs.length>1); last=i;
+      for(var k=0;k<qs.length;k++) qs[k].classList.toggle('on',k===i);
+      qs[i].scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+  })();
+  </script>
+</div>
+<hr><div id="td9p">
+  <style>
+    #td9p{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #td9p *{box-sizing:border-box;}
+    #td9p h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #td9p h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #td9p .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #td9p .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #td9p .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #td9p .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #td9p .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #td9p .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #td9p .q.on .start{display:block;}
+    #td9p .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #td9p button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #td9p button:hover{background:#0f4a5c;}
+    #td9p button.ghost{background:transparent;color:var(--teal);}
+    #td9p button.ghost:hover{background:var(--teal-bg);}
+    #td9p button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #td9p button.amber:hover{background:#e0a52a;}
+    #td9p button:disabled{opacity:.45;cursor:default;}
+    #td9p .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #td9p .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #td9p .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #td9p .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #td9p .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #td9p .choice:disabled{opacity:.9;cursor:default;}
+    #td9p .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #td9p .fb.ok{color:var(--ok);} #td9p .fb.no{color:var(--no);}
+    #td9p .fb .plain{font-weight:normal;color:var(--ink);}
+    #td9p input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #td9p input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #td9p input.ok{border-color:var(--ok);background:var(--ok-bg);} #td9p input.no{border-color:var(--no);background:var(--no-bg);}
+    #td9p textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:80px;}
+    #td9p .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #td9p .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #td9p .talk p{margin:0 0 6px;}
+    #td9p .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #td9p .ex p{margin:4px 0;}
+    #td9p .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #td9p .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #td9p .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #td9p .note{font-size:14px;color:var(--muted);}
+    #td9p .hide{display:none !important;}
+    #td9p .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #td9p .item:first-child{border-top:none;}
+    #td9p .item > b{color:var(--teal);}
+    #td9p .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #td9p .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #td9p .video iframe,#td9p .video video,#td9p .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #td9p .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:flex-end;}
+    #td9p .tg{display:inline-flex;flex-direction:column;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:3px 10px;font-size:16px;}
+    #td9p .tg small{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+    #td9p .tg.bad{border-color:var(--terra);background:var(--terra-bg);}
+    #td9p .tg.noun{border-style:dashed;}
+    #td9p .tg.unk{border-style:dotted;}
+    #td9p .strip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:15px;font-weight:bold;}
+    #td9p .strip span{background:var(--teal-bg);color:var(--teal);border-radius:8px;padding:6px 10px;}
+    #td9p .strip span.n{background:var(--slate-bg);color:var(--slate);}
+    #td9p .strip span.x{background:var(--amber-bg);color:#8a6510;border:2px dashed var(--amber);}
+    #td9p .strip i{color:var(--muted);font-style:normal;}
+    #td9p table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #td9p table.t th,#td9p table.t td{border:1px solid var(--line);padding:7px;text-align:center;}
+    #td9p table.t th{background:var(--slate-bg);}
+    #td9p table.t td.f{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #td9p table.t td.n{font-weight:bold;color:var(--slate);}
+    #td9p .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #td9p .pic{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+    #td9p .pic img{width:100%;display:block;}
+    #td9p .pic.tall img{height:300px;object-fit:contain;background:#fff;}
+    #td9p .pic figcaption{text-align:center;font-weight:bold;padding:6px;color:var(--teal);font-size:15px;}
+    #td9p .hold{user-select:none;-webkit-user-select:none;touch-action:none;text-align:center;border:3px dashed var(--teal);border-radius:14px;padding:22px 14px;background:var(--teal-bg);cursor:pointer;font-weight:bold;color:var(--teal);}
+    #td9p .hold.on{background:#fff;border-style:solid;}
+    #td9p .hold .secret{font-size:30px;color:var(--ink);}
+    #td9p .timer{font-size:34px;font-weight:bold;text-align:center;color:var(--teal);font-variant-numeric:tabular-nums;}
+    @media (max-width:560px){ #td9p .grid2{grid-template-columns:1fr;} #td9p table.t{font-size:12px;} #td9p table.t th,#td9p table.t td{padding:4px;} }
+  </style>
+
+  <h1>One change at a time</h1>
+  <p class="sub">Change one word at a time to get from the first object to the second. Every step must be a real phrase, with the adjectives in the right order. Watch out for <em>a</em> and <em>an</em>.</p>
+  <div class="ex"><p>from <strong>a dirty old window</strong> to <strong>a clean new car</strong></p>
+  <p>a dirty old window &rarr; a <strong>clean</strong> old window &rarr; a clean <strong>new</strong> window &rarr; a clean new <strong>car</strong></p></div>
+  <div id="td9"><div class="panel ch" data-i="0"><h2 style="margin-top:0">1 of 4 &middot; from <span style="color:var(--slate)">a tiny wooden button</span> to <span style="color:var(--terra)">a new plastic chair</span></h2><div class="chain strip" style="font-weight:normal"></div><div class="step" style="margin-top:12px"><input type="text" class="m" autocomplete="off" placeholder="the next step: change one word"><div class="btns"><button class="go">Check this step</button><button class="ghost hint">Show me one step</button></div></div><div class="res"></div><div class="btns hide nx"><button class="amber next">Next one</button></div></div><div class="panel ch hide" data-i="1"><h2 style="margin-top:0">2 of 4 &middot; from <span style="color:var(--slate)">a soft round pillow</span> to <span style="color:var(--terra)">an old cotton towel</span></h2><div class="chain strip" style="font-weight:normal"></div><div class="step" style="margin-top:12px"><input type="text" class="m" autocomplete="off" placeholder="the next step: change one word"><div class="btns"><button class="go">Check this step</button><button class="ghost hint">Show me one step</button></div></div><div class="res"></div><div class="btns hide nx"><button class="amber next">Next one</button></div></div><div class="panel ch hide" data-i="2"><h2 style="margin-top:0">3 of 4 &middot; from <span style="color:var(--slate)">a huge black hat</span> to <span style="color:var(--terra)">a comfortable old sofa</span></h2><div class="chain strip" style="font-weight:normal"></div><div class="step" style="margin-top:12px"><input type="text" class="m" autocomplete="off" placeholder="the next step: change one word"><div class="btns"><button class="go">Check this step</button><button class="ghost hint">Show me one step</button></div></div><div class="res"></div><div class="btns hide nx"><button class="amber next">Next one</button></div></div><div class="panel ch hide" data-i="3"><h2 style="margin-top:0">4 of 4 &middot; from <span style="color:var(--slate)">an old woollen sweater</span> to <span style="color:var(--terra)">a huge colourful balloon</span></h2><div class="chain strip" style="font-weight:normal"></div><div class="step" style="margin-top:12px"><input type="text" class="m" autocomplete="off" placeholder="the next step: change one word"><div class="btns"><button class="go">Check this step</button><button class="ghost hint">Show me one step</button></div></div><div class="res"></div><div class="btns hide nx"><button class="amber next">Next one</button></div></div></div>
+  <div class="panel hide" id="td9-end"><h2 style="margin-top:0">All four. Now make one for your partner.</h2><p style="margin:0">Write a start and a finish, three words each, and give them to your partner. Can they do it in three steps?</p></div>
+
+
+  <script>
+  (function(){
+    var D=[{"a": "a tiny wooden button", "b": "a new plastic chair", "k": ["a new wooden button", "a new wooden chair", "a new plastic chair"]}, {"a": "a soft round pillow", "b": "an old cotton towel", "k": ["a soft cotton pillow", "a soft cotton towel", "an old cotton towel"]}, {"a": "a huge black hat", "b": "a comfortable old sofa", "k": ["a huge black sofa", "a huge old sofa", "a comfortable old sofa"]}, {"a": "an old woollen sweater", "b": "a huge colourful balloon", "k": ["an old colourful sweater", "an old colourful balloon", "a huge colourful balloon"]}], box=document.getElementById('td9'); if(!box) return;
+    
+    var SLOTS=["opinion", "size", "quality", "age", "shape", "colour", "origin", "material"], LEX={"lovely": 0, "beautiful": 0, "pretty": 0, "nice": 0, "ugly": 0, "horrible": 0, "amazing": 0, "wonderful": 0, "cute": 0, "great": 0, "awful": 0, "terrible": 0, "perfect": 0, "fantastic": 0, "strange": 0, "funny": 0, "boring": 0, "interesting": 0, "gorgeous": 0, "elegant": 0, "stylish": 0, "delicious": 0, "useful": 0, "useless": 0, "favourite": 0, "crazy": 0, "silly": 0, "weird": 0, "fancy": 0, "brilliant": 0, "excellent": 0, "ridiculous": 0, "lucky": 0, "special": 0, "unusual": 0, "cosy": 0, "cozy": 0, "charming": 0, "cool": 0, "tiny": 1, "small": 1, "little": 1, "big": 1, "large": 1, "huge": 1, "enormous": 1, "giant": 1, "long": 1, "short": 1, "tall": 1, "wide": 1, "narrow": 1, "massive": 1, "mini": 1, "soft": 2, "hard": 2, "sharp": 2, "thick": 2, "thin": 2, "heavy": 2, "light": 2, "clean": 2, "dirty": 2, "tidy": 2, "messy": 2, "comfortable": 2, "uncomfortable": 2, "warm": 2, "cold": 2, "hot": 2, "smooth": 2, "rough": 2, "shiny": 2, "broken": 2, "expensive": 2, "cheap": 2, "strong": 2, "fragile": 2, "wet": 2, "dry": 2, "loud": 2, "quiet": 2, "bright": 2, "fast": 2, "slow": 2, "simple": 2, "practical": 2, "powerful": 2, "noisy": 2, "sticky": 2, "fluffy": 2, "fresh": 2, "empty": 2, "full": 2, "famous": 2, "safe": 2, "dangerous": 2, "old": 3, "new": 3, "ancient": 3, "modern": 3, "young": 3, "antique": 3, "vintage": 3, "brand-new": 3, "second-hand": 3, "retro": 3, "round": 4, "square": 4, "rectangular": 4, "triangular": 4, "oval": 4, "flat": 4, "circular": 4, "curved": 4, "straight": 4, "spherical": 4, "red": 5, "white": 5, "blue": 5, "black": 5, "green": 5, "yellow": 5, "orange": 5, "pink": 5, "purple": 5, "brown": 5, "grey": 5, "gray": 5, "colourful": 5, "colorful": 5, "golden": 5, "beige": 5, "turquoise": 5, "navy": 5, "italian": 6, "french": 6, "japanese": 6, "german": 6, "chinese": 6, "british": 6, "english": 6, "american": 6, "spanish": 6, "thai": 6, "swiss": 6, "korean": 6, "indian": 6, "mexican": 6, "belgian": 6, "dutch": 6, "scandinavian": 6, "african": 6, "irish": 6, "wooden": 7, "plastic": 7, "metal": 7, "glass": 7, "cotton": 7, "woollen": 7, "wool": 7, "leather": 7, "rubber": 7, "paper": 7, "silk": 7, "steel": 7, "gold": 7, "silver": 7, "stone": 7, "ceramic": 7, "denim": 7, "cardboard": 7, "velvet": 7, "nylon": 7, "concrete": 7, "bamboo": 7, "porcelain": 7, "linen": 7, "aluminium": 7, "aluminum": 7, "copper": 7, "iron": 7, "clay": 7, "marble": 7};
+    var STOP={'in':1,on:1,at:1,'with':1,'for':1,from:1,to:1,of:1,that:1,which:1,who:1,because:1,by:1,near:1,i:1,it:1,is:1,'and':0};
+    var DET={a:1,an:1,the:1,my:1,your:1,his:1,her:1,our:1,their:1,this:1,that:1,these:1,those:1,some:1};
+    function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+    function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function toks(s){ return s.toLowerCase().replace(/[’‘]/g,"'").replace(/[^a-z\-' ]/g,' ').split(/\s+/).filter(Boolean); }
+    function slot(w){ return Object.prototype.hasOwnProperty.call(LEX,w)?LEX[w]:-1; }
+    function anWord(w){ if(/^(hour|honest|honour)/.test(w)) return true; if(/^(uni|use|usu|eu|one|once)/.test(w)) return false; return /^[aeiou]/.test(w); }
+    // Checks one noun phrase: [det] adj adj ... noun. Returns {det, words:[{w,r,bad,noun}], errs:[], unk:[]}
+    function check(s){
+      var t=toks(s), det=null, errs=[], unk=[];
+      if(t.length&&DET[t[0]]) det=t.shift();
+      // the phrase ends before a preposition or a relative word: "an old wooden clock in the hall"
+      for(var q=1;q<t.length;q++) if(STOP[t[q]]){ t=t.slice(0,q); break; }
+      var W=t.map(function(w,i){ return {w:w,r:slot(w),noun:i===t.length-1,bad:false}; });
+      var A=W.filter(function(x){ return !x.noun; });
+      for(var i=0;i<A.length;i++){
+        if(A[i].r<0){ unk.push(A[i].w); continue; }
+        for(var j=i+1;j<A.length;j++){
+          if(A[j].r>=0&&A[i].r>A[j].r){ A[i].bad=A[j].bad=true;
+            errs.push('<em>'+esc(cap(A[j].w))+'</em> is '+SLOTS[A[j].r]+' and <em>'+esc(A[i].w)+'</em> is '+SLOTS[A[i].r]+': '+SLOTS[A[j].r]+' comes first.'); }
+        }
+      }
+      if(W.length&&(det==='a'||det==='an')){
+        var f=W[0].w, want=anWord(f)?'an':'a';
+        if(det!==want) errs.push('<em>'+want+' '+esc(f)+'</em>, not <em>'+det+' '+esc(f)+'</em>: '+(want==='an'?'it starts with a vowel sound.':'it starts with a consonant sound.'));
+      }
+      return {det:det,words:W,errs:errs,unk:unk};
+    }
+    function tags(c){
+      var h=c.det?'<span class="tg noun" style="border-style:solid;opacity:.7">'+esc(c.det)+'<small>&nbsp;</small></span>':'';
+      c.words.forEach(function(x){
+        var lab=x.noun?'noun':(x.r>=0?SLOTS[x.r]:'?');
+        h+='<span class="tg'+(x.noun?' noun':'')+(x.bad?' bad':'')+(!x.noun&&x.r<0?' unk':'')+'">'+esc(x.w)+'<small>'+lab+'</small></span>';
+      });
+      return '<div class="tags">'+h+'</div>';
+    }
+    function verdict(c){
+      if(c.errs.length) return '<div class="fb no">'+c.errs.join('<br>')+'</div>';
+      var m='<div class="fb ok">The order works.</div>';
+      if(c.unk.length) m='<div class="fb ok">The order works for the words I know.</div><div class="note">I don&rsquo;t know <em>'+c.unk.map(esc).join('</em>, <em>')+'</em>, so I can&rsquo;t say where it goes. Ask your partner.</div>';
+      return m;
+    }
+
+    var cur=[], path=[];
+    function body(s){ var t=toks(s); if(DET[t[0]]) t.shift(); return t; }
+    function draw(i){
+      var card=box.querySelectorAll('.ch')[i];
+      card.querySelector('.chain').innerHTML=path[i].map(function(p,k){ return (k?'<i>&rarr;</i>':'')+'<span'+(k===0?' class="n"':'')+'>'+esc(p)+'</span>'; }).join('');
+    }
+    for(var i=0;i<D.length;i++){ path[i]=[D[i].a]; cur[i]=D[i].a; draw(i); }
+    function step(i,v){
+      var card=box.querySelectorAll('.ch')[i], res=card.querySelector('.res');
+      var now=body(cur[i]), nt=body(v), goal=body(D[i].b), c=check(v);
+      var msg=null;
+      if(nt.length!==3) msg='Keep three words after <em>a</em> / <em>an</em>: two adjectives and a noun.';
+      else {
+        var rem=now.slice(), add=[];
+        nt.forEach(function(w){ var k=rem.indexOf(w); if(k>-1) rem.splice(k,1); else add.push(w); });
+        var nouns=[now[2],goal[2]];
+        if(add.length===0&&nt.join(' ')!==now.join(' ')&&c.errs.length){ res.innerHTML=tags(c)+verdict(c); return; }
+        if(add.length===0) msg=nt.join(' ')===now.join(' ')?'Nothing changed. Change one word.':'Same words, new order. Change one word instead.';
+        else if(add.length>1) msg='You changed '+add.length+' words: <em>'+add.map(esc).join('</em>, <em>')+'</em>. One at a time.';
+        else if(goal.indexOf(add[0])<0) msg='Use a word from the finish: <em>'+goal.join('</em>, <em>')+'</em>.';
+        else if(nouns.indexOf(nt[2])<0) msg='The noun goes last: <em>'+esc(nt[2])+'</em> is not a noun here.';
+        else if(slot(nt[0])<0||slot(nt[1])<0) msg='The first two words must be adjectives.';
+      }
+      if(!msg&&!c.det) msg='Start with <em>a</em> or <em>an</em>.';
+      if(msg){ res.innerHTML='<div class="fb no">'+msg+'</div>'; return; }
+      if(c.errs.length){ res.innerHTML=tags(c)+verdict(c); return; }
+      var clean=c.det+' '+nt.join(' '); cur[i]=clean; path[i].push(clean); draw(i);
+      var inp=card.querySelector('input'); inp.value='';
+      if(nt.join(' ')===goal.join(' ')){
+        var n=path[i].length-1; res.innerHTML='<div class="fb ok">You got there in '+n+' step'+(n===1?'':'s')+'.</div>';
+        card.querySelector('.step').classList.add('hide'); card.querySelector('.nx').classList.remove('hide');
+        if(i===D.length-1){ card.querySelector('.nx').classList.add('hide'); document.getElementById('td9-end').classList.remove('hide'); }
+      } else { res.innerHTML=tags(c)+'<div class="fb ok">Good step.</div>'; inp.focus(); }
+    }
+    box.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b) return;
+      var card=b.closest('.ch'), i=+card.getAttribute('data-i');
+      if(b.classList.contains('go')){ var v=card.querySelector('input').value; if(v.trim()) step(i,v); }
+      if(b.classList.contains('hint')){
+        // the key's next step from where the student is, if they are on the key's path; else the first key step that is one change away
+        var now=body(cur[i]).join(' '), k=D[i].k, h=null;
+        for(var j=0;j<k.length;j++){ var t=body(k[j]); var diff=t.filter(function(w,x){ return body(cur[i]).indexOf(w)<0; }).length; if(diff===1&&t.join(' ')!==now){ h=k[j]; break; } }
+        card.querySelector('.res').innerHTML='<p class="note" style="margin:6px 0 0">Try: <strong>'+(h||k[k.length-1])+'</strong></p>';
+      }
+      if(b.classList.contains('next')){ var all=box.querySelectorAll('.ch'); all[i+1].classList.remove('hide'); card.querySelector('.nx').classList.add('hide'); all[i+1].scrollIntoView({behavior:'smooth',block:'start'}); all[i+1].querySelector('input').focus(); }
+    });
+    box.addEventListener('keydown',function(e){ if(e.key==='Enter'&&e.target.classList.contains('m')){ e.preventDefault(); e.target.closest('.ch').querySelector('.go').click(); } });
+  })();
+  </script>
+</div>
+<hr><div id="td1011">
+  <style>
+    #td1011{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #td1011 *{box-sizing:border-box;}
+    #td1011 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #td1011 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #td1011 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #td1011 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #td1011 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #td1011 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #td1011 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #td1011 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #td1011 .q.on .start{display:block;}
+    #td1011 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #td1011 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #td1011 button:hover{background:#0f4a5c;}
+    #td1011 button.ghost{background:transparent;color:var(--teal);}
+    #td1011 button.ghost:hover{background:var(--teal-bg);}
+    #td1011 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #td1011 button.amber:hover{background:#e0a52a;}
+    #td1011 button:disabled{opacity:.45;cursor:default;}
+    #td1011 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #td1011 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #td1011 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #td1011 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #td1011 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #td1011 .choice:disabled{opacity:.9;cursor:default;}
+    #td1011 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #td1011 .fb.ok{color:var(--ok);} #td1011 .fb.no{color:var(--no);}
+    #td1011 .fb .plain{font-weight:normal;color:var(--ink);}
+    #td1011 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #td1011 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #td1011 input.ok{border-color:var(--ok);background:var(--ok-bg);} #td1011 input.no{border-color:var(--no);background:var(--no-bg);}
+    #td1011 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:80px;}
+    #td1011 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #td1011 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #td1011 .talk p{margin:0 0 6px;}
+    #td1011 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #td1011 .ex p{margin:4px 0;}
+    #td1011 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #td1011 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #td1011 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #td1011 .note{font-size:14px;color:var(--muted);}
+    #td1011 .hide{display:none !important;}
+    #td1011 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #td1011 .item:first-child{border-top:none;}
+    #td1011 .item > b{color:var(--teal);}
+    #td1011 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #td1011 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #td1011 .video iframe,#td1011 .video video,#td1011 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #td1011 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:flex-end;}
+    #td1011 .tg{display:inline-flex;flex-direction:column;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:3px 10px;font-size:16px;}
+    #td1011 .tg small{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+    #td1011 .tg.bad{border-color:var(--terra);background:var(--terra-bg);}
+    #td1011 .tg.noun{border-style:dashed;}
+    #td1011 .tg.unk{border-style:dotted;}
+    #td1011 .strip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:15px;font-weight:bold;}
+    #td1011 .strip span{background:var(--teal-bg);color:var(--teal);border-radius:8px;padding:6px 10px;}
+    #td1011 .strip span.n{background:var(--slate-bg);color:var(--slate);}
+    #td1011 .strip span.x{background:var(--amber-bg);color:#8a6510;border:2px dashed var(--amber);}
+    #td1011 .strip i{color:var(--muted);font-style:normal;}
+    #td1011 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #td1011 table.t th,#td1011 table.t td{border:1px solid var(--line);padding:7px;text-align:center;}
+    #td1011 table.t th{background:var(--slate-bg);}
+    #td1011 table.t td.f{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #td1011 table.t td.n{font-weight:bold;color:var(--slate);}
+    #td1011 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #td1011 .pic{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+    #td1011 .pic img{width:100%;display:block;}
+    #td1011 .pic.tall img{height:300px;object-fit:contain;background:#fff;}
+    #td1011 .pic figcaption{text-align:center;font-weight:bold;padding:6px;color:var(--teal);font-size:15px;}
+    #td1011 .hold{user-select:none;-webkit-user-select:none;touch-action:none;text-align:center;border:3px dashed var(--teal);border-radius:14px;padding:22px 14px;background:var(--teal-bg);cursor:pointer;font-weight:bold;color:var(--teal);}
+    #td1011 .hold.on{background:#fff;border-style:solid;}
+    #td1011 .hold .secret{font-size:30px;color:var(--ink);}
+    #td1011 .timer{font-size:34px;font-weight:bold;text-align:center;color:var(--teal);font-variant-numeric:tabular-nums;}
+    @media (max-width:560px){ #td1011 .grid2{grid-template-columns:1fr;} #td1011 table.t{font-size:12px;} #td1011 table.t th,#td1011 table.t td{padding:4px;} }
+  </style>
+
+  <h1>What is it?</h1>
+  <p class="sub">Click a gap, then a word. There are three words you don&rsquo;t need.</p>
+  <div class="opt" id="td10b" style="margin-bottom:10px"><button class="choice chip">hat</button><button class="choice chip">button</button><button class="choice chip">mop</button><button class="choice chip">balloon</button><button class="choice chip">pillow</button><button class="choice chip">tablecloth</button><button class="choice chip">towel</button><button class="choice chip">yoga mat</button></div>
+  <div class="panel" id="td10"><div class="item" data-i="0"><b>A</b><div>A <button class="choice gap" style="min-width:130px;padding:4px 10px">&nbsp;</button> is a square or round cotton thing you put on a table.<div class="fb"></div></div></div><div class="item" data-i="1"><b>B</b><div>A <button class="choice gap" style="min-width:130px;padding:4px 10px">&nbsp;</button> is a tiny round thing on your clothing. It can be plastic or metal.<div class="fb"></div></div></div><div class="item" data-i="2"><b>C</b><div>A <button class="choice gap" style="min-width:130px;padding:4px 10px">&nbsp;</button> is a rectangular cotton thing you use in the bathroom after you wash yourself.<div class="fb"></div></div></div><div class="item" data-i="3"><b>D</b><div>A <button class="choice gap" style="min-width:130px;padding:4px 10px">&nbsp;</button> is a thing with a long plastic or wooden handle you use to clean the floor.<div class="fb"></div></div></div><div class="item" data-i="4"><b>E</b><div>A <button class="choice gap" style="min-width:130px;padding:4px 10px">&nbsp;</button> is a round colourful rubber thing you fill with air and use at parties.<div class="fb"></div></div></div>
+    <div class="btns"><button id="td10-chk">Check</button></div>
+    <div class="score" id="td10-s"></div>
+  </div>
+  <div class="ex hide" id="td10-pat"><p><strong>The pattern:</strong> a + <em>size / quality / shape / colour / material</em> + <strong>thing</strong> + what you do with it.</p>
+  <p><em>a tiny round <strong>thing</strong> on your clothing &middot; a round colourful rubber <strong>thing</strong> you fill with air</em></p></div>
+
+  <h1 style="margin-top:26px">Your turn</h1>
+  <p class="sub">In pairs. Each of you thinks of three everyday objects that are <strong>not</strong> in this lesson. Write a description like the ones above. The page checks the adjectives before <em>thing</em>. Then hide and play.</p>
+  <div class="panel" id="td11w"><div class="item"><b>1</b><div><input type="text" class="ans" autocomplete="off" placeholder="the object (your partner must not see it)" style="margin-bottom:6px"><input type="text" class="desc" autocomplete="off" placeholder="It is a ... thing you ..."><div class="res"></div></div></div><div class="item"><b>2</b><div><input type="text" class="ans" autocomplete="off" placeholder="the object (your partner must not see it)" style="margin-bottom:6px"><input type="text" class="desc" autocomplete="off" placeholder="It is a ... thing you ..."><div class="res"></div></div></div><div class="item"><b>3</b><div><input type="text" class="ans" autocomplete="off" placeholder="the object (your partner must not see it)" style="margin-bottom:6px"><input type="text" class="desc" autocomplete="off" placeholder="It is a ... thing you ..."><div class="res"></div></div></div>
+    <div class="btns"><button id="td11-chk" class="ghost">Check my adjectives</button><button id="td11-play">Hide and play</button></div>
+    <div class="fb no" id="td11-fb"></div>
+  </div>
+  <div class="panel hide" id="td11p">
+    <div class="note" id="td11-n"></div>
+    <p style="font-size:22px;margin:6px 0 10px" id="td11-d"></p>
+    <div class="btns"><button id="td11-r" class="amber">Show the answer</button><button id="td11-nx">Next description</button><button id="td11-e" class="ghost">Edit</button></div>
+    <div class="fb ok" id="td11-a"></div>
+  </div>
+  <p class="note">Nothing is sent anywhere. Your descriptions stay on this screen only.</p>
+
+
+  <script>
+  (function(){
+    var K=["tablecloth", "button", "towel", "mop", "balloon"], box=document.getElementById('td10'); if(!box) return;
+    var $=function(i){ return document.getElementById(i); };
+    
+    var SLOTS=["opinion", "size", "quality", "age", "shape", "colour", "origin", "material"], LEX={"lovely": 0, "beautiful": 0, "pretty": 0, "nice": 0, "ugly": 0, "horrible": 0, "amazing": 0, "wonderful": 0, "cute": 0, "great": 0, "awful": 0, "terrible": 0, "perfect": 0, "fantastic": 0, "strange": 0, "funny": 0, "boring": 0, "interesting": 0, "gorgeous": 0, "elegant": 0, "stylish": 0, "delicious": 0, "useful": 0, "useless": 0, "favourite": 0, "crazy": 0, "silly": 0, "weird": 0, "fancy": 0, "brilliant": 0, "excellent": 0, "ridiculous": 0, "lucky": 0, "special": 0, "unusual": 0, "cosy": 0, "cozy": 0, "charming": 0, "cool": 0, "tiny": 1, "small": 1, "little": 1, "big": 1, "large": 1, "huge": 1, "enormous": 1, "giant": 1, "long": 1, "short": 1, "tall": 1, "wide": 1, "narrow": 1, "massive": 1, "mini": 1, "soft": 2, "hard": 2, "sharp": 2, "thick": 2, "thin": 2, "heavy": 2, "light": 2, "clean": 2, "dirty": 2, "tidy": 2, "messy": 2, "comfortable": 2, "uncomfortable": 2, "warm": 2, "cold": 2, "hot": 2, "smooth": 2, "rough": 2, "shiny": 2, "broken": 2, "expensive": 2, "cheap": 2, "strong": 2, "fragile": 2, "wet": 2, "dry": 2, "loud": 2, "quiet": 2, "bright": 2, "fast": 2, "slow": 2, "simple": 2, "practical": 2, "powerful": 2, "noisy": 2, "sticky": 2, "fluffy": 2, "fresh": 2, "empty": 2, "full": 2, "famous": 2, "safe": 2, "dangerous": 2, "old": 3, "new": 3, "ancient": 3, "modern": 3, "young": 3, "antique": 3, "vintage": 3, "brand-new": 3, "second-hand": 3, "retro": 3, "round": 4, "square": 4, "rectangular": 4, "triangular": 4, "oval": 4, "flat": 4, "circular": 4, "curved": 4, "straight": 4, "spherical": 4, "red": 5, "white": 5, "blue": 5, "black": 5, "green": 5, "yellow": 5, "orange": 5, "pink": 5, "purple": 5, "brown": 5, "grey": 5, "gray": 5, "colourful": 5, "colorful": 5, "golden": 5, "beige": 5, "turquoise": 5, "navy": 5, "italian": 6, "french": 6, "japanese": 6, "german": 6, "chinese": 6, "british": 6, "english": 6, "american": 6, "spanish": 6, "thai": 6, "swiss": 6, "korean": 6, "indian": 6, "mexican": 6, "belgian": 6, "dutch": 6, "scandinavian": 6, "african": 6, "irish": 6, "wooden": 7, "plastic": 7, "metal": 7, "glass": 7, "cotton": 7, "woollen": 7, "wool": 7, "leather": 7, "rubber": 7, "paper": 7, "silk": 7, "steel": 7, "gold": 7, "silver": 7, "stone": 7, "ceramic": 7, "denim": 7, "cardboard": 7, "velvet": 7, "nylon": 7, "concrete": 7, "bamboo": 7, "porcelain": 7, "linen": 7, "aluminium": 7, "aluminum": 7, "copper": 7, "iron": 7, "clay": 7, "marble": 7};
+    var STOP={'in':1,on:1,at:1,'with':1,'for':1,from:1,to:1,of:1,that:1,which:1,who:1,because:1,by:1,near:1,i:1,it:1,is:1,'and':0};
+    var DET={a:1,an:1,the:1,my:1,your:1,his:1,her:1,our:1,their:1,this:1,that:1,these:1,those:1,some:1};
+    function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+    function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function toks(s){ return s.toLowerCase().replace(/[’‘]/g,"'").replace(/[^a-z\-' ]/g,' ').split(/\s+/).filter(Boolean); }
+    function slot(w){ return Object.prototype.hasOwnProperty.call(LEX,w)?LEX[w]:-1; }
+    function anWord(w){ if(/^(hour|honest|honour)/.test(w)) return true; if(/^(uni|use|usu|eu|one|once)/.test(w)) return false; return /^[aeiou]/.test(w); }
+    // Checks one noun phrase: [det] adj adj ... noun. Returns {det, words:[{w,r,bad,noun}], errs:[], unk:[]}
+    function check(s){
+      var t=toks(s), det=null, errs=[], unk=[];
+      if(t.length&&DET[t[0]]) det=t.shift();
+      // the phrase ends before a preposition or a relative word: "an old wooden clock in the hall"
+      for(var q=1;q<t.length;q++) if(STOP[t[q]]){ t=t.slice(0,q); break; }
+      var W=t.map(function(w,i){ return {w:w,r:slot(w),noun:i===t.length-1,bad:false}; });
+      var A=W.filter(function(x){ return !x.noun; });
+      for(var i=0;i<A.length;i++){
+        if(A[i].r<0){ unk.push(A[i].w); continue; }
+        for(var j=i+1;j<A.length;j++){
+          if(A[j].r>=0&&A[i].r>A[j].r){ A[i].bad=A[j].bad=true;
+            errs.push('<em>'+esc(cap(A[j].w))+'</em> is '+SLOTS[A[j].r]+' and <em>'+esc(A[i].w)+'</em> is '+SLOTS[A[i].r]+': '+SLOTS[A[j].r]+' comes first.'); }
+        }
+      }
+      if(W.length&&(det==='a'||det==='an')){
+        var f=W[0].w, want=anWord(f)?'an':'a';
+        if(det!==want) errs.push('<em>'+want+' '+esc(f)+'</em>, not <em>'+det+' '+esc(f)+'</em>: '+(want==='an'?'it starts with a vowel sound.':'it starts with a consonant sound.'));
+      }
+      return {det:det,words:W,errs:errs,unk:unk};
+    }
+    function tags(c){
+      var h=c.det?'<span class="tg noun" style="border-style:solid;opacity:.7">'+esc(c.det)+'<small>&nbsp;</small></span>':'';
+      c.words.forEach(function(x){
+        var lab=x.noun?'noun':(x.r>=0?SLOTS[x.r]:'?');
+        h+='<span class="tg'+(x.noun?' noun':'')+(x.bad?' bad':'')+(!x.noun&&x.r<0?' unk':'')+'">'+esc(x.w)+'<small>'+lab+'</small></span>';
+      });
+      return '<div class="tags">'+h+'</div>';
+    }
+    function verdict(c){
+      if(c.errs.length) return '<div class="fb no">'+c.errs.join('<br>')+'</div>';
+      var m='<div class="fb ok">The order works.</div>';
+      if(c.unk.length) m='<div class="fb ok">The order works for the words I know.</div><div class="note">I don&rsquo;t know <em>'+c.unk.map(esc).join('</em>, <em>')+'</em>, so I can&rsquo;t say where it goes. Ask your partner.</div>';
+      return m;
+    }
+
+    var gaps=box.querySelectorAll('.gap'), act=0, chips=$('td10b').querySelectorAll('.chip'), checked=false;
+    function mark(){ for(var i=0;i<gaps.length;i++) gaps[i].classList.toggle('sel',i===act&&!checked); }
+    function used(){ var u={}; for(var i=0;i<gaps.length;i++){ var v=gaps[i].getAttribute('data-v'); if(v) u[v]=1; } for(var k=0;k<chips.length;k++) chips[k].disabled=!!u[chips[k].textContent]||checked; }
+    box.addEventListener('click',function(e){ var g=e.target.closest?e.target.closest('.gap'):null; if(!g||checked) return;
+      for(var i=0;i<gaps.length;i++) if(gaps[i]===g) act=i;
+      if(g.getAttribute('data-v')){ g.removeAttribute('data-v'); g.innerHTML='&nbsp;'; used(); } mark(); });
+    $('td10b').addEventListener('click',function(e){ var c=e.target.closest?e.target.closest('.chip'):null; if(!c||c.disabled||checked) return;
+      gaps[act].setAttribute('data-v',c.textContent); gaps[act].textContent=c.textContent; used();
+      for(var k=1;k<=gaps.length;k++){ var j=(act+k)%gaps.length; if(!gaps[j].getAttribute('data-v')){ act=j; break; } } mark(); });
+    $('td10-chk').addEventListener('click',function(){
+      var r=0, empty=0; for(var i=0;i<gaps.length;i++) if(!gaps[i].getAttribute('data-v')) empty++;
+      if(empty){ $('td10-s').textContent='Fill all five gaps first.'; return; }
+      checked=true; mark(); used(); this.disabled=true;
+      for(var i=0;i<gaps.length;i++){ var v=gaps[i].getAttribute('data-v'), ok=v===K[i], f=gaps[i].parentNode.querySelector('.fb'); if(ok) r++;
+        gaps[i].className='choice gap '+(ok?'ok':'no'); gaps[i].disabled=true;
+        f.className='fb '+(ok?'ok':'no'); f.innerHTML=ok?'Yes.':'You chose '+v+'. It is <strong>'+K[i]+'</strong>.'; }
+      $('td10-s').textContent=r+' of 5. Not needed: hat, pillow, yoga mat.'; $('td10-pat').classList.remove('hide');
+    });
+    mark();
+    // your turn
+    function adjBefore(s){
+      var t=toks(s), k=-1; for(var i=0;i<t.length;i++) if(/^(thing|things|object|tool|machine|device|gadget)$/.test(t[i])){ k=i; break; }
+      if(k<0) return null; var j=k-1; while(j>=0&&slot(t[j])>=0) j--;
+      var det=(j>=0&&DET[t[j]])?t[j]+' ':''; return det+t.slice(j+1,k+1).join(' ');
+    }
+    function checkAll(){
+      var its=$('td11w').querySelectorAll('.item'), okAll=true;
+      for(var i=0;i<its.length;i++){ var d=its[i].querySelector('.desc').value, res=its[i].querySelector('.res');
+        if(!d.trim()){ res.innerHTML=''; continue; }
+        var ph=adjBefore(d); if(!ph){ res.innerHTML='<div class="note">Use the pattern: ... a [adjectives] <strong>thing</strong> you ...</div>'; continue; }
+        var c=check(ph); if(c.errs.length) okAll=false; res.innerHTML=tags(c)+verdict(c); }
+      return okAll;
+    }
+    $('td11-chk').addEventListener('click',checkAll);
+    var L=[], k=0;
+    function showD(){ $('td11-n').textContent='Description '+(k+1)+' of '+L.length; $('td11-d').textContent=L[k].d; $('td11-a').textContent=''; $('td11-nx').disabled=k>=L.length-1; }
+    $('td11-play').addEventListener('click',function(){
+      L=[]; var its=$('td11w').querySelectorAll('.item');
+      for(var i=0;i<its.length;i++){ var a=its[i].querySelector('.ans').value.trim(), d=its[i].querySelector('.desc').value.trim(); if(a&&d) L.push({a:a,d:d.replace(new RegExp('\\b(an?\\s+|the\\s+)?'+a.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'ig'),'...')}); }
+      if(!L.length){ $('td11-fb').textContent='Write at least one object and its description.'; return; }
+      checkAll(); $('td11-fb').textContent=''; $('td11w').classList.add('hide'); $('td11p').classList.remove('hide'); k=0; showD();
+    });
+    $('td11-r').addEventListener('click',function(){ $('td11-a').textContent='It\u2019s: '+L[k].a; });
+    $('td11-nx').addEventListener('click',function(){ if(k<L.length-1){ k++; showD(); } });
+    $('td11-e').addEventListener('click',function(){ $('td11p').classList.add('hide'); $('td11w').classList.remove('hide'); });
+  })();
+  </script>
+</div>
+<hr><div id="td12p">
+  <style>
+    #td12p{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #td12p *{box-sizing:border-box;}
+    #td12p h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #td12p h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #td12p .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #td12p .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #td12p .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #td12p .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #td12p .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #td12p .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #td12p .q.on .start{display:block;}
+    #td12p .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #td12p button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #td12p button:hover{background:#0f4a5c;}
+    #td12p button.ghost{background:transparent;color:var(--teal);}
+    #td12p button.ghost:hover{background:var(--teal-bg);}
+    #td12p button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #td12p button.amber:hover{background:#e0a52a;}
+    #td12p button:disabled{opacity:.45;cursor:default;}
+    #td12p .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #td12p .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #td12p .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #td12p .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #td12p .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #td12p .choice:disabled{opacity:.9;cursor:default;}
+    #td12p .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #td12p .fb.ok{color:var(--ok);} #td12p .fb.no{color:var(--no);}
+    #td12p .fb .plain{font-weight:normal;color:var(--ink);}
+    #td12p input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #td12p input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #td12p input.ok{border-color:var(--ok);background:var(--ok-bg);} #td12p input.no{border-color:var(--no);background:var(--no-bg);}
+    #td12p textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:80px;}
+    #td12p .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #td12p .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #td12p .talk p{margin:0 0 6px;}
+    #td12p .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #td12p .ex p{margin:4px 0;}
+    #td12p .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #td12p .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #td12p .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #td12p .note{font-size:14px;color:var(--muted);}
+    #td12p .hide{display:none !important;}
+    #td12p .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #td12p .item:first-child{border-top:none;}
+    #td12p .item > b{color:var(--teal);}
+    #td12p .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #td12p .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #td12p .video iframe,#td12p .video video,#td12p .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #td12p .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:flex-end;}
+    #td12p .tg{display:inline-flex;flex-direction:column;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:3px 10px;font-size:16px;}
+    #td12p .tg small{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+    #td12p .tg.bad{border-color:var(--terra);background:var(--terra-bg);}
+    #td12p .tg.noun{border-style:dashed;}
+    #td12p .tg.unk{border-style:dotted;}
+    #td12p .strip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:15px;font-weight:bold;}
+    #td12p .strip span{background:var(--teal-bg);color:var(--teal);border-radius:8px;padding:6px 10px;}
+    #td12p .strip span.n{background:var(--slate-bg);color:var(--slate);}
+    #td12p .strip span.x{background:var(--amber-bg);color:#8a6510;border:2px dashed var(--amber);}
+    #td12p .strip i{color:var(--muted);font-style:normal;}
+    #td12p table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #td12p table.t th,#td12p table.t td{border:1px solid var(--line);padding:7px;text-align:center;}
+    #td12p table.t th{background:var(--slate-bg);}
+    #td12p table.t td.f{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #td12p table.t td.n{font-weight:bold;color:var(--slate);}
+    #td12p .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #td12p .pic{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+    #td12p .pic img{width:100%;display:block;}
+    #td12p .pic.tall img{height:300px;object-fit:contain;background:#fff;}
+    #td12p .pic figcaption{text-align:center;font-weight:bold;padding:6px;color:var(--teal);font-size:15px;}
+    #td12p .hold{user-select:none;-webkit-user-select:none;touch-action:none;text-align:center;border:3px dashed var(--teal);border-radius:14px;padding:22px 14px;background:var(--teal-bg);cursor:pointer;font-weight:bold;color:var(--teal);}
+    #td12p .hold.on{background:#fff;border-style:solid;}
+    #td12p .hold .secret{font-size:30px;color:var(--ink);}
+    #td12p .timer{font-size:34px;font-weight:bold;text-align:center;color:var(--teal);font-variant-numeric:tabular-nums;}
+    @media (max-width:560px){ #td12p .grid2{grid-template-columns:1fr;} #td12p table.t{font-size:12px;} #td12p table.t th,#td12p table.t td{padding:4px;} }
+  </style>
+
+  <h1>Your picture, one minute</h1>
+  <p class="sub">In pairs. Take turns to talk about <strong>your</strong> picture for one minute on your own: what it is, what it looks like, what it&rsquo;s for, whether you have one. Then talk about the questions together.</p>
+  <div class="btns" style="margin:0 0 10px"><button id="td12-who" class="ghost">Who is A?</button><span class="fb" id="td12-whor" style="margin:10px 0 0"></span></div>
+  <div class="lang"><b>START LIKE THIS</b><span>In my picture, there&rsquo;s a / an...</span><span>It looks...</span><span>It&rsquo;s made of...</span><span>I think it&rsquo;s for...</span></div>
+  <p class="note" style="margin:-4px 0 12px">Two or three adjectives, in order: <em>a heavy silver steel watch, an old orange plastic telephone</em>.</p>
+  <div id="td12"><div class="s12" data-i="0"><h2>Set 1 of 2</h2><div class="grid2"><figure class="pic tall"><img src="img/diver-watch.jpg" alt="a steel diver's watch"><figcaption>Student A</figcaption></figure><figure class="pic tall"><img src="img/smartwatch.jpg" alt="a smartwatch projecting a screen onto an arm"><figcaption>Student B</figcaption></figure></div><div class="panel" style="margin-top:12px"><div class="timer">1:00</div><div class="btns" style="justify-content:center"><button class="ta">A talks: start 1 minute</button><button class="tb">B talks: start 1 minute</button></div></div><div class="qs hide"><p class="sub" style="margin-top:14px">Now together. Talk about the questions.</p><div class="q"><b>1</b><span>Which of the two objects would you like to have? Why?</span></div><div class="q"><b>2</b><span>Do you pay attention to the design when you buy an everyday object? Why or why not?</span></div><div class="q"><b>3</b><span>Are expensive things better than cheap things?</span></div><div class="btns" style="justify-content:center"><button class="amber pk">Pick one for me</button><button class="nx">Next set</button></div></div></div><div class="s12 hide" data-i="1"><h2>Set 2 of 2</h2><div class="grid2"><figure class="pic tall"><img src="img/burger-phone.png" alt="a telephone shaped like a hamburger"><figcaption>Student A</figcaption></figure><figure class="pic tall"><img src="img/rotary-phone.png" alt="an orange rotary telephone"><figcaption>Student B</figcaption></figure></div><div class="panel" style="margin-top:12px"><div class="timer">1:00</div><div class="btns" style="justify-content:center"><button class="ta">A talks: start 1 minute</button><button class="tb">B talks: start 1 minute</button></div></div><div class="qs hide"><p class="sub" style="margin-top:14px">Now together. Talk about the questions.</p><div class="q"><b>1</b><span>Would you like to have these objects at home? Why or why not?</span></div><div class="q"><b>2</b><span>Do you think most everyday things are the same as they were 20 or 30 years ago? Why or why not?</span></div><div class="q"><b>3</b><span>How do you think everyday objects will change in the future?</span></div><div class="btns" style="justify-content:center"><button class="amber pk">Pick one for me</button></div></div></div></div>
+
+
+  <script>
+  (function(){
+    var box=document.getElementById('td12'); if(!box) return;
+    var iv=null;
+    document.getElementById('td12-who').addEventListener('click',function(){
+      document.getElementById('td12-whor').textContent=Math.random()<.5?'The person on the left is A.':'The person on the right is A.';
+    });
+    function run(set,who){
+      clearInterval(iv); var t=60, el=set.querySelector('.timer');
+      el.textContent=who+' talks \u00b7 1:00'; el.style.color=who==='A'?'#155E75':'#D97757';
+      iv=setInterval(function(){ t--; el.textContent=who+' talks \u00b7 0:'+(t<10?'0':'')+t;
+        if(t<=0){ clearInterval(iv); el.textContent='Time!';
+          set.setAttribute('data-'+who,'1'); if(set.getAttribute('data-A')&&set.getAttribute('data-B')) set.querySelector('.qs').classList.remove('hide'); } },1000);
+    }
+    box.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b) return; var set=b.closest('.s12');
+      if(b.classList.contains('ta')) run(set,'A');
+      if(b.classList.contains('tb')) run(set,'B');
+      if(b.classList.contains('pk')){ var qs=set.querySelectorAll('.q'), i=Math.floor(Math.random()*qs.length); for(var k=0;k<qs.length;k++) qs[k].classList.toggle('on',k===i); }
+      if(b.classList.contains('nx')){ var n=set.nextElementSibling; n.classList.remove('hide'); b.disabled=true; n.scrollIntoView({behavior:'smooth',block:'start'}); }
+    });
+    // the questions also open if the teacher skips the timers
+    box.addEventListener('dblclick',function(e){ var t=e.target.closest?e.target.closest('.timer'):null; if(t) t.closest('.s12').querySelector('.qs').classList.remove('hide'); });
+  })();
+  </script>
+</div>
+<hr><div id="td13p">
+  <style>
+    #td13p{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #td13p *{box-sizing:border-box;}
+    #td13p h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #td13p h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #td13p .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #td13p .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #td13p .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #td13p .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #td13p .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #td13p .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #td13p .q.on .start{display:block;}
+    #td13p .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #td13p button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #td13p button:hover{background:#0f4a5c;}
+    #td13p button.ghost{background:transparent;color:var(--teal);}
+    #td13p button.ghost:hover{background:var(--teal-bg);}
+    #td13p button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #td13p button.amber:hover{background:#e0a52a;}
+    #td13p button:disabled{opacity:.45;cursor:default;}
+    #td13p .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #td13p .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #td13p .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #td13p .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #td13p .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #td13p .choice:disabled{opacity:.9;cursor:default;}
+    #td13p .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #td13p .fb.ok{color:var(--ok);} #td13p .fb.no{color:var(--no);}
+    #td13p .fb .plain{font-weight:normal;color:var(--ink);}
+    #td13p input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #td13p input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #td13p input.ok{border-color:var(--ok);background:var(--ok-bg);} #td13p input.no{border-color:var(--no);background:var(--no-bg);}
+    #td13p textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:80px;}
+    #td13p .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #td13p .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #td13p .talk p{margin:0 0 6px;}
+    #td13p .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #td13p .ex p{margin:4px 0;}
+    #td13p .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #td13p .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #td13p .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #td13p .note{font-size:14px;color:var(--muted);}
+    #td13p .hide{display:none !important;}
+    #td13p .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #td13p .item:first-child{border-top:none;}
+    #td13p .item > b{color:var(--teal);}
+    #td13p .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #td13p .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #td13p .video iframe,#td13p .video video,#td13p .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #td13p .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:flex-end;}
+    #td13p .tg{display:inline-flex;flex-direction:column;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:3px 10px;font-size:16px;}
+    #td13p .tg small{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+    #td13p .tg.bad{border-color:var(--terra);background:var(--terra-bg);}
+    #td13p .tg.noun{border-style:dashed;}
+    #td13p .tg.unk{border-style:dotted;}
+    #td13p .strip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:15px;font-weight:bold;}
+    #td13p .strip span{background:var(--teal-bg);color:var(--teal);border-radius:8px;padding:6px 10px;}
+    #td13p .strip span.n{background:var(--slate-bg);color:var(--slate);}
+    #td13p .strip span.x{background:var(--amber-bg);color:#8a6510;border:2px dashed var(--amber);}
+    #td13p .strip i{color:var(--muted);font-style:normal;}
+    #td13p table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #td13p table.t th,#td13p table.t td{border:1px solid var(--line);padding:7px;text-align:center;}
+    #td13p table.t th{background:var(--slate-bg);}
+    #td13p table.t td.f{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #td13p table.t td.n{font-weight:bold;color:var(--slate);}
+    #td13p .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #td13p .pic{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+    #td13p .pic img{width:100%;display:block;}
+    #td13p .pic.tall img{height:300px;object-fit:contain;background:#fff;}
+    #td13p .pic figcaption{text-align:center;font-weight:bold;padding:6px;color:var(--teal);font-size:15px;}
+    #td13p .hold{user-select:none;-webkit-user-select:none;touch-action:none;text-align:center;border:3px dashed var(--teal);border-radius:14px;padding:22px 14px;background:var(--teal-bg);cursor:pointer;font-weight:bold;color:var(--teal);}
+    #td13p .hold.on{background:#fff;border-style:solid;}
+    #td13p .hold .secret{font-size:30px;color:var(--ink);}
+    #td13p .timer{font-size:34px;font-weight:bold;text-align:center;color:var(--teal);font-variant-numeric:tabular-nums;}
+    @media (max-width:560px){ #td13p .grid2{grid-template-columns:1fr;} #td13p table.t{font-size:12px;} #td13p table.t th,#td13p table.t td{padding:4px;} }
+  </style>
+
+  <h1>Lisa&rsquo;s big crazy party</h1>
+  <p class="sub">Homework or a last ten minutes. Fill each gap with <strong>two adjectives and a noun</strong>, any you like. Then write one or two sentences to finish the story.</p>
+  <div class="ex"><p><strong>Tom&rsquo;s funny wardrobe discovery</strong></p>
+  <p>Tom was looking for his <strong>new colourful socks</strong> in his messy drawer. He found all sorts of things: a <strong>black woollen sweater</strong>, an <strong>old leather jacket</strong>, and even a <strong>huge cotton towel</strong>, but not his new colourful socks! After a few minutes, he finally found them... on his feet! Tom laughed at himself and decided to organise his drawer.</p></div>
+  <div class="panel" id="td13" style="line-height:2.2">
+    Lisa was getting ready for a big party and wanted to wear a <input type="text" class="g3" autocomplete="off" placeholder="adjective adjective noun" style="display:inline-block;width:auto;min-width:240px;margin:2px 4px"> she&rsquo;d bought especially for the event.
+    But when she put it on, she realised there was a <input type="text" class="g3" autocomplete="off" placeholder="adjective adjective noun" style="display:inline-block;width:auto;min-width:240px;margin:2px 4px"> right in the front!
+    She didn&rsquo;t have time to do anything about it, so she quickly used a <input type="text" class="g3" autocomplete="off" placeholder="adjective adjective noun" style="display:inline-block;width:auto;min-width:240px;margin:2px 4px"> to make it look better.
+    At the party, everyone looked surprised and kept asking her questions about...
+    <textarea id="td13-end" placeholder="Finish the story in one or two sentences." style="margin-top:8px"></textarea>
+    <div class="btns"><button id="td13-chk">Check my adjectives</button><button id="td13-show" class="ghost">A possible version</button></div>
+    <div id="td13-res" style="line-height:1.55"></div>
+  </div>
+  <div class="panel hide" id="td13-key"><p style="margin:0">Lisa was getting ready for a big party and wanted to wear a <strong>colourful cotton dress</strong> she&rsquo;d bought especially for the event. But when she put it on, she realised there was a <strong>tiny round hole</strong> right in the front! She didn&rsquo;t have time to do anything about it, so she quickly used a <strong>huge woollen scarf</strong> to make it look better. At the party, everyone looked surprised and kept asking her questions about... her warm scarf. She just smiled and said it was her &lsquo;new style&rsquo;.</p></div>
+
+
+  <script>
+  (function(){
+    var box=document.getElementById('td13'); if(!box) return;
+    
+    var SLOTS=["opinion", "size", "quality", "age", "shape", "colour", "origin", "material"], LEX={"lovely": 0, "beautiful": 0, "pretty": 0, "nice": 0, "ugly": 0, "horrible": 0, "amazing": 0, "wonderful": 0, "cute": 0, "great": 0, "awful": 0, "terrible": 0, "perfect": 0, "fantastic": 0, "strange": 0, "funny": 0, "boring": 0, "interesting": 0, "gorgeous": 0, "elegant": 0, "stylish": 0, "delicious": 0, "useful": 0, "useless": 0, "favourite": 0, "crazy": 0, "silly": 0, "weird": 0, "fancy": 0, "brilliant": 0, "excellent": 0, "ridiculous": 0, "lucky": 0, "special": 0, "unusual": 0, "cosy": 0, "cozy": 0, "charming": 0, "cool": 0, "tiny": 1, "small": 1, "little": 1, "big": 1, "large": 1, "huge": 1, "enormous": 1, "giant": 1, "long": 1, "short": 1, "tall": 1, "wide": 1, "narrow": 1, "massive": 1, "mini": 1, "soft": 2, "hard": 2, "sharp": 2, "thick": 2, "thin": 2, "heavy": 2, "light": 2, "clean": 2, "dirty": 2, "tidy": 2, "messy": 2, "comfortable": 2, "uncomfortable": 2, "warm": 2, "cold": 2, "hot": 2, "smooth": 2, "rough": 2, "shiny": 2, "broken": 2, "expensive": 2, "cheap": 2, "strong": 2, "fragile": 2, "wet": 2, "dry": 2, "loud": 2, "quiet": 2, "bright": 2, "fast": 2, "slow": 2, "simple": 2, "practical": 2, "powerful": 2, "noisy": 2, "sticky": 2, "fluffy": 2, "fresh": 2, "empty": 2, "full": 2, "famous": 2, "safe": 2, "dangerous": 2, "old": 3, "new": 3, "ancient": 3, "modern": 3, "young": 3, "antique": 3, "vintage": 3, "brand-new": 3, "second-hand": 3, "retro": 3, "round": 4, "square": 4, "rectangular": 4, "triangular": 4, "oval": 4, "flat": 4, "circular": 4, "curved": 4, "straight": 4, "spherical": 4, "red": 5, "white": 5, "blue": 5, "black": 5, "green": 5, "yellow": 5, "orange": 5, "pink": 5, "purple": 5, "brown": 5, "grey": 5, "gray": 5, "colourful": 5, "colorful": 5, "golden": 5, "beige": 5, "turquoise": 5, "navy": 5, "italian": 6, "french": 6, "japanese": 6, "german": 6, "chinese": 6, "british": 6, "english": 6, "american": 6, "spanish": 6, "thai": 6, "swiss": 6, "korean": 6, "indian": 6, "mexican": 6, "belgian": 6, "dutch": 6, "scandinavian": 6, "african": 6, "irish": 6, "wooden": 7, "plastic": 7, "metal": 7, "glass": 7, "cotton": 7, "woollen": 7, "wool": 7, "leather": 7, "rubber": 7, "paper": 7, "silk": 7, "steel": 7, "gold": 7, "silver": 7, "stone": 7, "ceramic": 7, "denim": 7, "cardboard": 7, "velvet": 7, "nylon": 7, "concrete": 7, "bamboo": 7, "porcelain": 7, "linen": 7, "aluminium": 7, "aluminum": 7, "copper": 7, "iron": 7, "clay": 7, "marble": 7};
+    var STOP={'in':1,on:1,at:1,'with':1,'for':1,from:1,to:1,of:1,that:1,which:1,who:1,because:1,by:1,near:1,i:1,it:1,is:1,'and':0};
+    var DET={a:1,an:1,the:1,my:1,your:1,his:1,her:1,our:1,their:1,this:1,that:1,these:1,those:1,some:1};
+    function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+    function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function toks(s){ return s.toLowerCase().replace(/[’‘]/g,"'").replace(/[^a-z\-' ]/g,' ').split(/\s+/).filter(Boolean); }
+    function slot(w){ return Object.prototype.hasOwnProperty.call(LEX,w)?LEX[w]:-1; }
+    function anWord(w){ if(/^(hour|honest|honour)/.test(w)) return true; if(/^(uni|use|usu|eu|one|once)/.test(w)) return false; return /^[aeiou]/.test(w); }
+    // Checks one noun phrase: [det] adj adj ... noun. Returns {det, words:[{w,r,bad,noun}], errs:[], unk:[]}
+    function check(s){
+      var t=toks(s), det=null, errs=[], unk=[];
+      if(t.length&&DET[t[0]]) det=t.shift();
+      // the phrase ends before a preposition or a relative word: "an old wooden clock in the hall"
+      for(var q=1;q<t.length;q++) if(STOP[t[q]]){ t=t.slice(0,q); break; }
+      var W=t.map(function(w,i){ return {w:w,r:slot(w),noun:i===t.length-1,bad:false}; });
+      var A=W.filter(function(x){ return !x.noun; });
+      for(var i=0;i<A.length;i++){
+        if(A[i].r<0){ unk.push(A[i].w); continue; }
+        for(var j=i+1;j<A.length;j++){
+          if(A[j].r>=0&&A[i].r>A[j].r){ A[i].bad=A[j].bad=true;
+            errs.push('<em>'+esc(cap(A[j].w))+'</em> is '+SLOTS[A[j].r]+' and <em>'+esc(A[i].w)+'</em> is '+SLOTS[A[i].r]+': '+SLOTS[A[j].r]+' comes first.'); }
+        }
+      }
+      if(W.length&&(det==='a'||det==='an')){
+        var f=W[0].w, want=anWord(f)?'an':'a';
+        if(det!==want) errs.push('<em>'+want+' '+esc(f)+'</em>, not <em>'+det+' '+esc(f)+'</em>: '+(want==='an'?'it starts with a vowel sound.':'it starts with a consonant sound.'));
+      }
+      return {det:det,words:W,errs:errs,unk:unk};
+    }
+    function tags(c){
+      var h=c.det?'<span class="tg noun" style="border-style:solid;opacity:.7">'+esc(c.det)+'<small>&nbsp;</small></span>':'';
+      c.words.forEach(function(x){
+        var lab=x.noun?'noun':(x.r>=0?SLOTS[x.r]:'?');
+        h+='<span class="tg'+(x.noun?' noun':'')+(x.bad?' bad':'')+(!x.noun&&x.r<0?' unk':'')+'">'+esc(x.w)+'<small>'+lab+'</small></span>';
+      });
+      return '<div class="tags">'+h+'</div>';
+    }
+    function verdict(c){
+      if(c.errs.length) return '<div class="fb no">'+c.errs.join('<br>')+'</div>';
+      var m='<div class="fb ok">The order works.</div>';
+      if(c.unk.length) m='<div class="fb ok">The order works for the words I know.</div><div class="note">I don&rsquo;t know <em>'+c.unk.map(esc).join('</em>, <em>')+'</em>, so I can&rsquo;t say where it goes. Ask your partner.</div>';
+      return m;
+    }
+
+    document.getElementById('td13-chk').addEventListener('click',function(){
+      var ins=box.querySelectorAll('.g3'), h='';
+      for(var i=0;i<ins.length;i++){ var v=ins[i].value.trim(); if(!v) continue;
+        var c=check('a '+v.replace(/^(an?|the)\s+/i,'')); var n=c.words.length;
+        h+='<div style="margin-top:10px"><strong>Gap '+(i+1)+'</strong>'+tags(c)+(n!==3?'<div class="fb no">Two adjectives and a noun: three words.</div>':verdict(c))+'</div>'; }
+      document.getElementById('td13-res').innerHTML=h||'<div class="fb no">Fill a gap first.</div>';
+    });
+    document.getElementById('td13-show').addEventListener('click',function(){ document.getElementById('td13-key').classList.remove('hide'); this.disabled=true; });
+  })();
+  </script>
+</div>
+</body></html>

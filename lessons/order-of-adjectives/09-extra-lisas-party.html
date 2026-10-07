@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Things we use every day: Lisa's big crazy party</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="td13p">
+  <style>
+    #td13p{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #td13p *{box-sizing:border-box;}
+    #td13p h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #td13p h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #td13p .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #td13p .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #td13p .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #td13p .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #td13p .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #td13p .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #td13p .q.on .start{display:block;}
+    #td13p .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #td13p button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #td13p button:hover{background:#0f4a5c;}
+    #td13p button.ghost{background:transparent;color:var(--teal);}
+    #td13p button.ghost:hover{background:var(--teal-bg);}
+    #td13p button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #td13p button.amber:hover{background:#e0a52a;}
+    #td13p button:disabled{opacity:.45;cursor:default;}
+    #td13p .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #td13p .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #td13p .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #td13p .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #td13p .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #td13p .choice:disabled{opacity:.9;cursor:default;}
+    #td13p .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #td13p .fb.ok{color:var(--ok);} #td13p .fb.no{color:var(--no);}
+    #td13p .fb .plain{font-weight:normal;color:var(--ink);}
+    #td13p input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #td13p input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #td13p input.ok{border-color:var(--ok);background:var(--ok-bg);} #td13p input.no{border-color:var(--no);background:var(--no-bg);}
+    #td13p textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:80px;}
+    #td13p .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #td13p .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #td13p .talk p{margin:0 0 6px;}
+    #td13p .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #td13p .ex p{margin:4px 0;}
+    #td13p .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #td13p .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #td13p .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #td13p .note{font-size:14px;color:var(--muted);}
+    #td13p .hide{display:none !important;}
+    #td13p .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #td13p .item:first-child{border-top:none;}
+    #td13p .item > b{color:var(--teal);}
+    #td13p .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #td13p .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #td13p .video iframe,#td13p .video video,#td13p .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #td13p .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:flex-end;}
+    #td13p .tg{display:inline-flex;flex-direction:column;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:3px 10px;font-size:16px;}
+    #td13p .tg small{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+    #td13p .tg.bad{border-color:var(--terra);background:var(--terra-bg);}
+    #td13p .tg.noun{border-style:dashed;}
+    #td13p .tg.unk{border-style:dotted;}
+    #td13p .strip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:15px;font-weight:bold;}
+    #td13p .strip span{background:var(--teal-bg);color:var(--teal);border-radius:8px;padding:6px 10px;}
+    #td13p .strip span.n{background:var(--slate-bg);color:var(--slate);}
+    #td13p .strip span.x{background:var(--amber-bg);color:#8a6510;border:2px dashed var(--amber);}
+    #td13p .strip i{color:var(--muted);font-style:normal;}
+    #td13p table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #td13p table.t th,#td13p table.t td{border:1px solid var(--line);padding:7px;text-align:center;}
+    #td13p table.t th{background:var(--slate-bg);}
+    #td13p table.t td.f{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #td13p table.t td.n{font-weight:bold;color:var(--slate);}
+    #td13p .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #td13p .pic{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+    #td13p .pic img{width:100%;display:block;}
+    #td13p .pic.tall img{height:300px;object-fit:contain;background:#fff;}
+    #td13p .pic figcaption{text-align:center;font-weight:bold;padding:6px;color:var(--teal);font-size:15px;}
+    #td13p .hold{user-select:none;-webkit-user-select:none;touch-action:none;text-align:center;border:3px dashed var(--teal);border-radius:14px;padding:22px 14px;background:var(--teal-bg);cursor:pointer;font-weight:bold;color:var(--teal);}
+    #td13p .hold.on{background:#fff;border-style:solid;}
+    #td13p .hold .secret{font-size:30px;color:var(--ink);}
+    #td13p .timer{font-size:34px;font-weight:bold;text-align:center;color:var(--teal);font-variant-numeric:tabular-nums;}
+    @media (max-width:560px){ #td13p .grid2{grid-template-columns:1fr;} #td13p table.t{font-size:12px;} #td13p table.t th,#td13p table.t td{padding:4px;} }
+  </style>
+
+  <h1>Lisa&rsquo;s big crazy party</h1>
+  <p class="sub">Homework or a last ten minutes. Fill each gap with <strong>two adjectives and a noun</strong>, any you like. Then write one or two sentences to finish the story.</p>
+  <div class="ex"><p><strong>Tom&rsquo;s funny wardrobe discovery</strong></p>
+  <p>Tom was looking for his <strong>new colourful socks</strong> in his messy drawer. He found all sorts of things: a <strong>black woollen sweater</strong>, an <strong>old leather jacket</strong>, and even a <strong>huge cotton towel</strong>, but not his new colourful socks! After a few minutes, he finally found them... on his feet! Tom laughed at himself and decided to organise his drawer.</p></div>
+  <div class="panel" id="td13" style="line-height:2.2">
+    Lisa was getting ready for a big party and wanted to wear a <input type="text" class="g3" autocomplete="off" placeholder="adjective adjective noun" style="display:inline-block;width:auto;min-width:240px;margin:2px 4px"> she&rsquo;d bought especially for the event.
+    But when she put it on, she realised there was a <input type="text" class="g3" autocomplete="off" placeholder="adjective adjective noun" style="display:inline-block;width:auto;min-width:240px;margin:2px 4px"> right in the front!
+    She didn&rsquo;t have time to do anything about it, so she quickly used a <input type="text" class="g3" autocomplete="off" placeholder="adjective adjective noun" style="display:inline-block;width:auto;min-width:240px;margin:2px 4px"> to make it look better.
+    At the party, everyone looked surprised and kept asking her questions about...
+    <textarea id="td13-end" placeholder="Finish the story in one or two sentences." style="margin-top:8px"></textarea>
+    <div class="btns"><button id="td13-chk">Check my adjectives</button><button id="td13-show" class="ghost">A possible version</button></div>
+    <div id="td13-res" style="line-height:1.55"></div>
+  </div>
+  <div class="panel hide" id="td13-key"><p style="margin:0">Lisa was getting ready for a big party and wanted to wear a <strong>colourful cotton dress</strong> she&rsquo;d bought especially for the event. But when she put it on, she realised there was a <strong>tiny round hole</strong> right in the front! She didn&rsquo;t have time to do anything about it, so she quickly used a <strong>huge woollen scarf</strong> to make it look better. At the party, everyone looked surprised and kept asking her questions about... her warm scarf. She just smiled and said it was her &lsquo;new style&rsquo;.</p></div>
+
+
+  <script>
+  (function(){
+    var box=document.getElementById('td13'); if(!box) return;
+    
+    var SLOTS=["opinion", "size", "quality", "age", "shape", "colour", "origin", "material"], LEX={"lovely": 0, "beautiful": 0, "pretty": 0, "nice": 0, "ugly": 0, "horrible": 0, "amazing": 0, "wonderful": 0, "cute": 0, "great": 0, "awful": 0, "terrible": 0, "perfect": 0, "fantastic": 0, "strange": 0, "funny": 0, "boring": 0, "interesting": 0, "gorgeous": 0, "elegant": 0, "stylish": 0, "delicious": 0, "useful": 0, "useless": 0, "favourite": 0, "crazy": 0, "silly": 0, "weird": 0, "fancy": 0, "brilliant": 0, "excellent": 0, "ridiculous": 0, "lucky": 0, "special": 0, "unusual": 0, "cosy": 0, "cozy": 0, "charming": 0, "cool": 0, "tiny": 1, "small": 1, "little": 1, "big": 1, "large": 1, "huge": 1, "enormous": 1, "giant": 1, "long": 1, "short": 1, "tall": 1, "wide": 1, "narrow": 1, "massive": 1, "mini": 1, "soft": 2, "hard": 2, "sharp": 2, "thick": 2, "thin": 2, "heavy": 2, "light": 2, "clean": 2, "dirty": 2, "tidy": 2, "messy": 2, "comfortable": 2, "uncomfortable": 2, "warm": 2, "cold": 2, "hot": 2, "smooth": 2, "rough": 2, "shiny": 2, "broken": 2, "expensive": 2, "cheap": 2, "strong": 2, "fragile": 2, "wet": 2, "dry": 2, "loud": 2, "quiet": 2, "bright": 2, "fast": 2, "slow": 2, "simple": 2, "practical": 2, "powerful": 2, "noisy": 2, "sticky": 2, "fluffy": 2, "fresh": 2, "empty": 2, "full": 2, "famous": 2, "safe": 2, "dangerous": 2, "old": 3, "new": 3, "ancient": 3, "modern": 3, "young": 3, "antique": 3, "vintage": 3, "brand-new": 3, "second-hand": 3, "retro": 3, "round": 4, "square": 4, "rectangular": 4, "triangular": 4, "oval": 4, "flat": 4, "circular": 4, "curved": 4, "straight": 4, "spherical": 4, "red": 5, "white": 5, "blue": 5, "black": 5, "green": 5, "yellow": 5, "orange": 5, "pink": 5, "purple": 5, "brown": 5, "grey": 5, "gray": 5, "colourful": 5, "colorful": 5, "golden": 5, "beige": 5, "turquoise": 5, "navy": 5, "italian": 6, "french": 6, "japanese": 6, "german": 6, "chinese": 6, "british": 6, "english": 6, "american": 6, "spanish": 6, "thai": 6, "swiss": 6, "korean": 6, "indian": 6, "mexican": 6, "belgian": 6, "dutch": 6, "scandinavian": 6, "african": 6, "irish": 6, "wooden": 7, "plastic": 7, "metal": 7, "glass": 7, "cotton": 7, "woollen": 7, "wool": 7, "leather": 7, "rubber": 7, "paper": 7, "silk": 7, "steel": 7, "gold": 7, "silver": 7, "stone": 7, "ceramic": 7, "denim": 7, "cardboard": 7, "velvet": 7, "nylon": 7, "concrete": 7, "bamboo": 7, "porcelain": 7, "linen": 7, "aluminium": 7, "aluminum": 7, "copper": 7, "iron": 7, "clay": 7, "marble": 7};
+    var STOP={'in':1,on:1,at:1,'with':1,'for':1,from:1,to:1,of:1,that:1,which:1,who:1,because:1,by:1,near:1,i:1,it:1,is:1,'and':0};
+    var DET={a:1,an:1,the:1,my:1,your:1,his:1,her:1,our:1,their:1,this:1,that:1,these:1,those:1,some:1};
+    function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+    function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function toks(s){ return s.toLowerCase().replace(/[’‘]/g,"'").replace(/[^a-z\-' ]/g,' ').split(/\s+/).filter(Boolean); }
+    function slot(w){ return Object.prototype.hasOwnProperty.call(LEX,w)?LEX[w]:-1; }
+    function anWord(w){ if(/^(hour|honest|honour)/.test(w)) return true; if(/^(uni|use|usu|eu|one|once)/.test(w)) return false; return /^[aeiou]/.test(w); }
+    // Checks one noun phrase: [det] adj adj ... noun. Returns {det, words:[{w,r,bad,noun}], errs:[], unk:[]}
+    function check(s){
+      var t=toks(s), det=null, errs=[], unk=[];
+      if(t.length&&DET[t[0]]) det=t.shift();
+      // the phrase ends before a preposition or a relative word: "an old wooden clock in the hall"
+      for(var q=1;q<t.length;q++) if(STOP[t[q]]){ t=t.slice(0,q); break; }
+      var W=t.map(function(w,i){ return {w:w,r:slot(w),noun:i===t.length-1,bad:false}; });
+      var A=W.filter(function(x){ return !x.noun; });
+      for(var i=0;i<A.length;i++){
+        if(A[i].r<0){ unk.push(A[i].w); continue; }
+        for(var j=i+1;j<A.length;j++){
+          if(A[j].r>=0&&A[i].r>A[j].r){ A[i].bad=A[j].bad=true;
+            errs.push('<em>'+esc(cap(A[j].w))+'</em> is '+SLOTS[A[j].r]+' and <em>'+esc(A[i].w)+'</em> is '+SLOTS[A[i].r]+': '+SLOTS[A[j].r]+' comes first.'); }
+        }
+      }
+      if(W.length&&(det==='a'||det==='an')){
+        var f=W[0].w, want=anWord(f)?'an':'a';
+        if(det!==want) errs.push('<em>'+want+' '+esc(f)+'</em>, not <em>'+det+' '+esc(f)+'</em>: '+(want==='an'?'it starts with a vowel sound.':'it starts with a consonant sound.'));
+      }
+      return {det:det,words:W,errs:errs,unk:unk};
+    }
+    function tags(c){
+      var h=c.det?'<span class="tg noun" style="border-style:solid;opacity:.7">'+esc(c.det)+'<small>&nbsp;</small></span>':'';
+      c.words.forEach(function(x){
+        var lab=x.noun?'noun':(x.r>=0?SLOTS[x.r]:'?');
+        h+='<span class="tg'+(x.noun?' noun':'')+(x.bad?' bad':'')+(!x.noun&&x.r<0?' unk':'')+'">'+esc(x.w)+'<small>'+lab+'</small></span>';
+      });
+      return '<div class="tags">'+h+'</div>';
+    }
+    function verdict(c){
+      if(c.errs.length) return '<div class="fb no">'+c.errs.join('<br>')+'</div>';
+      var m='<div class="fb ok">The order works.</div>';
+      if(c.unk.length) m='<div class="fb ok">The order works for the words I know.</div><div class="note">I don&rsquo;t know <em>'+c.unk.map(esc).join('</em>, <em>')+'</em>, so I can&rsquo;t say where it goes. Ask your partner.</div>';
+      return m;
+    }
+
+    document.getElementById('td13-chk').addEventListener('click',function(){
+      var ins=box.querySelectorAll('.g3'), h='';
+      for(var i=0;i<ins.length;i++){ var v=ins[i].value.trim(); if(!v) continue;
+        var c=check('a '+v.replace(/^(an?|the)\s+/i,'')); var n=c.words.length;
+        h+='<div style="margin-top:10px"><strong>Gap '+(i+1)+'</strong>'+tags(c)+(n!==3?'<div class="fb no">Two adjectives and a noun: three words.</div>':verdict(c))+'</div>'; }
+      document.getElementById('td13-res').innerHTML=h||'<div class="fb no">Fill a gap first.</div>';
+    });
+    document.getElementById('td13-show').addEventListener('click',function(){ document.getElementById('td13-key').classList.remove('hide'); this.disabled=true; });
+  })();
+  </script>
+</div>
+</body>
+</html>

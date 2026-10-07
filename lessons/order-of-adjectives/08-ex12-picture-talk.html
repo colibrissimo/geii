@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Things we use every day: Your picture, one minute</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="td12p">
+  <style>
+    #td12p{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #td12p *{box-sizing:border-box;}
+    #td12p h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #td12p h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #td12p .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #td12p .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #td12p .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #td12p .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #td12p .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #td12p .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #td12p .q.on .start{display:block;}
+    #td12p .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #td12p button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #td12p button:hover{background:#0f4a5c;}
+    #td12p button.ghost{background:transparent;color:var(--teal);}
+    #td12p button.ghost:hover{background:var(--teal-bg);}
+    #td12p button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #td12p button.amber:hover{background:#e0a52a;}
+    #td12p button:disabled{opacity:.45;cursor:default;}
+    #td12p .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #td12p .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #td12p .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #td12p .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #td12p .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #td12p .choice:disabled{opacity:.9;cursor:default;}
+    #td12p .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #td12p .fb.ok{color:var(--ok);} #td12p .fb.no{color:var(--no);}
+    #td12p .fb .plain{font-weight:normal;color:var(--ink);}
+    #td12p input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #td12p input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #td12p input.ok{border-color:var(--ok);background:var(--ok-bg);} #td12p input.no{border-color:var(--no);background:var(--no-bg);}
+    #td12p textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:80px;}
+    #td12p .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #td12p .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #td12p .talk p{margin:0 0 6px;}
+    #td12p .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #td12p .ex p{margin:4px 0;}
+    #td12p .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #td12p .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #td12p .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #td12p .note{font-size:14px;color:var(--muted);}
+    #td12p .hide{display:none !important;}
+    #td12p .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #td12p .item:first-child{border-top:none;}
+    #td12p .item > b{color:var(--teal);}
+    #td12p .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #td12p .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #td12p .video iframe,#td12p .video video,#td12p .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #td12p .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:flex-end;}
+    #td12p .tg{display:inline-flex;flex-direction:column;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:3px 10px;font-size:16px;}
+    #td12p .tg small{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+    #td12p .tg.bad{border-color:var(--terra);background:var(--terra-bg);}
+    #td12p .tg.noun{border-style:dashed;}
+    #td12p .tg.unk{border-style:dotted;}
+    #td12p .strip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:15px;font-weight:bold;}
+    #td12p .strip span{background:var(--teal-bg);color:var(--teal);border-radius:8px;padding:6px 10px;}
+    #td12p .strip span.n{background:var(--slate-bg);color:var(--slate);}
+    #td12p .strip span.x{background:var(--amber-bg);color:#8a6510;border:2px dashed var(--amber);}
+    #td12p .strip i{color:var(--muted);font-style:normal;}
+    #td12p table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #td12p table.t th,#td12p table.t td{border:1px solid var(--line);padding:7px;text-align:center;}
+    #td12p table.t th{background:var(--slate-bg);}
+    #td12p table.t td.f{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #td12p table.t td.n{font-weight:bold;color:var(--slate);}
+    #td12p .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #td12p .pic{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+    #td12p .pic img{width:100%;display:block;}
+    #td12p .pic.tall img{height:300px;object-fit:contain;background:#fff;}
+    #td12p .pic figcaption{text-align:center;font-weight:bold;padding:6px;color:var(--teal);font-size:15px;}
+    #td12p .hold{user-select:none;-webkit-user-select:none;touch-action:none;text-align:center;border:3px dashed var(--teal);border-radius:14px;padding:22px 14px;background:var(--teal-bg);cursor:pointer;font-weight:bold;color:var(--teal);}
+    #td12p .hold.on{background:#fff;border-style:solid;}
+    #td12p .hold .secret{font-size:30px;color:var(--ink);}
+    #td12p .timer{font-size:34px;font-weight:bold;text-align:center;color:var(--teal);font-variant-numeric:tabular-nums;}
+    @media (max-width:560px){ #td12p .grid2{grid-template-columns:1fr;} #td12p table.t{font-size:12px;} #td12p table.t th,#td12p table.t td{padding:4px;} }
+  </style>
+
+  <h1>Your picture, one minute</h1>
+  <p class="sub">In pairs. Take turns to talk about <strong>your</strong> picture for one minute on your own: what it is, what it looks like, what it&rsquo;s for, whether you have one. Then talk about the questions together.</p>
+  <div class="btns" style="margin:0 0 10px"><button id="td12-who" class="ghost">Who is A?</button><span class="fb" id="td12-whor" style="margin:10px 0 0"></span></div>
+  <div class="lang"><b>START LIKE THIS</b><span>In my picture, there&rsquo;s a / an...</span><span>It looks...</span><span>It&rsquo;s made of...</span><span>I think it&rsquo;s for...</span></div>
+  <p class="note" style="margin:-4px 0 12px">Two or three adjectives, in order: <em>a heavy silver steel watch, an old orange plastic telephone</em>.</p>
+  <div id="td12"><div class="s12" data-i="0"><h2>Set 1 of 2</h2><div class="grid2"><figure class="pic tall"><img src="img/diver-watch.jpg" alt="a steel diver's watch"><figcaption>Student A</figcaption></figure><figure class="pic tall"><img src="img/smartwatch.jpg" alt="a smartwatch projecting a screen onto an arm"><figcaption>Student B</figcaption></figure></div><div class="panel" style="margin-top:12px"><div class="timer">1:00</div><div class="btns" style="justify-content:center"><button class="ta">A talks: start 1 minute</button><button class="tb">B talks: start 1 minute</button></div></div><div class="qs hide"><p class="sub" style="margin-top:14px">Now together. Talk about the questions.</p><div class="q"><b>1</b><span>Which of the two objects would you like to have? Why?</span></div><div class="q"><b>2</b><span>Do you pay attention to the design when you buy an everyday object? Why or why not?</span></div><div class="q"><b>3</b><span>Are expensive things better than cheap things?</span></div><div class="btns" style="justify-content:center"><button class="amber pk">Pick one for me</button><button class="nx">Next set</button></div></div></div><div class="s12 hide" data-i="1"><h2>Set 2 of 2</h2><div class="grid2"><figure class="pic tall"><img src="img/burger-phone.png" alt="a telephone shaped like a hamburger"><figcaption>Student A</figcaption></figure><figure class="pic tall"><img src="img/rotary-phone.png" alt="an orange rotary telephone"><figcaption>Student B</figcaption></figure></div><div class="panel" style="margin-top:12px"><div class="timer">1:00</div><div class="btns" style="justify-content:center"><button class="ta">A talks: start 1 minute</button><button class="tb">B talks: start 1 minute</button></div></div><div class="qs hide"><p class="sub" style="margin-top:14px">Now together. Talk about the questions.</p><div class="q"><b>1</b><span>Would you like to have these objects at home? Why or why not?</span></div><div class="q"><b>2</b><span>Do you think most everyday things are the same as they were 20 or 30 years ago? Why or why not?</span></div><div class="q"><b>3</b><span>How do you think everyday objects will change in the future?</span></div><div class="btns" style="justify-content:center"><button class="amber pk">Pick one for me</button></div></div></div></div>
+
+
+  <script>
+  (function(){
+    var box=document.getElementById('td12'); if(!box) return;
+    var iv=null;
+    document.getElementById('td12-who').addEventListener('click',function(){
+      document.getElementById('td12-whor').textContent=Math.random()<.5?'The person on the left is A.':'The person on the right is A.';
+    });
+    function run(set,who){
+      clearInterval(iv); var t=60, el=set.querySelector('.timer');
+      el.textContent=who+' talks \u00b7 1:00'; el.style.color=who==='A'?'#155E75':'#D97757';
+      iv=setInterval(function(){ t--; el.textContent=who+' talks \u00b7 0:'+(t<10?'0':'')+t;
+        if(t<=0){ clearInterval(iv); el.textContent='Time!';
+          set.setAttribute('data-'+who,'1'); if(set.getAttribute('data-A')&&set.getAttribute('data-B')) set.querySelector('.qs').classList.remove('hide'); } },1000);
+    }
+    box.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button'):null; if(!b) return; var set=b.closest('.s12');
+      if(b.classList.contains('ta')) run(set,'A');
+      if(b.classList.contains('tb')) run(set,'B');
+      if(b.classList.contains('pk')){ var qs=set.querySelectorAll('.q'), i=Math.floor(Math.random()*qs.length); for(var k=0;k<qs.length;k++) qs[k].classList.toggle('on',k===i); }
+      if(b.classList.contains('nx')){ var n=set.nextElementSibling; n.classList.remove('hide'); b.disabled=true; n.scrollIntoView({behavior:'smooth',block:'start'}); }
+    });
+    // the questions also open if the teacher skips the timers
+    box.addEventListener('dblclick',function(e){ var t=e.target.closest?e.target.closest('.timer'):null; if(t) t.closest('.s12').querySelector('.qs').classList.remove('hide'); });
+  })();
+  </script>
+</div>
+</body>
+</html>

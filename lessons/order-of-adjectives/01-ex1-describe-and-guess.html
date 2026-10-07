@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Things we use every day: Describe and guess</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="td1">
+  <style>
+    #td1{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #td1 *{box-sizing:border-box;}
+    #td1 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #td1 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #td1 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #td1 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #td1 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #td1 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #td1 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #td1 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #td1 .q.on .start{display:block;}
+    #td1 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #td1 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #td1 button:hover{background:#0f4a5c;}
+    #td1 button.ghost{background:transparent;color:var(--teal);}
+    #td1 button.ghost:hover{background:var(--teal-bg);}
+    #td1 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #td1 button.amber:hover{background:#e0a52a;}
+    #td1 button:disabled{opacity:.45;cursor:default;}
+    #td1 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #td1 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #td1 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #td1 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #td1 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #td1 .choice:disabled{opacity:.9;cursor:default;}
+    #td1 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #td1 .fb.ok{color:var(--ok);} #td1 .fb.no{color:var(--no);}
+    #td1 .fb .plain{font-weight:normal;color:var(--ink);}
+    #td1 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #td1 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #td1 input.ok{border-color:var(--ok);background:var(--ok-bg);} #td1 input.no{border-color:var(--no);background:var(--no-bg);}
+    #td1 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:80px;}
+    #td1 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #td1 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #td1 .talk p{margin:0 0 6px;}
+    #td1 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #td1 .ex p{margin:4px 0;}
+    #td1 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #td1 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #td1 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #td1 .note{font-size:14px;color:var(--muted);}
+    #td1 .hide{display:none !important;}
+    #td1 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #td1 .item:first-child{border-top:none;}
+    #td1 .item > b{color:var(--teal);}
+    #td1 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #td1 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #td1 .video iframe,#td1 .video video,#td1 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #td1 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:flex-end;}
+    #td1 .tg{display:inline-flex;flex-direction:column;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:3px 10px;font-size:16px;}
+    #td1 .tg small{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+    #td1 .tg.bad{border-color:var(--terra);background:var(--terra-bg);}
+    #td1 .tg.noun{border-style:dashed;}
+    #td1 .tg.unk{border-style:dotted;}
+    #td1 .strip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:15px;font-weight:bold;}
+    #td1 .strip span{background:var(--teal-bg);color:var(--teal);border-radius:8px;padding:6px 10px;}
+    #td1 .strip span.n{background:var(--slate-bg);color:var(--slate);}
+    #td1 .strip span.x{background:var(--amber-bg);color:#8a6510;border:2px dashed var(--amber);}
+    #td1 .strip i{color:var(--muted);font-style:normal;}
+    #td1 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #td1 table.t th,#td1 table.t td{border:1px solid var(--line);padding:7px;text-align:center;}
+    #td1 table.t th{background:var(--slate-bg);}
+    #td1 table.t td.f{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #td1 table.t td.n{font-weight:bold;color:var(--slate);}
+    #td1 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #td1 .pic{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+    #td1 .pic img{width:100%;display:block;}
+    #td1 .pic.tall img{height:300px;object-fit:contain;background:#fff;}
+    #td1 .pic figcaption{text-align:center;font-weight:bold;padding:6px;color:var(--teal);font-size:15px;}
+    #td1 .hold{user-select:none;-webkit-user-select:none;touch-action:none;text-align:center;border:3px dashed var(--teal);border-radius:14px;padding:22px 14px;background:var(--teal-bg);cursor:pointer;font-weight:bold;color:var(--teal);}
+    #td1 .hold.on{background:#fff;border-style:solid;}
+    #td1 .hold .secret{font-size:30px;color:var(--ink);}
+    #td1 .timer{font-size:34px;font-weight:bold;text-align:center;color:var(--teal);font-variant-numeric:tabular-nums;}
+    @media (max-width:560px){ #td1 .grid2{grid-template-columns:1fr;} #td1 table.t{font-size:12px;} #td1 table.t th,#td1 table.t td{padding:4px;} }
+  </style>
+
+  <h1>Things we use every day</h1>
+  <p class="sub">In pairs, one screen. Choose a picture. <strong>A</strong> holds the button to see a secret object and describes it, without saying its name. <strong>B</strong> guesses. Then swap.</p>
+  <div class="ex"><p><em>It&rsquo;s something you can eat. It&rsquo;s a fruit. It can be red or green.</em> (an apple)</p></div>
+  <div class="btns" style="margin:0 0 12px"><button class="ghost" data-p="0" id="td1-b0">The desk</button><button class="ghost" data-p="1" id="td1-b1">The room</button></div>
+  <div class="grid2" id="td1-pics">
+    <figure class="pic" data-p="0"><img src="img/desk.jpg" alt="a desk with stationery"><figcaption>The desk</figcaption></figure>
+    <figure class="pic" data-p="1"><img src="img/room.jpg" alt="a bright living room"><figcaption>The room</figcaption></figure>
+  </div>
+  <div class="panel hide" id="td1-play" style="margin-top:14px">
+    <div class="hold" id="td1-hold" tabindex="0" role="button" aria-label="Press and hold to see your secret object">
+      <span id="td1-cover">Describer only: press and hold</span><span class="secret hide" id="td1-sec"></span>
+    </div>
+    <div class="btns" style="justify-content:center"><button id="td1-got">Guessed it: next object</button><button id="td1-swap" class="amber">Swap roles</button></div>
+    <p class="score" id="td1-n"></p>
+  </div>
+  <div class="lang"><b>USEFUL LANGUAGE</b><span>It&rsquo;s something you use to...</span><span>It&rsquo;s made of...</span><span>It&rsquo;s small / big / round...</span><span>You find it in / on...</span></div>
+
+
+  <script>
+  (function(){
+    var L=[["a calculator", "a pair of glasses", "a pencil", "a pen", "a ruler", "a glass of tea", "a notebook", "a plant", "a picture frame", "a rubber (an eraser)", "a clip", "sticky notes", "a pencil pot"], ["a table", "a chair", "a fruit basket", "a sofa", "an armchair", "a lamp", "a plant", "a radiator", "a window", "a cupboard", "candles", "a vase", "a coffee table"]], pics=document.querySelectorAll('#td1-pics .pic'), play=document.getElementById('td1-play'); if(!play) return;
+    var hold=document.getElementById('td1-hold'), sec=document.getElementById('td1-sec'), cov=document.getElementById('td1-cover');
+    var deck=[], pos=0, p=-1, role='A', n=0;
+    function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+    function choose(k){
+      p=k; deck=shuffle(L[k].slice()); pos=0; n=0; play.classList.remove('hide');
+      for(var i=0;i<pics.length;i++) pics[i].classList.toggle('hide',i!==k);
+      document.getElementById('td1-pics').style.gridTemplateColumns='1fr';
+      document.getElementById('td1-b0').className=k===0?'':'ghost'; document.getElementById('td1-b1').className=k===1?'':'ghost'; deal();
+    }
+    function deal(){ sec.textContent=deck[pos%deck.length]; document.getElementById('td1-n').textContent=role+' describes. Objects guessed so far: '+n+'.'; }
+    function show(){ sec.classList.remove('hide'); cov.classList.add('hide'); hold.classList.add('on'); }
+    function hide(){ sec.classList.add('hide'); cov.classList.remove('hide'); hold.classList.remove('on'); }
+    hold.addEventListener('pointerdown',function(e){ e.preventDefault(); try{ hold.setPointerCapture(e.pointerId); }catch(_){ } show(); });
+    ['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){ hold.addEventListener(ev,hide); });
+    hold.addEventListener('contextmenu',function(e){ e.preventDefault(); });
+    hold.addEventListener('keydown',function(e){ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); show(); } });
+    hold.addEventListener('keyup',function(e){ if(e.key===' '||e.key==='Enter') hide(); });
+    window.addEventListener('blur',hide);
+    document.getElementById('td1-b0').addEventListener('click',function(){ choose(0); });
+    document.getElementById('td1-b1').addEventListener('click',function(){ choose(1); });
+    for(var i=0;i<pics.length;i++) pics[i].addEventListener('click',(function(k){ return function(){ choose(k); }; })(i));
+    document.getElementById('td1-got').addEventListener('click',function(){ n++; pos++; hide(); deal(); });
+    document.getElementById('td1-swap').addEventListener('click',function(){ role=role==='A'?'B':'A'; pos++; hide(); deal(); });
+  })();
+  </script>
+</div>
+</body>
+</html>
