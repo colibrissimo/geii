@@ -1,0 +1,810 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Preview: TOEIC taster</title><style>body{margin:0;background:#e5e9ef;padding:24px 12px}hr{border:0;height:2px;background:#155E75;margin:40px auto;max-width:820px}</style></head><body><div id="t1">
+  <style>
+    #t1{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #t1 *{box-sizing:border-box;}
+    #t1 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #t1 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #t1 .sub{margin:0 0 6px;color:var(--muted);font-size:16px;}
+    #t1 .fr{margin:0 0 18px;color:var(--muted);font-size:14px;font-style:italic;}
+    #t1 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #t1 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #t1 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #t1 button:hover{background:#0f4a5c;}
+    #t1 button.ghost{background:transparent;color:var(--teal);}
+    #t1 button:disabled{opacity:.45;cursor:default;}
+    #t1 .opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px;}
+    #t1 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #t1 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #t1 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #t1 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #t1 .choice .l{display:inline-block;min-width:34px;font-weight:bold;color:var(--muted);}
+    #t1 .fb{font-weight:bold;margin-top:10px;font-size:16px;}
+    #t1 .fb.ok{color:var(--ok);} #t1 .fb.no{color:var(--no);}
+    #t1 .plain{font-weight:normal;color:var(--ink);}
+    #t1 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #t1 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #t1 .talk p{margin:0 0 6px;}
+    #t1 .note{font-size:14px;color:var(--muted);}
+    #t1 .sent{font-size:20px;margin:6px 0 2px;}
+    #t1 .bar{height:12px;border-radius:6px;background:var(--line);overflow:hidden;margin:6px 0 4px;}
+    #t1 .bar i{display:block;height:100%;width:100%;background:var(--teal);transition:width .2s linear;}
+    #t1 .bar i.low{background:var(--no);}
+    #t1 .clock{font-family:"Courier New",monospace;font-weight:bold;font-size:20px;color:var(--teal);}
+    #t1 .doc{background:#fff;border:1px solid var(--line);border-left:6px solid var(--slate);border-radius:10px;padding:14px 18px;margin-bottom:12px;font-size:17px;}
+    #t1 .doc p{margin:0 0 8px;}
+    #t1 .doc .hd{font-size:14px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:10px;}
+    #t1 .doc table{border-collapse:collapse;width:100%;font-size:16px;}
+    #t1 .doc td{border-top:1px solid var(--line);padding:6px 8px;vertical-align:top;}
+    #t1 .gap{display:inline-block;min-width:90px;padding:0 6px;border-bottom:2px solid var(--amber);font-weight:bold;color:var(--muted);}
+    #t1 .gap.ok{color:var(--ok);border-color:var(--ok);background:var(--ok-bg);}
+    #t1 .gap.no{color:var(--no);border-color:var(--no);background:var(--no-bg);}
+    #t1 .gap ins{color:var(--ok);text-decoration:none;}
+    #t1 .qn{font-weight:bold;color:var(--teal);}
+    #t1 .item{padding:12px 0;border-top:1px solid var(--line);}
+    #t1 .item:first-child{border-top:none;}
+    #t1 table.sum{border-collapse:collapse;width:100%;font-size:15px;}
+    #t1 table.sum td,#t1 table.sum th{border-top:1px solid var(--line);padding:6px;text-align:left;vertical-align:top;}
+    #t1 .hide{display:none;}
+  </style>
+  <style>
+    #t1 img.photo{display:block;max-width:100%;max-height:min(460px,36vh);margin:0 auto 12px;border-radius:10px;border:1px solid var(--line);}
+    #t1 .opts.letters{grid-template-columns:repeat(auto-fit,minmax(70px,1fr));}
+    #t1 .opts.letters .choice{text-align:center;font-size:20px;font-weight:bold;}
+    #t1 .choice.sel{background:var(--teal-bg);border-color:var(--teal);}
+    #t1 mark{background:var(--amber-bg);padding:0 3px;border-radius:3px;}
+    #t1 mark.k{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #t1 mark.b{background:var(--no-bg);color:var(--no);font-weight:bold;}
+    #t1 .tr p{margin:0 0 8px;}
+  </style>
+
+  <h1>Part 1: the photo</h1>
+  <p class="sub">In Part 1 you see a photo and hear four statements, <strong>once</strong>. Nothing is printed: the photo is all you have. Choose the statement that matches the photo. You get about <strong>5 seconds</strong>. Three photos.</p>
+  <p class="fr">FR : Une photo, quatre phrases entendues une seule fois (rien n'est écrit). Choisissez la phrase qui correspond à la photo. Environ 5 secondes pour répondre.</p>
+  <div class="panel" id="t1-start">
+    <p style="margin:0"><strong>Before you press play:</strong> look at the photo. Who is in it? What are they doing? Where? Then listen for the <em>action</em>, not just the objects.</p>
+    <p class="note" style="margin:8px 0 0">Check your sound first. The audio plays once.</p>
+    <div class="btns"><button id="t1-go">Start</button></div>
+  </div>
+  <div class="panel hide" id="t1-q">
+    <div class="note" id="t1-n"></div>
+    <img class="photo" id="t1-img" src="" alt="">
+    <div class="btns"><button id="t1-play">Play the four statements (once)</button><span class="note" id="t1-st"></span></div>
+    <div class="bar hide" id="t1-barw"><i id="t1-bar"></i></div>
+    <div class="opts letters hide" id="t1-o"></div>
+    <div class="fb" id="t1-fb"></div>
+    <div id="t1-tr"></div>
+    <div class="btns"><button class="ghost hide" id="t1-re">Listen again</button><button class="hide" id="t1-next">Next</button></div>
+  </div>
+  <div class="hide" id="t1-end">
+    <div class="score" id="t1-score"></div>
+    <div class="panel"><table class="sum" id="t1-sum"></table></div>
+    <div class="talk">
+      <p><strong>Photos 1 and 3 each had a statement with <em>being</em>.</strong> One was right and one was wrong. What decided it? Look at the people in each photo.</p>
+    </div>
+  </div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('t1'); if(!root) return;
+    var D=[{"img": "img/p1-photo1.jpg", "alt": "An empty meeting room: a long table, black chairs, a dark screen on the wall, nobody there.", "audio": "audio/p1-photo1.mp3", "t": ["Some chairs are being arranged around the table.", "A man is closing the blinds.", "The meeting room is empty.", "A presentation is being given on the screen."], "k": 2, "x": ["Nobody is in the photo, so nothing is <em>being</em> arranged. <em>being</em> needs someone doing it.", "There is no man in the photo.", "Right: no people, so the answer simply describes the room.", "The screen is dark and nobody is there to give a presentation. <em>being</em> again, with nobody."], "trap": "<em>being</em>, nobody there"}, {"img": "img/p1-photo2.jpg", "alt": "A woman seen from behind, carrying a cardboard box in both arms between tall shelves full of boxes.", "audio": "audio/p1-photo2.mp3", "t": ["A woman is opening a box.", "A woman is carrying a box.", "Some boxes are being loaded onto a truck.", "The shelves are empty."], "k": 1, "x": ["She is carrying the box, not opening it. Same woman, same box: only the <strong>verb</strong> is different.", "Right: she is carrying a box in both arms.", "There is no truck and nobody is loading anything.", "The shelves are full of boxes."], "trap": "same nouns, different verb"}, {"img": "img/p1-photo3.jpg", "alt": "A technician in work gloves repairing a machine with a screwdriver, tools laid out on the workbench.", "audio": "audio/p1-photo3.mp3", "t": ["A machine is being repaired.", "A man is putting on his gloves.", "Some tools are lying on the floor.", "A machine is being delivered."], "k": 0, "x": ["Right. Here <em>is being repaired</em> is correct, because someone is doing it: the man with the screwdriver.", "He is already <em>wearing</em> his gloves. <em>Putting on</em> is the action of getting them on.", "The tools are on the workbench, not on the floor.", "Nothing is arriving: he is repairing the machine."], "trap": "<em>putting on</em> vs <em>wearing</em>"}], L=5, i=-1, res=[], pl=null, tick=null, t0=0;
+    
+    function opts(list){ var h=''; for(var j=0;j<list.length;j++) h+='<button class="choice" data-j="'+j+'"><span class="l">('+'ABCD'[j]+')</span>'+list[j]+'</button>'; return h; }
+    function mark(box,j,k){ var bs=box.querySelectorAll('button.choice'); for(var n=0;n<bs.length;n++){ bs[n].disabled=true; if(n===k) bs[n].className='choice ok'; } if(j!==null&&j!==k) bs[j].className='choice no'; }
+    function mmss(t){ t=Math.max(0,Math.round(t)); return Math.floor(t/60)+':'+('0'+t%60).slice(-2); }
+
+    
+    function $(id){ return document.getElementById(id); }
+    function lets(n){ var h=''; for(var j=0;j<n;j++) h+='<button class="choice" data-j="'+j+'"><span class="l" style="min-width:0">'+'ABCD'[j]+'</span></button>'; return h; }
+    function player(src, btn, st, onend, onfail){
+      var a=new Audio(), fired=false, used=false; a.preload='auto'; a.src=src;
+      function fail(){ used=false; btn.disabled=false; st.textContent='The audio did not start. Check your sound, then press the button again.'; if(onfail) onfail(); }
+      a.addEventListener('ended',function(){ if(fired) return; fired=true; st.textContent=''; onend(); });
+      a.addEventListener('error',fail);
+      return {
+        go:function(){ if(used) return; used=true; btn.disabled=true; st.textContent='Playing. One time only.'; var p=a.play(); if(p&&p.catch) p.catch(fail); },
+        again:function(){ a.currentTime=0; var p=a.play(); if(p&&p.catch) p.catch(function(){}); },
+        stop:function(){ a.pause(); }
+      };
+    }
+    function tr(d, j, intro){
+      var h='<div class="panel" style="margin-top:12px"><strong>'+intro+'</strong>';
+      if(d.q) h+='<p style="margin:8px 0 4px"><span class="qn">Question</span> '+d.q+'</p>';
+      for(var n=0;n<d.t.length;n++){
+        var key=n===d.k, pick=n===j;
+        h+='<p style="margin:6px 0"><span class="qn">('+'ABCD'[n]+')</span> '+d.t[n]+' <span style="color:var(--'+(key?'ok':(pick?'no':'muted'))+')">'+(key?'&#10003; ':'&#10007; ')+d.x[n]+(pick&&!key?' <strong>(your answer)</strong>':'')+'</span></p>';
+      }
+      return h+'</div>';
+    }
+
+    function show(){
+      var d=D[i]; if(pl) pl.stop();
+      $('t1-n').textContent='Photo '+(i+1)+' of '+D.length; $('t1-img').src=d.img; $('t1-img').alt=d.alt;
+      $('t1-o').innerHTML=''; $('t1-o').classList.add('hide'); $('t1-barw').classList.add('hide');
+      $('t1-fb').innerHTML=''; $('t1-tr').innerHTML=''; $('t1-next').classList.add('hide'); $('t1-re').classList.add('hide');
+      $('t1-play').disabled=false; $('t1-play').classList.remove('hide'); $('t1-st').textContent='';
+      pl=player(d.audio,$('t1-play'),$('t1-st'),openWindow);
+    }
+    function openWindow(){
+      $('t1-play').classList.add('hide'); $('t1-o').innerHTML=lets(4); $('t1-o').classList.remove('hide'); try{ $('t1-o').scrollIntoView({block:'nearest'}); }catch(e){}
+      var w=$('t1-barw'), bar=$('t1-bar'); w.classList.remove('hide'); bar.style.width='100%'; bar.className='';
+      t0=Date.now(); clearInterval(tick);
+      tick=setInterval(function(){ var left=L-(Date.now()-t0)/1000; bar.style.width=Math.max(0,left/L*100)+'%'; if(left<2) bar.className='low'; if(left<=0) done(null); },100);
+    }
+    function done(j){
+      clearInterval(tick); var d=D[i]; mark($('t1-o'),j,d.k); var ok=j===d.k; res.push({j:j,ok:ok});
+      $('t1-barw').classList.add('hide');
+      var fb=$('t1-fb'); fb.className='fb '+(ok?'ok':'no');
+      fb.innerHTML=j===null?"Time's up. In the real test: guess and move on. <span class=\"plain\">Answer: <strong>("+'ABCD'[d.k]+")</strong>.</span>":(ok?'Yes. ':'You chose ('+'ABCD'[j]+'). ')+'<span class="plain">Answer: <strong>('+'ABCD'[d.k]+')</strong>.</span>';
+      $('t1-tr').innerHTML=tr(d,j,'What you heard');
+      $('t1-re').classList.remove('hide'); var n=$('t1-next'); n.textContent=i<D.length-1?'Next photo':'See my results'; n.classList.remove('hide');
+    }
+    $('t1-go').addEventListener('click',function(){ $('t1-start').classList.add('hide'); $('t1-q').classList.remove('hide'); i=0; show(); });
+    $('t1-play').addEventListener('click',function(){ pl.go(); });
+    $('t1-re').addEventListener('click',function(){ pl.again(); });
+    $('t1-o').addEventListener('click',function(e){ var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||b.disabled) return; done(+b.getAttribute('data-j')); });
+    $('t1-next').addEventListener('click',function(){ if(i<D.length-1){ i++; show(); return; } end(); });
+    function end(){
+      if(pl) pl.stop(); $('t1-q').classList.add('hide'); var r=0, h='<tr><th></th><th>You</th><th>Answer</th><th>The trap</th></tr>';
+      for(var n=0;n<D.length;n++){ var x=res[n]; if(x.ok) r++;
+        h+='<tr><td>'+(n+1)+'</td><td style="color:'+(x.ok?'#1f8a4c':'#b23a3a')+'">'+(x.j===null?'time up':'('+'ABCD'[x.j]+')')+'</td><td><strong>('+'ABCD'[D[n].k]+')</strong></td><td>'+D[n].trap+'</td></tr>'; }
+      $('t1-sum').innerHTML=h; $('t1-score').textContent=r+' of '+D.length; $('t1-end').classList.remove('hide');
+    }
+  })();
+  </script>
+</div>
+<hr><div id="t2">
+  <style>
+    #t2{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #t2 *{box-sizing:border-box;}
+    #t2 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #t2 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #t2 .sub{margin:0 0 6px;color:var(--muted);font-size:16px;}
+    #t2 .fr{margin:0 0 18px;color:var(--muted);font-size:14px;font-style:italic;}
+    #t2 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #t2 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #t2 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #t2 button:hover{background:#0f4a5c;}
+    #t2 button.ghost{background:transparent;color:var(--teal);}
+    #t2 button:disabled{opacity:.45;cursor:default;}
+    #t2 .opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px;}
+    #t2 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #t2 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #t2 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #t2 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #t2 .choice .l{display:inline-block;min-width:34px;font-weight:bold;color:var(--muted);}
+    #t2 .fb{font-weight:bold;margin-top:10px;font-size:16px;}
+    #t2 .fb.ok{color:var(--ok);} #t2 .fb.no{color:var(--no);}
+    #t2 .plain{font-weight:normal;color:var(--ink);}
+    #t2 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #t2 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #t2 .talk p{margin:0 0 6px;}
+    #t2 .note{font-size:14px;color:var(--muted);}
+    #t2 .sent{font-size:20px;margin:6px 0 2px;}
+    #t2 .bar{height:12px;border-radius:6px;background:var(--line);overflow:hidden;margin:6px 0 4px;}
+    #t2 .bar i{display:block;height:100%;width:100%;background:var(--teal);transition:width .2s linear;}
+    #t2 .bar i.low{background:var(--no);}
+    #t2 .clock{font-family:"Courier New",monospace;font-weight:bold;font-size:20px;color:var(--teal);}
+    #t2 .doc{background:#fff;border:1px solid var(--line);border-left:6px solid var(--slate);border-radius:10px;padding:14px 18px;margin-bottom:12px;font-size:17px;}
+    #t2 .doc p{margin:0 0 8px;}
+    #t2 .doc .hd{font-size:14px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:10px;}
+    #t2 .doc table{border-collapse:collapse;width:100%;font-size:16px;}
+    #t2 .doc td{border-top:1px solid var(--line);padding:6px 8px;vertical-align:top;}
+    #t2 .gap{display:inline-block;min-width:90px;padding:0 6px;border-bottom:2px solid var(--amber);font-weight:bold;color:var(--muted);}
+    #t2 .gap.ok{color:var(--ok);border-color:var(--ok);background:var(--ok-bg);}
+    #t2 .gap.no{color:var(--no);border-color:var(--no);background:var(--no-bg);}
+    #t2 .gap ins{color:var(--ok);text-decoration:none;}
+    #t2 .qn{font-weight:bold;color:var(--teal);}
+    #t2 .item{padding:12px 0;border-top:1px solid var(--line);}
+    #t2 .item:first-child{border-top:none;}
+    #t2 table.sum{border-collapse:collapse;width:100%;font-size:15px;}
+    #t2 table.sum td,#t2 table.sum th{border-top:1px solid var(--line);padding:6px;text-align:left;vertical-align:top;}
+    #t2 .hide{display:none;}
+  </style>
+  <style>
+    #t2 img.photo{display:block;max-width:100%;max-height:min(460px,36vh);margin:0 auto 12px;border-radius:10px;border:1px solid var(--line);}
+    #t2 .opts.letters{grid-template-columns:repeat(auto-fit,minmax(70px,1fr));}
+    #t2 .opts.letters .choice{text-align:center;font-size:20px;font-weight:bold;}
+    #t2 .choice.sel{background:var(--teal-bg);border-color:var(--teal);}
+    #t2 mark{background:var(--amber-bg);padding:0 3px;border-radius:3px;}
+    #t2 mark.k{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #t2 mark.b{background:var(--no-bg);color:var(--no);font-weight:bold;}
+    #t2 .tr p{margin:0 0 8px;}
+  </style>
+
+  <h1>Part 2: question and response</h1>
+  <p class="sub">In Part 2 you hear a question and three replies, <strong>once</strong>. Nothing is printed, not even the question. Choose the reply that fits. In the real test you get 5 to 8 seconds; here, <strong>8</strong>. Four questions.</p>
+  <p class="fr">FR : Une question, trois réponses, entendues une seule fois (rien n'est écrit). Choisissez la réponse qui convient. 8 secondes ici (5 à 8 au vrai test).</p>
+  <div class="panel" id="t2-start">
+    <p style="margin:0"><strong>The first word is the whole question.</strong> Catch <em>When</em>, <em>Who</em>, <em>Where</em>... and you know what a right answer must be. A reply that repeats a word from the question is almost always bait.</p>
+    <p class="note" style="margin:8px 0 0">Check your sound first. Each recording plays once.</p>
+    <div class="btns"><button id="t2-go">Start</button></div>
+  </div>
+  <div class="panel hide" id="t2-q">
+    <div class="note" id="t2-n"></div>
+    <div class="btns"><button id="t2-play">Play the question and the replies (once)</button><span class="note" id="t2-st"></span></div>
+    <div class="bar hide" id="t2-barw"><i id="t2-bar"></i></div>
+    <div class="opts letters hide" id="t2-o"></div>
+    <div class="fb" id="t2-fb"></div>
+    <div id="t2-tr"></div>
+    <div class="btns"><button class="ghost hide" id="t2-re">Listen again</button><button class="hide" id="t2-next">Next</button></div>
+  </div>
+  <div class="hide" id="t2-end">
+    <div class="score" id="t2-score"></div>
+    <div class="panel"><table class="sum" id="t2-sum"></table></div>
+    <div class="talk">
+      <p><strong>In the last question the first word was <em>Why</em>.</strong> Was the speaker asking for a reason? What was the question really doing, and what kind of reply does that call for?</p>
+    </div>
+  </div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('t2'); if(!root) return;
+    var D=[{"audio": "audio/p2-1.mp3", "q": "When does the training session start?", "t": ["In Room 4, on the second floor.", "At nine thirty, I think.", "Yes, it was very useful."], "k": 1, "x": ["That answers <em>where</em>. The first word was <em>When</em>.", "A time. <em>I think</em> only hedges: it is still an answer.", "<em>Yes</em> answers a yes/no question and nobody asked one. And <em>was</em> is past: the session has not started."], "fw": "When", "kind": "a time"}, {"audio": "audio/p2-2.mp3", "q": "Who's in charge of the new project?", "t": ["Mr Chen, from the design team.", "It's a very big project.", "By the end of the month."], "k": 0, "x": ["A person, so it answers <em>Who</em>.", "It repeats <em>project</em>: the same word as the question, and no answer. An echo is bait.", "A deadline. That answers <em>When</em>."], "fw": "Who", "kind": "a person"}, {"audio": "audio/p2-4.mp3", "q": "Have you sent the invoice yet?", "t": ["No, I'll do it after lunch.", "Yes, her voice was very clear.", "It costs two hundred euros."], "k": 0, "x": ["A yes/no question can be answered with <em>No</em> plus a reason or a plan. It is still a direct answer.", "<em>invoice</em> and <em>voice</em> sound alike: a sound trap. The meaning does not fit.", "It talks about the price. You were asked whether it was sent."], "fw": "Have", "kind": "yes or no"}, {"audio": "audio/p2-3.mp3", "q": "Why don't we take a taxi to the airport?", "t": ["At the main entrance.", "Good idea. I'll call one now.", "Ms Dubois, I think."], "k": 1, "x": ["That answers <em>where</em>, and nobody asked where.", "It accepts the suggestion. <em>Why don't we...?</em> is a suggestion, not a real <em>why</em> question.", "A person, so it answers <em>who</em>. Nobody asked who."], "fw": "Why", "kind": "a suggestion, not a real why-question"}], L=8, i=-1, res=[], pl=null, tick=null, t0=0;
+    
+    function opts(list){ var h=''; for(var j=0;j<list.length;j++) h+='<button class="choice" data-j="'+j+'"><span class="l">('+'ABCD'[j]+')</span>'+list[j]+'</button>'; return h; }
+    function mark(box,j,k){ var bs=box.querySelectorAll('button.choice'); for(var n=0;n<bs.length;n++){ bs[n].disabled=true; if(n===k) bs[n].className='choice ok'; } if(j!==null&&j!==k) bs[j].className='choice no'; }
+    function mmss(t){ t=Math.max(0,Math.round(t)); return Math.floor(t/60)+':'+('0'+t%60).slice(-2); }
+
+    
+    function $(id){ return document.getElementById(id); }
+    function lets(n){ var h=''; for(var j=0;j<n;j++) h+='<button class="choice" data-j="'+j+'"><span class="l" style="min-width:0">'+'ABCD'[j]+'</span></button>'; return h; }
+    function player(src, btn, st, onend, onfail){
+      var a=new Audio(), fired=false, used=false; a.preload='auto'; a.src=src;
+      function fail(){ used=false; btn.disabled=false; st.textContent='The audio did not start. Check your sound, then press the button again.'; if(onfail) onfail(); }
+      a.addEventListener('ended',function(){ if(fired) return; fired=true; st.textContent=''; onend(); });
+      a.addEventListener('error',fail);
+      return {
+        go:function(){ if(used) return; used=true; btn.disabled=true; st.textContent='Playing. One time only.'; var p=a.play(); if(p&&p.catch) p.catch(fail); },
+        again:function(){ a.currentTime=0; var p=a.play(); if(p&&p.catch) p.catch(function(){}); },
+        stop:function(){ a.pause(); }
+      };
+    }
+    function tr(d, j, intro){
+      var h='<div class="panel" style="margin-top:12px"><strong>'+intro+'</strong>';
+      if(d.q) h+='<p style="margin:8px 0 4px"><span class="qn">Question</span> '+d.q+'</p>';
+      for(var n=0;n<d.t.length;n++){
+        var key=n===d.k, pick=n===j;
+        h+='<p style="margin:6px 0"><span class="qn">('+'ABCD'[n]+')</span> '+d.t[n]+' <span style="color:var(--'+(key?'ok':(pick?'no':'muted'))+')">'+(key?'&#10003; ':'&#10007; ')+d.x[n]+(pick&&!key?' <strong>(your answer)</strong>':'')+'</span></p>';
+      }
+      return h+'</div>';
+    }
+
+    function show(){
+      var d=D[i]; if(pl) pl.stop();
+      $('t2-n').textContent='Question '+(i+1)+' of '+D.length;
+      $('t2-o').innerHTML=''; $('t2-o').classList.add('hide'); $('t2-barw').classList.add('hide');
+      $('t2-fb').innerHTML=''; $('t2-tr').innerHTML=''; $('t2-next').classList.add('hide'); $('t2-re').classList.add('hide');
+      $('t2-play').disabled=false; $('t2-play').classList.remove('hide'); $('t2-st').textContent='';
+      pl=player(d.audio,$('t2-play'),$('t2-st'),openWindow);
+    }
+    function openWindow(){
+      $('t2-play').classList.add('hide'); $('t2-o').innerHTML=lets(3); $('t2-o').classList.remove('hide'); try{ $('t2-o').scrollIntoView({block:'nearest'}); }catch(e){}
+      var w=$('t2-barw'), bar=$('t2-bar'); w.classList.remove('hide'); bar.style.width='100%'; bar.className='';
+      t0=Date.now(); clearInterval(tick);
+      tick=setInterval(function(){ var left=L-(Date.now()-t0)/1000; bar.style.width=Math.max(0,left/L*100)+'%'; if(left<3) bar.className='low'; if(left<=0) done(null); },100);
+    }
+    function done(j){
+      clearInterval(tick); var d=D[i]; mark($('t2-o'),j,d.k); var ok=j===d.k; res.push({j:j,ok:ok});
+      $('t2-barw').classList.add('hide');
+      var fb=$('t2-fb'); fb.className='fb '+(ok?'ok':'no');
+      var head=j===null?"Time's up. In the real test: guess and move on. ":(ok?'Yes. ':'You chose ('+'ABCD'[j]+'). ');
+      fb.innerHTML=head+'<span class="plain">Answer: <strong>('+'ABCD'[d.k]+')</strong>. First word: <strong>'+d.fw+'</strong>, so a right reply is '+d.kind+'.</span>';
+      $('t2-tr').innerHTML=tr(d,j,'What you heard');
+      $('t2-re').classList.remove('hide'); var n=$('t2-next'); n.textContent=i<D.length-1?'Next question':'See my results'; n.classList.remove('hide');
+    }
+    $('t2-go').addEventListener('click',function(){ $('t2-start').classList.add('hide'); $('t2-q').classList.remove('hide'); i=0; show(); });
+    $('t2-play').addEventListener('click',function(){ pl.go(); });
+    $('t2-re').addEventListener('click',function(){ pl.again(); });
+    $('t2-o').addEventListener('click',function(e){ var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||b.disabled) return; done(+b.getAttribute('data-j')); });
+    $('t2-next').addEventListener('click',function(){ if(i<D.length-1){ i++; show(); return; } end(); });
+    function end(){
+      if(pl) pl.stop(); $('t2-q').classList.add('hide'); var r=0, h='<tr><th></th><th>First word</th><th>You</th><th>Answer</th></tr>';
+      for(var n=0;n<D.length;n++){ var x=res[n]; if(x.ok) r++;
+        h+='<tr><td>'+(n+1)+'</td><td>'+D[n].fw+'</td><td style="color:'+(x.ok?'#1f8a4c':'#b23a3a')+'">'+(x.j===null?'time up':'('+'ABCD'[x.j]+')')+'</td><td><strong>('+'ABCD'[D[n].k]+')</strong></td></tr>'; }
+      $('t2-sum').innerHTML=h; $('t2-score').textContent=r+' of '+D.length; $('t2-end').classList.remove('hide');
+    }
+  })();
+  </script>
+</div>
+<hr><div id="t3">
+  <style>
+    #t3{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #t3 *{box-sizing:border-box;}
+    #t3 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #t3 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #t3 .sub{margin:0 0 6px;color:var(--muted);font-size:16px;}
+    #t3 .fr{margin:0 0 18px;color:var(--muted);font-size:14px;font-style:italic;}
+    #t3 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #t3 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #t3 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #t3 button:hover{background:#0f4a5c;}
+    #t3 button.ghost{background:transparent;color:var(--teal);}
+    #t3 button:disabled{opacity:.45;cursor:default;}
+    #t3 .opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px;}
+    #t3 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #t3 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #t3 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #t3 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #t3 .choice .l{display:inline-block;min-width:34px;font-weight:bold;color:var(--muted);}
+    #t3 .fb{font-weight:bold;margin-top:10px;font-size:16px;}
+    #t3 .fb.ok{color:var(--ok);} #t3 .fb.no{color:var(--no);}
+    #t3 .plain{font-weight:normal;color:var(--ink);}
+    #t3 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #t3 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #t3 .talk p{margin:0 0 6px;}
+    #t3 .note{font-size:14px;color:var(--muted);}
+    #t3 .sent{font-size:20px;margin:6px 0 2px;}
+    #t3 .bar{height:12px;border-radius:6px;background:var(--line);overflow:hidden;margin:6px 0 4px;}
+    #t3 .bar i{display:block;height:100%;width:100%;background:var(--teal);transition:width .2s linear;}
+    #t3 .bar i.low{background:var(--no);}
+    #t3 .clock{font-family:"Courier New",monospace;font-weight:bold;font-size:20px;color:var(--teal);}
+    #t3 .doc{background:#fff;border:1px solid var(--line);border-left:6px solid var(--slate);border-radius:10px;padding:14px 18px;margin-bottom:12px;font-size:17px;}
+    #t3 .doc p{margin:0 0 8px;}
+    #t3 .doc .hd{font-size:14px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:10px;}
+    #t3 .doc table{border-collapse:collapse;width:100%;font-size:16px;}
+    #t3 .doc td{border-top:1px solid var(--line);padding:6px 8px;vertical-align:top;}
+    #t3 .gap{display:inline-block;min-width:90px;padding:0 6px;border-bottom:2px solid var(--amber);font-weight:bold;color:var(--muted);}
+    #t3 .gap.ok{color:var(--ok);border-color:var(--ok);background:var(--ok-bg);}
+    #t3 .gap.no{color:var(--no);border-color:var(--no);background:var(--no-bg);}
+    #t3 .gap ins{color:var(--ok);text-decoration:none;}
+    #t3 .qn{font-weight:bold;color:var(--teal);}
+    #t3 .item{padding:12px 0;border-top:1px solid var(--line);}
+    #t3 .item:first-child{border-top:none;}
+    #t3 table.sum{border-collapse:collapse;width:100%;font-size:15px;}
+    #t3 table.sum td,#t3 table.sum th{border-top:1px solid var(--line);padding:6px;text-align:left;vertical-align:top;}
+    #t3 .hide{display:none;}
+  </style>
+  <style>
+    #t3 img.photo{display:block;max-width:100%;max-height:min(460px,36vh);margin:0 auto 12px;border-radius:10px;border:1px solid var(--line);}
+    #t3 .opts.letters{grid-template-columns:repeat(auto-fit,minmax(70px,1fr));}
+    #t3 .opts.letters .choice{text-align:center;font-size:20px;font-weight:bold;}
+    #t3 .choice.sel{background:var(--teal-bg);border-color:var(--teal);}
+    #t3 mark{background:var(--amber-bg);padding:0 3px;border-radius:3px;}
+    #t3 mark.k{background:var(--ok-bg);color:var(--ok);font-weight:bold;}
+    #t3 mark.b{background:var(--no-bg);color:var(--no);font-weight:bold;}
+    #t3 .tr p{margin:0 0 8px;}
+  </style>
+
+  <h1>Parts 3 and 4: read the questions first</h1>
+  <p class="sub">In Part 3 you hear a conversation, in Part 4 a talk or a voicemail. Either way: <strong>once</strong>, then three questions with four options each, which are <strong>printed</strong>, and you may read them <strong>before</strong> the audio starts. That is a gift, and most students waste it. Today: one conversation (Part 3). Part 4 works the same way, with one speaker.</p>
+  <p class="fr">FR : Parties 3 et 4 : une conversation (ou un message, une annonce), entendue une seule fois, puis trois questions imprimées. Lisez-les AVANT l'audio. Environ 8 secondes par question.</p>
+  <div class="panel" id="t3-a">
+    <p style="margin:0 0 6px"><strong>Step 1. Read the three questions. Do not listen yet.</strong> What do you need to catch? Take about 15 seconds.</p>
+    <div class="note" id="t3-st" style="min-height:1.5em"></div>
+    <div class="bar hide" id="t3-barw"><i id="t3-bar"></i></div>
+    <div id="t3-qs"><div class="item" data-i="0"><span class="qn">1.</span> Who most likely is the woman?<div class="opts" data-i="0"></div><div class="fb"></div></div><div class="item" data-i="1"><span class="qn">2.</span> What problem does the man mention?<div class="opts" data-i="1"></div><div class="fb"></div></div><div class="item" data-i="2"><span class="qn">3.</span> What will the woman probably do next?<div class="opts" data-i="2"></div><div class="fb"></div></div></div>
+    <div class="btns"><button id="t3-go">I have read them: play the conversation (once)</button></div>
+  </div>
+  <div class="hide" id="t3-end">
+    <div class="score" id="t3-score"></div>
+    <div class="btns" style="justify-content:center"><button class="ghost" id="t3-re">Listen again</button></div>
+    <div class="panel tr" id="t3-tr"></div>
+    <div class="talk">
+      <p><strong>Most of the wrong options reuse a word you heard.</strong> Find three (the red words help) and say why each one is still wrong. What does that tell you about the words you recognise?</p>
+    </div>
+  </div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('t3'); if(!root) return;
+    var D=[{"q": "Who most likely is the woman?", "o": ["A maintenance technician", "A delivery driver", "A buyer who places orders", "A worker at the port"], "k": 2, "h": "the spare parts <em>you ordered</em> ... <em>Let me check the order</em> ... the supplier says...", "w": "She ordered the parts and deals with the supplier: that is what a buyer does. It is an inference, because nobody says <em>buyer</em>.", "x": {"0": "That is the man: <em>it's Mark from maintenance</em>.", "1": "Nobody mentions a driver.", "3": "The port is where the delivery was held up. She does not work there."}}, {"q": "What problem does the man mention?", "o": ["Some parts have not been delivered", "The parts arrived damaged", "A supplier has raised its prices", "A strike has closed the factory"], "k": 0, "h": "They <em>still haven't arrived</em>.", "w": "<em>haven't arrived</em> becomes <em>have not been delivered</em>: a paraphrase.", "x": {"1": "The parts have not arrived at all.", "2": "The extra 150 euros is the price of express delivery, not a price rise.", "3": "<strong>Echo trap.</strong> <em>strike</em> is in the audio, but it is a strike at the port, and nothing says the factory closed."}}, {"q": "What will the woman probably do next?", "o": ["Call the port to complain", "Restart the production line", "Look for a cheaper supplier", "Pay for faster shipping"], "k": 3, "h": "They can send the parts <em>by express</em> ... <em>extra hundred and fifty euros</em> ... Sure. <em>I'll arrange it right now.</em>", "w": "<em>express</em> becomes <em>faster shipping</em>, and she agrees to the extra cost: she will pay for it.", "x": {"0": "The delay was at the port, but nobody plans to complain.", "1": "The line restarts on Thursday: that is the man's plan, not her next action.", "2": "<strong>Echo trap.</strong> The man says <em>cheaper</em>, but he is comparing express delivery with a stopped line. Nobody looks for another supplier."}}], TR=["<strong>Man:</strong> Hi Anna, it's Mark from <mark class='b'>maintenance</mark>. I'm calling about the <mark class='k'>spare parts you ordered</mark> for line three. They <mark class='k'>still haven't arrived</mark>, and we're supposed to restart the line on Thursday.", "<strong>Woman:</strong> Oh no. Let me <mark class='k'>check the order</mark>... Right, the supplier says the delivery was held up by a <mark class='b'>strike at the port</mark>. They can send the parts <mark class='k'>by express</mark>, but it'll cost an <mark class='k'>extra hundred and fifty euros</mark>.", "<strong>Man:</strong> That's still <mark class='b'>cheaper</mark> than keeping the line stopped for another week. Can you go ahead with the express delivery?", "<strong>Woman:</strong> Sure. I'll <mark class='k'>arrange it right now</mark> and send you the tracking number."], L=24, sel=[-1,-1,-1], playing=false, over=false, fin=false, tick=null, t0=0, pl=null;
+    
+    function opts(list){ var h=''; for(var j=0;j<list.length;j++) h+='<button class="choice" data-j="'+j+'"><span class="l">('+'ABCD'[j]+')</span>'+list[j]+'</button>'; return h; }
+    function mark(box,j,k){ var bs=box.querySelectorAll('button.choice'); for(var n=0;n<bs.length;n++){ bs[n].disabled=true; if(n===k) bs[n].className='choice ok'; } if(j!==null&&j!==k) bs[j].className='choice no'; }
+    function mmss(t){ t=Math.max(0,Math.round(t)); return Math.floor(t/60)+':'+('0'+t%60).slice(-2); }
+
+    
+    function $(id){ return document.getElementById(id); }
+    function lets(n){ var h=''; for(var j=0;j<n;j++) h+='<button class="choice" data-j="'+j+'"><span class="l" style="min-width:0">'+'ABCD'[j]+'</span></button>'; return h; }
+    function player(src, btn, st, onend, onfail){
+      var a=new Audio(), fired=false, used=false; a.preload='auto'; a.src=src;
+      function fail(){ used=false; btn.disabled=false; st.textContent='The audio did not start. Check your sound, then press the button again.'; if(onfail) onfail(); }
+      a.addEventListener('ended',function(){ if(fired) return; fired=true; st.textContent=''; onend(); });
+      a.addEventListener('error',fail);
+      return {
+        go:function(){ if(used) return; used=true; btn.disabled=true; st.textContent='Playing. One time only.'; var p=a.play(); if(p&&p.catch) p.catch(fail); },
+        again:function(){ a.currentTime=0; var p=a.play(); if(p&&p.catch) p.catch(function(){}); },
+        stop:function(){ a.pause(); }
+      };
+    }
+    function tr(d, j, intro){
+      var h='<div class="panel" style="margin-top:12px"><strong>'+intro+'</strong>';
+      if(d.q) h+='<p style="margin:8px 0 4px"><span class="qn">Question</span> '+d.q+'</p>';
+      for(var n=0;n<d.t.length;n++){
+        var key=n===d.k, pick=n===j;
+        h+='<p style="margin:6px 0"><span class="qn">('+'ABCD'[n]+')</span> '+d.t[n]+' <span style="color:var(--'+(key?'ok':(pick?'no':'muted'))+')">'+(key?'&#10003; ':'&#10007; ')+d.x[n]+(pick&&!key?' <strong>(your answer)</strong>':'')+'</span></p>';
+      }
+      return h+'</div>';
+    }
+
+    var boxes=root.querySelectorAll('#t3-qs .opts'); for(var n=0;n<boxes.length;n++) boxes[n].innerHTML=opts(D[n].o);
+    pl=player('audio/p3-conversation.mp3',$('t3-go'),$('t3-st'),audioOver,function(){ playing=false; });
+    function allIn(){ for(var n=0;n<sel.length;n++) if(sel[n]<0) return false; return true; }
+    $('t3-go').addEventListener('click',function(){ if(playing) return; playing=true; pl.go(); $('t3-st').textContent='Playing. One time only. Mark your answers as you listen: your last click counts.'; try{ $('t3-st').scrollIntoView({block:'start'}); }catch(e){} });
+    $('t3-qs').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||fin) return;
+      if(!playing){ $('t3-st').textContent='Press the play button first.'; return; }
+      var box=b.parentNode, i=+box.getAttribute('data-i'); sel[i]=+b.getAttribute('data-j');
+      var bs=box.querySelectorAll('button.choice'); for(var n=0;n<bs.length;n++) bs[n].className='choice'+(n===sel[i]?' sel':'');
+      if(over&&allIn()) finish();
+    });
+    function audioOver(){
+      over=true; if(allIn()){ finish(); return; }
+      $('t3-st').textContent='The audio is over. '+L+' seconds to finish.';
+      var w=$('t3-barw'), bar=$('t3-bar'); w.classList.remove('hide'); bar.style.width='100%'; bar.className='';
+      t0=Date.now(); tick=setInterval(function(){ var left=L-(Date.now()-t0)/1000; bar.style.width=Math.max(0,left/L*100)+'%'; if(left<6) bar.className='low'; if(left<=0) finish(); },100);
+    }
+    function finish(){
+      if(fin) return; fin=true; clearInterval(tick); $('t3-barw').classList.add('hide'); $('t3-st').textContent=''; $('t3-go').classList.add('hide');
+      var r=0, items=root.querySelectorAll('#t3-qs .item');
+      for(var i=0;i<D.length;i++){
+        var d=D[i], j=sel[i], ok=j===d.k, box=items[i].querySelector('.opts'); if(ok) r++;
+        mark(box,j<0?null:j,d.k);
+        var fb=items[i].querySelector('.fb'); fb.className='fb '+(ok?'ok':'no');
+        fb.innerHTML=(ok?'Yes. ':(j<0?'No answer. ':'You chose ('+'ABCD'[j]+'). '))+'<span class="plain">You heard: '+d.h+' The right answer says: <strong>'+d.o[d.k]+'</strong>. '+d.w+((j>=0&&!ok&&d.x[j])?' '+d.x[j]:'')+'</span>';
+      }
+      $('t3-score').textContent=r+' of '+D.length;
+      $('t3-tr').innerHTML='<strong>What was said</strong> <span class="note">Green: what the right answers rely on. Red: words that bait.</span><p></p>'+TR.map(function(l){ return '<p>'+l+'</p>'; }).join('');
+      $('t3-end').classList.remove('hide');
+    }
+    $('t3-re').addEventListener('click',function(){ pl.again(); });
+  })();
+  </script>
+</div>
+<hr><div id="t4">
+  <style>
+    #t4{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #t4 *{box-sizing:border-box;}
+    #t4 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #t4 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #t4 .sub{margin:0 0 6px;color:var(--muted);font-size:16px;}
+    #t4 .fr{margin:0 0 18px;color:var(--muted);font-size:14px;font-style:italic;}
+    #t4 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #t4 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #t4 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #t4 button:hover{background:#0f4a5c;}
+    #t4 button.ghost{background:transparent;color:var(--teal);}
+    #t4 button:disabled{opacity:.45;cursor:default;}
+    #t4 .opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px;}
+    #t4 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #t4 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #t4 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #t4 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #t4 .choice .l{display:inline-block;min-width:34px;font-weight:bold;color:var(--muted);}
+    #t4 .fb{font-weight:bold;margin-top:10px;font-size:16px;}
+    #t4 .fb.ok{color:var(--ok);} #t4 .fb.no{color:var(--no);}
+    #t4 .plain{font-weight:normal;color:var(--ink);}
+    #t4 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #t4 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #t4 .talk p{margin:0 0 6px;}
+    #t4 .note{font-size:14px;color:var(--muted);}
+    #t4 .sent{font-size:20px;margin:6px 0 2px;}
+    #t4 .bar{height:12px;border-radius:6px;background:var(--line);overflow:hidden;margin:6px 0 4px;}
+    #t4 .bar i{display:block;height:100%;width:100%;background:var(--teal);transition:width .2s linear;}
+    #t4 .bar i.low{background:var(--no);}
+    #t4 .clock{font-family:"Courier New",monospace;font-weight:bold;font-size:20px;color:var(--teal);}
+    #t4 .doc{background:#fff;border:1px solid var(--line);border-left:6px solid var(--slate);border-radius:10px;padding:14px 18px;margin-bottom:12px;font-size:17px;}
+    #t4 .doc p{margin:0 0 8px;}
+    #t4 .doc .hd{font-size:14px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:10px;}
+    #t4 .doc table{border-collapse:collapse;width:100%;font-size:16px;}
+    #t4 .doc td{border-top:1px solid var(--line);padding:6px 8px;vertical-align:top;}
+    #t4 .gap{display:inline-block;min-width:90px;padding:0 6px;border-bottom:2px solid var(--amber);font-weight:bold;color:var(--muted);}
+    #t4 .gap.ok{color:var(--ok);border-color:var(--ok);background:var(--ok-bg);}
+    #t4 .gap.no{color:var(--no);border-color:var(--no);background:var(--no-bg);}
+    #t4 .gap ins{color:var(--ok);text-decoration:none;}
+    #t4 .qn{font-weight:bold;color:var(--teal);}
+    #t4 .item{padding:12px 0;border-top:1px solid var(--line);}
+    #t4 .item:first-child{border-top:none;}
+    #t4 table.sum{border-collapse:collapse;width:100%;font-size:15px;}
+    #t4 table.sum td,#t4 table.sum th{border-top:1px solid var(--line);padding:6px;text-align:left;vertical-align:top;}
+    #t4 .hide{display:none;}
+  </style>
+
+  <h1>Part 5: thirty seconds</h1>
+  <p class="sub">Part 5 is one sentence with one gap. In the real test there are 30 of them, and the rule is: <strong>30 seconds maximum</strong> for each one. You get the same clock here. Six sentences.</p>
+  <p class="fr">FR : Une phrase, un blanc, 30 secondes maximum par phrase. Si le temps est écoulé, la question se verrouille : au vrai test, on répond au jugé et on passe.</p>
+  <div class="panel" id="t4-start">
+    <p style="margin:0"><strong>Tip:</strong> read the four options <em>first</em>. They tell you what is being tested: four forms of one word, four tenses, four prepositions...</p>
+    <div class="btns"><button id="t4-go">Start the clock</button></div>
+  </div>
+  <div class="panel hide" id="t4-q">
+    <div class="note" id="t4-n"></div>
+    <div class="bar"><i id="t4-bar"></i></div>
+    <div class="sent" id="t4-s"></div>
+    <div class="opts" id="t4-o"></div>
+    <div class="fb" id="t4-fb"></div>
+    <div class="btns"><button class="hide" id="t4-next">Next</button></div>
+  </div>
+  <div class="hide" id="t4-end">
+    <div class="score" id="t4-score"></div>
+    <div class="panel"><table class="sum" id="t4-sum"></table></div>
+    <div class="talk">
+      <p><strong>Look at the <em>tested</em> column.</strong> Which kind of question cost you the most time? That is the one to practise.</p>
+    </div>
+  </div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('t4'); if(!root) return;
+    var D=[{"s": "Ms. Lopez gave a very ______ presentation to the new clients.", "o": ["persuade", "persuasive", "persuasion", "persuasively"], "k": 1, "t": "part of speech", "w": "Between <em>very</em> and a noun (<em>presentation</em>) you need an adjective.", "x": {"0": "<em>persuade</em> is a verb.", "2": "<em>persuasion</em> is a noun.", "3": "<em>persuasively</em> is an adverb: it describes a verb, not a noun."}}, {"s": "The new branch in Lyon ______ next March.", "o": ["opened", "has opened", "will open", "opening"], "k": 2, "t": "time signal", "w": "<em>Next March</em> is in the future.", "x": {"0": "Past: it contradicts <em>next March</em>.", "1": "Present perfect talks about the past, not about next March.", "3": "<em>opening</em> alone is not a complete verb: it needs <em>is</em>."}}, {"s": "Before we sign the contract, we need to ______ a few changes.", "o": ["do", "make", "take", "have"], "k": 1, "t": "collocation", "w": "In English you <strong>make</strong> changes.", "x": {"0": "French calque (<em>faire des changements</em>). English says <em>make</em> changes.", "2": "<em>take</em> goes with notes, a break or responsibility, not with changes.", "3": "<em>have changes</em> needs another verb (<em>have changes made</em>)."}}, {"s": "The meeting has been postponed ______ Thursday afternoon.", "o": ["until", "since", "during", "at"], "k": 0, "t": "preposition", "w": "Postponed <strong>until</strong> a new time: the meeting waits until Thursday.", "x": {"1": "<em>since</em> looks back to a point in the past.", "2": "<em>during</em> means inside a period, not a new time.", "3": "Days take <em>on</em>, not <em>at</em>: <em>on Thursday afternoon</em>."}}, {"s": "______ the train was late, the team arrived on time for the interview.", "o": ["Although", "Despite", "Because", "However"], "k": 0, "t": "connector", "w": "Two opposite ideas, and a full clause after the gap (<em>the train was late</em>): <strong>although</strong>.", "x": {"1": "<em>despite</em> takes a noun, not a clause: <em>despite the delay</em>.", "2": "<em>because</em> gives a cause, but a late train does not make you arrive on time.", "3": "<em>however</em> links two sentences; it cannot join these two clauses."}}, {"s": "We received a large number of ______ for the technician position.", "o": ["apply", "applicants", "applied", "applicable"], "k": 1, "t": "part of speech", "w": "After <em>a number of</em> you need a plural noun.", "x": {"0": "<em>apply</em> is a verb.", "2": "<em>applied</em> is a verb form.", "3": "<em>applicable</em> is an adjective."}}], L=30, i=-1, t0=0, tick=null, res=[], used=0;
+    
+    function opts(list){ var h=''; for(var j=0;j<list.length;j++) h+='<button class="choice" data-j="'+j+'"><span class="l">('+'ABCD'[j]+')</span>'+list[j]+'</button>'; return h; }
+    function mark(box,j,k){ var bs=box.querySelectorAll('button.choice'); for(var n=0;n<bs.length;n++){ bs[n].disabled=true; if(n===k) bs[n].className='choice ok'; } if(j!==null&&j!==k) bs[j].className='choice no'; }
+    function mmss(t){ t=Math.max(0,Math.round(t)); return Math.floor(t/60)+':'+('0'+t%60).slice(-2); }
+
+    function $(id){ return document.getElementById(id); }
+    function show(){
+      var d=D[i]; $('t4-n').textContent='Sentence '+(i+1)+' of '+D.length;
+      $('t4-s').innerHTML=d.s.replace('______','<span class="gap">______</span>'); $('t4-o').innerHTML=opts(d.o);
+      $('t4-fb').innerHTML=''; $('t4-next').classList.add('hide');
+      var bar=$('t4-bar'); bar.style.width='100%'; bar.className='';
+      t0=Date.now(); clearInterval(tick);
+      tick=setInterval(function(){ var left=L-(Date.now()-t0)/1000; bar.style.width=Math.max(0,left/L*100)+'%'; if(left<8) bar.className='low'; if(left<=0) done(null); },200);
+    }
+    function done(j){
+      clearInterval(tick); var d=D[i], s=Math.min(L,(Date.now()-t0)/1000); used+=s;
+      mark($('t4-o'),j,d.k); var ok=j===d.k; res.push({j:j,ok:ok,s:s});
+      var fb=$('t4-fb'); fb.className='fb '+(ok?'ok':'no');
+      var head=j===null?"Time's up. In the real test: guess and move on. ":(ok?'Yes. ':'You chose <em>'+d.o[j]+'</em>. ');
+      var why=(j!==null&&!ok&&d.x[j])?' '+d.x[j]:'';
+      fb.innerHTML=head+'<span class="plain">Answer: <strong>'+d.o[d.k]+'</strong>. '+d.w+why+' <span class="note">(tested: '+d.t+', '+Math.round(s)+' s)</span></span>';
+      var n=$('t4-next'); n.textContent=i<D.length-1?'Next':'See my results'; n.classList.remove('hide');
+    }
+    $('t4-o').addEventListener('click',function(e){ var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||b.disabled) return; done(+b.getAttribute('data-j')); });
+    $('t4-go').addEventListener('click',function(){ $('t4-start').classList.add('hide'); $('t4-q').classList.remove('hide'); i=0; show(); });
+    $('t4-next').addEventListener('click',function(){ if(i<D.length-1){ i++; show(); return; } end(); });
+    function end(){
+      $('t4-q').classList.add('hide'); var r=0, h='<tr><th></th><th>Tested</th><th>You</th><th>Answer</th><th>Time</th></tr>';
+      for(var n=0;n<D.length;n++){ var x=res[n]; if(x.ok) r++;
+        h+='<tr><td>'+(n+1)+'</td><td>'+D[n].t+'</td><td style="color:'+(x.ok?'#1f8a4c':'#b23a3a')+'">'+(x.j===null?'time up':D[n].o[x.j])+'</td><td><strong>'+D[n].o[D[n].k]+'</strong></td><td>'+Math.round(x.s)+' s</td></tr>'; }
+      $('t4-sum').innerHTML=h;
+      $('t4-score').textContent=r+' of '+D.length+' in '+mmss(used)+'. The budget for six was 3:00.';
+      $('t4-end').classList.remove('hide');
+    }
+  })();
+  </script>
+</div>
+<hr><div id="t5">
+  <style>
+    #t5{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #t5 *{box-sizing:border-box;}
+    #t5 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #t5 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #t5 .sub{margin:0 0 6px;color:var(--muted);font-size:16px;}
+    #t5 .fr{margin:0 0 18px;color:var(--muted);font-size:14px;font-style:italic;}
+    #t5 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #t5 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #t5 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #t5 button:hover{background:#0f4a5c;}
+    #t5 button.ghost{background:transparent;color:var(--teal);}
+    #t5 button:disabled{opacity:.45;cursor:default;}
+    #t5 .opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px;}
+    #t5 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #t5 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #t5 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #t5 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #t5 .choice .l{display:inline-block;min-width:34px;font-weight:bold;color:var(--muted);}
+    #t5 .fb{font-weight:bold;margin-top:10px;font-size:16px;}
+    #t5 .fb.ok{color:var(--ok);} #t5 .fb.no{color:var(--no);}
+    #t5 .plain{font-weight:normal;color:var(--ink);}
+    #t5 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #t5 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #t5 .talk p{margin:0 0 6px;}
+    #t5 .note{font-size:14px;color:var(--muted);}
+    #t5 .sent{font-size:20px;margin:6px 0 2px;}
+    #t5 .bar{height:12px;border-radius:6px;background:var(--line);overflow:hidden;margin:6px 0 4px;}
+    #t5 .bar i{display:block;height:100%;width:100%;background:var(--teal);transition:width .2s linear;}
+    #t5 .bar i.low{background:var(--no);}
+    #t5 .clock{font-family:"Courier New",monospace;font-weight:bold;font-size:20px;color:var(--teal);}
+    #t5 .doc{background:#fff;border:1px solid var(--line);border-left:6px solid var(--slate);border-radius:10px;padding:14px 18px;margin-bottom:12px;font-size:17px;}
+    #t5 .doc p{margin:0 0 8px;}
+    #t5 .doc .hd{font-size:14px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:10px;}
+    #t5 .doc table{border-collapse:collapse;width:100%;font-size:16px;}
+    #t5 .doc td{border-top:1px solid var(--line);padding:6px 8px;vertical-align:top;}
+    #t5 .gap{display:inline-block;min-width:90px;padding:0 6px;border-bottom:2px solid var(--amber);font-weight:bold;color:var(--muted);}
+    #t5 .gap.ok{color:var(--ok);border-color:var(--ok);background:var(--ok-bg);}
+    #t5 .gap.no{color:var(--no);border-color:var(--no);background:var(--no-bg);}
+    #t5 .gap ins{color:var(--ok);text-decoration:none;}
+    #t5 .qn{font-weight:bold;color:var(--teal);}
+    #t5 .item{padding:12px 0;border-top:1px solid var(--line);}
+    #t5 .item:first-child{border-top:none;}
+    #t5 table.sum{border-collapse:collapse;width:100%;font-size:15px;}
+    #t5 table.sum td,#t5 table.sum th{border-top:1px solid var(--line);padding:6px;text-align:left;vertical-align:top;}
+    #t5 .hide{display:none;}
+  </style>
+
+  <h1>Part 6: one text, four gaps</h1>
+  <p class="sub">Part 6 is short texts (emails, memos, notices) with four gaps each. Three gaps are a word or a phrase. <strong>One gap is a whole sentence.</strong> The budget: about 2 minutes for this text.</p>
+  <p class="fr">FR : Un texte, quatre blancs, dont un qui est une phrase entière. Environ 2 minutes pour ce texte.</p>
+  <div class="panel" id="t5-start"><div class="btns"><button id="t5-go">Show the text and start the clock</button></div></div>
+  <div class="hide" id="t5-main">
+    <div class="btns" style="margin:0 0 8px"><span class="clock" id="t5-clock">0:00</span><span class="note">budget 2:00</span></div>
+    <div class="doc"><div class="hd">To: All staff<br>From: Facilities Department<br>Subject: Staff car park closed next week</div><p>Please note that the staff car park will be closed from Monday to Friday next week while the surface is being <span class="gap" id="t5-g1">1</span>. During this period, employees who drive to work may use the public car park on Station Road. <span class="gap" id="t5-g2">2</span></p><p>The company will <span class="gap" id="t5-g3">3</span> the cost of parking for the whole week. To be reimbursed, please keep your receipts and send them to the Facilities Department no later <span class="gap" id="t5-g4">4</span> the end of the month.</p><p>Thank you for your understanding.</p></div>
+    <div class="panel" id="t5-qs"><div class="item" data-i="0"><span class="qn">Gap 1</span><div class="opts" data-i="0"></div><div class="fb"></div></div><div class="item" data-i="1"><span class="qn">Gap 2</span><div class="opts" data-i="1"></div><div class="fb"></div></div><div class="item" data-i="2"><span class="qn">Gap 3</span><div class="opts" data-i="2"></div><div class="fb"></div></div><div class="item" data-i="3"><span class="qn">Gap 4</span><div class="opts" data-i="3"></div><div class="fb"></div></div></div>
+    <div class="score" id="t5-score"></div>
+    <div class="talk hide" id="t5-talk">
+      <p><strong>The video says: look only at the words just before and after the gap.</strong> That worked for gaps 1, 3 and 4. Did it work for gap 2? What did you need to read instead?</p>
+    </div>
+  </div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('t5'); if(!root) return;
+    var D=[{"o": ["repair", "repairs", "repaired", "repairing"], "k": 2, "w": "<em>is being</em> + past participle: the passive, something is done to the surface. Look at the words just before the gap.", "x": {"0": "<em>is being repair</em>: after <em>being</em> you need the past participle.", "1": "<em>repairs</em> is a noun or a present verb; neither fits after <em>being</em>.", "3": "<em>is being repairing</em> does not exist."}}, {"o": ["It is about a five-minute walk from our main entrance.", "The car park on Station Road will also be closed that week.", "Unfortunately, the company cannot pay for parking this time.", "We thank you for your patience during last month's repairs."], "k": 0, "w": "A whole sentence: the words next to the gap do not help. Read the sentence before and the sentence after.", "x": {"1": "The sentence before says staff <em>may use</em> the Station Road car park: it cannot be closed.", "2": "The next sentence says the company <em>will cover</em> the cost.", "3": "The repairs are next week, not last month."}}, {"o": ["cover", "spend", "charge", "earn"], "k": 0, "w": "<em>cover the cost</em> = pay for it. A collocation, and the receipts in the next sentence confirm it.", "x": {"1": "You spend <em>money</em>, not <em>the cost</em>.", "2": "If the company charged the cost, staff would pay it; then why reimburse them?", "3": "Nobody earns a cost."}}, {"o": ["than", "then", "that", "to"], "k": 0, "w": "<em>no later than</em> = before or on that date. A fixed expression.", "x": {"1": "<em>then</em> is about time order (first... then...). Form confusion: <em>than</em> compares.", "2": "<em>no later that</em> does not exist.", "3": "<em>no later to</em> does not exist."}}], t0=0, tick=null, done=0, right=0;
+    
+    function opts(list){ var h=''; for(var j=0;j<list.length;j++) h+='<button class="choice" data-j="'+j+'"><span class="l">('+'ABCD'[j]+')</span>'+list[j]+'</button>'; return h; }
+    function mark(box,j,k){ var bs=box.querySelectorAll('button.choice'); for(var n=0;n<bs.length;n++){ bs[n].disabled=true; if(n===k) bs[n].className='choice ok'; } if(j!==null&&j!==k) bs[j].className='choice no'; }
+    function mmss(t){ t=Math.max(0,Math.round(t)); return Math.floor(t/60)+':'+('0'+t%60).slice(-2); }
+
+    function $(id){ return document.getElementById(id); }
+    var boxes=root.querySelectorAll('.opts'); for(var n=0;n<boxes.length;n++) boxes[n].innerHTML=opts(D[n].o);
+    $('t5-go').addEventListener('click',function(){
+      $('t5-start').classList.add('hide'); $('t5-main').classList.remove('hide'); t0=Date.now();
+      tick=setInterval(function(){ $('t5-clock').textContent=mmss((Date.now()-t0)/1000); },500);
+    });
+    $('t5-qs').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||b.disabled) return;
+      var box=b.parentNode, i=+box.getAttribute('data-i'), d=D[i], j=+b.getAttribute('data-j'), ok=j===d.k;
+      mark(box,j,d.k); done++; if(ok) right++;
+      var g=$('t5-g'+(i+1)); g.className='gap '+(ok?'ok':'no');
+      g.innerHTML=ok?d.o[d.k]:'<del>'+d.o[j]+'</del> <ins>'+d.o[d.k]+'</ins>';
+      var fb=box.parentNode.querySelector('.fb'); fb.className='fb '+(ok?'ok':'no');
+      fb.innerHTML=(ok?'Yes. ':'You chose ('+'ABCD'[j]+'). ')+'<span class="plain">'+d.w+((!ok&&d.x[j])?' '+d.x[j]:'')+'</span>';
+      if(done===D.length){ clearInterval(tick); var s=(Date.now()-t0)/1000;
+        $('t5-score').textContent=right+' of '+D.length+' in '+mmss(s)+(s<=120?'. Inside the budget.':'. Over the 2:00 budget.');
+        $('t5-talk').classList.remove('hide'); }
+    });
+  })();
+  </script>
+</div>
+<hr><div id="t6">
+  <style>
+    #t6{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #t6 *{box-sizing:border-box;}
+    #t6 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #t6 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #t6 .sub{margin:0 0 6px;color:var(--muted);font-size:16px;}
+    #t6 .fr{margin:0 0 18px;color:var(--muted);font-size:14px;font-style:italic;}
+    #t6 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #t6 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #t6 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #t6 button:hover{background:#0f4a5c;}
+    #t6 button.ghost{background:transparent;color:var(--teal);}
+    #t6 button:disabled{opacity:.45;cursor:default;}
+    #t6 .opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px;}
+    #t6 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #t6 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #t6 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #t6 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #t6 .choice .l{display:inline-block;min-width:34px;font-weight:bold;color:var(--muted);}
+    #t6 .fb{font-weight:bold;margin-top:10px;font-size:16px;}
+    #t6 .fb.ok{color:var(--ok);} #t6 .fb.no{color:var(--no);}
+    #t6 .plain{font-weight:normal;color:var(--ink);}
+    #t6 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #t6 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #t6 .talk p{margin:0 0 6px;}
+    #t6 .note{font-size:14px;color:var(--muted);}
+    #t6 .sent{font-size:20px;margin:6px 0 2px;}
+    #t6 .bar{height:12px;border-radius:6px;background:var(--line);overflow:hidden;margin:6px 0 4px;}
+    #t6 .bar i{display:block;height:100%;width:100%;background:var(--teal);transition:width .2s linear;}
+    #t6 .bar i.low{background:var(--no);}
+    #t6 .clock{font-family:"Courier New",monospace;font-weight:bold;font-size:20px;color:var(--teal);}
+    #t6 .doc{background:#fff;border:1px solid var(--line);border-left:6px solid var(--slate);border-radius:10px;padding:14px 18px;margin-bottom:12px;font-size:17px;}
+    #t6 .doc p{margin:0 0 8px;}
+    #t6 .doc .hd{font-size:14px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:10px;}
+    #t6 .doc table{border-collapse:collapse;width:100%;font-size:16px;}
+    #t6 .doc td{border-top:1px solid var(--line);padding:6px 8px;vertical-align:top;}
+    #t6 .gap{display:inline-block;min-width:90px;padding:0 6px;border-bottom:2px solid var(--amber);font-weight:bold;color:var(--muted);}
+    #t6 .gap.ok{color:var(--ok);border-color:var(--ok);background:var(--ok-bg);}
+    #t6 .gap.no{color:var(--no);border-color:var(--no);background:var(--no-bg);}
+    #t6 .gap ins{color:var(--ok);text-decoration:none;}
+    #t6 .qn{font-weight:bold;color:var(--teal);}
+    #t6 .item{padding:12px 0;border-top:1px solid var(--line);}
+    #t6 .item:first-child{border-top:none;}
+    #t6 table.sum{border-collapse:collapse;width:100%;font-size:15px;}
+    #t6 table.sum td,#t6 table.sum th{border-top:1px solid var(--line);padding:6px;text-align:left;vertical-align:top;}
+    #t6 .hide{display:none;}
+  </style>
+
+  <h1>Part 7: skim, then scan</h1>
+  <p class="sub">Part 7 is the long part: 54 questions, about 55 minutes. Reading every word is the fastest way to run out of time. Two moves: <strong>skim</strong> for the main idea, <strong>scan</strong> for the detail the question asks.</p>
+  <p class="fr">FR : Survoler pour l'idée générale, puis balayer le texte pour trouver le détail demandé. Ne pas tout lire mot à mot.</p>
+
+  <h2>1. Skim: 15 seconds</h2>
+  <div class="panel" id="t6-a">
+    <p style="margin:0">A notice appears for <strong>15 seconds</strong>, then disappears. You cannot read it all. Get the main idea.</p>
+    <div class="btns"><button id="t6-a-go">Show the notice</button><span class="clock hide" id="t6-a-clock"></span></div>
+    <div class="doc hide" id="t6-a-doc" style="margin-top:12px"><p><strong>GreenLine Bikes: notice to customers</strong></p><p>From 1 November, our shop on Rue Nationale will move to a larger building at 12 Place Rihour, two minutes from the old address. The new shop will have its own repair workshop, so customers will no longer need to leave their bikes with us for a week. Our opening hours will stay the same.</p><p>During the move, from 28 to 31 October, the shop will be closed, but online orders will still be delivered as usual.</p></div>
+    <div class="hide" id="t6-a-q"><p><strong>What is the notice mainly about?</strong></p><div class="opts" id="t6-a-o"></div><div class="fb" id="t6-a-fb"></div></div>
+  </div>
+
+  <div class="hide" id="t6-b">
+    <h2>2. Scan: questions first</h2>
+    <p class="sub">An email and a schedule. <strong>Read the three questions first</strong>, so you know what to look for. Then show the documents: they appear above the questions, as in the real test, and the clock starts. Budget: about 1 minute per question.</p>
+    <p class="fr">FR : Lisez d'abord les trois questions. Ensuite seulement, affichez les documents : le chrono démarre.</p>
+    <div class="hide" id="t6-docs">
+      <div class="doc"><div class='hd'>From: Julie Martin, Training Coordinator<br>To: New technicians<br>Subject: Your first week</div><p>Welcome to Novatek! Your induction week starts on Monday. Please come to reception at 8:45 on the first day to collect your badge: you will not be able to enter the workshop without it.</p><p>On Wednesday, safety training is compulsory for everyone. If you have already completed a safety course with another employer, bring your certificate: you may be able to skip the practical part.</p><p>Lunch is provided on Monday only. For the rest of the week, you can use the staff canteen on the ground floor.</p></div>
+      <div class="doc"><div class="hd">Novatek: induction week for new technicians</div><table><tr><td><strong>Monday</strong></td><td>9:00 Welcome talk (Room B2) &middot; 12:30 Lunch with the team</td></tr><tr><td><strong>Tuesday</strong></td><td>9:00 Tour of the production site &middot; 14:00 IT accounts and passwords</td></tr><tr><td><strong>Wednesday</strong></td><td>9:00 Safety training, theory (Room B2) &middot; 14:00 Safety training, practical (Workshop 1)</td></tr><tr><td><strong>Thursday</strong></td><td>9:00 Shadowing an experienced technician</td></tr><tr><td><strong>Friday</strong></td><td>11:00 Questions and feedback with Julie Martin</td></tr></table></div>
+    </div>
+    <div class="panel" id="t6-qs"><div class="item"><span class="qn">1.</span> What must the new technicians do before the welcome talk?<div class="opts hide" data-i="0"></div><div class="fb"></div></div><div class="item"><span class="qn">2.</span> Some technicians may be able to skip part of the safety training. When is that part?<div class="opts hide" data-i="1"></div><div class="fb"></div></div><div class="item"><span class="qn">3.</span> Where can the new technicians eat on Tuesday?<div class="opts hide" data-i="2"></div><div class="fb"></div></div>
+      <div class="btns"><button id="t6-b-go">I have read the questions: show the documents</button><span class="clock hide" id="t6-b-clock">0:00</span></div>
+    </div>
+    <div class="score" id="t6-score"></div>
+    <div class="talk hide" id="t6-talk">
+      <p><strong>Two of the three answers needed both documents.</strong> Which two? And in question 1, the question said <em>before</em> but the email never did. What did it say instead?</p>
+    </div>
+  </div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('t6'); if(!root) return;
+    var S={"o": ["A shop is moving to a new address.", "A shop is closing down for good.", "A shop is changing its opening hours.", "A shop has stopped its deliveries."], "k": 0, "x": {"0": "The main idea is in the first sentence: <em>will move to a larger building</em>.", "1": "It moves; it does not close for good. Only four days of closure.", "2": "<em>Our opening hours will stay the same.</em>", "3": "<em>Online orders will still be delivered as usual.</em>"}}, D=[{"o": ["Collect their badge at reception", "Go directly to Workshop 1", "Attend the safety training", "Have lunch with the team"], "k": 0, "w": "Email: <em>come to reception at 8:45 ... to collect your badge</em>. Schedule: the talk is at 9:00. The question says <em>before</em>; the email says <em>8:45</em>. Paraphrase plus both documents.", "x": {"1": "Without a badge they cannot enter the workshop, and the talk is in Room B2.", "2": "Safety training is on Wednesday.", "3": "Lunch is at 12:30, after the talk."}}, {"o": ["Wednesday afternoon", "Wednesday morning", "Tuesday afternoon", "Thursday morning"], "k": 0, "w": "Email: <em>skip the practical part</em>. Schedule: the practical part is Wednesday at 14:00. You need both documents.", "x": {"1": "Wednesday morning is the theory part, not the practical part.", "2": "Tuesday afternoon is IT accounts.", "3": "Thursday morning is shadowing."}}, {"o": ["In the staff canteen on the ground floor", "With the team, as on Monday", "In the staff canteen on the first floor", "Nowhere: meals are for Monday only"], "k": 0, "w": "Email: <em>For the rest of the week, you can use the staff canteen on the ground floor.</em>", "x": {"1": "<em>Lunch is provided on Monday only.</em>", "2": "Scan the detail: the canteen is on the <em>ground</em> floor.", "3": "Meals are <em>provided</em> on Monday only, but the canteen is open all week."}}], SK=15, t0=0, tick=null, done=0, right=0;
+    
+    function opts(list){ var h=''; for(var j=0;j<list.length;j++) h+='<button class="choice" data-j="'+j+'"><span class="l">('+'ABCD'[j]+')</span>'+list[j]+'</button>'; return h; }
+    function mark(box,j,k){ var bs=box.querySelectorAll('button.choice'); for(var n=0;n<bs.length;n++){ bs[n].disabled=true; if(n===k) bs[n].className='choice ok'; } if(j!==null&&j!==k) bs[j].className='choice no'; }
+    function mmss(t){ t=Math.max(0,Math.round(t)); return Math.floor(t/60)+':'+('0'+t%60).slice(-2); }
+
+    function $(id){ return document.getElementById(id); }
+    $('t6-a-o').innerHTML=opts(S.o);
+    $('t6-a-go').addEventListener('click',function(){
+      this.disabled=true; $('t6-a-doc').classList.remove('hide'); var c=$('t6-a-clock'); c.classList.remove('hide');
+      var a0=Date.now(), tk=setInterval(function(){ var left=SK-(Date.now()-a0)/1000; c.textContent=Math.max(0,Math.ceil(left))+' s';
+        if(left<=0){ clearInterval(tk); $('t6-a-doc').classList.add('hide'); c.textContent='Time is up.'; $('t6-a-q').classList.remove('hide'); } },200);
+    });
+    $('t6-a-o').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||b.disabled) return;
+      var j=+b.getAttribute('data-j'), ok=j===S.k; mark($('t6-a-o'),j,S.k);
+      var fb=$('t6-a-fb'); fb.className='fb '+(ok?'ok':'no');
+      fb.innerHTML=(ok?'Yes. ':'You chose ('+'ABCD'[j]+'). ')+'<span class="plain">'+S.x[S.k]+(ok?'':' '+S.x[j])+'</span>';
+      $('t6-a-doc').classList.remove('hide'); $('t6-b').classList.remove('hide');
+    });
+    $('t6-b-go').addEventListener('click',function(){
+      this.classList.add('hide'); $('t6-docs').classList.remove('hide');
+      var bs=root.querySelectorAll('#t6-qs .opts'); for(var n=0;n<bs.length;n++){ bs[n].innerHTML=opts(D[n].o); bs[n].classList.remove('hide'); }
+      var c=$('t6-b-clock'); c.classList.remove('hide'); t0=Date.now();
+      tick=setInterval(function(){ c.textContent=mmss((Date.now()-t0)/1000); },500);
+    });
+    $('t6-qs').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||b.disabled) return;
+      var box=b.parentNode, i=+box.getAttribute('data-i'), d=D[i], j=+b.getAttribute('data-j'), ok=j===d.k;
+      mark(box,j,d.k); done++; if(ok) right++;
+      var fb=box.parentNode.querySelector('.fb'); fb.className='fb '+(ok?'ok':'no');
+      fb.innerHTML=(ok?'Yes. ':'You chose ('+'ABCD'[j]+'). ')+'<span class="plain">'+d.w+((!ok&&d.x[j])?' '+d.x[j]:'')+'</span>';
+      if(done===D.length){ clearInterval(tick); var s=(Date.now()-t0)/1000;
+        $('t6-score').textContent=right+' of '+D.length+' in '+mmss(s)+(s<=180?'. Inside the 3:00 budget.':'. Over the 3:00 budget.');
+        $('t6-talk').classList.remove('hide'); }
+    });
+  })();
+  </script>
+</div>
+</body></html>
