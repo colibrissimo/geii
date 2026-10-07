@@ -57,6 +57,8 @@ body{margin:0;background:var(--gt-cream);color:var(--gt-ink);
 .gt-chip.ds{color:var(--gt-ds);border-color:var(--gt-ds);background:var(--gt-ds-bg)}
 .gt-chip.sae{color:var(--gt-sae);border-color:var(--gt-sae);background:var(--gt-sae-bg)}
 .gt-chip.info{color:var(--gt-info);border-color:var(--gt-info);background:var(--gt-info-bg)}
+.gt-chip.pp{color:var(--gt-ds);border-color:var(--gt-ds);background:var(--gt-ds-bg)}
+.gt-strike{text-decoration:line-through;opacity:.65}
 
 .gt-tl{list-style:none;margin:34px 0 30px 220px;padding:0 0 0 32px;
  border-left:7px solid var(--gt-line-s)}
@@ -80,6 +82,7 @@ body{margin:0;background:var(--gt-cream);color:var(--gt-ink);
 li.me .gt-dot{border-color:var(--gt-me)} li.mt .gt-dot{border-color:var(--gt-mt)}
 li.tp .gt-dot{border-color:var(--gt-tp)} li.ds .gt-dot{border-color:var(--gt-ds)}
 li.sae .gt-dot{border-color:var(--gt-sae)} li.info .gt-dot{border-color:var(--gt-info)}
+li.pp .gt-dot{border-color:var(--gt-ds)}
 
 .gt-body{max-height:22px;padding:52px 20px 0;border:2px solid transparent;border-radius:.6em;
  position:relative;background:transparent}
@@ -108,6 +111,7 @@ li.tp .gt-radio:checked+.gt-rel .gt-dot{background:var(--gt-tp)}
 li.ds .gt-radio:checked+.gt-rel .gt-dot{background:var(--gt-ds)}
 li.sae .gt-radio:checked+.gt-rel .gt-dot{background:var(--gt-sae)}
 li.info .gt-radio:checked+.gt-rel .gt-dot{background:var(--gt-info)}
+li.pp .gt-radio:checked+.gt-rel .gt-dot{background:var(--gt-ds)}
 .gt-radio:checked~.gt-body{max-height:1400px;border-color:var(--gt-line-s);background:var(--gt-card);
  margin-right:20px;transform:translateX(20px);
  transition:max-height .4s linear,border-color .4s linear,transform .2s linear}
@@ -119,6 +123,7 @@ li.tp .gt-radio:checked~.gt-body{border-color:var(--gt-tp)}
 li.ds .gt-radio:checked~.gt-body{border-color:var(--gt-ds)}
 li.sae .gt-radio:checked~.gt-body{border-color:var(--gt-sae)}
 li.info .gt-radio:checked~.gt-body{border-color:var(--gt-info)}
+li.pp .gt-radio:checked~.gt-body{border-color:var(--gt-ds)}
 
 .gt-foot{max-width:1000px;margin:30px auto 0;color:var(--gt-muted);font-size:12px}
 .gt-foot code{background:var(--gt-line);padding:1px 6px;border-radius:4px}
@@ -194,59 +199,59 @@ li.info .gt-radio:checked~.gt-body{border-color:var(--gt-info)}
     </div>
     <div class="gt-body"><div class="gt-inner"><dl><dt>Topic</dt><dd>Energy and AI.</dd><dt>Pronunciation</dt><dd>Word stress</dd></dl></div></div>
   </li>
-  <li class="me">
+  <li class="pp">
     <input class="gt-radio" id="A2I_4" name="tl_A2I" type="radio">
     <div class="gt-rel">
-      <label class="gt-head" for="A2I_4"><span class="gt-sid">s41</span><span class="gt-chip me">Midterm exam</span></label>
+      <label class="gt-head" for="A2I_4"><span class="gt-sid">s41</span><span class="gt-chip me gt-strike">Midterm exam</span> <span class="gt-chip pp">POSTPONED</span></label>
       <span class="gt-date"><b>Tuesday 6 October</b><span class="gt-hm">13:30 to 15:30</span><br>Room 3A15</span>
+      <span class="gt-dot"></span>
+    </div>
+    <div class="gt-body"><div class="gt-inner"><dl><dt>Status</dt><dd>Postponed. New date: Tuesday 10 November (s42).</dd></dl></div></div>
+  </li>
+  <li class="me">
+    <input class="gt-radio" id="A2I_5" name="tl_A2I" type="radio">
+    <div class="gt-rel">
+      <label class="gt-head" for="A2I_5"><span class="gt-sid">s42</span><span class="gt-chip me">Midterm exam</span></label>
+      <span class="gt-date"><b>Tuesday 10 November</b><span class="gt-hm">10:00 to 12:00</span><br>Room 3A15</span>
       <span class="gt-dot"></span>
     </div>
     <div class="gt-body"><div class="gt-inner"><dl><dt>Format</dt><dd>Moodle exam</dd><dt>Content</dt><dd>Vocabulary from the first four sessions, a text on one of our themes with comprehension questions, connectors, and pronunciation from the first four sessions: transparent words, the W sound, the TH sound and word stress. MCQ and matching only, no typed answers.</dd></dl></div></div>
   </li>
   <li class="">
-    <input class="gt-radio" id="A2I_5" name="tl_A2I" type="radio">
+    <input class="gt-radio" id="A2I_6" name="tl_A2I" type="radio">
     <div class="gt-rel">
-      <label class="gt-head" for="A2I_5"><span class="gt-sid">s42</span>Diversity at work</label>
-      <span class="gt-date"><b>Tuesday 10 November</b><span class="gt-hm">10:00 to 12:00</span><br>Room 3A15</span>
+      <label class="gt-head" for="A2I_6"><span class="gt-sid">s43</span>Diversity at work</label>
+      <span class="gt-date"><b>Thursday 19 November</b><span class="gt-hm">08:00 to 10:00</span><br>Room 3A15</span>
       <span class="gt-dot"></span>
     </div>
     <div class="gt-body"><div class="gt-inner"><dl><dt>Topic</dt><dd>Diversity in technical environments.</dd><dt>Pronunciation</dt><dd>The schwa</dd></dl></div></div>
   </li>
   <li class="">
-    <input class="gt-radio" id="A2I_6" name="tl_A2I" type="radio">
+    <input class="gt-radio" id="A2I_7" name="tl_A2I" type="radio">
     <div class="gt-rel">
-      <label class="gt-head" for="A2I_6"><span class="gt-sid">s43</span>TOEIC overview</label>
-      <span class="gt-date"><b>Thursday 19 November</b><span class="gt-hm">08:00 to 10:00</span><br>Room 3A15</span>
+      <label class="gt-head" for="A2I_7"><span class="gt-sid">s44</span>TOEIC overview</label>
+      <span class="gt-date"><b>Tuesday 24 November</b><span class="gt-hm">08:00 to 10:00</span><br>Room 3A15</span>
       <span class="gt-dot"></span>
     </div>
     <div class="gt-body"><div class="gt-inner"><dl><dt>What it is</dt><dd>One session on the TOEIC: the shape of the whole test, the score out of 990, the fact that it expires, and the two or three strategies that pay best.</dd><dt>Do you have to take it?</dt><dd>No. The TOEIC is optional, and nothing about it is graded in this course. It matters mainly if you go on to an engineering school, because most of them ask for a score at the end of your curriculum, and a score cannot be produced in a fortnight. If you want to go further than this session, there is a self-access folder on Moodle. It is optional and ungraded too.</dd></dl></div></div>
   </li>
   <li class="">
-    <input class="gt-radio" id="A2I_7" name="tl_A2I" type="radio">
+    <input class="gt-radio" id="A2I_8" name="tl_A2I" type="radio">
     <div class="gt-rel">
-      <label class="gt-head" for="A2I_7"><span class="gt-sid">s44</span>Critical thinking</label>
-      <span class="gt-date"><b>Tuesday 24 November</b><span class="gt-hm">08:00 to 10:00</span><br>Room 3A15</span>
+      <label class="gt-head" for="A2I_8"><span class="gt-sid">s45</span>Critical thinking</label>
+      <span class="gt-date"><b>Monday 30 November</b><span class="gt-hm">10:00 to 12:00</span><br>Room 3A15</span>
       <span class="gt-dot"></span>
     </div>
     <div class="gt-body"><div class="gt-inner"><dl><dt>Topic</dt><dd>Critical thinking and the big-problems debate, on Adam Aleksic's talk <i>Why Are People Starting to Sound Like ChatGPT?</i></dd><dt>Pronunciation</dt><dd>Vowel reduction and weak forms</dd></dl></div></div>
   </li>
   <li class="">
-    <input class="gt-radio" id="A2I_8" name="tl_A2I" type="radio">
-    <div class="gt-rel">
-      <label class="gt-head" for="A2I_8"><span class="gt-sid">s45</span>Pronunciation and spelling oddities</label>
-      <span class="gt-date"><b>Monday 30 November</b><span class="gt-hm">10:00 to 12:00</span><br>Room 3A15</span>
-      <span class="gt-dot"></span>
-    </div>
-    <div class="gt-body"><div class="gt-inner"><dl><dt>Topic</dt><dd>Silent letters</dd><dt>Pronunciation</dt><dd>Diphthongs</dd></dl></div></div>
-  </li>
-  <li class="">
     <input class="gt-radio" id="A2I_9" name="tl_A2I" type="radio">
     <div class="gt-rel">
-      <label class="gt-head" for="A2I_9"><span class="gt-sid">s46</span>Are we becoming cyborgs?</label>
+      <label class="gt-head" for="A2I_9"><span class="gt-sid">s46</span>Pronunciation and spelling oddities</label>
       <span class="gt-date"><b>Thursday 10 December</b><span class="gt-hm">10:00 to 12:00</span><br>Room 3A15</span>
       <span class="gt-dot"></span>
     </div>
-    <div class="gt-body"><div class="gt-inner"><dl><dt>Topic</dt><dd>Implants, prosthetics and augmentation: where the tool stops and the body starts.</dd><dt>Pronunciation</dt><dd>The R sound</dd></dl></div></div>
+    <div class="gt-body"><div class="gt-inner"><dl><dt>Topic</dt><dd>Silent letters</dd><dt>Pronunciation</dt><dd>Diphthongs</dd></dl></div></div>
   </li>
   <li class="ds">
     <input class="gt-radio" id="A2I_10" name="tl_A2I" type="radio">
@@ -504,59 +509,59 @@ li.info .gt-radio:checked~.gt-body{border-color:var(--gt-info)}
     </div>
     <div class="gt-body"><div class="gt-inner"><dl><dt>Topic</dt><dd>Energy and AI.</dd><dt>Pronunciation</dt><dd>Word stress</dd></dl></div></div>
   </li>
-  <li class="me">
+  <li class="pp">
     <input class="gt-radio" id="ESE_4" name="tl_ESE" type="radio">
     <div class="gt-rel">
-      <label class="gt-head" for="ESE_4"><span class="gt-sid">s41</span><span class="gt-chip me">Midterm exam</span></label>
+      <label class="gt-head" for="ESE_4"><span class="gt-sid">s41</span><span class="gt-chip me gt-strike">Midterm exam</span> <span class="gt-chip pp">POSTPONED</span></label>
       <span class="gt-date"><b>Wednesday 7 October</b><span class="gt-hm">08:00 to 10:00</span><br>Room 3A15</span>
+      <span class="gt-dot"></span>
+    </div>
+    <div class="gt-body"><div class="gt-inner"><dl><dt>Status</dt><dd>Postponed. New date: Monday 9 November (s42).</dd></dl></div></div>
+  </li>
+  <li class="me">
+    <input class="gt-radio" id="ESE_5" name="tl_ESE" type="radio">
+    <div class="gt-rel">
+      <label class="gt-head" for="ESE_5"><span class="gt-sid">s42</span><span class="gt-chip me">Midterm exam</span></label>
+      <span class="gt-date"><b>Monday 9 November</b><span class="gt-hm">13:30 to 15:30</span><br>Room 3A15</span>
       <span class="gt-dot"></span>
     </div>
     <div class="gt-body"><div class="gt-inner"><dl><dt>Format</dt><dd>Moodle exam</dd><dt>Content</dt><dd>Vocabulary from the first four sessions, a text on one of our themes with comprehension questions, connectors, and pronunciation from the first four sessions: transparent words, the W sound, the TH sound and word stress. MCQ and matching only, no typed answers.</dd></dl></div></div>
   </li>
   <li class="">
-    <input class="gt-radio" id="ESE_5" name="tl_ESE" type="radio">
+    <input class="gt-radio" id="ESE_6" name="tl_ESE" type="radio">
     <div class="gt-rel">
-      <label class="gt-head" for="ESE_5"><span class="gt-sid">s42</span>Diversity at work</label>
-      <span class="gt-date"><b>Monday 9 November</b><span class="gt-hm">13:30 to 15:30</span><br>Room 3A15</span>
+      <label class="gt-head" for="ESE_6"><span class="gt-sid">s43</span>Diversity at work</label>
+      <span class="gt-date"><b>Monday 16 November</b><span class="gt-hm">08:00 to 10:00</span><br>Room 3A15</span>
       <span class="gt-dot"></span>
     </div>
     <div class="gt-body"><div class="gt-inner"><dl><dt>Topic</dt><dd>Diversity in technical environments.</dd><dt>Pronunciation</dt><dd>The schwa</dd></dl></div></div>
   </li>
   <li class="">
-    <input class="gt-radio" id="ESE_6" name="tl_ESE" type="radio">
+    <input class="gt-radio" id="ESE_7" name="tl_ESE" type="radio">
     <div class="gt-rel">
-      <label class="gt-head" for="ESE_6"><span class="gt-sid">s43</span>TOEIC overview</label>
-      <span class="gt-date"><b>Monday 16 November</b><span class="gt-hm">08:00 to 10:00</span><br>Room 3A15</span>
+      <label class="gt-head" for="ESE_7"><span class="gt-sid">s44</span>TOEIC overview</label>
+      <span class="gt-date"><b>Monday 23 November</b><span class="gt-hm">10:00 to 12:00</span><br>Room 3A15</span>
       <span class="gt-dot"></span>
     </div>
     <div class="gt-body"><div class="gt-inner"><dl><dt>What it is</dt><dd>One session on the TOEIC: the shape of the whole test, the score out of 990, the fact that it expires, and the two or three strategies that pay best.</dd><dt>Do you have to take it?</dt><dd>No. The TOEIC is optional, and nothing about it is graded in this course. It matters mainly if you go on to an engineering school, because most of them ask for a score at the end of your curriculum, and a score cannot be produced in a fortnight. If you want to go further than this session, there is a self-access folder on Moodle. It is optional and ungraded too.</dd></dl></div></div>
   </li>
   <li class="">
-    <input class="gt-radio" id="ESE_7" name="tl_ESE" type="radio">
+    <input class="gt-radio" id="ESE_8" name="tl_ESE" type="radio">
     <div class="gt-rel">
-      <label class="gt-head" for="ESE_7"><span class="gt-sid">s44</span>Critical thinking</label>
-      <span class="gt-date"><b>Monday 23 November</b><span class="gt-hm">10:00 to 12:00</span><br>Room 3A15</span>
+      <label class="gt-head" for="ESE_8"><span class="gt-sid">s45</span>Critical thinking</label>
+      <span class="gt-date"><b>Tuesday 1 December</b><span class="gt-hm">10:00 to 12:00</span><br>Room 3A15</span>
       <span class="gt-dot"></span>
     </div>
     <div class="gt-body"><div class="gt-inner"><dl><dt>Topic</dt><dd>Critical thinking and the big-problems debate, on Adam Aleksic's talk <i>Why Are People Starting to Sound Like ChatGPT?</i></dd><dt>Pronunciation</dt><dd>Vowel reduction and weak forms</dd></dl></div></div>
   </li>
   <li class="">
-    <input class="gt-radio" id="ESE_8" name="tl_ESE" type="radio">
-    <div class="gt-rel">
-      <label class="gt-head" for="ESE_8"><span class="gt-sid">s45</span>Pronunciation and spelling oddities</label>
-      <span class="gt-date"><b>Tuesday 1 December</b><span class="gt-hm">10:00 to 12:00</span><br>Room 3A15</span>
-      <span class="gt-dot"></span>
-    </div>
-    <div class="gt-body"><div class="gt-inner"><dl><dt>Topic</dt><dd>Silent letters, French words that live inside English, the BBC silent-letters video.</dd><dt>Pronunciation</dt><dd>Diphthongs</dd></dl></div></div>
-  </li>
-  <li class="">
     <input class="gt-radio" id="ESE_9" name="tl_ESE" type="radio">
     <div class="gt-rel">
-      <label class="gt-head" for="ESE_9"><span class="gt-sid">s46</span>Are we becoming cyborgs?</label>
+      <label class="gt-head" for="ESE_9"><span class="gt-sid">s46</span>Pronunciation and spelling oddities</label>
       <span class="gt-date"><b>Monday 7 December</b><span class="gt-hm">13:30 to 15:30</span><br>Room 3A15</span>
       <span class="gt-dot"></span>
     </div>
-    <div class="gt-body"><div class="gt-inner"><dl><dt>Topic</dt><dd>Implants, prosthetics and augmentation: where the tool stops and the body starts.</dd><dt>Pronunciation</dt><dd>The R sound</dd></dl></div></div>
+    <div class="gt-body"><div class="gt-inner"><dl><dt>Topic</dt><dd>Silent letters, French words that live inside English, the BBC silent-letters video.</dd><dt>Pronunciation</dt><dd>Diphthongs</dd></dl></div></div>
   </li>
   <li class="ds">
     <input class="gt-radio" id="ESE_10" name="tl_ESE" type="radio">
