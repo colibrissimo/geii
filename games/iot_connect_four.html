@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connect Four: Internet of Things</title>
+<style>
+#c4f-game {
+  --p0:   #2563eb; --p0-l: #dbeafe; --p0-d: #1e40af;
+  --p1:   #ea580c; --p1-l: #ffedd5; --p1-d: #9a3412;
+  --cream:#f8fafc; --ink:#1c1917; --muted:#78716c; --line:#e7e5e4;
+  --good: #15803d; --bad: #b91c1c;
+  --frame:#334155; --hole:#f8fafc;
+  --radius: 12px;
+  font-family: 'Segoe UI', system-ui, Arial, sans-serif;
+  background: var(--cream); color: var(--ink);
+  min-height: 100vh; padding: 16px 12px 28px; box-sizing: border-box;
+}
+#c4f-game *, #c4f-game *::before, #c4f-game *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { margin: 0; background: #f8fafc; }
+#c4f-game .c4f-inner { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+#c4f-game h1 { text-align: center; font-size: 1.8rem; font-weight: 900; letter-spacing: 1px; }
+#c4f-game .c4f-sub { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: -8px; letter-spacing: 0.04em; }
+#c4f-game [hidden] { display: none !important; }
+#c4f-game button { font-family: inherit; cursor: pointer; }
+
+/* ---------- start screen ---------- */
+#c4f-game .c4f-rules {
+  background: white; border: 1.5px solid var(--line); border-radius: var(--radius);
+  padding: 18px 20px; font-size: 0.95rem; line-height: 1.5;
+}
+#c4f-game .c4f-rules p { margin-bottom: 8px; }
+#c4f-game .c4f-rules p:last-child { margin-bottom: 0; }
+#c4f-game .c4f-rules b { color: var(--p0-d); }
+#c4f-game .c4f-setup { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+#c4f-game .c4f-field {
+  background: white; border: 1.5px solid var(--line); border-radius: var(--radius);
+  padding: 10px 14px; display: flex; flex-direction: column; gap: 6px;
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);
+}
+#c4f-game .c4f-field input, #c4f-game .c4f-field select {
+  font: inherit; font-size: 1rem; text-transform: none; letter-spacing: 0; color: var(--ink);
+  border: 1.5px solid var(--line); border-radius: 8px; padding: 6px 8px; background: white;
+}
+#c4f-game .c4f-field.p0 { border-color: var(--p0); }
+#c4f-game .c4f-field.p1 { border-color: var(--p1); }
+#c4f-game .c4f-go {
+  align-self: center; background: var(--ink); color: white; border: none;
+  border-radius: var(--radius); padding: 14px 44px; font-size: 1.15rem; font-weight: 800;
+}
+#c4f-game .c4f-go:hover { background: #44403c; }
+
+/* ---------- players ---------- */
+#c4f-game .c4f-players { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; }
+#c4f-game .c4f-player {
+  background: white; border: 2px solid var(--line); border-radius: var(--radius);
+  padding: 10px 14px; display: flex; align-items: center; gap: 10px; opacity: 0.5;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
+#c4f-game .c4f-player.c4f-active { opacity: 1; }
+#c4f-game .c4f-player.p0.c4f-active { border-color: var(--p0); box-shadow: 0 0 0 4px var(--p0-l); }
+#c4f-game .c4f-player.p1.c4f-active { border-color: var(--p1); box-shadow: 0 0 0 4px var(--p1-l); }
+#c4f-game .c4f-player.p1 { flex-direction: row-reverse; text-align: right; }
+#c4f-game .c4f-chip { flex: 0 0 26px; height: 26px; border-radius: 50%; }
+#c4f-game .p0 .c4f-chip { background: var(--p0); }
+#c4f-game .p1 .c4f-chip { background: var(--p1); }
+#c4f-game .c4f-pname { font-weight: 800; font-size: 1.05rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#c4f-game .p0 .c4f-pname { color: var(--p0-d); }
+#c4f-game .p1 .c4f-pname { color: var(--p1-d); }
+#c4f-game .c4f-vs { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* ---------- question ---------- */
+#c4f-game .c4f-q {
+  background: white; border: 2px solid var(--line); border-radius: var(--radius);
+  padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; text-align: center; min-height: 196px;
+}
+#c4f-game .c4f-q.p0 { border-color: var(--p0); }
+#c4f-game .c4f-q.p1 { border-color: var(--p1); }
+#c4f-game .c4f-qhead { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+#c4f-game .c4f-qhead b { color: var(--ink); letter-spacing: 0.04em; }
+#c4f-game .c4f-fr { font-size: 1.6rem; font-weight: 900; line-height: 1.15; word-break: break-word; }
+#c4f-game .c4f-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+#c4f-game .c4f-opt {
+  background: #faf9fb; border: 2px solid var(--line); border-radius: 10px; padding: 10px 10px 10px 34px;
+  font-size: 1.05rem; font-weight: 700; text-align: left; position: relative; line-height: 1.2; color: var(--ink);
+}
+#c4f-game .c4f-opt:hover:not(:disabled) { border-color: var(--ink); }
+#c4f-game .c4f-opt:disabled { cursor: default; }
+#c4f-game .c4f-opt small {
+  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+  font-size: 0.75rem; font-weight: 800; color: var(--muted);
+}
+#c4f-game .c4f-opt.good { border-color: var(--good); background: #dcfce7; color: var(--good); }
+#c4f-game .c4f-clock { height: 8px; background: #f1f0ef; border-radius: 4px; overflow: hidden; }
+#c4f-game .c4f-clock-fill { height: 100%; width: 100%; background: var(--muted); transition: width 0.1s linear; }
+#c4f-game .c4f-msg { font-size: 1.25rem; font-weight: 900; letter-spacing: 0.5px; }
+#c4f-game .c4f-msg.good { color: var(--good); }
+#c4f-game .c4f-msg.bad { color: var(--bad); }
+#c4f-game .c4f-hint { font-size: 0.85rem; color: var(--muted); }
+#c4f-game .c4f-next {
+  align-self: center; background: var(--ink); color: white; border: none; border-radius: 10px;
+  padding: 12px 34px; font-size: 1.05rem; font-weight: 800;
+}
+#c4f-game .c4f-keyhint { font-size: 0.72rem; color: var(--muted); }
+
+/* ---------- board ---------- */
+#c4f-game .c4f-boardwrap { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+#c4f-game .c4f-board {
+  --cell: min(62px, calc((100vw - 60px) / 7));
+  display: grid; grid-template-columns: repeat(7, var(--cell));
+  background: var(--frame); padding: 8px; border-radius: 14px; gap: 0;
+}
+#c4f-game .c4f-col { display: flex; flex-direction: column; border-radius: 8px; }
+#c4f-game .c4f-board.c4f-choosing .c4f-col { cursor: pointer; }
+#c4f-game .c4f-board.c4f-choosing .c4f-col.c4f-open:hover { background: rgba(255,255,255,0.14); }
+#c4f-game .c4f-cell { width: var(--cell); height: var(--cell); display: flex; align-items: center; justify-content: center; }
+#c4f-game .c4f-disc {
+  width: 80%; height: 80%; border-radius: 50%; background: var(--hole);
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.25);
+}
+#c4f-game .c4f-disc.p0 { background: var(--p0); box-shadow: inset 0 -4px 0 rgba(0,0,0,0.2); }
+#c4f-game .c4f-disc.p1 { background: var(--p1); box-shadow: inset 0 -4px 0 rgba(0,0,0,0.2); }
+#c4f-game .c4f-disc.c4f-drop { animation: c4f-fall 0.35s cubic-bezier(.5,0,1,1); }
+#c4f-game .c4f-disc.c4f-four { outline: 4px solid #facc15; outline-offset: 2px; }
+@keyframes c4f-fall { from { transform: translateY(calc(var(--fall) * -1)); } to { transform: translateY(0); } }
+#c4f-game .c4f-colnums { display: grid; grid-template-columns: repeat(7, var(--cell)); --cell: min(62px, calc((100vw - 60px) / 7)); }
+#c4f-game .c4f-colnums span { text-align: center; font-size: 0.75rem; font-weight: 800; color: var(--muted); }
+
+/* ---------- end screen ---------- */
+#c4f-game .c4f-winner { text-align: center; font-size: 1.6rem; font-weight: 900; }
+#c4f-game .c4f-winner.p0 { color: var(--p0-d); }
+#c4f-game .c4f-winner.p1 { color: var(--p1-d); }
+#c4f-game .c4f-why { text-align: center; color: var(--muted); font-size: 0.95rem; margin-top: -8px; }
+#c4f-game table { width: 100%; border-collapse: collapse; background: white; border-radius: var(--radius); overflow: hidden; font-size: 0.9rem; }
+#c4f-game th, #c4f-game td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+#c4f-game th { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); background: #faf9fb; }
+#c4f-game td.good { color: var(--good); font-weight: 700; }
+#c4f-game td.bad { color: var(--bad); font-weight: 700; }
+#c4f-game td .p0 { color: var(--p0-d); font-weight: 700; }
+#c4f-game td .p1 { color: var(--p1-d); font-weight: 700; }
+#c4f-game .c4f-endbtns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+#c4f-game .c4f-ghost { background: white; color: var(--ink); border: 2px solid var(--ink); border-radius: 10px; padding: 12px 26px; font-size: 1rem; font-weight: 800; }
+
+@media (max-width: 600px) {
+  #c4f-game .c4f-setup, #c4f-game .c4f-opts { grid-template-columns: 1fr; }
+  #c4f-game .c4f-players { grid-template-columns: 1fr 1fr; }
+  #c4f-game .c4f-vs { display: none; }
+}
+</style>
+</head>
+<body>
+<div id="c4f-game">
+<div class="c4f-inner">
+
+  <!-- ===== start ===== -->
+  <section id="c4f-start" class="c4f-inner">
+    <h1>Connect Four</h1>
+    <p class="c4f-sub">Internet of Things · 30 words</p>
+    <div class="c4f-rules">
+      <p>Two players, one screen. Get <b>four discs in a row</b>: across, up and down, or diagonally.</p>
+      <p>To earn a disc, translate a French word: pick the English from four. <b>Right</b>: drop your disc in any column. <b>Wrong</b>: no disc, and it is the other player's turn.</p>
+      <p>Block your opponent and plan your own lines. The game picks who starts. If the starting player connects four, the other player still gets one last turn: if they connect four too, it is a draw.</p>
+      <p>Keys: <b>1 2 3 4</b> to answer, <b>1 to 7</b> to drop a disc, <b>Enter</b> for the next turn.</p>
+    </div>
+    <div class="c4f-setup">
+      <label class="c4f-field p0">Blue player<input id="c4f-n0" maxlength="16" value="Player 1"></label>
+      <label class="c4f-field p1">Orange player<input id="c4f-n1" maxlength="16" value="Player 2"></label>
+      <label class="c4f-field">Answer clock
+        <select id="c4f-clocksel"><option value="0">Off</option><option value="20" selected>20 seconds</option><option value="10">10 seconds</option></select>
+      </label>
+    </div>
+    <button class="c4f-go" id="c4f-startbtn">Start</button>
+  </section>
+
+  <!-- ===== game ===== -->
+  <section id="c4f-play" class="c4f-inner" hidden>
+    <div class="c4f-players">
+      <div class="c4f-player p0" id="c4f-pp0"><span class="c4f-chip"></span><span class="c4f-pname" id="c4f-pn0"></span></div>
+      <span class="c4f-vs">vs</span>
+      <div class="c4f-player p1" id="c4f-pp1"><span class="c4f-chip"></span><span class="c4f-pname" id="c4f-pn1"></span></div>
+    </div>
+
+    <div class="c4f-q" id="c4f-q">
+      <div class="c4f-qhead" id="c4f-qhead"></div>
+      <div class="c4f-fr" id="c4f-fr"></div>
+      <div class="c4f-opts" id="c4f-opts"></div>
+      <div class="c4f-clock" id="c4f-clockwrap"><div class="c4f-clock-fill" id="c4f-clockfill"></div></div>
+      <div class="c4f-msg" id="c4f-msg" hidden></div>
+      <div class="c4f-hint" id="c4f-hint" hidden></div>
+      <button class="c4f-next" id="c4f-nextbtn" hidden>Next turn</button>
+      <div class="c4f-keyhint" id="c4f-nexthint" hidden>or press Enter</div>
+    </div>
+
+    <div class="c4f-boardwrap">
+      <div class="c4f-colnums" id="c4f-colnums"></div>
+      <div class="c4f-board" id="c4f-board"></div>
+    </div>
+  </section>
+
+  <!-- ===== end ===== -->
+  <section id="c4f-end" class="c4f-inner" hidden>
+    <h1>Game over</h1>
+    <div class="c4f-winner" id="c4f-winner"></div>
+    <div class="c4f-why" id="c4f-why"></div>
+    <div class="c4f-boardwrap"><div class="c4f-board" id="c4f-endboard"></div></div>
+    <table>
+      <thead><tr><th>French</th><th>English</th><th>Who</th><th>Result</th></tr></thead>
+      <tbody id="c4f-recap"></tbody>
+    </table>
+    <div class="c4f-endbtns">
+      <button class="c4f-go" id="c4f-againbtn">Play again</button>
+      <button class="c4f-ghost" id="c4f-menubtn">Change players</button>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<script>
+(function () {
+  // [French, correct English, wrong 1, wrong 2, wrong 3]
+  var WORDS = [
+[
+"Internet des objets (IdO)",
+"Internet of Things (IoT)",
+"Internet of Thinks",
+"Internet of Stuffs",
+"Industrial Internet"
+],
+[
+"appareil électroménager",
+"household appliance",
+"household applause",
+"household electro-manager",
+"household chores"
+],
+[
+"surveiller",
+"to monitor",
+"to monster",
+"to survey",
+"to maintain"
+],
+[
+"données",
+"data",
+"dates",
+"donations",
+"metadata"
+],
+[
+"maison connectée",
+"smart home",
+"smart foam",
+"smart mansion",
+"smart grid"
+],
+[
+"thermostat",
+"thermostat",
+"Ferme aux stats",
+"thermostate",
+"thermometer"
+],
+[
+"sonnette",
+"doorbell",
+"dumbbell",
+"ringlet",
+"doorknob"
+],
+[
+"détecteur de fumée",
+"smoke detector",
+"smoke defector",
+"smoked detector",
+"smoke extractor"
+],
+[
+"chauffe-eau",
+"water heater",
+"water eater",
+"water chauffeur",
+"water cooler"
+],
+[
+"alarme de sécurité",
+"security alarm",
+"security llama",
+"securitary alarm",
+"security guard"
+],
+[
+"capteur",
+"sensor",
+"censor",
+"captor",
+"actuator"
+],
+[
+"actionneur",
+"actuator",
+"act-you-later",
+"actioner",
+"accelerator"
+],
+[
+"matériel informatique",
+"hardware",
+"hard-wear",
+"computer material",
+"software"
+],
+[
+"passerelle (réseau)",
+"gateway",
+"getaway",
+"footbridge",
+"firewall"
+],
+[
+"le nuage (informatique)",
+"the cloud",
+"the clout",
+"the nuance",
+"the web"
+],
+[
+"interface",
+"interface",
+"inter-farce",
+"interphone",
+"interference"
+],
+[
+"protocole",
+"protocol",
+"photocall",
+"protocolary",
+"prototype"
+],
+[
+"connectivité",
+"connectivity",
+"collectivity",
+"connectividude",
+"conductivity"
+],
+[
+"serveur back-end",
+"back-end server",
+"backhand server",
+"back-end waiter",
+"front-end server"
+],
+[
+"protocole de communication",
+"communication protocol",
+"communion protocol",
+"communication prototool",
+"communication satellite"
+],
+[
+"apprentissage automatique",
+"machine learning",
+"machine leaning",
+"automatic apprenticeship",
+"machine translation"
+],
+[
+"aperçu (compréhension fine)",
+"insight",
+"incite",
+"outsight",
+"eyesight"
+],
+[
+"appareil",
+"device",
+"devise",
+"apparel",
+"component"
+],
+[
+"composant",
+"component",
+"compost",
+"componant",
+"composite"
+],
+[
+"hub de données",
+"data hub",
+"data pub",
+"data hubby",
+"data cable"
+],
+[
+"unité de stockage et de traitement",
+"storage and processing unit",
+"porridge and processing unit",
+"flower supply unit",
+"power supply unit"
+],
+[
+"filaire, câblé",
+"wired",
+"weird",
+"filared",
+"wireless"
+],
+[
+"sans fil",
+"wireless",
+"tireless",
+"threadless",
+"wired"
+],
+[
+"climatiseur (clim)",
+"air conditioner",
+"hair conditioner",
+"climatiser",
+"air purifier"
+],
+[
+"à distance",
+"remotely",
+"re-motley",
+"distancely",
+"manually"
+]
+];
+  var COLS = 7, ROWS = 6;
+  var REQUEUE_GAP = 4;   // a missed word comes back, but not before this many other questions
+
+  var $ = function (id) { return document.getElementById(id); };
+  var G = null, clockId = null;
+
+  function shuffle(a) {
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+  }
+  function show(id) {
+    ['c4f-start', 'c4f-play', 'c4f-end'].forEach(function (s) { $(s).hidden = (s !== id); });
+  }
+  function other(p) { return 1 - p; }
+
+  function newGame() {
+    stopClock();
+    var names = [0, 1].map(function (p) { return ($('c4f-n' + p).value.trim() || ('Player ' + (p + 1))); });
+    var first = Math.random() < 0.5 ? 0 : 1;
+    G = {
+      names: names,
+      clock: +$('c4f-clocksel').value,
+      grid: [],                  // grid[c][r], r = 0 is the bottom
+      deck: shuffle(WORDS.map(function (_, i) { return i; })),
+      first: first,
+      turn: first,
+      turnsTaken: [0, 0],
+      phase: 'answer',           // answer -> place (if right) -> result -> next turn
+      locked: false,
+      q: null,                   // { w: word index, opts: [{t, ok}] }
+      log: [],
+      finalRound: false,         // the starter has connected four; the other player gets one last turn
+      pending: null,             // who connected four first
+      over: false,
+      result: null,              // { winner: 0 | 1 | null, why: string, line: [[c, r]...] }
+      lastLine: null
+    };
+    for (var c = 0; c < COLS; c++) G.grid.push([]);
+    $('c4f-pn0').textContent = names[0];
+    $('c4f-pn1').textContent = names[1];
+    show('c4f-play');
+    startTurn();
+  }
+
+  function drawWord() {
+    if (!G.deck.length) G.deck = shuffle(WORDS.map(function (_, i) { return i; }));
+    return G.deck.shift();
+  }
+
+  function startTurn() {
+    var w = drawWord();
+    var opts = WORDS[w].slice(1, 5).map(function (t, i) { return { t: t, ok: i === 0 }; });
+    G.q = { w: w, opts: shuffle(opts) };
+    G.phase = 'answer';
+    G.locked = false;
+    render();
+    startClock();
+  }
+
+  function answer(i) {
+    if (G.locked || G.over || G.phase !== 'answer') return;
+    G.locked = true;
+    stopClock();
+    var p = G.turn;
+    var ok = i >= 0 && G.q.opts[i].ok;
+    G.log.push({ w: G.q.w, p: p, ok: ok, timedOut: i < 0 });
+    if (ok) {
+      G.q.picked = i;
+      G.phase = 'place';
+    } else {
+      // back into the deck, later, so the word is met again
+      var at = Math.min(G.deck.length, REQUEUE_GAP + Math.floor(Math.random() * 4));
+      G.deck.splice(at, 0, G.q.w);
+      G.q.picked = null;
+      G.q.timedOut = i < 0;
+      endTurn();
+    }
+    render();
+  }
+
+  function place(c) {
+    if (G.over || G.phase !== 'place') return;
+    if (G.grid[c].length >= ROWS) return;
+    var p = G.turn;
+    G.grid[c].push(p);
+    G.lastDrop = [c, G.grid[c].length - 1];
+    var line = fourAt(c, G.grid[c].length - 1, p);
+    if (line) {
+      G.lastLine = (G.lastLine || []).concat(line);
+      if (G.finalRound) {
+        G.result = { winner: null, why: 'Both players connected four with the same number of turns.' };
+      } else if (G.turnsTaken[p] + 1 > G.turnsTaken[other(p)]) {
+        G.finalRound = true;
+        G.pending = p;
+      } else {
+        G.result = { winner: p, why: G.names[p] + ' connected four.' };
+      }
+    }
+    endTurn();
+    render();
+  }
+
+  function endTurn() {
+    G.turnsTaken[G.turn]++;
+    G.phase = 'result';
+    if (G.result) return;
+    var full = G.grid.every(function (col) { return col.length >= ROWS; });
+    if (G.finalRound && G.turn !== G.pending) {
+      G.result = { winner: G.pending, why: G.names[G.pending] + ' connected four, and ' + G.names[G.turn] + ' could not answer it on the last turn.' };
+    } else if (full) {
+      G.result = G.finalRound
+        ? { winner: G.pending, why: G.names[G.pending] + ' connected four. The board is full, so there is no last turn.' }
+        : { winner: null, why: 'The board is full and nobody connected four.' };
+    }
+  }
+
+  function nextTurn() {
+    if (G.over || G.phase !== 'result') return;
+    if (G.result) { endGame(); return; }
+    G.turn = other(G.turn);
+    startTurn();
+  }
+
+  function fourAt(c, r, p) {
+    var dirs = [[1, 0], [0, 1], [1, 1], [1, -1]];
+    for (var d = 0; d < dirs.length; d++) {
+      var dc = dirs[d][0], dr = dirs[d][1], cells = [[c, r]];
+      [1, -1].forEach(function (s) {
+        var cc = c + dc * s, rr = r + dr * s;
+        while (cc >= 0 && cc < COLS && rr >= 0 && G.grid[cc][rr] === p) { cells.push([cc, rr]); cc += dc * s; rr += dr * s; }
+      });
+      if (cells.length >= 4) return cells;
+    }
+    return null;
+  }
+
+  function startClock() {
+    stopClock();
+    $('c4f-clockwrap').hidden = !G.clock;
+    if (!G.clock) return;
+    G.deadline = Date.now() + G.clock * 1000;
+    paintClock();
+    clockId = setInterval(function () {
+      paintClock();
+      if (Date.now() >= G.deadline) answer(-1);
+    }, 100);
+  }
+  function stopClock() { if (clockId) { clearInterval(clockId); clockId = null; } }
+  function paintClock() {
+    var left = Math.max(0, G.deadline - Date.now());
+    $('c4f-clockfill').style.width = (100 * left / (G.clock * 1000)) + '%';
+  }
+
+  function renderBoard(el, live) {
+    var html = '';
+    for (var c = 0; c < COLS; c++) {
+      var open = G.grid[c].length < ROWS;
+      html += '<div class="c4f-col' + (open ? ' c4f-open' : '') + '" data-col="' + c + '">';
+      for (var r = ROWS - 1; r >= 0; r--) {
+        var v = G.grid[c][r], cls = 'c4f-disc';
+        if (v === 0 || v === 1) cls += ' p' + v;
+        if (live && G.lastDrop && G.lastDrop[0] === c && G.lastDrop[1] === r && G.phase === 'result') cls += ' c4f-drop';
+        if (G.lastLine && G.lastLine.some(function (x) { return x[0] === c && x[1] === r; })) cls += ' c4f-four';
+        html += '<div class="c4f-cell"><div class="' + cls + '" style="--fall:' + ((ROWS - r) * 100) + '%"></div></div>';
+      }
+      html += '</div>';
+    }
+    el.innerHTML = html;
+  }
+
+  function render() {
+    var p = G.turn;
+    [0, 1].forEach(function (k) { $('c4f-pp' + k).classList.toggle('c4f-active', k === p); });
+    var q = $('c4f-q');
+    q.className = 'c4f-q p' + p;
+    $('c4f-qhead').innerHTML = '<b>' + esc(G.names[p]) + '</b>' + (G.finalRound && G.turn !== G.pending ? ' · last turn' : '') + ' · translate';
+    $('c4f-fr').textContent = WORDS[G.q.w][0];
+
+    var answering = G.phase === 'answer';
+    var showOpts = answering || (G.phase === 'place') || (G.phase === 'result' && G.q.picked !== null);
+    $('c4f-opts').hidden = !showOpts;
+    $('c4f-opts').innerHTML = G.q.opts.map(function (o, i) {
+      var cls = 'c4f-opt';
+      if (!answering && i === G.q.picked) cls += ' good';
+      if (!answering && i !== G.q.picked) return '';
+      return '<button class="' + cls + '" data-i="' + i + '"' + (answering ? '' : ' disabled') + '><small>' + (i + 1) + '</small>' + esc(o.t) + '</button>';
+    }).join('');
+    if (!answering) $('c4f-clockwrap').hidden = true;
+
+    var msg = $('c4f-msg'), hint = $('c4f-hint');
+    msg.hidden = hint.hidden = answering;
+    if (G.phase === 'place') {
+      msg.className = 'c4f-msg good'; msg.textContent = 'Correct!';
+      hint.textContent = 'Drop your disc: click a column, or press 1 to 7.';
+    } else if (G.phase === 'result') {
+      if (G.q.picked === null) {
+        msg.className = 'c4f-msg bad';
+        msg.textContent = G.q.timedOut ? 'Time is up. No disc this turn.' : 'Not this time. No disc this turn.';
+        hint.textContent = '';
+      } else {
+        msg.className = 'c4f-msg good'; msg.textContent = 'Disc dropped.';
+        hint.textContent = G.finalRound && G.turn === G.pending && !G.result
+          ? 'Four in a row! ' + G.names[other(p)] + ' gets one last turn to draw level.'
+          : (G.result && G.result.winner === p ? 'Four in a row!' : '');
+      }
+      hint.hidden = !hint.textContent;
+    }
+    $('c4f-nextbtn').hidden = $('c4f-nexthint').hidden = G.phase !== 'result';
+    $('c4f-nextbtn').textContent = G.result ? 'See the result' : 'Next turn';
+
+    renderBoard($('c4f-board'), true);
+    $('c4f-board').classList.toggle('c4f-choosing', G.phase === 'place');
+    $('c4f-colnums').innerHTML = G.phase === 'place'
+      ? G.grid.map(function (col, c) { return '<span>' + (col.length < ROWS ? c + 1 : '') + '</span>'; }).join('')
+      : '';
+  }
+
+  function endGame() {
+    G.over = true;
+    stopClock();
+    var w = G.result.winner;
+    $('c4f-winner').className = 'c4f-winner' + (w === null ? '' : ' p' + w);
+    $('c4f-winner').textContent = w === null ? 'It is a draw' : G.names[w] + ' wins';
+    $('c4f-why').textContent = G.result.why;
+    renderBoard($('c4f-endboard'), false);
+    // every word that was asked, once, with its English: the only place the answers are shown
+    var seen = {}, rows = [];
+    G.log.forEach(function (e) {
+      if (!seen[e.w]) { seen[e.w] = { w: e.w, tries: [] }; rows.push(seen[e.w]); }
+      seen[e.w].tries.push(e);
+    });
+    $('c4f-recap').innerHTML = rows.map(function (r) {
+      var who = r.tries.map(function (t) {
+        return '<span class="p' + t.p + '">' + esc(G.names[t.p]) + '</span>';
+      }).join(', ');
+      var res = r.tries.map(function (t) { return t.ok ? '✓' : (t.timedOut ? '⏱' : '✗'); }).join(' ');
+      var last = r.tries[r.tries.length - 1].ok;
+      return '<tr><td>' + esc(WORDS[r.w][0]) + '</td><td>' + esc(WORDS[r.w][1]) + '</td><td>' + who +
+             '</td><td class="' + (last ? 'good' : 'bad') + '">' + res + '</td></tr>';
+    }).join('');
+    show('c4f-end');
+  }
+
+  $('c4f-opts').addEventListener('click', function (e) {
+    var b = e.target.closest('.c4f-opt');
+    if (b && !b.disabled) answer(+b.dataset.i);
+  });
+  $('c4f-board').addEventListener('click', function (e) {
+    var col = e.target.closest('.c4f-col');
+    if (col) place(+col.dataset.col);
+  });
+  $('c4f-nextbtn').addEventListener('click', nextTurn);
+  $('c4f-startbtn').addEventListener('click', newGame);
+  $('c4f-againbtn').addEventListener('click', newGame);
+  $('c4f-menubtn').addEventListener('click', function () { stopClock(); show('c4f-start'); });
+
+  document.addEventListener('keydown', function (e) {
+    if (!G || G.over || $('c4f-play').hidden || e.target.tagName === 'INPUT') return;
+    var n = parseInt(e.key, 10);
+    if (G.phase === 'answer' && n >= 1 && n <= 4) answer(n - 1);
+    else if (G.phase === 'place' && n >= 1 && n <= COLS) place(n - 1);
+    else if (G.phase === 'result' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); nextTurn(); }
+  });
+
+  window.C4 = { newGame: newGame, answer: answer, place: place, nextTurn: nextTurn, state: function () { return G; } };
+})();
+</script>
+</body>
+</html>
