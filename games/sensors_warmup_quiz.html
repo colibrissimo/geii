@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sensors warm-up</title>
+<style>
+:root{
+  --gt-cream:#faf6ef;--gt-ink:#2b2b2b;--gt-muted:#6d7078;--gt-teal:#0f7c8a;--gt-teal-d:#0a5560;
+  --gt-orange:#e08a3c;--gt-line:#e3dccd;--gt-line-s:#cdc4ad;--gt-card:#ffffff;
+  --ok-bg:#ecf6f0;--ok-fg:#2e7d52;--no-bg:#fceceb;--no-fg:#b23b3b;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --gt-cream:#1a1b17;--gt-ink:#ece7db;--gt-muted:#a49d8a;--gt-teal:#4fb6c4;--gt-teal-d:#86d3de;
+    --gt-orange:#e8a361;--gt-line:#33392c;--gt-line-s:#454c39;--gt-card:#22261c;
+    --ok-bg:#1c2a22;--ok-fg:#5fbe88;--no-bg:#301f1d;--no-fg:#e8746a;
+  }
+}
+:root[data-theme="dark"]{
+  --gt-cream:#1a1b17;--gt-ink:#ece7db;--gt-muted:#a49d8a;--gt-teal:#4fb6c4;--gt-teal-d:#86d3de;
+  --gt-orange:#e8a361;--gt-line:#33392c;--gt-line-s:#454c39;--gt-card:#22261c;
+  --ok-bg:#1c2a22;--ok-fg:#5fbe88;--no-bg:#301f1d;--no-fg:#e8746a;
+}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--gt-cream);color:var(--gt-ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.55;font-size:18px;padding:26px 16px 60px}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.wrap{max-width:760px;margin:0 auto}
+h1{font-size:28px;margin:0 0 4px;color:var(--gt-teal-d)}
+.sub{color:var(--gt-muted);margin:0 0 18px;font-size:16px}
+.card{background:var(--gt-card);border:1px solid var(--gt-line-s);border-left:5px solid var(--gt-orange);
+  border-radius:10px;padding:18px 20px;margin-bottom:16px}
+.prog{display:flex;justify-content:space-between;color:var(--gt-muted);font-size:15px;margin-bottom:6px}
+.bar{height:7px;background:var(--gt-line);border-radius:6px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;background:var(--gt-orange);width:0;transition:width .25s}
+.ctx{font-size:15px;color:var(--gt-muted);margin:0 0 6px;font-weight:600;letter-spacing:.3px}
+.q{font-size:21px;font-weight:600;margin:0 0 16px;line-height:1.4}
+.opts{display:grid;gap:10px}
+.opt{font:inherit;font-size:17px;text-align:left;background:var(--gt-cream);color:var(--gt-ink);
+  border:2px solid var(--gt-line-s);border-radius:10px;padding:12px 14px;cursor:pointer;position:relative}
+.opt:hover:not(:disabled){border-color:var(--gt-orange)}
+.opt:focus-visible{outline:3px solid var(--gt-orange);outline-offset:2px}
+.opt:disabled{cursor:default}
+.opt.right{background:var(--ok-bg);border-color:var(--ok-fg)}
+.opt.wrong{background:var(--no-bg);border-color:var(--no-fg)}
+.opt.dim{opacity:.55}
+.tag{display:block;font-size:12.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:2px}
+.right .tag{color:var(--ok-fg)} .wrong .tag{color:var(--no-fg)}
+.why{margin-top:16px;padding:12px 14px;border-radius:8px;background:var(--gt-cream);border:1px solid var(--gt-line);font-size:16.5px}
+.why .verdict{font-weight:700;margin-bottom:4px}
+.why .verdict.ok{color:var(--ok-fg)} .why .verdict.no{color:var(--no-fg)}
+.why b{color:var(--gt-teal-d)}
+.act{font:inherit;font-size:17px;font-weight:700;border:none;border-radius:10px;padding:12px 20px;cursor:pointer;
+  background:var(--gt-orange);color:#fff;margin-top:16px}
+.act:focus-visible{outline:3px solid var(--gt-teal-d);outline-offset:2px}
+.ghost{background:transparent;color:var(--gt-teal-d);border:2px solid var(--gt-teal)}
+.end h2{color:var(--gt-teal-d);margin:0 0 6px;font-size:24px}
+.review{list-style:none;margin:14px 0 0;padding:0}
+.review li{border-top:1px solid var(--gt-line);padding:10px 0;font-size:16px}
+.review .rq{font-weight:600}
+.review .ra{color:var(--ok-fg)}
+.review .rx{color:var(--no-fg);text-decoration:line-through}
+.foot{font-size:12px;color:var(--gt-muted);margin-top:22px;text-align:center}
+@media (max-width:520px){ body{font-size:17px} .q{font-size:19px} h1{font-size:24px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section id="start">
+    <h1>Sensors: guess first</h1>
+    <p class="sub">Eight questions about the sensors around you. You are not expected to know the answers yet. Guess, then read why. The words in bold come back in the lesson.</p>
+    <div class="card">
+      <p style="margin:0">Pick one answer. You will see your answer and the right one side by side, with a short explanation. Read it before you click <b>Next</b>.</p>
+    </div>
+    <button class="act" id="go">Start</button>
+  </section>
+
+  <section id="play" hidden>
+    <div class="prog"><span id="count"></span><span id="score"></span></div>
+    <div class="bar"><i id="fill"></i></div>
+    <div class="card">
+      <p class="ctx" id="ctx"></p>
+      <p class="q" id="q"></p>
+      <div class="opts" id="opts"></div>
+      <div class="why" id="why" hidden><div class="verdict" id="verdict"></div><div id="expl"></div></div>
+      <button class="act" id="next" hidden>Next</button>
+    </div>
+  </section>
+
+  <section id="end" class="end" hidden>
+    <div class="card">
+      <h2 id="final"></h2>
+      <p style="margin:0" id="finalnote"></p>
+      <ul class="review" id="review"></ul>
+    </div>
+    <button class="act" id="again">Play again</button>
+  </section>
+  <p class="foot">BUT2 GEII · S3 · What is a sensor? Warm-up</p>
+</div>
+
+<script>
+(function(){
+  /* Solo warm-up, so the feedback shows the student's own answer beside the right one
+     (classroom-game-hardening 6b). The first option of each item is the right one;
+     options are shuffled on screen. */
+  var ITEMS = [
+    { ctx:"In your pocket",
+      q:"Turn your phone sideways and the picture turns too. Inside the phone, a tiny piece of silicon hangs on tiny springs. When the phone moves, the silicon moves. What does the chip measure?",
+      o:["A change in capacitance, because the gap between tiny plates changes",
+         "A change in resistance, because the tiny springs get hotter and hotter",
+         "A change in temperature, because the silicon rubs against the chip",
+         "A change in voltage, because the moving silicon acts as a tiny battery"],
+      e:"This sensor is an accelerometer, and it is part of <b>everyday life</b>. The silicon and the fixed parts around it form tiny capacitors. Remember your capacitor lesson: when the gap between the plates changes, the capacitance changes."},
+    { ctx:"At the traffic lights",
+      q:"Many traffic lights know when a car is waiting. A loop of wire is buried in the road, and a current runs through it. How does it detect the car?",
+      o:["The metal in the car changes the inductance of the loop",
+         "The weight of the car stretches the wire and breaks it",
+         "The heat of the engine changes the resistance of the wire",
+         "The sound of the engine makes the wire vibrate in the road"],
+      e:"The loop is a big inductor, <b>embedded</b> in the road at the <b>intersection</b>. A large piece of metal above it changes its inductance, and the <b>traffic lights</b> get the message. A bicycle has much less metal, so the loop can miss it."},
+    { ctx:"Space station, 2008",
+      q:"Astronauts on the International Space Station unpack and test a small box called the ENose: an electronic nose. What is it for?",
+      o:["To find dangerous chemicals in the air, such as ammonia",
+         "To check that the food on board is still safe to eat",
+         "To test the breath of the astronauts for signs of illness",
+         "To find very small holes in the walls of the space station"],
+      e:"Yes, sensors can <b>smell</b>. The ENose has 32 sensors: thin films that change their conductivity <b>in response to</b> a chemical. Before this, crews often found out about a leak only after they had been <b>exposed to</b> it."},
+    { ctx:"In the kitchen",
+      q:"A digital kitchen scale has a small metal bar inside, fixed at one end, with a strain gauge glued on top of it. You put a bag of sugar on the scale. What happens?",
+      o:["The bar bends a little, the gauge stretches, and its resistance goes up",
+         "The bar bends a little, the gauge gets warm, and its voltage goes up",
+         "The bar stays still, the gauge gets heavier, and its current goes down",
+         "The bar stays still, the gauge is squeezed, and its charge goes down"],
+      e:"A <b>strain gauge</b> is a very thin metal track. Stretch it and it gets longer and thinner, so its resistance goes up: R = &rho;L/A. The change does not produce a voltage by itself, so the gauge needs an <b>external power supply</b>."},
+    { ctx:"On the gas cooker",
+      q:"On many gas cookers, if the wind blows the flame out, the gas stops by itself. This safety system has no battery and no plug. A thermocouple sits in the flame. What does it do?",
+      o:["The flame heats it, and the small voltage it makes holds the gas valve open",
+         "The flame melts it, and the hot metal runs down and closes the gas pipe",
+         "The flame lights it up, and a small camera watches for this bright light",
+         "The flame bends it, and the bent metal pushes hard against the gas valve"],
+      e:"<b>Heat</b> the joint between two different metals and a voltage appears, with no battery. That is a thermocouple. While the flame burns, this voltage holds a small magnetic valve open. No flame, no voltage, and a spring closes the valve."},
+    { ctx:"How small is it?",
+      q:"You heat a common thermocouple (type K) by 100 &deg;C. What voltage does it produce?",
+      o:["About 4 mV", "About 40 mV", "About 0.4 V", "About 4 V"],
+      e:"About 0.04 mV per degree, so 4 mV. Now imagine reading that at the end of a long cable, next to big motors. This <b>output</b> is too small to be <b>usable</b> as it is. Watch the video to see what the industry does about it."},
+    { ctx:"In the factory",
+      q:"In a factory, the signal from a temperature sensor often travels as a current: 4 mA for the lowest temperature, 20 mA for the highest. Why not start at 0 mA?",
+      o:["So that 0 mA can only mean a problem, such as a broken wire",
+         "Because a copper wire cannot carry a current of less than 4 mA",
+         "Because a current of 0 mA would damage the device on the line",
+         "Because the first 4 mA are always lost as heat along the wire"],
+      e:"Engineers call this a live zero. If 0 mA meant the lowest temperature, a broken wire would look like a very cold tank. With 4 to 20 mA, a reading of 0 means: go and check the wire. It is now an <b>industry standard</b>."},
+    { ctx:"Mars, 1999",
+      q:"NASA's Mars Polar Lander comes down to land on Mars. Sensors in its legs must tell the computer: we are on the ground, stop the engines. Nobody ever hears from it again. What probably happened?",
+      o:["The legs opening gave a false signal, and the engines stopped too early",
+         "The cold froze the leg sensors, and the engines ran until they were empty",
+         "Red dust covered the leg sensors, so the lander never saw the ground at all",
+         "The legs broke on the rocks, and the leg sensors then cut power to the radio"],
+      e:"Nobody can be sure, but this is the most probable cause NASA's investigators found. When the legs opened, the sensors gave a very short false signal. The software kept it in memory and stopped the engines while the lander was still in the air. <b>Unfortunately</b>, a sensor's <b>output</b> is only useful if the system reads it correctly."}
+  ];
+
+  var $ = function(id){ return document.getElementById(id); };
+  var order, i, right, log;
+
+  function shuffle(a){ for (var k=a.length-1;k>0;k--){ var j=Math.floor(Math.random()*(k+1)); var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
+  function show(id){ ["start","play","end"].forEach(function(s){ $(s).hidden = (s!==id); }); window.scrollTo(0,0); }
+
+  /* Questions stay in story order (everyday life first, as in the video); only the options move. */
+  function begin(){ order = ITEMS.map(function(_,k){return k;}); i=0; right=0; log=[]; show("play"); render(); }
+
+  function render(){
+    var it = ITEMS[order[i]];
+    $("count").textContent = "Question "+(i+1)+" of "+ITEMS.length;
+    $("score").textContent = right+" right so far";
+    $("fill").style.width = Math.round(i/ITEMS.length*100)+"%";
+    $("ctx").textContent = it.ctx;
+    $("q").innerHTML = it.q;
+    $("why").hidden = true; $("next").hidden = true;
+    var box = $("opts"); box.innerHTML = "";
+    shuffle(it.o.map(function(_,k){return k;})).forEach(function(k){
+      var b = document.createElement("button");
+      b.className = "opt"; b.dataset.k = k;
+      var t = document.createElement("span"); t.textContent = it.o[k];
+      b.appendChild(t);
+      b.addEventListener("click", function(){ pick(k); });
+      box.appendChild(b);
+    });
+  }
+
+  function pick(k){
+    var it = ITEMS[order[i]], ok = (k===0);
+    if (ok) right++;
+    log.push({q:it.q, chose:it.o[k], answer:it.o[0], ok:ok});
+    Array.prototype.forEach.call($("opts").children, function(b){
+      var bk = Number(b.dataset.k);
+      b.disabled = true;
+      if (bk===0){
+        b.classList.add("right");
+        b.insertAdjacentHTML("afterbegin", '<span class="tag">'+(ok ? "Your answer: right" : "Right answer")+'</span>');
+      } else if (bk===k){
+        b.classList.add("wrong");
+        b.insertAdjacentHTML("afterbegin", '<span class="tag">Your answer</span>');
+      } else b.classList.add("dim");
+    });
+    var v = $("verdict");
+    v.textContent = ok ? "Good guess." : "Not this time.";
+    v.className = "verdict "+(ok ? "ok" : "no");
+    $("expl").innerHTML = it.e;
+    $("why").hidden = false;
+    $("score").textContent = right+" right so far";
+    $("next").textContent = (i===ITEMS.length-1) ? "See the summary" : "Next";
+    $("next").hidden = false;
+    $("next").focus();
+  }
+
+  function next(){
+    i++;
+    if (i<ITEMS.length){ render(); return; }
+    $("final").textContent = right+" out of "+ITEMS.length+" guessed right";
+    $("finalnote").textContent = right>=6 ? "You knew more about this than you thought." :
+      "That is normal for a warm-up: the lesson is about to fill the gaps.";
+    var ul = $("review"); ul.innerHTML = "";
+    log.forEach(function(r){
+      var li = document.createElement("li");
+      var q = document.createElement("div"); q.className="rq"; q.innerHTML = r.q;
+      li.appendChild(q);
+      if (!r.ok){ var x=document.createElement("div"); x.className="rx"; x.textContent="You: "+r.chose; li.appendChild(x); }
+      var a = document.createElement("div"); a.className="ra"; a.textContent=(r.ok?"You: ":"Answer: ")+r.answer; li.appendChild(a);
+      ul.appendChild(li);
+    });
+    show("end");
+  }
+
+  $("go").addEventListener("click", begin);
+  $("next").addEventListener("click", next);
+  $("again").addEventListener("click", begin);
+})();
+</script>
+</body>
+</html>
