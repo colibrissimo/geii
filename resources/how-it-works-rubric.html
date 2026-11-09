@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEII Presentation Assessment Rubric</title>
+    <style>
+        html { color-scheme: light; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: transparent;
+            line-height: 1.5;
+        }
+        .rubric-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 100%;
+        }
+        h1 {
+            color: #367588;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #ffa500;
+            padding-bottom: 10px;
+        }
+        .intro-section {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #367588;
+            margin-bottom: 20px;
+        }
+        .intro-section h2 {
+            color: #367588;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        .key-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .info-item {
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 3px solid #ffa500;
+        }
+        .info-item strong {
+            color: #367588;
+        }
+        .tab-container {
+            display: flex;
+            border-bottom: 3px solid #367588;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .tab {
+            padding: 10px 18px;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            border: none;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            transition: all 0.3s;
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+        .tab:hover {
+            background-color: #e0e0e0;
+        }
+        .tab.active {
+            background-color: #367588;
+            color: white;
+            border-bottom: 3px solid #367588;
+        }
+        .content-section {
+            display: none;
+            padding: 15px 0;
+            animation: fadeIn 0.4s;
+        }
+        .content-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .track-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .track-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 15px;
+            border-radius: 6px;
+            border: 2px solid #367588;
+        }
+        .track-card h3 {
+            color: #367588;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        .track-card .level-badge {
+            background: #ffa500;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .criteria-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        .criteria-table th {
+            background-color: #367588;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .criteria-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        .criteria-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        .criteria-table tr:hover {
+            background-color: #e9ecef;
+        }
+        .component-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #ffa500;
+            margin-bottom: 15px;
+        }
+        .component-section h3 {
+            color: #367588;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1em;
+        }
+        .weight-indicator {
+            background: #ffa500;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .score-cell {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            border-left: 3px solid #367588;
+        }
+        .score-range {
+            font-weight: bold;
+            color: #367588;
+            font-size: 1.1em;
+        }
+        .score-label {
+            color: #ffa500;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .score-desc {
+            font-size: 0.85em;
+            color: #555;
+        }
+        .tip-box {
+            background-color: #fff9e6;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #ffa500;
+            margin: 15px 0;
+        }
+        .tip-box h4 {
+            color: #856404;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+        .tip-box ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        .tip-box li {
+            margin-bottom: 5px;
+        }
+        .checkmark {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .crossmark {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .grade-scale {
+            background: linear-gradient(135deg, #367588 0%, #4a8a9d 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        .grade-scale h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .grade-scale-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+        }
+        .grade-item {
+            background: rgba(255,255,255,0.2);
+            padding: 8px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .grade-number {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .examples-section {
+            background-color: #e6f3f7;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        .examples-section h5 {
+            color: #367588;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        .example-list {
+            font-size: 0.88em;
+            margin: 5px 0;
+            padding-left: 20px;
+        }
+        .warning-box {
+            background-color: #fff3cd;
+            border: 2px solid #ffa500;
+            color: #856404;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+        .hover-term {
+            cursor: help;
+            border-bottom: 1px dotted #367588;
+            color: #367588;
+        }
+        @media print {
+            .tab-container {
+                display: none;
+            }
+            .content-section {
+                display: block !important;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rubric-container">
+        <h1 title="Grille d'évaluation des présentations GEII">GEII Presentation Assessment Rubric</h1>
+        
+        <div class="intro-section">
+            <h2 title="Aperçu de la présentation">Presentation Overview</h2>
+            <div class="key-info">
+                <div class="info-item">
+                    <strong title="Durée">Duration:</strong><br>2-3 minutes per student
+                </div>
+                <div class="info-item">
+                    <strong title="Format">Format:</strong><br>Group presentations (3 or 4 students)
+                </div>
+                <div class="info-item">
+                    <strong title="Sujet">Topic:</strong><br>"How it works": one component, tool or concept from your GEII coursework (one topic per group)
+                </div>
+                <div class="info-item">
+                    <strong title="Composants">Components:</strong><br>Presentation + Pronunciation + Q&A
+                </div>
+            </div>
+        </div>
+        
+        <div class="warning-box" title="Attribution du niveau">
+            <strong>Your track:</strong> Everyone starts in Track B. At your preparation session, you confirm Track B or ask to change to Track A or Track C. Your teacher makes the final decision. Every track can earn 20/20.
+        </div>
+        
+        <div class="tab-container">
+            <button class="tab active" onclick="showTab('overview')">Overview</button>
+            <button class="tab" onclick="showTab('trackA')">Track A (A1-A2)</button>
+            <button class="tab" onclick="showTab('trackB')">Track B (B1-B2)</button>
+            <button class="tab" onclick="showTab('trackC')">Track C (C1-C2)</button>
+            <button class="tab" onclick="showTab('tips')">Student Tips</button>
+            <button class="tab" onclick="showTab('grading')">Grade Scale</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="content-section active">
+            <h2 style="color: #367588;" title="Répartition de la notation">Track Comparison</h2>
+            <div class="track-overview">
+                <div class="track-card">
+                    <h3 title="Niveau A1-A2">Track A <span class="level-badge">A1-A2</span></h3>
+                    <table class="criteria-table">
+                        <tr>
+                            <td><strong title="Prononciation">Pronunciation</strong></td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td><strong title="Questions-réponses">Q&A Session</strong></td>
+                            <td>30%</td>
+                        </tr>
+                        <tr>
+                            <td><strong title="Présentation">Delivery</strong></td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td><strong title="Contenu">Content</strong></td>
+                            <td>30%</td>
+                        </tr>
+                    </table>
+                    <p style="font-size: 0.9em;"><strong title="Objectif">Focus:</strong> Clear communication and basic technical understanding</p>
+                </div>
+                
+                <div class="track-card">
+                    <h3 title="Niveau B1-B2">Track B <span class="level-badge">B1-B2</span></h3>
+                    <table class="criteria-table">
+                        <tr>
+                            <td><strong title="Prononciation">Pronunciation</strong></td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td><strong title="Questions-réponses">Q&A Session</strong></td>
+                            <td>40%</td>
+                        </tr>
+                        <tr>
+                            <td><strong title="Présentation">Delivery</strong></td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td><strong title="Contenu">Content</strong></td>
+                            <td>20%</td>
+                        </tr>
+                    </table>
+                    <p style="font-size: 0.9em;"><strong title="Objectif">Focus:</strong> Professional communication and technical depth</p>
+                </div>
+                
+                <div class="track-card">
+                    <h3 title="Niveau C1-C2">Track C <span class="level-badge">C1-C2</span></h3>
+                    <table class="criteria-table">
+                        <tr>
+                            <td><strong title="Prononciation">Pronunciation</strong></td>
+                            <td>15%</td>
+                        </tr>
+                        <tr>
+                            <td><strong title="Questions-réponses">Q&A Session</strong></td>
+                            <td>45%</td>
+                        </tr>
+                        <tr>
+                            <td><strong title="Présentation">Delivery</strong></td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td><strong title="Contenu">Content</strong></td>
+                            <td>20%</td>
+                        </tr>
+                    </table>
+                    <p style="font-size: 0.9em;"><strong title="Objectif">Focus:</strong> Advanced critical analysis and sophisticated communication</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Track A Tab -->
+        <div id="trackA" class="content-section">
+            <h2 style="color: #367588;" title="Critères du niveau A">Track A Detailed Criteria (A1-A2)</h2>
+            
+            <div class="component-section">
+                <h3>
+                    <span title="Défi de prononciation">1. Pronunciation Challenge</span>
+                    <span class="weight-indicator">20%</span>
+                </h3>
+                <p><strong title="Exigences">Requirements:</strong> Correctly pronounce 5-8 technical terms. Word list must be submitted 1 week before presentation.</p>
+                <p><strong title="Norme">Standard:</strong> Words must be understandable (accent is not important).</p>
+                
+                <div class="examples-section">
+                    <h5 title="Exemples acceptables">Acceptable Pronunciation Examples:</h5>
+                    <ul class="example-list">
+                        <li><span class="hover-term" title="microcontrôleur">microcontroller</span> → "micro-con-tro-ler" (any comprehensible version)</li>
+                        <li><span class="hover-term" title="algorithme">algorithm</span> → "algo-rithem" or "algo-rithm" (both OK)</li>
+                        <li><span class="hover-term" title="résistance">resistor</span> → "re-zis-tor" (understandable pronunciation)</li>
+                    </ul>
+                </div>
+                
+                <div class="score-grid">
+                    <div class="score-cell">
+                        <div class="score-label" title="Excellent">Excellent</div>
+                        <div class="score-range">18-20</div>
+                        <div class="score-desc">All terms clearly pronounced</div>
+                    </div>
+                    <div class="score-cell">
+                        <div class="score-label" title="Bien">Good</div>
+                        <div class="score-range">15-17</div>
+                        <div class="score-desc">6-7 terms clear; 1-2 minor errors</div>
+                    </div>
+                    <div class="score-cell">
+                        <div class="score-label" title="Adéquat">Adequate</div>
+                        <div class="score-range">12-14</div>
+                        <div class="score-desc">4-5 terms clear; some difficulty</div>
+                    </div>
+                    <div class="score-cell">
+                        <div class="score-label" title="Faible">Weak</div>
+                        <div class="score-range">8-11</div>
+                        <div class="score-desc">Only 2-3 terms understandable</div>
+                    </div>
+                    <div class="score-cell">
+                        <div class="score-label" title="Pauvre">Poor</div>
+                        <div class="score-range">0-7</div>
+                        <div class="score-desc">Most terms incomprehensible</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="component-section">
+                <h3>
+                    <span title="Session de questions-réponses">2. Q&A Session</span>
+                    <span class="weight-indicator">30%</span>
+                </h3>
+                <p><strong title="Types de questions">Question Types:</strong></p>
+                <ul>
+                    <li title="Questions directes">Direct questions</li>
+                    <li title="Demandes de clarification">Clarification requests</li>
+                    <li title="Application simple">Simple application</li>
+                </ul>
+                
+                <div class="tip-box">
+                    <h4 title="Ce qui compte">What Matters:</h4>
+                    <ul>
+                        <li><span class="checkmark">✓</span> Understanding your topic</li>
+                        <li><span class="checkmark">✓</span> Answering in YOUR OWN WORDS (even simple English)</li>
+                        <li><span class="checkmark">✓</span> Trying to communicate when stuck</li>
+                    </ul>
+                    <h4 title="Ce qui importe moins">What Doesn't Matter As Much:</h4>
+                    <ul>
+                        <li><span class="crossmark">✗</span> Perfect grammar</li>
+                        <li><span class="crossmark">✗</span> Complex vocabulary</li>
+                        <li><span class="crossmark">✗</span> Fast, fluent answers</li>
+                    </ul>
+                </div>
+                
+                <div class="score-grid">
+                    <div class="score-cell">
+                        <div class="score-label">Excellent</div>
+                        <div class="score-range">27-30</div>
+                        <div class="score-desc">Clear understanding; appropriate responses</div>
+                    </div>
+                    <div class="score-cell">
+                        <div class="score-label">Good</div>
+                        <div class="score-range">23-26</div>
+                        <div class="score-desc">Generally understands; mostly relevant answers</div>
+                    </div>
+                    <div class="score-cell">
+                        <div class="score-label">Adequate</div>
+                        <div class="score-range">18-22</div>
+                        <div class="score-desc">Partial understanding; some off-topic answers</div>
+                    </div>
+                    <div class="score-cell">
+                        <div class="score-label">Weak</div>
+                        <div class="score-range">12-17</div>
+                        <div class="score-desc">Struggles to understand; often irrelevant</div>
+                    </div>
+                    <div class="score-cell">
+                        <div class="score-label">Poor</div>
+                        <div class="score-range">0-11</div>
+                        <div class="score-desc">Cannot answer; no understanding evident</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="component-section">
+                <h3>
+                    <span title="Authenticité et présentation">3. Authenticity & Delivery</span>
+                    <span class="weight-indicator">20%</span>
+                </h3>
+                <p><strong title="Indicateurs clés">Key Indicators:</strong></p>
+                <ul>
+                    <li><span class="hover-term" title="Authenticité">Authenticity</span> - Are you communicating or just reading?</li>
+                    <li><span class="hover-term" title="Effort">Effort</span> - Did you practice enough to avoid constant reading?</li>
+                    <li><span class="hover-term" title="Engagement">Engagement</span> - Eye contact, gestures, showing you care</li>
+                </ul>
+            </div>
+            
+            <div class="component-section">
+                <h3>
+                    <span title="Précision du contenu">4. Content Accuracy</span>
+                    <span class="weight-indicator">30%</span>
+                </h3>
+                <p><strong title="Ce que nous vérifions">What We're Checking:</strong></p>
+                <ul>
+                    <li>Do you understand the <strong>basics</strong> of what you're presenting?</li>
+                    <li>Are your technical facts correct?</li>
+                    <li>Can you explain simple concepts accurately?</li>
+                </ul>
+                
+                <div class="examples-section">
+                    <h5 title="Exemples de contenus techniques">Engineering Content Examples:</h5>
+                    <ul class="example-list">
+                        <li>Explaining what a <span class="hover-term" title="plaque d'essai">breadboard</span> is for and how its rows are connected</li>
+                        <li>Describing what a <span class="hover-term" title="multimètre">multimeter</span> measures: voltage, current and resistance</li>
+                        <li>Explaining what happens in a circuit when you press a <span class="hover-term" title="bouton-poussoir">push button</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Track B Tab -->
+        <div id="trackB" class="content-section">
+            <h2 style="color: #367588;" title="Critères du niveau B">Track B Detailed Criteria (B1-B2)</h2>
+            
+            <div class="component-section">
+                <h3>
+                    <span title="Défi de prononciation">1. Pronunciation Challenge</span>
+                    <span class="weight-indicator">20%</span>
+                </h3>
+                <p><strong title="Exigences">Requirements:</strong> Correctly pronounce 8-12 technical terms with proper word stress, OR read one complex technical sentence with appropriate intonation.</p>
+                <p><strong title="Norme">Standard:</strong> Near-accurate pronunciation expected.</p>
+                
+                <div class="examples-section">
+                    <h5 title="Norme attendue">Expected Standard Examples:</h5>
+                    <ul class="example-list">
+                        <li><span class="hover-term" title="microcontrôleur">microcontroller</span> → "micro-con-<strong>TROL</strong>-ler" (stress on TROL)</li>
+                        <li><span class="hover-term" title="architecture">architecture</span> → "<strong>AR</strong>-ki-tek-cher" (stress on AR)</li>
+                        <li><span class="hover-term" title="traitement du signal">signal processing</span> → "<strong>SIG</strong>-nal <strong>PRO</strong>-cess-ing"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="component-section">
+                <h3>
+                    <span title="Session de questions-réponses">2. Q&A Session</span>
+                    <span class="weight-indicator">40%</span>
+                </h3>
+                <p><strong title="Types de questions">Question Types:</strong></p>
+                <ul>
+                    <li title="Questions d'analyse">Analysis questions</li>
+                    <li title="Scénarios hypothétiques">Hypothetical scenarios</li>
+                    <li title="Application au contexte">Application to context</li>
+                    <li title="Justification des choix">Justification of choices</li>
+                </ul>
+                
+                <div class="tip-box">
+                    <h4 title="Ce qui compte">What Matters:</h4>
+                    <ul>
+                        <li><span class="checkmark">✓</span> Can you explain <strong>WHY</strong>, not just WHAT?</li>
+                        <li><span class="checkmark">✓</span> Can you connect ideas?</li>
+                        <li><span class="checkmark">✓</span> Can you defend your choices?</li>
+                        <li><span class="checkmark">✓</span> Do you show critical thinking?</li>
+                    </ul>
+                </div>
+                
+                <div class="examples-section">
+                    <h5 title="Exemples de questions">Example Question Types:</h5>
+                    <ul class="example-list">
+                        <li>"Why does an LED need a <span class="hover-term" title="résistance">resistor</span>? What happens if you connect it without one?"</li>
+                        <li>"Why do we measure voltage <span class="hover-term" title="en parallèle">in parallel</span> but current <span class="hover-term" title="en série">in series</span>?"</li>
+                        <li>"Why does a circuit need a <span class="hover-term" title="masse commune">common ground</span>?"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="component-section">
+                <h3>
+                    <span title="Authenticité et présentation">3. Authenticity & Delivery</span>
+                    <span class="weight-indicator">20%</span>
+                </h3>
+                <p><strong title="Indicateurs clés">Key Indicators:</strong></p>
+                <ul>
+                    <li><span class="hover-term" title="Professionnalisme">Professionalism</span> - Would this be acceptable in a workplace presentation?</li>
+                    <li><span class="hover-term" title="Naturel">Naturalness</span> - Do you sound like you're talking or reciting?</li>
+                    <li><span class="hover-term" title="Présence">Presence</span> - Do you command attention and engage your audience?</li>
+                </ul>
+            </div>
+            
+            <div class="component-section">
+                <h3>
+                    <span title="Précision du contenu">4. Content Accuracy</span>
+                    <span class="weight-indicator">20%</span>
+                </h3>
+                <p><strong title="Ce que nous vérifions">What We're Checking:</strong></p>
+                <ul>
+                    <li>Do you understand <strong>WHY</strong> things work, not just WHAT they are?</li>
+                    <li>Can you explain technical details?</li>
+                    <li>Do you show critical thinking about the topic?</li>
+                </ul>
+                
+                <div class="examples-section">
+                    <h5 title="Exemples de profondeur technique">Expected Technical Depth:</h5>
+                    <ul class="example-list">
+                        <li>Explaining why we choose one component and not another: a push button or a <span class="hover-term" title="interrupteur">switch</span>?</li>
+                        <li>Describing what goes wrong when a component is used badly: an LED the wrong way round, a <span class="hover-term" title="court-circuit">short circuit</span> on a breadboard</li>
+                        <li>Comparing <span class="hover-term" title="analogique et numérique">analogue and digital signals</span> with an example from your lab work</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Track C Tab -->
+        <div id="trackC" class="content-section">
+            <h2 style="color: #367588;" title="Critères du niveau C">Track C Detailed Criteria (C1-C2)</h2>
+            
+            <div class="component-section">
+                <h3>
+                    <span title="Défi de prononciation">1. Pronunciation Challenge</span>
+                    <span class="weight-indicator">15%</span>
+                </h3>
+                <p><strong title="Exigences">Requirements:</strong> Correctly pronounce 10-15 complex technical/scientific terms with native-like stress and intonation. Must include at least 3 multi-syllable terms (4+ syllables).</p>
+                <p><strong title="Norme">Standard:</strong> Native-like pronunciation with natural connected speech.</p>
+                
+                <div class="examples-section">
+                    <h5 title="Norme attendue">Expected Standard Examples:</h5>
+                    <ul class="example-list">
+                        <li><span class="hover-term" title="compatibilité électromagnétique">electromagnetic compatibility</span> → "e-lek-tro-mag-<strong>NET</strong>-ik com-<strong>PAT</strong>-i-<strong>BIL</strong>-i-ty" (natural linking)</li>
+                        <li><span class="hover-term" title="semi-conducteur">semiconductor</span> → "<strong>SEM</strong>-i-con-<strong>DUC</strong>-tor" (primary and secondary stress)</li>
+                        <li><span class="hover-term" title="transformée de Fourier">Fourier transform</span> → "FOOR-i-ay trans-<strong>FORM</strong>" (correct French pronunciation + English stress)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="component-section">
+                <h3>
+                    <span title="Session de questions-réponses">2. Q&A Session</span>
+                    <span class="weight-indicator">45%</span>
+                </h3>
+                <p><strong title="Types de questions">Question Types:</strong></p>
+                <ul>
+                    <li title="Analyse et évaluation critiques">Critical analysis and evaluation</li>
+                    <li title="Scénarios hypothétiques complexes">Complex hypothetical scenarios</li>
+                    <li title="Connexions interdisciplinaires">Cross-disciplinary connections</li>
+                    <li title="Défense de méthodologie">Defence of methodology/approach</li>
+                    <li title="Élaboration spontanée">Spontaneous elaboration on unexpected aspects</li>
+                </ul>
+                
+                <div class="tip-box">
+                    <h4 title="Ce qui compte">What Matters:</h4>
+                    <ul>
+                        <li><span class="checkmark">✓</span> Can you <strong>critically evaluate</strong> and not just describe?</li>
+                        <li><span class="checkmark">✓</span> Can you discuss implications and consequences?</li>
+                        <li><span class="checkmark">✓</span> Can you synthesise information from multiple sources/contexts?</li>
+                        <li><span class="checkmark">✓</span> Can you engage in spontaneous technical discussion?</li>
+                    </ul>
+                </div>
+                
+                <div class="examples-section">
+                    <h5 title="Exemples de questions">Example Question Types:</h5>
+                    <ul class="example-list">
+                        <li>"Why use a <span class="hover-term" title="transistor">transistor</span> as a switch and not a push button? What are the advantages and limits?"</li>
+                        <li>"Your <span class="hover-term" title="alimentation continue">DC power supply</span> shows the right voltage, but your circuit does not work. What could be wrong, and how would you check?"</li>
+                        <li>"The real world is analogue, but most modern systems are digital. What do we gain, and what do we lose?"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="component-section">
+                <h3>
+                    <span title="Authenticité et présentation">3. Authenticity & Delivery</span>
+                    <span class="weight-indicator">20%</span>
+                </h3>
+                <p><strong title="Indicateurs clés">Key Indicators:</strong></p>
+                <ul>
+                    <li><span class="hover-term" title="Norme d'ingénierie professionnelle">Professional engineering standard</span> - Comparable to industry conference presentations</li>
+                    <li><span class="hover-term" title="Compétence rhétorique">Rhetorical skill</span> - Strategic use of emphasis, pausing, signposting</li>
+                    <li><span class="hover-term" title="Conscience du public">Audience awareness</span> - Adapts to audience reactions; engages effectively</li>
+                </ul>
+            </div>
+            
+            <div class="component-section">
+                <h3>
+                    <span title="Précision du contenu">4. Content Accuracy</span>
+                    <span class="weight-indicator">20%</span>
+                </h3>
+                <p><strong title="Ce que nous vérifions">What We're Checking:</strong></p>
+                <ul>
+                    <li>Can you <strong>critically evaluate</strong> technical approaches, not just describe them?</li>
+                    <li>Do you understand limitations and trade-offs?</li>
+                    <li>Can you contextualise within broader engineering/scientific frameworks?</li>
+                    <li>Do you demonstrate independent critical thinking?</li>
+                </ul>
+                
+                <div class="examples-section">
+                    <h5 title="Exemples de profondeur technique">Expected Sophistication:</h5>
+                    <ul class="example-list">
+                        <li>Evaluating the advantages and limits of your component compared with other solutions</li>
+                        <li>Explaining what happens at the limits: too much <span class="hover-term" title="courant">current</span>, the wrong voltage, a bad ground connection</li>
+                        <li>Connecting your topic to other components and systems you have studied in GEII</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Tips Tab -->
+        <div id="tips" class="content-section">
+            <h2 style="color: #367588;" title="Conseils pour les étudiants">Important Notes for Students</h2>
+            
+            <div class="component-section">
+                <h3 title="Travail de groupe">About Group Work</h3>
+                <ul>
+                    <li title="Évaluation individuelle">Each member will be individually assessed</li>
+                    <li title="Participation égale">All members should participate roughly equally</li>
+                    <li title="Coordination du contenu">Coordinate your content but speak authentically</li>
+                    <li title="Questions différentes">You'll each answer different questions in Q&A</li>
+                </ul>
+            </div>
+            
+            <div class="component-section">
+                <h3 title="Utilisation de l'IA">About AI Use</h3>
+                <div class="warning-box">
+                    <strong>I know you will use AI to help prepare.</strong> That's fine. But remember:
+                </div>
+                <ul>
+                    <li><span class="checkmark">✓</span> AI can write your content</li>
+                    <li><span class="crossmark">✗</span> AI cannot present for you</li>
+                    <li><span class="crossmark">✗</span> AI cannot answer my questions for you</li>
+                    <li><span class="crossmark">✗</span> AI cannot pronounce technical terms for you</li>
+                </ul>
+                <p style="margin-top: 10px;"><strong title="Votre note dépend">Your grade depends on what YOU understand and can do</strong>, not what AI prepared.</p>
+            </div>
+            
+            <div class="component-section">
+                <h3 title="Préparation">About Preparation</h3>
+                <ol>
+                    <li><strong title="Une semaine avant">One week before:</strong> Submit your pronunciation word lists (individually)</li>
+                    <li><strong title="Enregistrez-vous">Record yourselves practising</strong> (not graded, but required)</li>
+                    <li><strong title="Comprenez votre contenu">Understand your content</strong> - don't just memorise</li>
+                    <li><strong title="Entraînez-vous aux questions">Practise answering questions</strong> about your topic</li>
+                    <li><strong title="Chronométrez">Time your presentation</strong> - stay within 2-3 minutes per person</li>
+                </ol>
+            </div>
+            
+            <div class="tip-box">
+                <h4 title="Drapeaux rouges">Red Flags (What Gets You a Low Grade):</h4>
+                <ul>
+                    <li><span class="crossmark">✗</span> Reading entirely from notes/slides</li>
+                    <li><span class="crossmark">✗</span> Cannot answer simple questions about your own topic</li>
+                    <li><span class="crossmark">✗</span> No evidence of practice (pronunciation disasters)</li>
+                    <li><span class="crossmark">✗</span> Clearly don't understand what you're saying</li>
+                    <li><span class="crossmark">✗</span> Going significantly over/under time</li>
+                    <li><span class="crossmark">✗</span> Unequal participation in group</li>
+                </ul>
+            </div>
+            
+            <div class="tip-box" style="background-color: #e8f5e9; border-left-color: #28a745;">
+                <h4 style="color: #2e7d32;" title="Feux verts">Green Lights (What Gets You a Good Grade):</h4>
+                <ul>
+                    <li><span class="checkmark">✓</span> Practised pronunciation of technical terms</li>
+                    <li><span class="checkmark">✓</span> Can explain your topic in YOUR OWN WORDS</li>
+                    <li><span class="checkmark">✓</span> Show you understand, even if your English isn't perfect</li>
+                    <li><span class="checkmark">✓</span> Make eye contact and try to communicate</li>
+                    <li><span class="checkmark">✓</span> Answer questions with evidence of real understanding</li>
+                    <li><span class="checkmark">✓</span> All group members participate actively</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Grading Tab -->
+        <div id="grading" class="content-section">
+            <h2 style="color: #367588;" title="Échelle de notation">Final Grade Calculation</h2>
+            
+            <p style="font-size: 1.1em; margin-bottom: 20px;">Your final presentation grade = Sum of all components</p>
+            
+            <div class="grade-scale">
+                <h4 title="Échelle de notes">Grade Scale</h4>
+                <div class="grade-scale-grid">
+                    <div class="grade-item">
+                        <div class="grade-number">18-20</div>
+                        <div>Excellent</div>
+                    </div>
+                    <div class="grade-item">
+                        <div class="grade-number">16-17.9</div>
+                        <div>Very Good</div>
+                    </div>
+                    <div class="grade-item">
+                        <div class="grade-number">14-15.9</div>
+                        <div>Good</div>
+                    </div>
+                    <div class="grade-item">
+                        <div class="grade-number">12-13.9</div>
+                        <div>Satisfactory</div>
+                    </div>
+                    <div class="grade-item">
+                        <div class="grade-number">10-11.9</div>
+                        <div>Adequate</div>
+                    </div>
+                    <div class="grade-item">
+                        <div class="grade-number">&lt; 10</div>
+                        <div>Insufficient</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="warning-box" style="margin-top: 20px;">
+                <strong title="Équité">About Fairness:</strong> Track A questions are simpler but still require understanding. Track B questions are harder but show what you're capable of. Track C questions test advanced critical thinking. <strong>All tracks can earn full marks</strong> if you meet YOUR level's criteria. The goal is to challenge YOU appropriately.
+            </div>
+            
+            <div class="tip-box" style="margin-top: 20px;">
+                <h4 title="Rappel">Remember:</h4>
+                <p>This is about showing what <strong>YOU</strong> can do, not what AI can generate. Practise, understand your topic, and communicate authentically. Good luck!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab');
+            const sections = document.querySelectorAll('.content-section');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            sections.forEach(section => section.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+    </script>
+</body>
+</html>
