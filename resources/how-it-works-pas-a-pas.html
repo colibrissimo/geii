@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How it works : pas à pas</title><style>
+:root{--bg:#fbfaf7;--ink:#1d2433;--muted:#5b6475;--card:#fff;--line:#e3e0d8;--accent:#2f5d8a;--accent-soft:#e8eff7;--warn:#fff4d6;--warn-line:#d9a400;--ok:#e6f4ea;--ok-line:#2e7d4f}
+*{box-sizing:border-box}html{color-scheme:light}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Verdana,Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 56px}
+h1{font-size:1.7rem;line-height:1.2;margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 20px}
+.pick{background:var(--accent-soft);border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.pick label{font-weight:700;margin-right:8px}
+.pick select{font:inherit;padding:8px 10px;border-radius:8px;border:1px solid #b9c7d8;background:#fff;color:var(--ink)}
+#mydates{margin:10px 0 0;padding:0;list-style:none}
+#mydates li{margin:4px 0}
+.progress{color:var(--muted);font-size:.95rem;margin:4px 0 18px}
+.step{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 14px;margin:14px 0}
+.step.isdone{border-color:var(--ok-line);background:var(--ok)}
+.num{flex:none;width:42px;height:42px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+.sbody{flex:1;min-width:0}
+.step h2{font-size:1.2rem;margin:6px 0 8px}
+.warn{background:var(--warn);border-left:4px solid var(--warn-line);padding:10px 12px;border-radius:8px}
+.due{background:var(--accent-soft);padding:8px 12px;border-radius:8px}
+.model,.ex{background:#f4f2ec;border-radius:10px;padding:12px 14px;margin:8px 0}
+.ex p{margin:6px 0}
+.words{display:flex;flex-wrap:wrap;gap:8px}
+.words span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 12px}
+.slide{border:2px solid var(--ink);border-radius:6px;background:#fff;max-width:340px;aspect-ratio:16/9;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;margin:8px 0}
+.stitle{font-weight:800;font-size:1.15rem}
+.skw{color:var(--muted)}
+.postit{background:#fff27a;width:170px;min-height:150px;padding:14px;box-shadow:2px 3px 8px rgba(0,0,0,.15);transform:rotate(-2deg);font-weight:600;margin:10px 4px 14px}
+.parts li{margin:6px 0}
+.done{display:flex;gap:10px;align-items:center;margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-weight:600;cursor:pointer}
+.done input{width:22px;height:22px}
+.tablebox{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-size:.88rem}
+.end{color:var(--muted);font-size:.95rem;margin-top:22px}
+@media (max-width:520px){body{font-size:16px}.step{flex-direction:column;gap:6px}h1{font-size:1.4rem}}
+</style></head>
+<body><div class="wrap">
+<h1>Oral « How it works » : pas à pas</h1>
+<p class="sub">BUT 1 GEII, anglais. Faites les étapes dans l'ordre. Cochez chaque étape quand elle est faite.</p>
+<div class="pick"><label for="tp">Mon groupe de TP :</label><select id="tp"><option value="">choisir</option><option value="11A">11A</option><option value="11B">11B</option><option value="12A">12A</option><option value="12B">12B</option><option value="13A">13A</option><option value="13B">13B</option><option value="14A">14A</option><option value="14B">14B</option></select>
+<ul id="mydates"></ul></div>
+<p class="progress" id="pg"></p>
+<section class="step" id="s1">
+<div class="num">1</div>
+<div class="sbody"><h2>Comprendre votre thème</h2>
+<p>Votre thème est le nom anglais d'un <b>composant, d'un appareil ou d'une notion de vos cours d'électricité et d'électronique</b>. Ce n'est jamais un mot de la vie de tous les jours.</p>
+<p class="warn">Si vous utilisez un traducteur (DeepL, Google), il peut se tromper. Exemple : <span lang="en">« ground »</span> donne « le sol ». En électricité, <span lang="en">« ground »</span> veut dire <b>la masse</b>. Posez-vous toujours la question : <b>quel est le sens en électricité ?</b></p>
+<div class="tablebox"><table><thead><tr><th>Thème</th><th>En français</th><th>C'est quoi ?</th></tr></thead><tbody><tr><td lang="en"><b>Breadboard</b></td><td>la plaque d'essai</td><td>La plaque blanche avec des petits trous. On y branche les composants sans souder.</td></tr><tr><td lang="en"><b>DC Power Supply</b></td><td>l'alimentation continue</td><td>L'appareil de TP qui donne une tension continue au circuit (par exemple 5 V).</td></tr><tr><td lang="en"><b>Ground</b></td><td>la masse (et la terre)</td><td>La masse : le point 0 V du circuit, la référence. La terre : la broche de sécurité de la prise. <b>Ce n'est pas le sol.</b></td></tr><tr><td lang="en"><b>LED</b></td><td>la LED (diode électroluminescente)</td><td>Le petit composant qui s'allume quand le courant passe dans le bon sens.</td></tr><tr><td lang="en"><b>Multimeter</b></td><td>le multimètre</td><td>L'appareil qui mesure la tension, le courant et la résistance.</td></tr><tr><td lang="en"><b>Push button / Switch</b></td><td>le bouton-poussoir et l'interrupteur</td><td>Le bouton-poussoir fait contact seulement quand on appuie. L'interrupteur reste dans sa position.</td></tr><tr><td lang="en"><b>Voltage</b></td><td>la tension</td><td>La différence de potentiel entre deux points. Elle se mesure en volts (V).</td></tr><tr><td lang="en"><b>Digital vs Analog</b></td><td>le numérique et l'analogique</td><td>Analogique : un signal qui varie de façon continue. Numérique : un signal à deux niveaux, 0 ou 1.</td></tr><tr><td lang="en"><b>Transistors</b></td><td>le transistor</td><td>Un composant qui sert d'interrupteur ou d'amplificateur, commandé par un petit courant.</td></tr></tbody></table></div>
+<p>Ensuite, lisez le <b>guide de votre thème</b> sur Moodle. Vous pouvez aussi relire vos cours de TP.</p>
+<label class="done"><input type="checkbox" data-k="s1"> Je sais dire en français ce qu'est mon thème.</label></div></section><section class="step" id="s2">
+<div class="num">2</div>
+<div class="sbody"><h2>Contacter votre groupe</h2>
+<p>Cherchez votre nom sur la page « How it works » de votre groupe, sur Moodle. Vous y voyez les noms de votre groupe et votre thème.</p>
+<p>Envoyez un message à votre groupe <b>cette semaine</b> (messagerie de l'université, Moodle ou téléphone). Vous pouvez copier ce modèle :</p>
+<div class="model">Bonjour ! On est dans le même groupe pour l'oral d'anglais « How it works ».<br>Notre thème : <b>[thème]</b>.<br>Je propose : [prénom] fait la partie 1, [prénom] la partie 2, [prénom] la partie 3.<br>Ça vous va ?</div>
+<p>Si quelqu'un ne répond pas, prévenez votre enseignante.</p>
+<label class="done"><input type="checkbox" data-k="s2"> Mon groupe a répondu.</label></div></section><section class="step" id="s3">
+<div class="num">3</div>
+<div class="sbody"><h2>Vous partager le thème</h2>
+<p>Chaque personne présente <b>une partie</b> du thème. Prenez ces parties :</p>
+<ol class="parts">
+<li><b>Partie 1</b> : <span lang="en">What is it?</span> C'est quoi ? À quoi ça ressemble ? Quel est son symbole ?</li>
+<li><b>Partie 2</b> : <span lang="en">How does it work?</span> Comment ça marche ?</li>
+<li><b>Partie 3</b> : <span lang="en">Why do we use it?</span> À quoi ça sert ? Quelles erreurs ou quels dangers ?</li>
+<li><b>Partie 4</b> (seulement si vous êtes 4) : <span lang="en">An example.</span> Un exemple concret, en TP ou dans un appareil.</li>
+</ol>
+<label class="done"><input type="checkbox" data-k="s3"> Je connais ma partie.</label></div></section><section class="step" id="s4">
+<div class="num">4</div>
+<div class="sbody"><h2>Préparer ce que vous allez dire</h2>
+<p>Écrivez <b>6 à 8 phrases courtes en anglais</b> sur votre partie. Une phrase simple = <b>sujet + verbe + complément</b>.</p>
+<p>Exemple avec un autre thème, <span lang="en"><b>Resistor</b></span> (une résistance) :</p>
+<div class="ex" lang="en">
+<p><b>Part 1, What is it?</b> A resistor is a small component. It has two legs. It has coloured bands.</p>
+<p><b>Part 2, How does it work?</b> A resistor limits the current. A big resistance gives a small current. We measure resistance in ohms.</p>
+<p><b>Part 3, Why do we use it?</b> We use a resistor to protect an LED. Without a resistor, the LED can burn.</p>
+</div>
+<p class="warn">Ces phrases servent à <b>préparer</b>. À l'oral, vous ne les lirez pas : vous aurez seulement votre Post-it (étape 7).</p>
+<label class="done"><input type="checkbox" data-k="s4"> J'ai mes phrases.</label></div></section><section class="step" id="s5">
+<div class="num">5</div>
+<div class="sbody"><h2>Faire votre liste de mots</h2>
+<p>Choisissez <b>8 à 12 mots techniques</b> en anglais de votre partie. Pour chaque mot, soulignez ou écrivez en majuscules la <b>syllabe accentuée</b>. Vous devez savoir les prononcer à l'oral.</p>
+<p>Exemple (Resistor) :</p>
+<div class="ex words" lang="en"><span>re<b>SIS</b>tor</span><span>re<b>SIS</b>tance</span><span><b>CUR</b>rent</span><span><b>OHM</b></span><span>com<b>PO</b>nent</span><span><b>CIR</b>cuit</span><span><b>VOL</b>tage</span><span><b>CO</b>lour code</span></div>
+<p>Déposez votre liste sur Moodle, dans le devoir <b lang="en">« Upload your list of technical terms here »</b> de votre groupe de TP.</p>
+<p class="due">À déposer : <b data-d="liste">choisissez votre groupe de TP en haut de la page</b></p>
+<label class="done"><input type="checkbox" data-k="s5"> J'ai déposé ma liste sur Moodle.</label></div></section><section class="step" id="s6">
+<div class="num">6</div>
+<div class="sbody"><h2>Faire vos diapositives</h2>
+<p><b>1 ou 2 diapositives par personne.</b> Une image claire et 3 mots maximum. Pas de phrases : c'est vous qui parlez, pas la diapo.</p>
+<p>Exemple (Resistor, partie 1) :</p>
+<div class="slide" lang="en"><div class="stitle">What is a resistor?</div><svg viewBox="0 0 160 40" width="160" height="40" aria-label="symbole d'une résistance"><line x1="0" y1="20" x2="45" y2="20" stroke="#1d2433" stroke-width="3"/><rect x="45" y="10" width="70" height="20" fill="none" stroke="#1d2433" stroke-width="3"/><line x1="115" y1="20" x2="160" y2="20" stroke="#1d2433" stroke-width="3"/></svg><div class="skw">component · two legs · colour bands</div></div>
+<p>Mettez toutes les diapos du groupe dans un seul fichier. Une personne le dépose sur Moodle, dans le devoir <b lang="en">« Upload your slides here »</b>.</p>
+<p class="due">À déposer : <b data-d="diapos">choisissez votre groupe de TP en haut de la page</b></p>
+<label class="done"><input type="checkbox" data-k="s6"> Nos diapositives sont déposées.</label></div></section><section class="step" id="s7">
+<div class="num">7</div>
+<div class="sbody"><h2>Faire votre Post-it et vous entraîner</h2>
+<p>Sur <b>un seul Post-it</b>, écrivez <b>5 mots-clés</b>. Pas de phrases. Exemple (Resistor, partie 2) :</p>
+<div class="postit" lang="en">limits current<br>big R → small I<br>ohms Ω<br>colour code<br>heat</div>
+<p>Entraînez-vous <b>à voix haute</b>, avec le Post-it seulement. Chronométrez-vous : <b>2 à 3 minutes</b>. Enregistrez-vous avec votre téléphone (au moins 30 secondes) et écoutez votre prononciation.</p>
+<label class="done"><input type="checkbox" data-k="s7"> Je tiens 2 à 3 minutes avec mon Post-it.</label></div></section><section class="step" id="s8">
+<div class="num">8</div>
+<div class="sbody"><h2>Le jour de l'oral</h2>
+<p class="due">Votre oral : <b data-d="oral">choisissez votre groupe de TP en haut de la page</b></p>
+<ul>
+<li>Chaque personne parle <b>2 à 3 minutes</b>, avec son Post-it. On ne lit pas.</li>
+<li>Ensuite, votre enseignante vous pose <b>2 ou 3 questions</b> sur votre partie. Exemples : <span lang="en">« What does it do? » « Why do we use it? » « What happens if...? »</span></li>
+<li>Chaque personne a sa propre note.</li>
+</ul>
+<label class="done"><input type="checkbox" data-k="s8"> Je suis prêt(e) !</label></div></section>
+<p class="end">Une question ? Écrivez à votre enseignante par la messagerie Moodle. À la séance de préparation, nous vérifions ensemble vos parties, vos mots et votre parcours (A, B ou C). Tout le monde commence en parcours B.</p>
+</div><script>
+const D={"11A": {"prep": "jeudi 26 novembre, de 10h00 à 12h00, salle 3A15", "oral": "mercredi 2 décembre, de 10h00 à 12h00, salle 3A15", "liste": "mercredi 25 novembre, avant 23h59", "diapos": "mardi 1er décembre, avant 23h59"}, "11B": {"prep": "mercredi 25 novembre, de 10h00 à 12h00, salle 3A15", "oral": "mercredi 9 décembre, de 10h00 à 12h00, salle 3A15", "liste": "mercredi 2 décembre, avant 23h59", "diapos": "mardi 8 décembre, avant 23h59"}, "12A": {"prep": "mercredi 2 décembre, de 08h00 à 10h00, salle 3A15", "oral": "mercredi 9 décembre, de 13h30 à 15h30, salle 3A15", "liste": "mercredi 2 décembre, avant 23h59", "diapos": "mardi 8 décembre, avant 23h59"}, "12B": {"prep": "mercredi 16 décembre, de 13h30 à 15h30, salle 3A15", "oral": "jeudi 17 décembre, de 10h00 à 12h00, salle 3A15", "liste": "jeudi 10 décembre, avant 23h59", "diapos": "mercredi 16 décembre, avant 23h59"}, "13A": {"prep": "mardi 24 novembre, de 10h00 à 12h00, salle 3A15", "oral": "mardi 1er décembre, de 08h00 à 10h00, salle 3A15", "liste": "mardi 24 novembre, avant 23h59", "diapos": "lundi 30 novembre, avant 23h59"}, "13B": {"prep": "mardi 8 décembre, de 13h30 à 15h30, salle 3A15", "oral": "mardi 15 décembre, de 10h00 à 12h00, salle 3A15", "liste": "mardi 8 décembre, avant 23h59", "diapos": "lundi 14 décembre, avant 23h59"}, "14A": {"prep": "mercredi 25 novembre, de 08h00 à 10h00, salle 3A15", "oral": "lundi 14 décembre, de 13h30 à 15h30, salle 3A15", "liste": "lundi 7 décembre, avant 23h59", "diapos": "dimanche 13 décembre, avant 23h59"}, "14B": {"prep": "mardi 1er décembre, de 13h30 à 15h30, salle 3A15", "oral": "mercredi 16 décembre, de 10h00 à 12h00, salle 3A15", "liste": "mercredi 9 décembre, avant 23h59", "diapos": "mardi 15 décembre, avant 23h59"}};
+const sel=document.getElementById('tp'),md=document.getElementById('mydates');
+function k(x){return 'hiw-'+x}
+function get(x){try{return localStorage.getItem(k(x))}catch(e){return null}}
+function put(x,v){try{localStorage.setItem(k(x),v)}catch(e){}}
+function show(){const t=sel.value;if(!t||!D[t]){md.innerHTML='';return;}
+ const d=D[t];
+ md.innerHTML='<li><b>Séance de préparation :</b> '+d.prep+'</li><li><b>Liste de mots à déposer :</b> '+d.liste+'</li><li><b>Diapositives à déposer :</b> '+d.diapos+'</li><li><b>Oral :</b> '+d.oral+'</li>';
+ document.querySelectorAll('[data-d]').forEach(e=>{e.textContent=d[e.dataset.d]});
+ put('tp',t);}
+sel.addEventListener('change',show);
+const saved=get('tp');if(saved&&D[saved]){sel.value=saved;}show();
+const boxes=[...document.querySelectorAll('.done input')],pg=document.getElementById('pg');
+function upd(){let n=0;boxes.forEach(b=>{b.closest('.step').classList.toggle('isdone',b.checked);if(b.checked)n++});pg.textContent=n+' étape(s) sur '+boxes.length+' faite(s).';}
+boxes.forEach(b=>{b.checked=get(b.dataset.k)==='1';b.addEventListener('change',()=>{put(b.dataset.k,b.checked?'1':'0');upd();});});
+upd();
+</script></body></html>
