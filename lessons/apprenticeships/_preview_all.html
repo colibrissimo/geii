@@ -1,0 +1,477 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Preview: The Apprentice Journey</title><style>body{margin:0;background:#e5e9ef;padding:24px 12px}hr{border:0;height:2px;background:#155E75;margin:40px auto;max-width:820px}</style></head><body><div id="ap1">
+  <style>
+    #ap1{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ap1 *{box-sizing:border-box;}
+    #ap1 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ap1 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ap1 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ap1 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ap1 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ap1 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ap1 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ap1 .q .start{display:block;margin-top:6px;font-style:italic;color:var(--muted);font-size:16px;}
+    #ap1 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #ap1 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ap1 button:hover{background:#0f4a5c;}
+    #ap1 button.ghost{background:transparent;color:var(--teal);}
+    #ap1 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ap1 button.amber:hover{background:#e0a52a;}
+    #ap1 button:disabled{opacity:.45;cursor:default;}
+    #ap1 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #ap1 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ap1 .choice.sel{border-color:var(--teal);background:var(--teal-bg);font-weight:bold;}
+    #ap1 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #ap1 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #ap1 .choice:disabled{opacity:.9;cursor:default;}
+    #ap1 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ap1 .fb.ok{color:var(--ok);} #ap1 .fb.no{color:var(--no);}
+    #ap1 .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #ap1 .tag.v{background:var(--teal-bg);color:var(--teal);} #ap1 .tag.b{background:var(--terra-bg);color:var(--terra);} #ap1 .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #ap1 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #ap1 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #ap1 input.gap{width:auto;min-width:130px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #ap1 input.ok{border-color:var(--ok);background:var(--ok-bg);} #ap1 input.no{border-color:var(--no);background:var(--no-bg);}
+    #ap1 textarea{font:inherit;font-size:17px;padding:10px 12px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:210px;}
+    #ap1 textarea:focus{outline:none;border-color:var(--teal);}
+    #ap1 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ap1 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ap1 .talk p{margin:0 0 6px;}
+    #ap1 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ap1 .ex p{margin:4px 0;}
+    #ap1 .def{background:var(--teal-bg);border-left:6px solid var(--teal);border-radius:10px;padding:12px 16px;margin:10px 0 16px;}
+    #ap1 .note{font-size:14px;color:var(--muted);}
+    #ap1 .hide{display:none;}
+    #ap1 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ap1 .item:first-child{border-top:none;}
+    #ap1 .item > b{color:var(--teal);}
+    #ap1 .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+    #ap1 .item .why{margin-top:8px;font-size:15px;padding:8px 12px;border-radius:8px;background:var(--slate-bg);}
+    #ap1 .mine{font-size:14px;color:var(--muted);margin-top:4px;}
+    #ap1 .check{list-style:none;padding:0;margin:10px 0 0;}
+    #ap1 .check li{padding:4px 0;font-size:16px;}
+    #ap1 .check li.ok{color:var(--ok);font-weight:bold;} #ap1 .check li.no{color:var(--muted);}
+    #ap1 mark{background:#ffe9a8;padding:0 2px;border-radius:3px;}
+    @media (max-width:560px){ #ap1 .item{grid-template-columns:22px 1fr;} }
+  </style>
+
+  <h1>The Apprentice Journey</h1>
+  <p class="sub">Warm-up. Read the definition, then type your answers before you look.</p>
+  <div class="def"><strong>apprenticeship</strong> (noun): a period of time when you learn a skill from experts by working for them.<br>
+  <strong>apprentice</strong> (noun): a person doing an apprenticeship.</div>
+
+  <h2>1. Three jobs</h2>
+  <p>Think of three jobs a person could learn through an apprenticeship.</p>
+  <div class="panel">
+    <input type="text" class="ap1-j" autocomplete="off" placeholder="job 1" style="margin-bottom:8px">
+    <input type="text" class="ap1-j" autocomplete="off" placeholder="job 2" style="margin-bottom:8px">
+    <input type="text" class="ap1-j" autocomplete="off" placeholder="job 3">
+    <div class="btns"><button id="ap1-lock">Lock my answers</button></div>
+    <div class="hide" id="ap1-rev">
+      <p class="mine" id="ap1-mine"></p>
+      <div class="ex"><p>Some possible answers: <strong>plumber, electrician, chef</strong>. Also: mechanic, carpenter, hairdresser, baker, welder...</p>
+      <p>Did you write <strong>electrician</strong>? Our video is about one.</p></div>
+    </div>
+  </div>
+
+  <h2>2. One French word</h2>
+  <p>You can do your B.U.T. GEII <strong>en alternance</strong>. What is the best English word for <em>alternance</em>?</p>
+  <div class="panel">
+    <div class="opt" id="ap1-alt" style="display:flex;gap:8px;flex-wrap:wrap"><button class="choice" data-ok="0" data-why="A false friend. <em>Alternation</em> means taking turns, switching from one thing to another and back.">an alternation</button><button class="choice" data-ok="1" data-why="Yes. You work for a company and study at the same time. In the UK, the closest thing to a B.U.T. in alternance is a <em>degree apprenticeship</em>.">an apprenticeship</button><button class="choice" data-ok="0" data-why="Careful: in the USA, <em>work-study</em> is a part-time student job that helps pay for your studies. Not the same thing.">a work-study</button><button class="choice" data-ok="0" data-why="Close, but no. A British <em>sandwich course</em> is a degree with one long work placement, usually a whole year, in the middle.">a sandwich course</button></div>
+    <div class="btns"><button id="ap1-lock2" disabled>Lock my answer</button></div>
+    <div class="fb" id="ap1-fb"></div>
+    <div id="ap1-why"></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('ap1'); if(!root) return;
+    document.getElementById('ap1-lock').addEventListener('click',function(){
+      var ins=root.querySelectorAll('.ap1-j'), v=[];
+      for(var i=0;i<ins.length;i++){ if(ins[i].value.trim()) v.push(ins[i].value.trim()); ins[i].disabled=true; }
+      document.getElementById('ap1-mine').textContent='Your jobs: '+(v.length?v.join(', '):'(none)');
+      document.getElementById('ap1-rev').classList.remove('hide'); this.disabled=true;
+    });
+    var bs=root.querySelectorAll('#ap1-alt .choice'), pick=null, lock=document.getElementById('ap1-lock2');
+    for(var i=0;i<bs.length;i++) bs[i].addEventListener('click',function(){
+      for(var k=0;k<bs.length;k++) bs[k].classList.remove('sel'); this.classList.add('sel'); pick=this; lock.disabled=false;
+    });
+    lock.addEventListener('click',function(){
+      if(!pick) return;
+      function line(b){ return '<p class="ex" style="margin:8px 0"><strong>'+b.textContent+':</strong> '+b.getAttribute('data-why')+'</p>'; }
+      var why=line(pick);
+      for(var k=0;k<bs.length;k++){ var b=bs[k]; b.disabled=true;
+        if(b.getAttribute('data-ok')==='1'){ b.classList.add('ok'); if(b!==pick) why+=line(b); } else if(b===pick) b.classList.add('no');
+      }
+      var fb=document.getElementById('ap1-fb');
+      if(pick.getAttribute('data-ok')==='1'){ fb.textContent='Right.'; fb.className='fb ok'; } else { fb.textContent='Not quite. Your answer and the right one:'; fb.className='fb no'; }
+      document.getElementById('ap1-why').innerHTML=why; lock.disabled=true;
+    });
+  })();
+  </script>
+</div>
+<hr><div id="ap2">
+  <style>
+    #ap2{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ap2 *{box-sizing:border-box;}
+    #ap2 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ap2 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ap2 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ap2 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ap2 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ap2 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ap2 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ap2 .q .start{display:block;margin-top:6px;font-style:italic;color:var(--muted);font-size:16px;}
+    #ap2 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #ap2 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ap2 button:hover{background:#0f4a5c;}
+    #ap2 button.ghost{background:transparent;color:var(--teal);}
+    #ap2 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ap2 button.amber:hover{background:#e0a52a;}
+    #ap2 button:disabled{opacity:.45;cursor:default;}
+    #ap2 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #ap2 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ap2 .choice.sel{border-color:var(--teal);background:var(--teal-bg);font-weight:bold;}
+    #ap2 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #ap2 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #ap2 .choice:disabled{opacity:.9;cursor:default;}
+    #ap2 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ap2 .fb.ok{color:var(--ok);} #ap2 .fb.no{color:var(--no);}
+    #ap2 .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #ap2 .tag.v{background:var(--teal-bg);color:var(--teal);} #ap2 .tag.b{background:var(--terra-bg);color:var(--terra);} #ap2 .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #ap2 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #ap2 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #ap2 input.gap{width:auto;min-width:130px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #ap2 input.ok{border-color:var(--ok);background:var(--ok-bg);} #ap2 input.no{border-color:var(--no);background:var(--no-bg);}
+    #ap2 textarea{font:inherit;font-size:17px;padding:10px 12px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:210px;}
+    #ap2 textarea:focus{outline:none;border-color:var(--teal);}
+    #ap2 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ap2 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ap2 .talk p{margin:0 0 6px;}
+    #ap2 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ap2 .ex p{margin:4px 0;}
+    #ap2 .def{background:var(--teal-bg);border-left:6px solid var(--teal);border-radius:10px;padding:12px 16px;margin:10px 0 16px;}
+    #ap2 .note{font-size:14px;color:var(--muted);}
+    #ap2 .hide{display:none;}
+    #ap2 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ap2 .item:first-child{border-top:none;}
+    #ap2 .item > b{color:var(--teal);}
+    #ap2 .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+    #ap2 .item .why{margin-top:8px;font-size:15px;padding:8px 12px;border-radius:8px;background:var(--slate-bg);}
+    #ap2 .mine{font-size:14px;color:var(--muted);margin-top:4px;}
+    #ap2 .check{list-style:none;padding:0;margin:10px 0 0;}
+    #ap2 .check li{padding:4px 0;font-size:16px;}
+    #ap2 .check li.ok{color:var(--ok);font-weight:bold;} #ap2 .check li.no{color:var(--muted);}
+    #ap2 mark{background:#ffe9a8;padding:0 2px;border-radius:3px;}
+    @media (max-width:560px){ #ap2 .item{grid-template-columns:22px 1fr;} }
+  </style>
+
+  <h1>The electrician or you?</h1>
+  <p class="sub">Nick, in the video, did an apprenticeship to become an electrician in the USA. At the IUT de Lille, you can do your B.U.T. GEII <strong>en alternance</strong> from Year 2, in all three parcours. Who does each sentence describe? Choose for all ten, then lock.</p>
+  <p><span class="tag v">THE ELECTRICIAN</span><span class="tag b">B.U.T. GEII</span><span class="tag x">BOTH</span></p>
+  <div class="panel" id="ap2-list"><div class="item" data-key="v"><b>1</b><div>If you choose this, you usually have one <strong>career path</strong> and it is not easy to change career.<div class="opt"><button class="choice" data-k="v">the electrician in the video</button><button class="choice" data-k="b">B.U.T. GEII in alternance</button><button class="choice" data-k="x">both</button></div><div class="why hide">Nick trains for one trade: electrician. A B.U.T. GEII is a broad degree: you can work as a technician or go on to an engineering school. Some of you may say <em>both</em>: that is worth discussing.</div></div></div><div class="item" data-key="x"><b>2</b><div>You get <strong>on-the-job training</strong> from experts, but you also have to study.<div class="opt"><button class="choice" data-k="v">the electrician in the video</button><button class="choice" data-k="b">B.U.T. GEII in alternance</button><button class="choice" data-k="x">both</button></div><div class="why hide">Nick works full-time and goes to school. In alternance, you alternate between the company and the IUT, and you are paid: you are an employee.</div></div></div><div class="item" data-key="v"><b>3</b><div>To be accepted, you must first take an <strong>aptitude test</strong>.<div class="opt"><button class="choice" data-k="v">the electrician in the video</button><button class="choice" data-k="b">B.U.T. GEII in alternance</button><button class="choice" data-k="x">both</button></div><div class="why hide">Nick took an aptitude test (0:37). For alternance at the IUT de Lille there is no test: you need to find a company that hires you.</div></div></div><div class="item" data-key="v"><b>4</b><div>You <strong>train to be</strong> one particular professional, without learning everything about the industry.<div class="opt"><button class="choice" data-k="v">the electrician in the video</button><button class="choice" data-k="b">B.U.T. GEII in alternance</button><button class="choice" data-k="x">both</button></div><div class="why hide">Nick trains to be an inside wireman. A B.U.T. GEII covers energy, automation and electronics, not one job only.</div></div></div><div class="item" data-key="x"><b>5</b><div>The main purpose is to <strong>gain practical experience</strong>.<div class="opt"><button class="choice" data-k="v">the electrician in the video</button><button class="choice" data-k="b">B.U.T. GEII in alternance</button><button class="choice" data-k="x">both</button></div><div class="why hide">True for both: you learn by doing real tasks in a real workplace.</div></div></div><div class="item" data-key="x"><b>6</b><div>You have a <strong>mentor</strong> who supports you and answers your questions.<div class="opt"><button class="choice" data-k="v">the electrician in the video</button><button class="choice" data-k="b">B.U.T. GEII in alternance</button><button class="choice" data-k="x">both</button></div><div class="why hide">In alternance you have a <em>maître d'apprentissage</em> in the company (your mentor) and a tutor at the IUT.</div></div></div><div class="item" data-key="x"><b>7</b><div>At the end, you become <strong>certified</strong> and can start working in your field.<div class="opt"><button class="choice" data-k="v">the electrician in the video</button><button class="choice" data-k="b">B.U.T. GEII in alternance</button><button class="choice" data-k="x">both</button></div><div class="why hide">Nick becomes a certified electrician. In alternance you get exactly the same B.U.T. diploma as full-time students.</div></div></div><div class="item" data-key="v"><b>8</b><div>It allows you to <strong>learn a trade</strong>: a skilled job where you usually work with your hands.<div class="opt"><button class="choice" data-k="v">the electrician in the video</button><button class="choice" data-k="b">B.U.T. GEII in alternance</button><button class="choice" data-k="x">both</button></div><div class="why hide">An electrician learns a trade. A B.U.T. GEII leads to technician and engineering jobs: hands-on, but not only a trade.</div></div></div><div class="item" data-key="b"><b>9</b><div>You study electronics, automation and energy, not the skills of one job only.<div class="opt"><button class="choice" data-k="v">the electrician in the video</button><button class="choice" data-k="b">B.U.T. GEII in alternance</button><button class="choice" data-k="x">both</button></div><div class="why hide">That is the B.U.T. GEII programme, in alternance or not. Nick learns the skills of one job.</div></div></div><div class="item" data-key="b"><b>10</b><div>Afterwards, you can go on to an engineering school.<div class="opt"><button class="choice" data-k="v">the electrician in the video</button><button class="choice" data-k="b">B.U.T. GEII in alternance</button><button class="choice" data-k="x">both</button></div><div class="why hide">Yes, and you can even do engineering school in alternance too. Nick's path leads straight to work as an electrician.</div></div></div></div>
+  <div class="btns" style="justify-content:center"><button id="ap2-lock" disabled>Lock my answers</button></div>
+  <div class="score" id="ap2-score"></div>
+  <div class="talk hide" id="ap2-talk"><p><strong>Talk.</strong> Which answer surprised you? Which one do you disagree with, and why?</p>
+  <p class="note">Start with: <em>I chose ... because ...</em></p></div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('ap2'); if(!root) return;
+    var items=root.querySelectorAll('#ap2-list .item'), lock=document.getElementById('ap2-lock');
+    function done(){ for(var i=0;i<items.length;i++) if(!items[i].querySelector('.choice.sel')) return false; return true; }
+    for(var i=0;i<items.length;i++){ (function(it){
+      var bs=it.querySelectorAll('.choice');
+      for(var k=0;k<bs.length;k++) bs[k].addEventListener('click',function(){
+        for(var j=0;j<bs.length;j++) bs[j].classList.remove('sel'); this.classList.add('sel'); lock.disabled=!done();
+      });
+    })(items[i]); }
+    lock.addEventListener('click',function(){
+      var n=0;
+      for(var i=0;i<items.length;i++){ var it=items[i], key=it.getAttribute('data-key'), bs=it.querySelectorAll('.choice');
+        for(var k=0;k<bs.length;k++){ var b=bs[k]; b.disabled=true; var sel=b.classList.contains('sel');
+          if(b.getAttribute('data-k')===key){ b.classList.add('ok'); if(sel) n++; } else if(sel) b.classList.add('no'); }
+        it.querySelector('.why').classList.remove('hide');
+      }
+      document.getElementById('ap2-score').textContent=n+' / '+items.length+' match our answers. Read why under each sentence.';
+      document.getElementById('ap2-talk').classList.remove('hide'); lock.disabled=true;
+    });
+  })();
+  </script>
+</div>
+<hr><div id="ap3">
+  <style>
+    #ap3{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ap3 *{box-sizing:border-box;}
+    #ap3 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ap3 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ap3 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ap3 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ap3 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ap3 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ap3 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ap3 .q .start{display:block;margin-top:6px;font-style:italic;color:var(--muted);font-size:16px;}
+    #ap3 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #ap3 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ap3 button:hover{background:#0f4a5c;}
+    #ap3 button.ghost{background:transparent;color:var(--teal);}
+    #ap3 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ap3 button.amber:hover{background:#e0a52a;}
+    #ap3 button:disabled{opacity:.45;cursor:default;}
+    #ap3 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #ap3 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ap3 .choice.sel{border-color:var(--teal);background:var(--teal-bg);font-weight:bold;}
+    #ap3 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #ap3 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #ap3 .choice:disabled{opacity:.9;cursor:default;}
+    #ap3 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ap3 .fb.ok{color:var(--ok);} #ap3 .fb.no{color:var(--no);}
+    #ap3 .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #ap3 .tag.v{background:var(--teal-bg);color:var(--teal);} #ap3 .tag.b{background:var(--terra-bg);color:var(--terra);} #ap3 .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #ap3 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #ap3 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #ap3 input.gap{width:auto;min-width:130px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #ap3 input.ok{border-color:var(--ok);background:var(--ok-bg);} #ap3 input.no{border-color:var(--no);background:var(--no-bg);}
+    #ap3 textarea{font:inherit;font-size:17px;padding:10px 12px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:210px;}
+    #ap3 textarea:focus{outline:none;border-color:var(--teal);}
+    #ap3 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ap3 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ap3 .talk p{margin:0 0 6px;}
+    #ap3 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ap3 .ex p{margin:4px 0;}
+    #ap3 .def{background:var(--teal-bg);border-left:6px solid var(--teal);border-radius:10px;padding:12px 16px;margin:10px 0 16px;}
+    #ap3 .note{font-size:14px;color:var(--muted);}
+    #ap3 .hide{display:none;}
+    #ap3 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ap3 .item:first-child{border-top:none;}
+    #ap3 .item > b{color:var(--teal);}
+    #ap3 .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+    #ap3 .item .why{margin-top:8px;font-size:15px;padding:8px 12px;border-radius:8px;background:var(--slate-bg);}
+    #ap3 .mine{font-size:14px;color:var(--muted);margin-top:4px;}
+    #ap3 .check{list-style:none;padding:0;margin:10px 0 0;}
+    #ap3 .check li{padding:4px 0;font-size:16px;}
+    #ap3 .check li.ok{color:var(--ok);font-weight:bold;} #ap3 .check li.no{color:var(--muted);}
+    #ap3 mark{background:#ffe9a8;padding:0 2px;border-radius:3px;}
+    @media (max-width:560px){ #ap3 .item{grid-template-columns:22px 1fr;} }
+  </style>
+
+  <h1>Talk about it</h1>
+  <p class="sub">On Zoom, one question at a time. Press the button, then answer with the start of the sentence.</p>
+  <div class="q"><b>1</b><span>Can this video make people want to do an apprenticeship? Why or why not?<span class="start">I think it can / can't, because ...</span></span></div>
+  <div class="q"><b>2</b><span>Nick says the hard part was balance: work, school and his personal life. What would be the hardest part for you?<span class="start">For me, the hardest part would be ...</span></span></div>
+  <div class="q"><b>3</b><span>Are young people in France interested in trade jobs, like electrician or plumber? Why or why not?<span class="start">In France, I think young people ...</span></span></div>
+  <div class="q"><b>4</b><span>If you did an apprenticeship, what job would you train to be?<span class="start">I would like to train to be a / an ...</span></span></div>
+  <div class="btns" style="justify-content:center"><button id="ap3-pick" class="amber">Pick one for me</button></div>
+  <p class="note" style="text-align:center">The button chooses a question at random, so nobody argues about which one.</p>
+
+
+  <script>
+  (function(){
+    var qs=document.querySelectorAll('#ap3 .q'), b=document.getElementById('ap3-pick'), last=-1;
+    if(!b) return;
+    b.addEventListener('click',function(){
+      var i; do{ i=Math.floor(Math.random()*qs.length); }while(i===last&&qs.length>1); last=i;
+      for(var k=0;k<qs.length;k++) qs[k].className='q'+(k===i?' on':'');
+    });
+  })();
+  </script>
+</div>
+<hr><div id="ap4">
+  <style>
+    #ap4{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ap4 *{box-sizing:border-box;}
+    #ap4 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ap4 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ap4 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ap4 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ap4 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ap4 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ap4 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ap4 .q .start{display:block;margin-top:6px;font-style:italic;color:var(--muted);font-size:16px;}
+    #ap4 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #ap4 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ap4 button:hover{background:#0f4a5c;}
+    #ap4 button.ghost{background:transparent;color:var(--teal);}
+    #ap4 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ap4 button.amber:hover{background:#e0a52a;}
+    #ap4 button:disabled{opacity:.45;cursor:default;}
+    #ap4 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #ap4 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ap4 .choice.sel{border-color:var(--teal);background:var(--teal-bg);font-weight:bold;}
+    #ap4 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #ap4 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #ap4 .choice:disabled{opacity:.9;cursor:default;}
+    #ap4 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ap4 .fb.ok{color:var(--ok);} #ap4 .fb.no{color:var(--no);}
+    #ap4 .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #ap4 .tag.v{background:var(--teal-bg);color:var(--teal);} #ap4 .tag.b{background:var(--terra-bg);color:var(--terra);} #ap4 .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #ap4 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #ap4 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #ap4 input.gap{width:auto;min-width:130px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #ap4 input.ok{border-color:var(--ok);background:var(--ok-bg);} #ap4 input.no{border-color:var(--no);background:var(--no-bg);}
+    #ap4 textarea{font:inherit;font-size:17px;padding:10px 12px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:210px;}
+    #ap4 textarea:focus{outline:none;border-color:var(--teal);}
+    #ap4 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ap4 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ap4 .talk p{margin:0 0 6px;}
+    #ap4 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ap4 .ex p{margin:4px 0;}
+    #ap4 .def{background:var(--teal-bg);border-left:6px solid var(--teal);border-radius:10px;padding:12px 16px;margin:10px 0 16px;}
+    #ap4 .note{font-size:14px;color:var(--muted);}
+    #ap4 .hide{display:none;}
+    #ap4 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ap4 .item:first-child{border-top:none;}
+    #ap4 .item > b{color:var(--teal);}
+    #ap4 .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+    #ap4 .item .why{margin-top:8px;font-size:15px;padding:8px 12px;border-radius:8px;background:var(--slate-bg);}
+    #ap4 .mine{font-size:14px;color:var(--muted);margin-top:4px;}
+    #ap4 .check{list-style:none;padding:0;margin:10px 0 0;}
+    #ap4 .check li{padding:4px 0;font-size:16px;}
+    #ap4 .check li.ok{color:var(--ok);font-weight:bold;} #ap4 .check li.no{color:var(--muted);}
+    #ap4 mark{background:#ffe9a8;padding:0 2px;border-radius:3px;}
+    @media (max-width:560px){ #ap4 .item{grid-template-columns:22px 1fr;} }
+  </style>
+
+  <h1>Eight words, one letter each</h1>
+  <p class="sub">One word in each gap (number 2 is one word with hyphens). The first letter is given. Then <strong>Check</strong>.</p>
+  <div class="panel" id="ap4-list"><div class="item"><b>1</b><div>My career <input type="text" class="gap" data-ok="[&quot;path&quot;]" placeholder="p..." autocomplete="off"> is quite unusual: I have worked in five different professions.<div class="mine"></div></div></div><div class="item"><b>2</b><div>In my first job, I got <input type="text" class="gap" data-ok="[&quot;on-the-job&quot;, &quot;on the job&quot;]" placeholder="o-..." autocomplete="off"> training and learned a lot from my colleagues.<div class="mine"></div></div></div><div class="item"><b>3</b><div>I had to take an <input type="text" class="gap" data-ok="[&quot;aptitude&quot;]" placeholder="a..." autocomplete="off"> test to get the job I have now.<div class="mine"></div></div></div><div class="item"><b>4</b><div>If I could start my career again, I would <input type="text" class="gap" data-ok="[&quot;train&quot;]" placeholder="t..." autocomplete="off"> to be a doctor.<div class="mine"></div></div></div><div class="item"><b>5</b><div>Learning in the workplace, and not only in the classroom, allowed me to gain <input type="text" class="gap" data-ok="[&quot;practical&quot;]" placeholder="p..." autocomplete="off"> experience.<div class="mine"></div></div></div><div class="item"><b>6</b><div>I was lucky to have a fantastic <input type="text" class="gap" data-ok="[&quot;mentor&quot;]" placeholder="m..." autocomplete="off"> when I started work because they taught me a lot.<div class="mine"></div></div></div><div class="item"><b>7</b><div>After school, I wasn't sure what I wanted to do, so I did an apprenticeship to learn a <input type="text" class="gap" data-ok="[&quot;trade&quot;]" placeholder="t..." autocomplete="off">.<div class="mine"></div></div></div><div class="item"><b>8</b><div>I chose an apprenticeship because at the end I would be <input type="text" class="gap" data-ok="[&quot;certified&quot;]" placeholder="c..." autocomplete="off"> to practise my profession.<div class="mine"></div></div></div></div>
+  <div class="btns" style="justify-content:center"><button id="ap4-check">Check</button><button id="ap4-show" class="ghost">Show answers</button></div>
+  <div class="score" id="ap4-score"></div>
+  <div class="talk"><p><strong>Talk.</strong> Choose one sentence that could be true for you one day, and change it to make it about you.</p></div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('ap4'); if(!root) return;
+    var ins=root.querySelectorAll('#ap4-list input.gap');
+    function norm(s){ return s.trim().toLowerCase().replace(/\s*-\s*/g,'-').replace(/\s+/g,' '); }
+    function check(show){
+      var n=0;
+      for(var i=0;i<ins.length;i++){ var el=ins[i], ok=JSON.parse(el.getAttribute('data-ok')), v=norm(el.value), good=false;
+        for(var k=0;k<ok.length;k++) if(v===norm(ok[k])) good=true;
+        var mine=el.parentNode.querySelector('.mine');
+        el.className='gap '+(good?'ok':'no'); if(good) n++;
+        if(show && !good){ mine.textContent=(el.value.trim()?'You wrote: '+el.value.trim()+'. ':'')+'Answer: '+ok[0]; }
+        else mine.textContent='';
+      }
+      document.getElementById('ap4-score').textContent=n+' / '+ins.length;
+    }
+    document.getElementById('ap4-check').addEventListener('click',function(){ check(false); });
+    document.getElementById('ap4-show').addEventListener('click',function(){ check(true); });
+  })();
+  </script>
+</div>
+<hr><div id="ap5">
+  <style>
+    #ap5{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ap5 *{box-sizing:border-box;}
+    #ap5 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ap5 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ap5 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ap5 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ap5 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ap5 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ap5 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ap5 .q .start{display:block;margin-top:6px;font-style:italic;color:var(--muted);font-size:16px;}
+    #ap5 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #ap5 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ap5 button:hover{background:#0f4a5c;}
+    #ap5 button.ghost{background:transparent;color:var(--teal);}
+    #ap5 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ap5 button.amber:hover{background:#e0a52a;}
+    #ap5 button:disabled{opacity:.45;cursor:default;}
+    #ap5 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;}
+    #ap5 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ap5 .choice.sel{border-color:var(--teal);background:var(--teal-bg);font-weight:bold;}
+    #ap5 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #ap5 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);}
+    #ap5 .choice:disabled{opacity:.9;cursor:default;}
+    #ap5 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ap5 .fb.ok{color:var(--ok);} #ap5 .fb.no{color:var(--no);}
+    #ap5 .tag{display:inline-block;font-size:13px;font-weight:bold;letter-spacing:.04em;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:middle;}
+    #ap5 .tag.v{background:var(--teal-bg);color:var(--teal);} #ap5 .tag.b{background:var(--terra-bg);color:var(--terra);} #ap5 .tag.x{background:var(--slate-bg);color:var(--slate);}
+    #ap5 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #ap5 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #ap5 input.gap{width:auto;min-width:130px;display:inline-block;padding:4px 8px;margin:0 4px;}
+    #ap5 input.ok{border-color:var(--ok);background:var(--ok-bg);} #ap5 input.no{border-color:var(--no);background:var(--no-bg);}
+    #ap5 textarea{font:inherit;font-size:17px;padding:10px 12px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:210px;}
+    #ap5 textarea:focus{outline:none;border-color:var(--teal);}
+    #ap5 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ap5 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ap5 .talk p{margin:0 0 6px;}
+    #ap5 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ap5 .ex p{margin:4px 0;}
+    #ap5 .def{background:var(--teal-bg);border-left:6px solid var(--teal);border-radius:10px;padding:12px 16px;margin:10px 0 16px;}
+    #ap5 .note{font-size:14px;color:var(--muted);}
+    #ap5 .hide{display:none;}
+    #ap5 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ap5 .item:first-child{border-top:none;}
+    #ap5 .item > b{color:var(--teal);}
+    #ap5 .item .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+    #ap5 .item .why{margin-top:8px;font-size:15px;padding:8px 12px;border-radius:8px;background:var(--slate-bg);}
+    #ap5 .mine{font-size:14px;color:var(--muted);margin-top:4px;}
+    #ap5 .check{list-style:none;padding:0;margin:10px 0 0;}
+    #ap5 .check li{padding:4px 0;font-size:16px;}
+    #ap5 .check li.ok{color:var(--ok);font-weight:bold;} #ap5 .check li.no{color:var(--muted);}
+    #ap5 mark{background:#ffe9a8;padding:0 2px;border-radius:3px;}
+    @media (max-width:560px){ #ap5 .item{grid-template-columns:22px 1fr;} }
+  </style>
+
+  <h1>My paragraph</h1>
+  <p class="sub">Eight minutes. Write one paragraph, then we read a few aloud.</p>
+  <div class="def"><strong>Would you choose alternance in Year 2? Why or why not?</strong></div>
+  <div class="ex">
+    <p><strong>A paragraph about Nick</strong> (yours is about <em>you</em>):</p>
+    <p><em>Nick chose an apprenticeship <mark>because</mark> he wanted a solid career path. <mark>First</mark>, he enjoyed building with his hands, and he could work and go to school at the same time. <mark>However</mark>, working full-time and going to school was hard, and he had to find a balance. <mark>So</mark>, he tells young people to think about what they want for their future.</em></p>
+  </div>
+  <p class="note">Use this plan: your answer + <strong>because</strong> / <strong>First,</strong> a reason / <strong>However,</strong> one problem / <strong>So,</strong> your conclusion. Use at least <strong>two</strong> words from the lesson:<br>apprenticeship &middot; apprentice &middot; career path &middot; on-the-job training &middot; aptitude test &middot; train to be &middot; practical experience &middot; mentor &middot; certified &middot; trade &middot; full-time &middot; balance &middot; beneficial &middot; lifetime &middot; interview &middot; application &middot; union &middot; electrician</p>
+  <textarea id="ap5-t" placeholder="In Year 2, I would / would not like to do my B.U.T. in alternance because ..."></textarea>
+  <div class="btns"><button id="ap5-c">Check my paragraph</button></div>
+  <ul class="check" id="ap5-l"></ul>
+  <p class="note">Nothing is sent anywhere. Your text stays on this screen only.</p>
+
+
+  <script>
+  (function(){
+    var t=document.getElementById('ap5-t'); if(!t) return;
+    var W=["apprenticeship", "apprentice", "career path", "on-the-job training", "aptitude test", "train to be", "practical experience", "mentor", "certified", "trade", "full-time", "balance", "beneficial", "lifetime", "interview", "application", "union", "electrician"];
+    function has(re,s){ return re.test(s); }
+    document.getElementById('ap5-c').addEventListener('click',function(){
+      var s=' '+t.value.toLowerCase().replace(/[\u2019']/g,"'")+' ', words=t.value.trim()?t.value.trim().split(/\s+/).length:0, used=[];
+      for(var i=0;i<W.length;i++){ var w=W[i].replace(/-/g,'[- ]'); if(new RegExp('[^a-z]'+w+'(s|ed|ing)?[^a-z]').test(s)) used.push(W[i]); }
+      var L=[
+        [has(/[^a-z]because[^a-z]/,s),'because: you give a reason'],
+        [has(/[^a-z]first[^a-z]/,s),'First: your first reason'],
+        [has(/[^a-z]however[^a-z]/,s),'However: one problem or the other side'],
+        [has(/[^a-z]so[^a-z]/,s),'So: your conclusion'],
+        [used.length>=2,'two lesson words'+(used.length?' (you used: '+used.join(', ')+')':'')],
+        [words>=50,'at least 50 words (you have '+words+')']
+      ], h='';
+      for(var k=0;k<L.length;k++) h+='<li class="'+(L[k][0]?'ok':'no')+'">'+(L[k][0]?'\u2713 ':'\u2610 ')+L[k][1]+'</li>';
+      document.getElementById('ap5-l').innerHTML=h;
+    });
+  })();
+  </script>
+</div>
+</body></html>
