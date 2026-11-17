@@ -1,0 +1,576 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Preview: Turn it off</title><style>body{margin:0;background:#e5e9ef;padding:24px 12px}hr{border:0;height:2px;background:#155E75;margin:40px auto;max-width:820px}</style></head><body><div id="pv1">
+  <style>
+    #pv1{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #pv1 *{box-sizing:border-box;}
+    #pv1 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #pv1 h2{font-size:21px;margin:26px 0 8px;color:var(--teal);}
+    #pv1 p{margin:0 0 10px;}
+    #pv1 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #pv1 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #pv1 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #pv1 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #pv1 button:hover{background:#0f4a5c;}
+    #pv1 button:disabled{opacity:.45;cursor:default;}
+    #pv1 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #pv1 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #pv1 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #pv1 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #pv1 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #pv1 .choice.half{background:var(--amber-bg);border-color:var(--amber);color:#8a6510;font-weight:bold;}
+    #pv1 .choice:disabled{opacity:1;cursor:default;}
+    #pv1 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+    #pv1 .fb{margin-top:10px;font-size:16px;}
+    #pv1 .fb .v{font-weight:bold;}
+    #pv1 .fb.ok .v{color:var(--ok);} #pv1 .fb.no .v{color:var(--no);} #pv1 .fb.half .v{color:#8a6510;}
+    #pv1 .rows{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:8px 0 6px;font-size:17px;}
+    #pv1 .rows span{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);align-self:center;}
+    #pv1 .rows .you{color:var(--no);text-decoration:line-through;}
+    #pv1 .rows .you.fine{color:#8a6510;text-decoration:none;}
+    #pv1 .rows .right{color:var(--ok);font-weight:bold;}
+    #pv1 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #pv1 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:17px;}
+    #pv1 .ex p{margin:4px 0;}
+    #pv1 .rule{background:var(--teal-bg);border:2px solid var(--teal);border-radius:12px;padding:14px 18px;margin:14px 0;}
+    #pv1 .rule p{margin:4px 0;}
+    #pv1 .warn{background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #pv1 .note{font-size:14px;color:var(--muted);}
+    #pv1 .hide{display:none !important;}
+    #pv1 .item{padding:14px 0;border-top:1px solid var(--line);}
+    #pv1 .item:first-child{border-top:none;padding-top:2px;}
+    #pv1 .num{color:var(--teal);font-weight:bold;margin-right:6px;}
+    #pv1 .w{display:inline-block;background:var(--slate-bg);border-radius:8px;padding:4px 10px;margin:3px 2px;font-weight:bold;}
+    #pv1 .w.p{background:var(--teal-bg);color:var(--teal);}
+    #pv1 .w.o{background:var(--amber-bg);border:2px solid var(--amber);}
+    #pv1 button.slot{background:#fff;color:var(--muted);border:2px dashed var(--teal);font-weight:normal;padding:4px 14px;margin:3px 2px;font-size:15px;}
+    #pv1 button.slot:hover{background:var(--teal-bg);}
+    #pv1 button.slot.gone{visibility:hidden;}
+    #pv1 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);margin-top:6px;}
+    #pv1 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #pv1 input.ok{border-color:var(--ok);background:var(--ok-bg);} #pv1 input.no{border-color:var(--no);background:var(--no-bg);}
+    #pv1 .scale{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0 4px;font-weight:bold;}
+    #pv1 .scale span{border-radius:8px;padding:6px 10px;background:var(--slate-bg);}
+    #pv1 .scale span.p{background:var(--teal-bg);color:var(--teal);}
+    #pv1 .scale i{color:var(--muted);font-style:normal;font-weight:normal;}
+    #pv1 table.t{width:100%;border-collapse:collapse;font-size:16px;margin-top:8px;}
+    #pv1 table.t th,#pv1 table.t td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+    #pv1 table.t th{background:var(--slate-bg);font-size:13px;letter-spacing:.05em;text-transform:uppercase;}
+    #pv1 table.t td b{color:var(--teal);}
+    #pv1 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #pv1 .next{display:block;text-align:center;margin-top:20px;padding:14px;border-radius:12px;background:var(--teal);color:#fff;font-weight:bold;text-decoration:none;}
+    #pv1 .next:hover{background:#0f4a5c;}
+    #pv1 .big{font-size:22px;font-weight:bold;}
+    @media (max-width:560px){ #pv1 .grid2{grid-template-columns:1fr;} #pv1{font-size:16px;padding:14px;} }
+  </style>
+
+  <h1>What Dr. Dave actually said</h1>
+  <p class="sub">You have just watched the video. Dr. Dave Bradley uses five verbs made of a verb and one or two small words. Each one has an object. Where did he put it?</p>
+
+  <h2>1. Put the object where he put it</h2>
+  <div class="panel">
+    <p>The object is in the yellow box. Click the place where Dr. Dave said it. You get one click per sentence.</p>
+    <div id="pv1-list"></div>
+    <div class="score" id="pv1-score"></div>
+  </div>
+
+  <div id="pv1-part2" class="hide">
+    <h2>2. Lock your answer</h2>
+    <div class="panel">
+      <p>He said <strong>turn the power off</strong>. Here are three other versions. Two are correct English. <strong>One is impossible.</strong> Which one?</p>
+      <div class="opt" id="pv1-q2"></div>
+      <div class="btns"><button id="pv1-lock2" disabled>Lock my answer</button></div>
+      <div id="pv1-fb2"></div>
+    </div>
+  </div>
+
+  <div id="pv1-part3" class="hide">
+    <h2>3. One more</h2>
+    <div class="panel">
+      <p>He <strong>came up with a three-key sequence</strong>. Replace <em>a three-key sequence</em> with <em>it</em>. Which version is English?</p>
+      <div class="opt" id="pv1-q3"></div>
+      <div class="btns"><button id="pv1-lock3" disabled>Lock my answer</button></div>
+      <div id="pv1-fb3"></div>
+    </div>
+  </div>
+
+  <div id="pv1-end" class="hide">
+    <h2>What you have just seen</h2>
+    <div class="rule">
+      <p><strong>1.</strong> Some verbs open. A noun can go inside or after: <em>turn the power off</em>, <em>turn off the power</em>.</p>
+      <p><strong>2.</strong> When those verbs meet a pronoun (<em>it</em>, <em>them</em>), there is one place only: inside. <em>Turn it off.</em></p>
+      <p><strong>3.</strong> Some verbs never open. Noun or pronoun, the object comes after: <em>came up with a sequence</em>, <em>came up with it</em>.</p>
+    </div>
+    <div class="ex">
+      <p>Listen again to the very first sentence of the video: &ldquo;the man who created a way to <strong>start it all over</strong>&rdquo;. A pronoun, and it is inside.</p>
+      <p class="note">In your deck, <em>start over</em> has no object (we had to start over). Dr. Dave gives it one, and look where he puts it.</p>
+    </div>
+    <p>Two questions are left. Why can <em>it</em> not go at the end? And how do you know which verbs open? The next two pages answer them.</p>
+    <a class="next" href="02-light-inside-heavy-last.html">Next: Light inside, heavy last &rarr;</a>
+  </div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('pv1'); if(!root) return;
+    
+    function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)),t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+    function norm(s){ return String(s).toLowerCase().replace(/[\u2018\u2019]/g,"'").replace(/[.!?,;:]+/g,' ').replace(/\s+/g,' ').trim(); }
+    function rows(you,right,rightLabel,fine){
+      return '<div class="rows"><span>You</span><div class="you'+(fine?' fine':'')+'">'+esc(you)+'</div>'+
+             '<span>'+esc(rightLabel||'Correct')+'</span><div class="right">'+esc(right)+'</div></div>';
+    }
+    function one(right,label){ return '<div class="rows"><span>'+esc(label||'Correct')+'</span><div class="right">'+esc(right)+'</div></div>'; }
+
+    var ITEMS=shuffle([{"ctx": "When a program failed, the only way to reset the system:", "v": "turn", "p": "off", "o": "the power", "said": "mid", "sep": true}, {"ctx": "After a restart, the IBM PC would", "v": "go", "p": "through", "o": "a very long self test", "said": "end", "sep": false}, {"ctx": "So what the team did:", "v": "came", "p": "up with", "o": "a three-key sequence", "said": "end", "sep": false}, {"ctx": "With Ctrl+Alt+Del, he was able to", "v": "skip", "p": "over", "o": "many of the tests", "said": "end", "sep": false}, {"ctx": "Back in 1980, Dr. Dave", "v": "worked", "p": "on", "o": "the IBM Personal Computer", "said": "end", "sep": false}]), done=0, same=0;
+    var list=document.getElementById('pv1-list');
+    function sent(it,where){ return where==='mid' ? it.v+' '+it.o+' '+it.p : it.v+' '+it.p+' '+it.o; }
+    ITEMS.forEach(function(it,i){
+      var d=document.createElement('div'); d.className='item';
+      d.innerHTML='<div><span class="num">'+(i+1)+'.</span>'+esc(it.ctx)+'</div>'+
+        '<div style="margin-top:6px"><span class="w">'+esc(it.v)+'</span>'+
+        '<button class="slot" type="button">here?</button>'+
+        '<span class="w p">'+esc(it.p)+'</span>'+
+        '<button class="slot" type="button">here?</button>'+
+        '<span class="w o" style="margin-left:14px">'+esc(it.o)+'</span></div><div class="fb"></div>';
+      var slots=d.querySelectorAll('.slot'), locked=false;
+      [0,1].forEach(function(k){
+        slots[k].addEventListener('click',function(){
+          if(locked) return; locked=true;
+          var where=k===0?'mid':'end', fb=d.querySelector('.fb');
+          slots[k].outerHTML='<span class="w o">'+esc(it.o)+'</span>';
+          d.querySelector('.slot').classList.add('hide');
+          var free=d.querySelectorAll('.w.o'); if(free.length>1) free[free.length-1].classList.add('hide');
+          if(where===it.said){ same++; fb.className='fb ok';
+            fb.innerHTML='<span class="v">That is what he said.</span>'+one(sent(it,it.said),'Dr. Dave'); }
+          else if(it.sep){ fb.className='fb half';
+            fb.innerHTML='<span class="v">Not what he said, but your version is correct English too.</span>'+rows(sent(it,where),sent(it,it.said),'Dr. Dave',true); }
+          else { fb.className='fb no';
+            fb.innerHTML='<span class="v">Not English. This verb never opens.</span>'+rows(sent(it,where),sent(it,it.said),'Dr. Dave'); }
+          done++;
+          document.getElementById('pv1-score').textContent=same+' out of '+done+' as he said it';
+          if(done===ITEMS.length){
+            var s=document.getElementById('pv1-score');
+            s.innerHTML=same+' out of '+ITEMS.length+' as he said it.<br><span style="font-weight:normal">Four of the five verbs stayed shut. Only <em>turn off</em> opened.</span>';
+            document.getElementById('pv1-part2').classList.remove('hide');
+          }
+        });
+      });
+      list.appendChild(d);
+    });
+
+    function locked(qid,lockid,fbid,opts,key,why,after){
+      var box=document.getElementById(qid), lock=document.getElementById(lockid), pick=null, shut=false;
+      shuffle(opts).forEach(function(o){
+        var b=document.createElement('button'); b.type='button'; b.className='choice'; b.textContent=o;
+        b.addEventListener('click',function(){ if(shut) return; pick=o;
+          var all=box.querySelectorAll('.choice'); for(var i=0;i<all.length;i++) all[i].classList.toggle('sel',all[i]===b);
+          lock.disabled=false; });
+        box.appendChild(b);
+      });
+      lock.addEventListener('click',function(){
+        if(shut||pick===null) return; shut=true; lock.disabled=true;
+        var all=box.querySelectorAll('.choice');
+        for(var i=0;i<all.length;i++){ all[i].disabled=true; all[i].classList.remove('sel');
+          if(all[i].textContent===key) all[i].classList.add('ok'); else if(all[i].textContent===pick) all[i].classList.add('no'); }
+        var fb=document.getElementById(fbid);
+        fb.className='fb '+(pick===key?'ok':'no');
+        fb.innerHTML=(pick===key?'<span class="v">Yes.</span>'+one(key,'Answer'):'<span class="v">No.</span>'+rows(pick,key,'Answer'))+'<p>'+why+'</p>';
+        after();
+      });
+    }
+    locked('pv1-q2','pv1-lock2','pv1-fb2',['Turn off the power.','Turn it off.','Turn off it.'],'Turn off it.',
+      'A noun has two places: <em>turn the power off</em> and <em>turn off the power</em> are both fine. The pronoun has one place: <em>turn it off</em>. No English speaker says <em>turn off it</em>.',
+      function(){ document.getElementById('pv1-part3').classList.remove('hide'); });
+    locked('pv1-q3','pv1-lock3','pv1-fb3',['He came up with it.','He came it up with.','He came up it with.'],'He came up with it.',
+      '<em>Come up with</em> never opens. The pronoun goes exactly where the noun was.',
+      function(){ document.getElementById('pv1-end').classList.remove('hide'); });
+  })();
+  </script>
+</div>
+<hr><div id="pv2">
+  <style>
+    #pv2{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #pv2 *{box-sizing:border-box;}
+    #pv2 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #pv2 h2{font-size:21px;margin:26px 0 8px;color:var(--teal);}
+    #pv2 p{margin:0 0 10px;}
+    #pv2 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #pv2 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #pv2 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #pv2 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #pv2 button:hover{background:#0f4a5c;}
+    #pv2 button:disabled{opacity:.45;cursor:default;}
+    #pv2 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #pv2 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #pv2 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #pv2 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #pv2 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #pv2 .choice.half{background:var(--amber-bg);border-color:var(--amber);color:#8a6510;font-weight:bold;}
+    #pv2 .choice:disabled{opacity:1;cursor:default;}
+    #pv2 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+    #pv2 .fb{margin-top:10px;font-size:16px;}
+    #pv2 .fb .v{font-weight:bold;}
+    #pv2 .fb.ok .v{color:var(--ok);} #pv2 .fb.no .v{color:var(--no);} #pv2 .fb.half .v{color:#8a6510;}
+    #pv2 .rows{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:8px 0 6px;font-size:17px;}
+    #pv2 .rows span{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);align-self:center;}
+    #pv2 .rows .you{color:var(--no);text-decoration:line-through;}
+    #pv2 .rows .you.fine{color:#8a6510;text-decoration:none;}
+    #pv2 .rows .right{color:var(--ok);font-weight:bold;}
+    #pv2 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #pv2 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:17px;}
+    #pv2 .ex p{margin:4px 0;}
+    #pv2 .rule{background:var(--teal-bg);border:2px solid var(--teal);border-radius:12px;padding:14px 18px;margin:14px 0;}
+    #pv2 .rule p{margin:4px 0;}
+    #pv2 .warn{background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #pv2 .note{font-size:14px;color:var(--muted);}
+    #pv2 .hide{display:none !important;}
+    #pv2 .item{padding:14px 0;border-top:1px solid var(--line);}
+    #pv2 .item:first-child{border-top:none;padding-top:2px;}
+    #pv2 .num{color:var(--teal);font-weight:bold;margin-right:6px;}
+    #pv2 .w{display:inline-block;background:var(--slate-bg);border-radius:8px;padding:4px 10px;margin:3px 2px;font-weight:bold;}
+    #pv2 .w.p{background:var(--teal-bg);color:var(--teal);}
+    #pv2 .w.o{background:var(--amber-bg);border:2px solid var(--amber);}
+    #pv2 button.slot{background:#fff;color:var(--muted);border:2px dashed var(--teal);font-weight:normal;padding:4px 14px;margin:3px 2px;font-size:15px;}
+    #pv2 button.slot:hover{background:var(--teal-bg);}
+    #pv2 button.slot.gone{visibility:hidden;}
+    #pv2 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);margin-top:6px;}
+    #pv2 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #pv2 input.ok{border-color:var(--ok);background:var(--ok-bg);} #pv2 input.no{border-color:var(--no);background:var(--no-bg);}
+    #pv2 .scale{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0 4px;font-weight:bold;}
+    #pv2 .scale span{border-radius:8px;padding:6px 10px;background:var(--slate-bg);}
+    #pv2 .scale span.p{background:var(--teal-bg);color:var(--teal);}
+    #pv2 .scale i{color:var(--muted);font-style:normal;font-weight:normal;}
+    #pv2 table.t{width:100%;border-collapse:collapse;font-size:16px;margin-top:8px;}
+    #pv2 table.t th,#pv2 table.t td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+    #pv2 table.t th{background:var(--slate-bg);font-size:13px;letter-spacing:.05em;text-transform:uppercase;}
+    #pv2 table.t td b{color:var(--teal);}
+    #pv2 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #pv2 .next{display:block;text-align:center;margin-top:20px;padding:14px;border-radius:12px;background:var(--teal);color:#fff;font-weight:bold;text-decoration:none;}
+    #pv2 .next:hover{background:#0f4a5c;}
+    #pv2 .big{font-size:22px;font-weight:bold;}
+    @media (max-width:560px){ #pv2 .grid2{grid-template-columns:1fr;} #pv2{font-size:16px;padding:14px;} }
+  </style>
+
+  <h1>Light inside, heavy last</h1>
+  <p class="sub">On the last page: a noun has two places, a pronoun has one. Here is the reason, and it is one rule, not two.</p>
+
+  <h2>1. One verb, an object that grows</h2>
+  <div class="panel">
+    <p>The verb is <strong>set up</strong>. The object gets longer each time. Which version works?</p>
+    <div id="pv2-grow"></div>
+  </div>
+
+  <div id="pv2-why" class="hide">
+    <h2>2. Why</h2>
+    <div class="rule">
+      <p class="big">English keeps the heaviest thing for the end.</p>
+      <div class="scale"><span>it</span><i>lighter than</i><span class="p">UP</span><i>lighter than</i><span>the new acquisition card from the supplier</span></div>
+    </div>
+    <div class="panel">
+      <p><strong><em>It</em> is the lightest word in English.</strong> One syllable, no stress, nothing new: you only say <em>it</em> when everybody already knows what you are talking about.</p>
+      <p><strong>The small word is heavy.</strong> In these verbs it carries the stress: turn it <strong>OFF</strong>, back it <strong>UP</strong>, set it <strong>UP</strong>. You will work on that in the stress activity of this lesson.</p>
+      <p>So <em>it</em> cannot take the last place. The stressed word takes it, and <em>it</em> goes inside.</p>
+      <p>A long object is heavier than the small word, so the long object takes the end. A short noun weighs about the same, so both orders work.</p>
+      <p class="note">Same thing for the other pronouns: back <em>them</em> up, call <em>me</em> back, pick <em>us</em> up.</p>
+    </div>
+
+    <h2>3. French does it too</h2>
+    <div class="panel">
+      <p>Replace the noun with a pronoun in both languages.</p>
+      <div class="grid2">
+        <div><p><strong>Je sauvegarde le fichier.</strong></p><div class="opt" id="pv2-fr"></div></div>
+        <div><p><strong>Back up the file.</strong></p><div class="opt" id="pv2-en"></div></div>
+      </div>
+      <div id="pv2-mirror" class="hide">
+        <div class="ex"><p>In French the pronoun leaves the place of the noun and moves <strong>in front of</strong> the verb: je <strong>le</strong> sauvegarde.</p>
+        <p>In English it moves <strong>inside</strong> the verb: back <strong>it</strong> up.</p>
+        <p>You already know that a pronoun does not stay where the noun was. You only have to learn the new place.</p></div>
+      </div>
+    </div>
+
+    <div id="pv2-part4" class="hide">
+      <h2>4. Your turn</h2>
+      <div class="panel">
+        <p>Rewrite each sentence. Replace the words in bold with <em>it</em> or <em>them</em>. One try for each.</p>
+        <div id="pv2-type"></div>
+        <div class="score" id="pv2-score"></div>
+      </div>
+      <div id="pv2-end" class="hide">
+        <div class="warn">All five verbs on this page open. Some verbs never do. The last page shows you how to tell.</div>
+        <a class="next" href="03-the-last-small-word.html">Next: The last small word &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('pv2'); if(!root) return;
+    
+    function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)),t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+    function norm(s){ return String(s).toLowerCase().replace(/[\u2018\u2019]/g,"'").replace(/[.!?,;:]+/g,' ').replace(/\s+/g,' ').trim(); }
+    function rows(you,right,rightLabel,fine){
+      return '<div class="rows"><span>You</span><div class="you'+(fine?' fine':'')+'">'+esc(you)+'</div>'+
+             '<span>'+esc(rightLabel||'Correct')+'</span><div class="right">'+esc(right)+'</div></div>';
+    }
+    function one(right,label){ return '<div class="rows"><span>'+esc(label||'Correct')+'</span><div class="right">'+esc(right)+'</div></div>'; }
+
+    var GROW=[{"o": "it", "mid": "Set it up.", "end": "Set up it.", "key": "mid", "why": "With a pronoun, the middle is the only place. <em>Set up it</em> is not English."}, {"o": "the card", "mid": "Set the card up.", "end": "Set up the card.", "key": "both", "why": "A short noun is free. Both are correct, and you will hear both."}, {"o": "the new acquisition card from the supplier", "mid": "Set the new acquisition card from the supplier up.", "end": "Set up the new acquisition card from the supplier.", "key": "end", "why": "The first version is not a grammar mistake, but nobody writes it: the reader waits seven words for <em>up</em>. A long object goes after."}], TYPE=[{"q": "Back up the files before the update.", "a": "Back them up before the update.", "p": "up", "pro": "them", "n": "the files"}, {"q": "Please turn off the monitor.", "a": "Please turn it off.", "p": "off", "pro": "it", "n": "the monitor"}, {"q": "Print out the report for the team.", "a": "Print it out for the team.", "p": "out", "pro": "it", "n": "the report"}, {"q": "Shut down the workstations at six.", "a": "Shut them down at six.", "p": "down", "pro": "them", "n": "the workstations"}, {"q": "We set up the new bench yesterday.", "a": "We set it up yesterday.", "p": "up", "pro": "it", "n": "the new bench"}];
+    var LAB={mid:'Only the first',end:'Only the second',both:'Both'};
+    var grow=document.getElementById('pv2-grow');
+    function growItem(i){
+      var g=GROW[i], d=document.createElement('div'); d.className='item';
+      d.innerHTML='<div><span class="num">'+(i+1)+'.</span>Object: <span class="w o">'+esc(g.o)+'</span></div>'+
+        '<div class="ex"><p>First: '+esc(g.mid)+'</p><p>Second: '+esc(g.end)+'</p></div>'+
+        '<div class="opt"></div><div class="fb"></div>';
+      var opt=d.querySelector('.opt'), locked=false;
+      ['mid','both','end'].forEach(function(k){
+        var b=document.createElement('button'); b.type='button'; b.className='choice'; b.textContent=LAB[k];
+        b.addEventListener('click',function(){
+          if(locked) return; locked=true;
+          var all=opt.querySelectorAll('.choice'), fb=d.querySelector('.fb');
+          for(var j=0;j<all.length;j++){ all[j].disabled=true; if(all[j].textContent===LAB[g.key]) all[j].classList.add('ok'); }
+          var soft=(g.key==='end'&&k==='both');
+          if(k!==g.key) b.classList.add(soft?'half':'no');
+          fb.className='fb '+(k===g.key?'ok':(soft?'half':'no'));
+          fb.innerHTML='<span class="v">'+(k===g.key?'Yes.':(soft?'Grammar allows both, but look:':'No.'))+'</span>'+
+            (k===g.key?one(LAB[g.key],'Answer'):rows(LAB[k],LAB[g.key],'Answer',soft))+'<p>'+g.why+'</p>';
+          if(i+1<GROW.length) growItem(i+1); else document.getElementById('pv2-why').classList.remove('hide');
+        });
+        opt.appendChild(b);
+      });
+      grow.appendChild(d);
+    }
+    growItem(0);
+
+    var seen={fr:false,en:false};
+    function pair(id,opts,key,tag){
+      var box=document.getElementById(id), locked=false;
+      shuffle(opts).forEach(function(o){
+        var b=document.createElement('button'); b.type='button'; b.className='choice'; b.textContent=o;
+        b.addEventListener('click',function(){
+          if(locked) return; locked=true;
+          var all=box.querySelectorAll('.choice');
+          for(var j=0;j<all.length;j++){ all[j].disabled=true; if(all[j].textContent===key) all[j].classList.add('ok'); }
+          if(o!==key) b.classList.add('no');
+          seen[tag]=true;
+          if(seen.fr&&seen.en){ document.getElementById('pv2-mirror').classList.remove('hide');
+            document.getElementById('pv2-part4').classList.remove('hide'); }
+        });
+        box.appendChild(b);
+      });
+    }
+    pair('pv2-fr',['Je le sauvegarde.','Je sauvegarde le.'],'Je le sauvegarde.','fr');
+    pair('pv2-en',['Back it up.','Back up it.'],'Back it up.','en');
+
+    var tbox=document.getElementById('pv2-type'), done=0, good=0;
+    shuffle(TYPE).forEach(function(t,i){
+      var d=document.createElement('div'); d.className='item';
+      var shown=esc(t.q).replace(esc(t.n),'<strong>'+esc(t.n)+'</strong>');
+      d.innerHTML='<div><span class="num">'+(i+1)+'.</span>'+shown+'</div>'+
+        '<input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type the whole sentence">'+
+        '<div class="btns"><button type="button">Check</button></div><div class="fb"></div>';
+      var inp=d.querySelector('input'), btn=d.querySelector('button'), fb=d.querySelector('.fb'), locked=false;
+      function check(){
+        if(locked) return;
+        var raw=inp.value.trim();
+        if(!raw){ fb.className='fb no'; fb.innerHTML='<span class="v">Type your sentence first.</span>'; return; }
+        locked=true; inp.readOnly=true; btn.disabled=true;
+        var u=norm(raw), a=norm(t.a), other=(t.pro==='it'?'them':'it'), msg;
+        var core=norm(t.a).split(' '+t.pro+' '+t.p)[0].split(' ').pop()+' '+t.pro+' '+t.p;
+        if(u===a||u.indexOf(core)>=0){ good++; inp.className='ok'; fb.className='fb ok'; fb.innerHTML='<span class="v">Yes.</span>'+one(t.a); }
+        else {
+          inp.className='no';
+          if(u.indexOf(t.p+' '+t.pro)>=0||u.indexOf(t.p+' '+other)>=0) msg='The pronoun is after <em>'+esc(t.p)+'</em>. It has to go inside.';
+          else if(u===a.replace(' '+t.pro+' ',' '+other+' ')) msg='Right place, wrong pronoun: <em>'+esc(t.n)+'</em> is <em>'+t.pro+'</em>.';
+          else if(u.indexOf(norm(t.n))>=0) msg='The noun is still there. Replace it with <em>'+t.pro+'</em>.';
+          else msg='Compare the two lines word by word.';
+          fb.className='fb no'; fb.innerHTML='<span class="v">Not quite.</span>'+rows(raw,t.a)+'<p>'+msg+'</p>';
+        }
+        done++;
+        document.getElementById('pv2-score').textContent=good+' out of '+done+(done===TYPE.length?'':' so far');
+        if(done===TYPE.length) document.getElementById('pv2-end').classList.remove('hide');
+      }
+      btn.addEventListener('click',check);
+      inp.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); check(); } });
+      tbox.appendChild(d);
+    });
+  })();
+  </script>
+</div>
+<hr><div id="pv3">
+  <style>
+    #pv3{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #pv3 *{box-sizing:border-box;}
+    #pv3 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #pv3 h2{font-size:21px;margin:26px 0 8px;color:var(--teal);}
+    #pv3 p{margin:0 0 10px;}
+    #pv3 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #pv3 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #pv3 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #pv3 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #pv3 button:hover{background:#0f4a5c;}
+    #pv3 button:disabled{opacity:.45;cursor:default;}
+    #pv3 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #pv3 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #pv3 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #pv3 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #pv3 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #pv3 .choice.half{background:var(--amber-bg);border-color:var(--amber);color:#8a6510;font-weight:bold;}
+    #pv3 .choice:disabled{opacity:1;cursor:default;}
+    #pv3 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+    #pv3 .fb{margin-top:10px;font-size:16px;}
+    #pv3 .fb .v{font-weight:bold;}
+    #pv3 .fb.ok .v{color:var(--ok);} #pv3 .fb.no .v{color:var(--no);} #pv3 .fb.half .v{color:#8a6510;}
+    #pv3 .rows{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:8px 0 6px;font-size:17px;}
+    #pv3 .rows span{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);align-self:center;}
+    #pv3 .rows .you{color:var(--no);text-decoration:line-through;}
+    #pv3 .rows .you.fine{color:#8a6510;text-decoration:none;}
+    #pv3 .rows .right{color:var(--ok);font-weight:bold;}
+    #pv3 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #pv3 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:17px;}
+    #pv3 .ex p{margin:4px 0;}
+    #pv3 .rule{background:var(--teal-bg);border:2px solid var(--teal);border-radius:12px;padding:14px 18px;margin:14px 0;}
+    #pv3 .rule p{margin:4px 0;}
+    #pv3 .warn{background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #pv3 .note{font-size:14px;color:var(--muted);}
+    #pv3 .hide{display:none !important;}
+    #pv3 .item{padding:14px 0;border-top:1px solid var(--line);}
+    #pv3 .item:first-child{border-top:none;padding-top:2px;}
+    #pv3 .num{color:var(--teal);font-weight:bold;margin-right:6px;}
+    #pv3 .w{display:inline-block;background:var(--slate-bg);border-radius:8px;padding:4px 10px;margin:3px 2px;font-weight:bold;}
+    #pv3 .w.p{background:var(--teal-bg);color:var(--teal);}
+    #pv3 .w.o{background:var(--amber-bg);border:2px solid var(--amber);}
+    #pv3 button.slot{background:#fff;color:var(--muted);border:2px dashed var(--teal);font-weight:normal;padding:4px 14px;margin:3px 2px;font-size:15px;}
+    #pv3 button.slot:hover{background:var(--teal-bg);}
+    #pv3 button.slot.gone{visibility:hidden;}
+    #pv3 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);margin-top:6px;}
+    #pv3 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #pv3 input.ok{border-color:var(--ok);background:var(--ok-bg);} #pv3 input.no{border-color:var(--no);background:var(--no-bg);}
+    #pv3 .scale{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0 4px;font-weight:bold;}
+    #pv3 .scale span{border-radius:8px;padding:6px 10px;background:var(--slate-bg);}
+    #pv3 .scale span.p{background:var(--teal-bg);color:var(--teal);}
+    #pv3 .scale i{color:var(--muted);font-style:normal;font-weight:normal;}
+    #pv3 table.t{width:100%;border-collapse:collapse;font-size:16px;margin-top:8px;}
+    #pv3 table.t th,#pv3 table.t td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+    #pv3 table.t th{background:var(--slate-bg);font-size:13px;letter-spacing:.05em;text-transform:uppercase;}
+    #pv3 table.t td b{color:var(--teal);}
+    #pv3 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #pv3 .next{display:block;text-align:center;margin-top:20px;padding:14px;border-radius:12px;background:var(--teal);color:#fff;font-weight:bold;text-decoration:none;}
+    #pv3 .next:hover{background:#0f4a5c;}
+    #pv3 .big{font-size:22px;font-weight:bold;}
+    @media (max-width:560px){ #pv3 .grid2{grid-template-columns:1fr;} #pv3{font-size:16px;padding:14px;} }
+  </style>
+
+  <h1>The last small word</h1>
+  <p class="sub">Some verbs open for a pronoun (<em>back it up</em>). Some never open (<em>hack into it</em>). You cannot hear the difference yet. But you can often see it.</p>
+
+  <h2>1. Opens or stays shut?</h2>
+  <div class="panel">
+    <p>Fourteen verbs from your deck, one at a time. Look at the <strong>last small word</strong> and decide. Guessing is fine: the pattern comes after.</p>
+    <div id="pv3-card"></div>
+    <div class="score" id="pv3-score"></div>
+  </div>
+
+  <div id="pv3-rule" class="hide">
+    <h2>2. The pattern</h2>
+    <div class="panel">
+      <p>Read the last small word of each verb you have just sorted.</p>
+      <table class="t">
+        <tr><th>Last small word</th><th>What the verb does</th><th>From your deck</th></tr>
+        <tr><td><b>up, out, off, down, away, in</b></td><td>It opens. The pronoun goes inside.</td><td>back it up, print it out, turn it off, shut it down, put them away, plug it in</td></tr>
+        <tr><td><b>into, with, of, for, to, through</b></td><td>It never opens. The pronoun goes after.</td><td>hack into it, come up with it, run out of it, sign up for it, opt in to it, run through it</td></tr>
+        <tr><td><b>on</b></td><td>Both. You have to learn these two.</td><td>turn it on, but click on it</td></tr>
+      </table>
+      <div class="ex">
+        <p><strong>Why the second group never opens.</strong> <em>Into, with, of, for, to</em> are prepositions, and a preposition is glued to what follows it: hack <strong>[into the server]</strong>, hack <strong>[into it]</strong>. Nothing can get between them, so nothing moves.</p>
+        <p><strong>Two small words?</strong> The last one is always glue: come up <strong>[with it]</strong>, run out <strong>[of it]</strong>, sign up <strong>[for it]</strong>. A verb with two small words never opens.</p>
+      </div>
+      <div class="warn">
+        <p style="margin:0 0 6px"><strong>How far you can trust this.</strong> It works for every verb in your deck. English has thousands more, and a few break it: you <em>get off the bus</em>, and you <em>get off it</em>.</p>
+        <p style="margin:0">For a new verb, a learner&rsquo;s dictionary shows the place of the object. <em>back sth up</em>: it opens. <em>hack into sth</em>: it does not. (<em>sth</em> = something.)</p>
+      </div>
+    </div>
+
+    <h2>3. And the verbs with no object?</h2>
+    <div class="panel">
+      <p>The server <strong>went down</strong>. A warning <strong>popped up</strong>. <strong>Log in</strong>, then <strong>scroll down</strong>.</p>
+      <p style="margin:0">These have no object in this meaning, so there is nothing to place. Your deck marks them NO OBJECT.</p>
+    </div>
+
+    <div class="rule">
+      <p class="big">The whole lesson in three lines</p>
+      <p><strong>Opens</strong> (back up): back up the file, back the file up, but only <strong>back it up</strong>.</p>
+      <p><strong>Never opens</strong> (hack into, come up with): hack into the server, <strong>hack into it</strong>.</p>
+      <p><strong>No object</strong> (go down): the server went down.</p>
+    </div>
+    <p>Now go back to Moodle and do the activity <strong>Where Does the Object Go?</strong></p>
+  </div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('pv3'); if(!root) return;
+    
+    function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)),t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+    function norm(s){ return String(s).toLowerCase().replace(/[\u2018\u2019]/g,"'").replace(/[.!?,;:]+/g,' ').replace(/\s+/g,' ').trim(); }
+    function rows(you,right,rightLabel,fine){
+      return '<div class="rows"><span>You</span><div class="you'+(fine?' fine':'')+'">'+esc(you)+'</div>'+
+             '<span>'+esc(rightLabel||'Correct')+'</span><div class="right">'+esc(right)+'</div></div>';
+    }
+    function one(right,label){ return '<div class="rows"><span>'+esc(label||'Correct')+'</span><div class="right">'+esc(right)+'</div></div>'; }
+
+    var D={"sep": [{"v": "hook", "p": "up", "n": "Hook up the probe.", "y": "Hook it up.", "x": "Hook up it.", "sep": true}, {"v": "power", "p": "up", "n": "Power up the bench.", "y": "Power it up.", "x": "Power up it.", "sep": true}, {"v": "turn", "p": "off", "n": "Turn off the monitor.", "y": "Turn it off.", "x": "Turn off it.", "sep": true}, {"v": "boot", "p": "up", "n": "Boot up the PLC.", "y": "Boot it up.", "x": "Boot up it.", "sep": true}, {"v": "plug", "p": "in", "n": "Plug in the laptop.", "y": "Plug it in.", "x": "Plug in it.", "sep": true}, {"v": "set", "p": "up", "n": "Set up the router.", "y": "Set it up.", "x": "Set up it.", "sep": true}, {"v": "key", "p": "in", "n": "Key in the values.", "y": "Key them in.", "x": "Key in them.", "sep": true}, {"v": "sync", "p": "up", "n": "Sync up the two clocks.", "y": "Sync them up.", "x": "Sync up them.", "sep": true}, {"v": "roll", "p": "out", "n": "Roll out the update.", "y": "Roll it out.", "x": "Roll out it.", "sep": true}, {"v": "print", "p": "out", "n": "Print out the diagram.", "y": "Print it out.", "x": "Print out it.", "sep": true}, {"v": "figure", "p": "out", "n": "Figure out the error.", "y": "Figure it out.", "x": "Figure out it.", "sep": true}, {"v": "wipe", "p": "out", "n": "Wipe out the old image.", "y": "Wipe it out.", "x": "Wipe out it.", "sep": true}, {"v": "back", "p": "up", "n": "Back up the firmware.", "y": "Back it up.", "x": "Back up it.", "sep": true}, {"v": "filter", "p": "out", "n": "Filter out the noise.", "y": "Filter it out.", "x": "Filter out it.", "sep": true}, {"v": "shut", "p": "down", "n": "Shut down the workstation.", "y": "Shut it down.", "x": "Shut down it.", "sep": true}, {"v": "put", "p": "away", "n": "Put away the cables.", "y": "Put them away.", "x": "Put away them.", "sep": true}, {"v": "turn", "p": "down", "n": "Turn down the gain.", "y": "Turn it down.", "x": "Turn down it.", "sep": true}], "on": {"v": "turn", "p": "on", "n": "Turn on the scope.", "y": "Turn it on.", "x": "Turn on it.", "sep": true}, "insep": [{"v": "hack", "p": "into", "n": "They hacked into the server.", "y": "They hacked into it.", "x": "They hacked it into.", "sep": false}, {"v": "come", "p": "up with", "n": "He came up with the idea.", "y": "He came up with it.", "x": "He came it up with.", "sep": false}, {"v": "run", "p": "out of", "n": "We ran out of solder.", "y": "We ran out of it.", "x": "We ran it out of.", "sep": false}, {"v": "sign", "p": "up for", "n": "Sign up for the list.", "y": "Sign up for it.", "x": "Sign it up for.", "sep": false}, {"v": "opt", "p": "out of", "n": "Opt out of the emails.", "y": "Opt out of them.", "x": "Opt them out of.", "sep": false}, {"v": "run", "p": "through", "n": "Run through the checklist.", "y": "Run through it.", "x": "Run it through.", "sep": false}, {"v": "click", "p": "on", "n": "Click on the icon.", "y": "Click on it.", "x": "Click it on.", "sep": false}]};
+    // all seven that never open, turn on (to stand beside click on), and six of the others, new draw each load
+    var DECK=shuffle(D.insep.concat([D.on]).concat(shuffle(D.sep).slice(0,6)));
+    var i=0, good=0, card=document.getElementById('pv3-card'), score=document.getElementById('pv3-score');
+    var LAB={open:'It opens',shut:'It stays shut'};
+    function show(){
+      if(i>=DECK.length){
+        card.innerHTML='<p class="big" style="text-align:center;margin:10px 0">'+good+' out of '+DECK.length+'</p>';
+        score.textContent='';
+        document.getElementById('pv3-rule').classList.remove('hide');
+        document.getElementById('pv3-rule').scrollIntoView({behavior:'smooth',block:'start'});
+        return;
+      }
+      var c=DECK[i], locked=false;
+      card.innerHTML='<div class="note">Verb '+(i+1)+' of '+DECK.length+'</div>'+
+        '<div style="margin:6px 0"><span class="w">'+esc(c.v)+'</span><span class="w p">'+esc(c.p)+'</span></div>'+
+        '<div class="ex"><p>'+esc(c.n)+'</p></div>'+
+        '<div class="opt"></div><div class="fb"></div><div class="btns"><button type="button" class="hide">Next verb</button></div>';
+      var opt=card.querySelector('.opt'), nxt=card.querySelector('.btns button');
+      ['open','shut'].forEach(function(k){
+        var b=document.createElement('button'); b.type='button'; b.className='choice'; b.textContent=LAB[k];
+        b.addEventListener('click',function(){
+          if(locked) return; locked=true;
+          var right=(k==='open')===c.sep, fb=card.querySelector('.fb'), all=opt.querySelectorAll('.choice');
+          for(var j=0;j<all.length;j++){ all[j].disabled=true; if((all[j].textContent===LAB.open)===c.sep) all[j].classList.add('ok'); }
+          if(right){ good++; fb.className='fb ok'; fb.innerHTML='<span class="v">Yes. '+(c.sep?'It opens.':'It stays shut.')+'</span>'+one(c.y,'With a pronoun'); }
+          else { b.classList.add('no'); fb.className='fb no';
+            fb.innerHTML='<span class="v">No. '+(c.sep?'This one opens.':'This one stays shut.')+'</span>'+rows(c.x,c.y,'With a pronoun'); }
+          score.textContent=good+' out of '+(i+1)+' so far';
+          nxt.classList.remove('hide'); nxt.textContent=(i+1<DECK.length)?'Next verb':'See the pattern';
+        });
+        opt.appendChild(b);
+      });
+      nxt.addEventListener('click',function(){ i++; show(); });
+    }
+    show();
+  })();
+  </script>
+</div>
+</body></html>
