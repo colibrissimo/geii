@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turn it off: Verb + small word</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="pv0">
+  <style>
+    #pv0{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #pv0 *{box-sizing:border-box;}
+    #pv0 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #pv0 h2{font-size:21px;margin:26px 0 8px;color:var(--teal);}
+    #pv0 p{margin:0 0 10px;}
+    #pv0 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #pv0 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #pv0 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    #pv0 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #pv0 button:hover{background:#0f4a5c;}
+    #pv0 button:disabled{opacity:.45;cursor:default;}
+    #pv0 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #pv0 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #pv0 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;}
+    #pv0 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;}
+    #pv0 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+    #pv0 .choice.half{background:var(--amber-bg);border-color:var(--amber);color:#8a6510;font-weight:bold;}
+    #pv0 .choice:disabled{opacity:1;cursor:default;}
+    #pv0 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+    #pv0 .fb{margin-top:10px;font-size:16px;}
+    #pv0 .fb .v{font-weight:bold;}
+    #pv0 .fb.ok .v{color:var(--ok);} #pv0 .fb.no .v{color:var(--no);} #pv0 .fb.half .v{color:#8a6510;}
+    #pv0 .rows{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:8px 0 6px;font-size:17px;}
+    #pv0 .rows span{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);align-self:center;}
+    #pv0 .rows .you{color:var(--no);text-decoration:line-through;}
+    #pv0 .rows .you.fine{color:#8a6510;text-decoration:none;}
+    #pv0 .rows .right{color:var(--ok);font-weight:bold;}
+    #pv0 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #pv0 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:17px;}
+    #pv0 .ex p{margin:4px 0;}
+    #pv0 .rule{background:var(--teal-bg);border:2px solid var(--teal);border-radius:12px;padding:14px 18px;margin:14px 0;}
+    #pv0 .rule p{margin:4px 0;}
+    #pv0 .warn{background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #pv0 .note{font-size:14px;color:var(--muted);}
+    #pv0 .hide{display:none !important;}
+    #pv0 .item{padding:14px 0;border-top:1px solid var(--line);}
+    #pv0 .item:first-child{border-top:none;padding-top:2px;}
+    #pv0 .num{color:var(--teal);font-weight:bold;margin-right:6px;}
+    #pv0 .w{display:inline-block;background:var(--slate-bg);border-radius:8px;padding:4px 10px;margin:3px 2px;font-weight:bold;}
+    #pv0 .w.p{background:var(--teal-bg);color:var(--teal);}
+    #pv0 .w.o{background:var(--amber-bg);border:2px solid var(--amber);}
+    #pv0 button.slot{background:#fff;color:var(--muted);border:2px dashed var(--teal);font-weight:normal;padding:4px 14px;margin:3px 2px;font-size:15px;}
+    #pv0 button.slot:hover{background:var(--teal-bg);}
+    #pv0 button.slot.gone{visibility:hidden;}
+    #pv0 input[type=text]{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);margin-top:6px;}
+    #pv0 input[type=text]:focus{outline:none;border-color:var(--teal);}
+    #pv0 input.ok{border-color:var(--ok);background:var(--ok-bg);} #pv0 input.no{border-color:var(--no);background:var(--no-bg);}
+    #pv0 .scale{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0 4px;font-weight:bold;}
+    #pv0 .scale span{border-radius:8px;padding:6px 10px;background:var(--slate-bg);}
+    #pv0 .scale span.p{background:var(--teal-bg);color:var(--teal);}
+    #pv0 .scale i{color:var(--muted);font-style:normal;font-weight:normal;}
+    #pv0 table.t{width:100%;border-collapse:collapse;font-size:16px;margin-top:8px;}
+    #pv0 table.t th,#pv0 table.t td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+    #pv0 table.t th{background:var(--slate-bg);font-size:13px;letter-spacing:.05em;text-transform:uppercase;}
+    #pv0 table.t td b{color:var(--teal);}
+    #pv0 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    #pv0 .next{display:block;text-align:center;margin-top:20px;padding:14px;border-radius:12px;background:var(--teal);color:#fff;font-weight:bold;text-decoration:none;}
+    #pv0 .next:hover{background:#0f4a5c;}
+    #pv0 .big{font-size:22px;font-weight:bold;}
+    @media (max-width:560px){ #pv0 .grid2{grid-template-columns:1fr;} #pv0{font-size:16px;padding:14px;} }
+  </style>
+
+  <h1>Verb + small word</h1>
+  <p class="sub">Before the video. English has thousands of verbs made of a verb and a small word: <em>turn off</em>, <em>back up</em>, <em>log in</em>. They are called <strong>phrasal verbs</strong>. What are they, and how do you read them?</p>
+
+  <h2>1. Two words in English, one in French</h2>
+  <div class="panel">
+    <p>Read the sentence. Pick the French verb that means the same. One click per sentence.</p>
+    <div id="pv0-fr"></div>
+    <div class="score" id="pv0-score1"></div>
+  </div>
+
+  <div id="pv0-r1" class="hide">
+    <div class="rule">
+      <p class="big">Verb + small word = one verb, one meaning.</p>
+      <div class="scale"><span>turn</span><i>+</i><span class="p">off</span><i>=</i><span>éteindre</span></div>
+      <p>Very often, French says it with one verb. Read the two words together, never one by one.</p>
+    </div>
+
+    <h2>2. Same verb, new small word</h2>
+    <div class="panel">
+      <p>The verb is always <strong>turn</strong>. Only the small word changes. What does it mean here?</p>
+      <div id="pv0-turn"></div>
+    </div>
+  </div>
+
+  <div id="pv0-r2" class="hide">
+    <div class="rule">
+      <p class="big">The small word carries the meaning.</p>
+      <p>Some small words come back again and again with the same idea:</p>
+      <p><strong>up</strong>: more, or ready. Turn up the gain, power up the bench, boot up the PC, set up the router.</p>
+      <p><strong>down</strong>: less, or stop. Turn down the volume, shut down the workstation.</p>
+      <p><strong>on / off</strong>: power. Turn it on, turn it off.</p>
+    </div>
+
+    <h2>3. Can you always guess?</h2>
+    <div class="panel">
+      <p>Two more. Read the whole sentence.</p>
+      <div id="pv0-guess"></div>
+    </div>
+  </div>
+
+  <div id="pv0-end" class="hide">
+    <div class="warn">No. Some phrasal verbs say what they do (<em>plug in</em>, <em>print out</em>). Some do not (<em>figure out</em>, <em>run out of</em>). When the two words make no sense one by one, the sentence tells you, and the deck lists them all.</div>
+    <h2>What to keep</h2>
+    <div class="rule">
+      <p><strong>1.</strong> A phrasal verb is one verb in two or three words: <em>turn off</em>, <em>come up with</em>.</p>
+      <p><strong>2.</strong> The small word changes the meaning: turn <strong>on</strong>, turn <strong>off</strong>, turn <strong>up</strong>, turn <strong>down</strong>.</p>
+      <p><strong>3.</strong> You cannot always guess from the parts. Read the sentence.</p>
+    </div>
+    <div class="ex">
+      <p>You use some of them every day without knowing it. In tech, the verb came first and became a noun: <em>back up</em> &rarr; <strong>a backup</strong>, <em>log in</em> &rarr; <strong>a login</strong>, <em>set up</em> &rarr; <strong>the setup</strong>, <em>plug in</em> &rarr; <strong>a plugin</strong>.</p>
+    </div>
+    <p>Now go back to Moodle and watch <strong>the Ctrl+Alt+Del video</strong>. Dr. Dave uses five of these verbs. On the next page, you will see where he put the object.</p>
+  </div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('pv0'); if(!root) return;
+    
+    function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)),t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+    function norm(s){ return String(s).toLowerCase().replace(/[\u2018\u2019]/g,"'").replace(/[.!?,;:]+/g,' ').replace(/\s+/g,' ').trim(); }
+    function rows(you,right,rightLabel,fine){
+      return '<div class="rows"><span>You</span><div class="you'+(fine?' fine':'')+'">'+esc(you)+'</div>'+
+             '<span>'+esc(rightLabel||'Correct')+'</span><div class="right">'+esc(right)+'</div></div>';
+    }
+    function one(right,label){ return '<div class="rows"><span>'+esc(label||'Correct')+'</span><div class="right">'+esc(right)+'</div></div>'; }
+
+    var FR=[{"s": "Shut down the workstations at six.", "v": "shut down", "k": "arrêter (éteindre)", "o": ["fermer à clé", "descendre", "baisser"], "why": "Not a door, not a staircase: a computer. <em>Shut down</em> = stop the whole system properly."}, {"s": "Back up the files before the update.", "v": "back up", "k": "sauvegarder", "o": ["reculer", "remonter", "soutenir"], "why": "With a car, <em>back up</em> is <em>reculer</em>. With files, it is <em>sauvegarder</em>. The sentence decides."}, {"s": "Print out the report for the team.", "v": "print out", "k": "imprimer", "o": ["sortir", "publier", "effacer"], "why": "<em>Out</em> here means the paper comes out of the printer. Not <em>sortir</em>."}, {"s": "We set up the router yesterday.", "v": "set up", "k": "installer, configurer", "o": ["lever", "poser", "ranger"], "why": "<em>Set up</em> = make something ready to work."}, {"s": "Plug in the laptop, the battery is low.", "v": "plug in", "k": "brancher", "o": ["boucher", "enfoncer", "recharger"], "why": "<em>A plug</em> is <em>une fiche</em>, <em>a socket</em> is <em>une prise</em>. <em>Plug in</em> = put the plug in the socket."}, {"s": "Log in with your student number.", "v": "log in", "k": "se connecter", "o": ["noter dans le journal", "entrer dans la salle", "s'inscrire"], "why": "<em>A log</em> is a journal, but nobody thinks of that when they <em>log in</em>."}], TURN=[{"s": "The scope screen is dark. Turn it on.", "v": "turn on", "k": "allumer"}, {"s": "Turn off the power before you touch the board.", "v": "turn off", "k": "éteindre"}, {"s": "The signal is too weak. Turn up the gain.", "v": "turn up", "k": "augmenter"}, {"s": "The speaker is too loud. Turn it down.", "v": "turn down", "k": "baisser"}], GUESS=[{"s": "We could not figure out why it failed.", "v": "figure out", "k": "comprendre, trouver", "o": ["dessiner", "calculer", "sortir"], "why": "Nothing about drawing, nothing about numbers. You only get it from the sentence."}, {"s": "We ran out of solder, so the repair stopped.", "v": "ran out of", "k": "ne plus avoir de", "o": ["sortir en courant", "perdre", "acheter"], "why": "Nobody runs anywhere. There is no solder left."}];
+    // one sentence at a time; one click locks it; the student's pick stays beside the answer
+    function seq(boxId,items,optsOf,head,scoreId,after){
+      var box=document.getElementById(boxId), good=0;
+      function show(i){
+        if(i>=items.length){ after(); return; }
+        var it=items[i], d=document.createElement('div'); d.className='item';
+        d.innerHTML='<div><span class="num">'+(i+1)+'.</span>'+head(it)+'</div><div class="opt"></div><div class="fb"></div>';
+        var opt=d.querySelector('.opt'), locked=false;
+        shuffle(optsOf(it)).forEach(function(o){
+          var b=document.createElement('button'); b.type='button'; b.className='choice'; b.textContent=o;
+          b.addEventListener('click',function(){
+            if(locked) return; locked=true;
+            var all=opt.querySelectorAll('.choice'), fb=d.querySelector('.fb');
+            for(var j=0;j<all.length;j++){ all[j].disabled=true; if(all[j].textContent===it.k) all[j].classList.add('ok'); }
+            if(o===it.k){ good++; fb.className='fb ok'; fb.innerHTML='<span class="v">Yes.</span>'+one(it.k); }
+            else { b.classList.add('no'); fb.className='fb no'; fb.innerHTML='<span class="v">No.</span>'+rows(o,it.k); }
+            if(it.why) fb.innerHTML+='<p>'+it.why+'</p>';
+            if(scoreId) document.getElementById(scoreId).textContent=good+' out of '+(i+1)+(i+1===items.length?'':' so far');
+            show(i+1);
+          });
+          opt.appendChild(b);
+        });
+        box.appendChild(d);
+      }
+      show(0);
+    }
+    function hl(s,v){ return esc(s).replace(new RegExp('\\b('+v.split(' ').join('|')+')\\b','gi'),'<strong>$1</strong>'); }
+    var TURNOPTS=TURN.map(function(t){ return t.k; });
+    seq('pv0-fr',shuffle(FR),function(it){ return [it.k].concat(it.o); },
+        function(it){ return hl(it.s,it.v); },'pv0-score1',
+        function(){ document.getElementById('pv0-r1').classList.remove('hide');
+          seq('pv0-turn',shuffle(TURN),function(){ return TURNOPTS; },
+              function(it){ return hl(it.s,it.v); },null,
+              function(){ document.getElementById('pv0-r2').classList.remove('hide');
+                seq('pv0-guess',GUESS,function(it){ return [it.k].concat(it.o); },
+                    function(it){ return hl(it.s,it.v); },null,
+                    function(){ document.getElementById('pv0-end').classList.remove('hide'); });
+              });
+        });
+  })();
+  </script>
+</div>
+</body>
+</html>
