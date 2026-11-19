@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How thirsty is AI? How AI uses our drinking water</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="ta4">
+  <style>
+    #ta4{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:860px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ta4 *{box-sizing:border-box;}
+    #ta4 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ta4 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ta4 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ta4 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ta4 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ta4 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ta4 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ta4 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #ta4 .q.on .start{display:block;}
+    #ta4 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #ta4 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ta4 button:hover{background:#0f4a5c;}
+    #ta4 button.ghost{background:transparent;color:var(--teal);}
+    #ta4 button.ghost:hover{background:var(--teal-bg);}
+    #ta4 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ta4 button.amber:hover{background:#e0a52a;}
+    #ta4 button:disabled{opacity:.45;cursor:default;}
+    #ta4 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #ta4 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ta4 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #ta4 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #ta4 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;opacity:1;}
+    #ta4 .choice:disabled{cursor:default;}
+    #ta4 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ta4 .fb.ok{color:var(--ok);} #ta4 .fb.no{color:var(--no);}
+    #ta4 .fb .plain{font-weight:normal;color:var(--ink);}
+    #ta4 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;background:#fff;color:var(--ink);}
+    #ta4 textarea:focus{outline:none;border-color:var(--teal);}
+    #ta4 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ta4 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ta4 .talk p{margin:0 0 6px;}
+    #ta4 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ta4 .ex p{margin:4px 0;}
+    #ta4 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #ta4 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #ta4 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #ta4 .note{font-size:14px;color:var(--muted);}
+    #ta4 .hide{display:none !important;}
+    #ta4 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ta4 .item:first-child{border-top:none;}
+    #ta4 .item > b{color:var(--teal);}
+    #ta4 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #ta4 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #ta4 .video iframe,#ta4 .video video,#ta4 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #ta4 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #ta4 table.t th,#ta4 table.t td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;}
+    #ta4 table.t th{background:var(--slate-bg);}
+    #ta4 table.t td.big{font-weight:bold;color:var(--teal);white-space:nowrap;}
+    #ta4 .ticks label{display:inline-flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:6px 12px;margin:0 6px 8px 0;cursor:pointer;font-size:16px;}
+    #ta4 .ticks label.ok{border-color:var(--ok);background:var(--ok-bg);}
+    #ta4 .ticks label.no{border-color:var(--no);background:var(--no-bg);}
+    #ta4 .ticks label.miss{border-color:var(--amber);border-style:dashed;}
+    #ta4 .verb{font-weight:bold;color:var(--teal);}
+    #ta4 .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    #ta4 .card{border:2px solid var(--line);border-radius:12px;padding:14px;background:#fff;cursor:pointer;font-weight:bold;text-align:center;}
+    #ta4 .card:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #ta4 .card.on{border-color:var(--teal);background:var(--teal-bg);box-shadow:0 0 0 3px var(--teal-bg);}
+    @media (max-width:560px){ #ta4 .cards{grid-template-columns:1fr;} #ta4 table.t{font-size:13px;} }
+  </style>
+
+  <h1>How AI uses our drinking water</h1>
+  <p class="sub">Watch the next part. Why are these things mentioned? Write a few words for each, then check.</p>
+  
+    <div class="video"><div id="ta4p-yt"></div></div>
+    <div class="btns">
+      <button id="ta4p-play">Play 1:30 to 5:09</button>
+      <button id="ta4p-back" class="ghost">Back 5 s</button>
+      <span class="note" id="ta4p-t" style="margin-left:auto"></span>
+    </div>
+  <p class="note">Video: <em>How AI uses our drinking water</em>, BBC World Service (YouTube).</p>
+  <div class="panel" id="ta4w" style="margin-top:12px"><div class="item"><b>A</b><div><strong>air-cooling systems</strong><textarea placeholder="Why is it mentioned? A few words." style="min-height:44px;margin-top:6px"></textarea><div class="ans hide" style="margin-top:6px;color:var(--ok)"><strong>Most data centres used air cooling, and that was fine until AI came along.</strong> <span class="note">(2:06)</span></div></div></div><div class="item"><b>B</b><div><strong>drinking water</strong><textarea placeholder="Why is it mentioned? A few words." style="min-height:44px;margin-top:6px"></textarea><div class="ans hide" style="margin-top:6px;color:var(--ok)"><strong>Liquid cooling needs clean water, to stop bacteria, clogs and corrosion. So it is mostly drinking water.</strong> <span class="note">(2:24)</span></div></div></div><div class="item"><b>C</b><div><strong>absorb the heat</strong><textarea placeholder="Why is it mentioned? A few words." style="min-height:44px;margin-top:6px"></textarea><div class="ans hide" style="margin-top:6px;color:var(--ok)"><strong>The coolant absorbs the heat from the chips and carries it to a heat exchanger.</strong> <span class="note">(2:41)</span></div></div></div><div class="item"><b>D</b><div><strong>80%</strong><textarea placeholder="Why is it mentioned? A few words." style="min-height:44px;margin-top:6px"></textarea><div class="ans hide" style="margin-top:6px;color:var(--ok)"><strong>Up to 80% of the water evaporates in the cooling towers.</strong> <span class="note">(3:10)</span></div></div></div><div class="item"><b>E</b><div><strong>400%</strong><textarea placeholder="Why is it mentioned? A few words." style="min-height:44px;margin-top:6px"></textarea><div class="ans hide" style="margin-top:6px;color:var(--ok)"><strong>The International Energy Agency expects electricity demand for AI-optimised data centres to increase by 400% by 2030, to 300 TWh: about the UK&rsquo;s electricity for a year.</strong> <span class="note">(4:00)</span></div></div></div><div class="item"><b>F</b><div><strong>AI hardware</strong><textarea placeholder="Why is it mentioned? A few words." style="min-height:44px;margin-top:6px"></textarea><div class="ans hide" style="margin-top:6px;color:var(--ok)"><strong>Water is also needed to make the chips and to refine the raw materials for them.</strong> <span class="note">(4:18)</span></div></div></div><div class="item"><b>G</b><div><strong>Google, Meta and Microsoft annual reports</strong><textarea placeholder="Why is it mentioned? A few words." style="min-height:44px;margin-top:6px"></textarea><div class="ans hide" style="margin-top:6px;color:var(--ok)"><strong>Their data centres use billions of litres a year from local sources, but none of them say how much of it is due to AI.</strong> <span class="note">(4:47)</span></div></div></div>
+    <div class="btns"><button id="ta4-show" class="amber">Show the answers</button></div>
+  </div>
+
+  <div class="hide" id="ta4b">
+    <h1 style="margin-top:26px">How strong is each claim?</h1>
+    <p class="sub">Three claims from the video. Which verb fits the evidence behind it?</p>
+    <div class="panel" id="ta4c"><div class="item" data-i="0"><b>1</b><div>&ldquo;For liquid cooling the water must be clean to prevent bacteria growing or clogs and corrosion in the system.&rdquo; (2:24)<div class="opt"><button class="choice" data-o="0">established</button><button class="choice" data-o="1">estimated</button><button class="choice" data-o="2">asserted</button></div><div class="fb"></div></div></div><div class="item" data-i="1"><b>2</b><div>&ldquo;Overall, up to 80% of the water evaporates.&rdquo; (3:10)<div class="opt"><button class="choice" data-o="0">established</button><button class="choice" data-o="1">estimated</button><button class="choice" data-o="2">suspected</button></div><div class="fb"></div></div></div><div class="item" data-i="2"><b>3</b><div>&ldquo;Electricity demand for AI-optimised data centres is expected to increase by 400% by 2030.&rdquo; (4:00)<div class="opt"><button class="choice" data-o="0">established</button><button class="choice" data-o="1">estimated</button><button class="choice" data-o="2">asserted</button></div><div class="fb"></div></div></div></div>
+    <div class="talk">
+      <p><strong>Now argue it.</strong> Google, Meta and Microsoft publish their total water use, not the AI part. So if a journalist gives you a number for AI only, has it been <em>inferred</em> or <em>estimated</em>? Both answers can be defended. Defend one.</p>
+    </div>
+    <div class="ex"><p><strong>Engineers&rsquo; corner.</strong> At the board: why does a cooling tower lose water, and a closed loop doesn&rsquo;t? What does the closed loop lose instead?</p>
+    <p><strong>Maths check.</strong> &ldquo;Increase <em>by</em> 400%&rdquo;: if demand is 60 TWh today, what is it in 2030?</p></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var A=90, B=309, done=false; if(!document.getElementById('ta4p-play')) return;
+    function fire(){ if(done) return; done=true; if(window['ta4Done']) window['ta4Done'](); }
+    
+    var P=null, rdy=false;
+    var V={ok:function(){return rdy;}, play:function(){ if(!rdy) return; var t=P.getCurrentTime(); if(t<A-0.5||t>=B) P.seekTo(A,true); P.playVideo(); },
+      pause:function(){ if(rdy) P.pauseVideo(); }, t:function(){ return rdy?P.getCurrentTime():0; }, seek:function(s){ if(rdy) P.seekTo(s,true); }};
+    function make(){ P=new YT.Player('ta4p-yt',{videoId:'b0C56yqIkbk',playerVars:{rel:0,playsinline:1,modestbranding:1,start:Math.floor(A)},
+      events:{onReady:function(){ rdy=true; },onStateChange:function(e){ if(e.data===0) fire(); }}}); }
+    if(window.YT&&window.YT.Player) make();
+    else { var prev=window.onYouTubeIframeAPIReady; window.onYouTubeIframeAPIReady=function(){ if(prev) prev(); make(); };
+      var sc=document.createElement('script'); sc.src='https://www.youtube.com/iframe_api'; document.head.appendChild(sc); }
+    setInterval(function(){ if(!V.ok()) return; var t=V.t();
+      var m=Math.floor(t/60), s=Math.floor(t%60); document.getElementById('ta4p-t').textContent=m+':'+(s<10?'0':'')+s;
+      if(t>=B-0.1&&t<B+2){ V.pause(); fire(); } },150);
+    document.getElementById('ta4p-play').addEventListener('click',function(){ V.play(); });
+    document.getElementById('ta4p-back').addEventListener('click',function(){ V.seek(Math.max(A,V.t()-5)); });
+  })();
+  </script>
+  <script>
+  (function(){
+    var T=[["&ldquo;For liquid cooling the water must be clean to prevent bacteria growing or clogs and corrosion in the system.&rdquo; (2:24)", ["established", "estimated", "asserted"], 0, "Engineers know this from experience and tests. Nobody disputes it: established."], ["&ldquo;Overall, up to 80% of the water evaporates.&rdquo; (3:10)", ["established", "estimated", "suspected"], 1, "<em>Up to</em> gives it away. A calculated range: estimated."], ["&ldquo;Electricity demand for AI-optimised data centres is expected to increase by 400% by 2030.&rdquo; (4:00)", ["established", "estimated", "asserted"], 1, "2030 hasn&rsquo;t happened. A projection is an estimate, never established."]]; if(!document.getElementById('ta4w')) return; var $=function(i){ return document.getElementById(i); };
+    function show(){ var a=document.querySelectorAll('#ta4w .ans'); for(var i=0;i<a.length;i++) a[i].classList.remove('hide');
+      $('ta4-show').disabled=true; $('ta4b').classList.remove('hide'); }
+    $('ta4-show').addEventListener('click',show);
+    window.ta4Done=function(){ $('ta4w').scrollIntoView({behavior:'smooth',block:'start'}); };
+    $('ta4c').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||b.disabled) return;
+      var it=b.closest('.item'), i=+it.getAttribute('data-i'), bs=it.querySelectorAll('button'), got=+b.getAttribute('data-o'), ok=got===T[i][2];
+      for(var x=0;x<bs.length;x++){ bs[x].disabled=true; if(x===T[i][2]) bs[x].className='choice ok'; }
+      if(!ok) b.className='choice no';
+      var f=it.querySelector('.fb'); f.className='fb '+(ok?'ok':'no'); f.innerHTML=(ok?'Yes. ':'You chose '+T[i][1][got]+'. ')+'<span class="plain">'+T[i][3]+'</span>';
+    });
+  })();
+  </script>
+</div>
+</body>
+</html>

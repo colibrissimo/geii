@@ -1,0 +1,721 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Preview: How thirsty is AI?</title><style>body{margin:0;background:#e5e9ef;padding:24px 12px}hr{border:0;height:2px;background:#155E75;margin:40px auto;max-width:860px}</style></head><body><div id="ta1">
+  <style>
+    #ta1{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:860px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ta1 *{box-sizing:border-box;}
+    #ta1 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ta1 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ta1 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ta1 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ta1 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ta1 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ta1 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ta1 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #ta1 .q.on .start{display:block;}
+    #ta1 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #ta1 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ta1 button:hover{background:#0f4a5c;}
+    #ta1 button.ghost{background:transparent;color:var(--teal);}
+    #ta1 button.ghost:hover{background:var(--teal-bg);}
+    #ta1 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ta1 button.amber:hover{background:#e0a52a;}
+    #ta1 button:disabled{opacity:.45;cursor:default;}
+    #ta1 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #ta1 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ta1 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #ta1 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #ta1 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;opacity:1;}
+    #ta1 .choice:disabled{cursor:default;}
+    #ta1 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ta1 .fb.ok{color:var(--ok);} #ta1 .fb.no{color:var(--no);}
+    #ta1 .fb .plain{font-weight:normal;color:var(--ink);}
+    #ta1 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;background:#fff;color:var(--ink);}
+    #ta1 textarea:focus{outline:none;border-color:var(--teal);}
+    #ta1 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ta1 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ta1 .talk p{margin:0 0 6px;}
+    #ta1 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ta1 .ex p{margin:4px 0;}
+    #ta1 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #ta1 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #ta1 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #ta1 .note{font-size:14px;color:var(--muted);}
+    #ta1 .hide{display:none !important;}
+    #ta1 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ta1 .item:first-child{border-top:none;}
+    #ta1 .item > b{color:var(--teal);}
+    #ta1 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #ta1 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #ta1 .video iframe,#ta1 .video video,#ta1 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #ta1 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #ta1 table.t th,#ta1 table.t td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;}
+    #ta1 table.t th{background:var(--slate-bg);}
+    #ta1 table.t td.big{font-weight:bold;color:var(--teal);white-space:nowrap;}
+    #ta1 .ticks label{display:inline-flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:6px 12px;margin:0 6px 8px 0;cursor:pointer;font-size:16px;}
+    #ta1 .ticks label.ok{border-color:var(--ok);background:var(--ok-bg);}
+    #ta1 .ticks label.no{border-color:var(--no);background:var(--no-bg);}
+    #ta1 .ticks label.miss{border-color:var(--amber);border-style:dashed;}
+    #ta1 .verb{font-weight:bold;color:var(--teal);}
+    #ta1 .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    #ta1 .card{border:2px solid var(--line);border-radius:12px;padding:14px;background:#fff;cursor:pointer;font-weight:bold;text-align:center;}
+    #ta1 .card:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #ta1 .card.on{border-color:var(--teal);background:var(--teal-bg);box-shadow:0 0 0 3px var(--teal-bg);}
+    @media (max-width:560px){ #ta1 .cards{grid-template-columns:1fr;} #ta1 table.t{font-size:13px;} }
+  </style>
+
+  <h1>How thirsty is AI?</h1>
+  <p class="sub">Two numbers about ChatGPT. Nobody in the room knows them, so just guess. Then lock your guesses.</p>
+  <div class="panel" id="ta1g"><div class="item" data-i="0"><b>1</b><div>How much water does one average message to ChatGPT use?<div class="opt"><button class="choice" data-o="0">a teaspoon</button><button class="choice" data-o="1">1/15 of a teaspoon</button><button class="choice" data-o="2">half a glass</button></div></div></div><div class="item" data-i="1"><b>2</b><div>How many messages are sent to ChatGPT every day?<div class="opt"><button class="choice" data-o="0">one million</button><button class="choice" data-o="1">one billion</button><button class="choice" data-o="2">one hundred billion</button></div></div></div>
+    <div class="btns"><button id="ta1-lock" disabled>Lock my guesses</button></div>
+  </div>
+
+  <div class="hide" id="ta1v">
+    <h2>Watch, and listen for <em>how</em> the numbers are introduced</h2>
+    <p class="sub">Tick the words and phrases you hear. Two of them are not in the video.</p>
+    <div class="ticks" id="ta1t"><label data-k="1"><input type="checkbox"> according to</label><label data-k="1"><input type="checkbox"> claims</label><label data-k="1"><input type="checkbox"> estimate</label><label data-k="1"><input type="checkbox"> sceptical</label><label data-k="1"><input type="checkbox"> not enough information</label><label data-k="1"><input type="checkbox"> trust</label><label data-k="0"><input type="checkbox"> proved</label><label data-k="0"><input type="checkbox"> confirmed</label></div>
+    
+    <div class="video"><div id="ta1p-yt"></div></div>
+    <div class="btns">
+      <button id="ta1p-play">Play 0:00 to 1:30</button>
+      <button id="ta1p-back" class="ghost">Back 5 s</button>
+      <span class="note" id="ta1p-t" style="margin-left:auto"></span>
+    </div>
+    <p class="note">Video: <em>How AI uses our drinking water</em>, BBC World Service (YouTube). <a href="#" id="ta1-skip">Skip to the answers</a></p>
+  </div>
+
+  <div class="hide" id="ta1a">
+    <div class="panel" id="ta1r" style="border-left:6px solid var(--ok)"></div>
+    <h1 style="margin-top:26px">Three numbers, one question</h1>
+    <p class="sub">How much water does one message to an AI use? Three different answers.</p>
+    <div class="panel" style="overflow-x:auto"><table class="t">
+      <tr><th>Who says so</th><th>Water per message</th><th>What it counts</th><th>Did they publish how they calculated it?</th></tr>
+      <tr><td>Sam Altman, boss of OpenAI (blog, June 2025)</td><td class="big">about 0.3 mL</td><td>Not said.</td><td>No. OpenAI declined to give the BBC details.</td></tr>
+      <tr><td>Prof. Shaolei Ren, University of California, Riverside (research on a GPT-3-sized model)</td><td class="big">10 to 50 mL</td><td>Cooling the data centre <strong>and</strong> producing its electricity.</td><td>Yes: a research study, <em>Making AI Less &lsquo;Thirsty&rsquo;</em>.</td></tr>
+      <tr><td>Google, about its own AI, Gemini (August 2025)</td><td class="big">0.26 mL</td><td>Cooling only. Not the water used to produce the electricity.</td><td>Yes, a technical paper. Not checked by independent scientists yet.</td></tr>
+    </table>
+    <p class="note" style="margin:8px 0 0">0.3 mL is 1/15 of a teaspoon. 500 mL for 10 to 50 messages is 10 to 50 mL each.</p></div>
+    <div class="talk">
+      <p><strong>In pairs</strong></p>
+      <p>1. The highest number is 30 to 150 times the lowest. Look at the &ldquo;What it counts&rdquo; column. Is one of them wrong, or are they measuring different things?</p>
+      <p>2. Which number would you trust most? Why?</p>
+      <p>3. The BBC calls Altman&rsquo;s number an <em>estimate</em>. Is that the right word for a number with no calculation published? What word would you use?</p>
+    </div>
+    <div class="ex"><p><strong>One more thing about numbers.</strong> The video says one billion messages a day. That was Altman&rsquo;s figure in December 2024. In July 2025, OpenAI said 2.5 billion. A number in a video has a date.</p></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var A=0, B=90, done=false; if(!document.getElementById('ta1p-play')) return;
+    function fire(){ if(done) return; done=true; if(window['ta1Done']) window['ta1Done'](); }
+    
+    var P=null, rdy=false;
+    var V={ok:function(){return rdy;}, play:function(){ if(!rdy) return; var t=P.getCurrentTime(); if(t<A-0.5||t>=B) P.seekTo(A,true); P.playVideo(); },
+      pause:function(){ if(rdy) P.pauseVideo(); }, t:function(){ return rdy?P.getCurrentTime():0; }, seek:function(s){ if(rdy) P.seekTo(s,true); }};
+    function make(){ P=new YT.Player('ta1p-yt',{videoId:'b0C56yqIkbk',playerVars:{rel:0,playsinline:1,modestbranding:1,start:Math.floor(A)},
+      events:{onReady:function(){ rdy=true; },onStateChange:function(e){ if(e.data===0) fire(); }}}); }
+    if(window.YT&&window.YT.Player) make();
+    else { var prev=window.onYouTubeIframeAPIReady; window.onYouTubeIframeAPIReady=function(){ if(prev) prev(); make(); };
+      var sc=document.createElement('script'); sc.src='https://www.youtube.com/iframe_api'; document.head.appendChild(sc); }
+    setInterval(function(){ if(!V.ok()) return; var t=V.t();
+      var m=Math.floor(t/60), s=Math.floor(t%60); document.getElementById('ta1p-t').textContent=m+':'+(s<10?'0':'')+s;
+      if(t>=B-0.1&&t<B+2){ V.pause(); fire(); } },150);
+    document.getElementById('ta1p-play').addEventListener('click',function(){ V.play(); });
+    document.getElementById('ta1p-back').addEventListener('click',function(){ V.seek(Math.max(A,V.t()-5)); });
+  })();
+  </script>
+  <script>
+  (function(){
+    var G=[["How much water does one average message to ChatGPT use?", ["a teaspoon", "1/15 of a teaspoon", "half a glass"], 1], ["How many messages are sent to ChatGPT every day?", ["one million", "one billion", "one hundred billion"], 1]], box=document.getElementById('ta1g'); if(!box) return;
+    var $=function(i){ return document.getElementById(i); }, pick=[null,null];
+    box.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||b.disabled) return;
+      var it=b.closest('.item'), i=+it.getAttribute('data-i'), bs=it.querySelectorAll('button');
+      for(var k=0;k<bs.length;k++) bs[k].classList.remove('sel'); b.classList.add('sel'); pick[i]=+b.getAttribute('data-o');
+      $('ta1-lock').disabled=pick[0]===null||pick[1]===null;
+    });
+    $('ta1-lock').addEventListener('click',function(){
+      var bs=box.querySelectorAll('button'); for(var k=0;k<bs.length;k++) bs[k].disabled=true;
+      this.textContent='Locked'; $('ta1v').classList.remove('hide'); $('ta1v').scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    window.ta1Done=function(){
+      if(!$('ta1a').classList.contains('hide')) return;
+      var h='<h2 style="margin-top:0">What the video says</h2>';
+      G.forEach(function(g,i){ var you=pick[i]===null?'no guess':g[1][pick[i]];
+        h+='<p style="margin:0 0 6px">'+g[0]+'<br><strong style="color:var(--ok)">'+g[1][g[2]]+'</strong> <span class="note">&middot; you guessed: '+you+(pick[i]===g[2]?' &#10003;':'')+'</span></p>'; });
+      h+='<p style="margin:10px 0 0"><strong>Both numbers come from one person: Sam Altman, the boss of OpenAI.</strong> Listen again to the words the BBC puts around them.</p>';
+      var ls=$('ta1t').querySelectorAll('label'), right=0;
+      for(var k=0;k<ls.length;k++){ var said=ls[k].getAttribute('data-k')==='1', on=ls[k].querySelector('input').checked;
+        ls[k].className=said?(on?'ok':'miss'):(on?'no':''); if(said===on) right++; ls[k].querySelector('input').disabled=true; }
+      h+='<p class="note" style="margin:6px 0 0">Words: '+right+' of '+ls.length+' right. Green: heard and ticked. Dashed: in the video, not ticked. Red: ticked, but not in the video (<em>proved</em>, <em>confirmed</em>). Nobody in the video says the number is proved.</p>';
+      $('ta1r').innerHTML=h; $('ta1a').classList.remove('hide'); $('ta1a').scrollIntoView({behavior:'smooth',block:'start'});
+    };
+    $('ta1-skip').addEventListener('click',function(e){ e.preventDefault(); window.ta1Done(); });
+  })();
+  </script>
+</div>
+<hr><div id="ta2">
+  <style>
+    #ta2{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:860px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ta2 *{box-sizing:border-box;}
+    #ta2 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ta2 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ta2 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ta2 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ta2 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ta2 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ta2 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ta2 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #ta2 .q.on .start{display:block;}
+    #ta2 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #ta2 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ta2 button:hover{background:#0f4a5c;}
+    #ta2 button.ghost{background:transparent;color:var(--teal);}
+    #ta2 button.ghost:hover{background:var(--teal-bg);}
+    #ta2 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ta2 button.amber:hover{background:#e0a52a;}
+    #ta2 button:disabled{opacity:.45;cursor:default;}
+    #ta2 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #ta2 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ta2 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #ta2 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #ta2 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;opacity:1;}
+    #ta2 .choice:disabled{cursor:default;}
+    #ta2 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ta2 .fb.ok{color:var(--ok);} #ta2 .fb.no{color:var(--no);}
+    #ta2 .fb .plain{font-weight:normal;color:var(--ink);}
+    #ta2 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;background:#fff;color:var(--ink);}
+    #ta2 textarea:focus{outline:none;border-color:var(--teal);}
+    #ta2 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ta2 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ta2 .talk p{margin:0 0 6px;}
+    #ta2 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ta2 .ex p{margin:4px 0;}
+    #ta2 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #ta2 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #ta2 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #ta2 .note{font-size:14px;color:var(--muted);}
+    #ta2 .hide{display:none !important;}
+    #ta2 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ta2 .item:first-child{border-top:none;}
+    #ta2 .item > b{color:var(--teal);}
+    #ta2 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #ta2 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #ta2 .video iframe,#ta2 .video video,#ta2 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #ta2 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #ta2 table.t th,#ta2 table.t td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;}
+    #ta2 table.t th{background:var(--slate-bg);}
+    #ta2 table.t td.big{font-weight:bold;color:var(--teal);white-space:nowrap;}
+    #ta2 .ticks label{display:inline-flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:6px 12px;margin:0 6px 8px 0;cursor:pointer;font-size:16px;}
+    #ta2 .ticks label.ok{border-color:var(--ok);background:var(--ok-bg);}
+    #ta2 .ticks label.no{border-color:var(--no);background:var(--no-bg);}
+    #ta2 .ticks label.miss{border-color:var(--amber);border-style:dashed;}
+    #ta2 .verb{font-weight:bold;color:var(--teal);}
+    #ta2 .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    #ta2 .card{border:2px solid var(--line);border-radius:12px;padding:14px;background:#fff;cursor:pointer;font-weight:bold;text-align:center;}
+    #ta2 .card:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #ta2 .card.on{border-color:var(--teal);background:var(--teal-bg);box-shadow:0 0 0 3px var(--teal-bg);}
+    @media (max-width:560px){ #ta2 .cards{grid-template-columns:1fr;} #ta2 table.t{font-size:13px;} }
+  </style>
+
+  <h1>Eight verbs for claims</h1>
+  <p class="sub">Which definition matches the verb in bold? Sentences A to D share definitions 1 to 4; E to H share 5 to 8.</p>
+  <div class="panel" id="ta2m"><div class="item" data-i="0"><b>A</b><div>Experts <span class='verb'>suspect</span> that advanced robotics will replace many manual jobs within the next decade.<div class="opt"><button class="choice" data-d="0">show that something is true through evidence</button><button class="choice" data-d="1">believe that something is likely without proof, often something bad</button><button class="choice" data-d="2">make an approximate judgement or calculation</button><button class="choice" data-d="3">state a fact or belief confidently</button></div><div class="fb"></div></div></div><div class="item" data-i="1"><b>B</b><div>Researchers <span class='verb'>establish</span> a clear link between screen time and reduced attention span in teenagers.<div class="opt"><button class="choice" data-d="0">show that something is true through evidence</button><button class="choice" data-d="1">believe that something is likely without proof, often something bad</button><button class="choice" data-d="2">make an approximate judgement or calculation</button><button class="choice" data-d="3">state a fact or belief confidently</button></div><div class="fb"></div></div></div><div class="item" data-i="2"><b>C</b><div>Analysts <span class='verb'>estimate</span> that global demand for cloud storage will double by 2030.<div class="opt"><button class="choice" data-d="0">show that something is true through evidence</button><button class="choice" data-d="1">believe that something is likely without proof, often something bad</button><button class="choice" data-d="2">make an approximate judgement or calculation</button><button class="choice" data-d="3">state a fact or belief confidently</button></div><div class="fb"></div></div></div><div class="item" data-i="3"><b>D</b><div>Technology companies <span class='verb'>assert</span> that their new encryption systems are impossible to hack.<div class="opt"><button class="choice" data-d="0">show that something is true through evidence</button><button class="choice" data-d="1">believe that something is likely without proof, often something bad</button><button class="choice" data-d="2">make an approximate judgement or calculation</button><button class="choice" data-d="3">state a fact or belief confidently</button></div><div class="fb"></div></div></div><div class="item" data-i="4"><b>E</b><div>Cybersecurity specialists <span class='verb'>contend</span> that AI-generated malware is becoming harder to detect.<div class="opt"><button class="choice" data-d="4">state something strongly in an argument or a debate</button><button class="choice" data-d="5">show that something exists or is likely to be true</button><button class="choice" data-d="6">reach a conclusion from evidence and reasoning</button><button class="choice" data-d="7">express something indirectly</button></div><div class="fb"></div></div></div><div class="item" data-i="5"><b>F</b><div>Recent surveys <span class='verb'>indicate</span> that users prefer apps with built-in privacy controls.<div class="opt"><button class="choice" data-d="4">state something strongly in an argument or a debate</button><button class="choice" data-d="5">show that something exists or is likely to be true</button><button class="choice" data-d="6">reach a conclusion from evidence and reasoning</button><button class="choice" data-d="7">express something indirectly</button></div><div class="fb"></div></div></div><div class="item" data-i="6"><b>G</b><div>The trend <span class='verb'>implies</span> that traditional desktop software may soon become obsolete.<div class="opt"><button class="choice" data-d="4">state something strongly in an argument or a debate</button><button class="choice" data-d="5">show that something exists or is likely to be true</button><button class="choice" data-d="6">reach a conclusion from evidence and reasoning</button><button class="choice" data-d="7">express something indirectly</button></div><div class="fb"></div></div></div><div class="item" data-i="7"><b>H</b><div>Data scientists can <span class='verb'>infer</span> patterns in user behaviour by analysing millions of online interactions.<div class="opt"><button class="choice" data-d="4">state something strongly in an argument or a debate</button><button class="choice" data-d="5">show that something exists or is likely to be true</button><button class="choice" data-d="6">reach a conclusion from evidence and reasoning</button><button class="choice" data-d="7">express something indirectly</button></div><div class="fb"></div></div></div></div>
+  <div class="score" id="ta2m-s"></div>
+
+  <div class="hide" id="ta2sw">
+    <h1 style="margin-top:26px">What does each verb need behind it?</h1>
+    <p class="sub">Before you use the verb, what do you need to have? Proof, a calculation, some signs or data, just confidence, or just a feeling?</p>
+    <div class="panel" id="ta2s"><div class="item" data-i="0"><b class="verb" style="min-width:90px">establish</b><div><div class="opt"><button class="choice" data-c="0">proof</button><button class="choice" data-c="1">a calculation</button><button class="choice" data-c="2">signs or data</button><button class="choice" data-c="3">confidence</button><button class="choice" data-c="4">a feeling</button></div><div class="fb"></div></div></div><div class="item" data-i="1"><b class="verb" style="min-width:90px">estimate</b><div><div class="opt"><button class="choice" data-c="0">proof</button><button class="choice" data-c="1">a calculation</button><button class="choice" data-c="2">signs or data</button><button class="choice" data-c="3">confidence</button><button class="choice" data-c="4">a feeling</button></div><div class="fb"></div></div></div><div class="item" data-i="2"><b class="verb" style="min-width:90px">indicate</b><div><div class="opt"><button class="choice" data-c="0">proof</button><button class="choice" data-c="1">a calculation</button><button class="choice" data-c="2">signs or data</button><button class="choice" data-c="3">confidence</button><button class="choice" data-c="4">a feeling</button></div><div class="fb"></div></div></div><div class="item" data-i="3"><b class="verb" style="min-width:90px">imply</b><div><div class="opt"><button class="choice" data-c="0">proof</button><button class="choice" data-c="1">a calculation</button><button class="choice" data-c="2">signs or data</button><button class="choice" data-c="3">confidence</button><button class="choice" data-c="4">a feeling</button></div><div class="fb"></div></div></div><div class="item" data-i="4"><b class="verb" style="min-width:90px">infer</b><div><div class="opt"><button class="choice" data-c="0">proof</button><button class="choice" data-c="1">a calculation</button><button class="choice" data-c="2">signs or data</button><button class="choice" data-c="3">confidence</button><button class="choice" data-c="4">a feeling</button></div><div class="fb"></div></div></div><div class="item" data-i="5"><b class="verb" style="min-width:90px">assert</b><div><div class="opt"><button class="choice" data-c="0">proof</button><button class="choice" data-c="1">a calculation</button><button class="choice" data-c="2">signs or data</button><button class="choice" data-c="3">confidence</button><button class="choice" data-c="4">a feeling</button></div><div class="fb"></div></div></div><div class="item" data-i="6"><b class="verb" style="min-width:90px">contend</b><div><div class="opt"><button class="choice" data-c="0">proof</button><button class="choice" data-c="1">a calculation</button><button class="choice" data-c="2">signs or data</button><button class="choice" data-c="3">confidence</button><button class="choice" data-c="4">a feeling</button></div><div class="fb"></div></div></div><div class="item" data-i="7"><b class="verb" style="min-width:90px">suspect</b><div><div class="opt"><button class="choice" data-c="0">proof</button><button class="choice" data-c="1">a calculation</button><button class="choice" data-c="2">signs or data</button><button class="choice" data-c="3">confidence</button><button class="choice" data-c="4">a feeling</button></div><div class="fb"></div></div></div></div>
+    <div class="score" id="ta2s-s"></div>
+  </div>
+
+  <div class="panel hide" id="ta2scale" style="border-left:6px solid var(--teal)">
+    <h2 style="margin-top:0">From weakest to strongest</h2>
+    <p style="margin:0 0 6px"><strong>a feeling</strong>: suspect &rarr; <strong>confidence</strong>: assert, contend &rarr; <strong>signs or data</strong>: indicate, imply, infer &rarr; <strong>a calculation</strong>: estimate &rarr; <strong>proof</strong>: establish</p>
+    <p class="note" style="margin:0">Careful: <em>assert</em> and <em>contend</em> sound strong. They are only as strong as the person&rsquo;s confidence.</p>
+  </div>
+
+  <div class="hide" id="ta2iw">
+    <h1 style="margin-top:26px">Imply or infer?</h1>
+    <p class="sub">The speaker (or the data) implies. The listener infers.</p>
+    <div class="panel" id="ta2i"><div class="item" data-i="0"><b>1</b><div>The data ___ that prices will rise next year.<div class="opt"><button class="choice" data-o="0">implies</button><button class="choice" data-o="1">infers</button></div><div class="fb"></div></div></div><div class="item" data-i="1"><b>2</b><div>From the data, we ___ that prices will rise next year.<div class="opt"><button class="choice" data-o="0">imply</button><button class="choice" data-o="1">infer</button></div><div class="fb"></div></div></div><div class="item" data-i="2"><b>3</b><div>Are you ___ that my calculation is wrong?<div class="opt"><button class="choice" data-o="0">implying</button><button class="choice" data-o="1">inferring</button></div><div class="fb"></div></div></div></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var P=[["Experts <span class='verb'>suspect</span> that advanced robotics will replace many manual jobs within the next decade.", "suspect", 1], ["Researchers <span class='verb'>establish</span> a clear link between screen time and reduced attention span in teenagers.", "establish", 0], ["Analysts <span class='verb'>estimate</span> that global demand for cloud storage will double by 2030.", "estimate", 2], ["Technology companies <span class='verb'>assert</span> that their new encryption systems are impossible to hack.", "assert", 3], ["Cybersecurity specialists <span class='verb'>contend</span> that AI-generated malware is becoming harder to detect.", "contend", 4], ["Recent surveys <span class='verb'>indicate</span> that users prefer apps with built-in privacy controls.", "indicate", 5], ["The trend <span class='verb'>implies</span> that traditional desktop software may soon become obsolete.", "imply", 7], ["Data scientists can <span class='verb'>infer</span> patterns in user behaviour by analysing millions of online interactions.", "infer", 6]], S=[["establish", 0, "You only <em>establish</em> something when the evidence is in. It is the strongest verb here."], ["estimate", 1, "An estimate is a number you worked out, and you know it is approximate. Look for <em>around</em>, <em>about</em>, <em>up to</em>."], ["indicate", 2, "Data and surveys <em>indicate</em>: they point in a direction, they don&rsquo;t prove."], ["imply", 2, "Data, trends and people <em>imply</em>: the meaning is there, but not said directly."], ["infer", 2, "<em>You</em> infer: you read the signs and reach a conclusion."], ["assert", 3, "You can assert something with no evidence at all. Only confidence is needed."], ["contend", 3, "The same as assert, but in an argument: someone else disagrees."], ["suspect", 4, "A feeling, often a bad one, without proof."]], I=[["The data ___ that prices will rise next year.", ["implies", "infers"], 0, "Data can&rsquo;t infer. Only people infer."], ["From the data, we ___ that prices will rise next year.", ["imply", "infer"], 1, "We read the data and reach a conclusion: we infer."], ["Are you ___ that my calculation is wrong?", ["implying", "inferring"], 0, "You are saying it indirectly: implying. Native speakers often get this one wrong."]], NEEDS=["proof", "a calculation", "signs or data", "confidence", "a feeling"], DEFS=["show that something is true through evidence", "believe that something is likely without proof, often something bad", "make an approximate judgement or calculation", "state a fact or belief confidently", "state something strongly in an argument or a debate", "show that something exists or is likely to be true", "reach a conclusion from evidence and reasoning", "express something indirectly"]; if(!document.getElementById('ta2m')) return;
+    var $=function(i){ return document.getElementById(i); };
+    function one(box,key,txt,done){
+      var n=0,r=0;
+      box.addEventListener('click',function(e){
+        var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||b.disabled) return;
+        var it=b.closest('.item'), i=+it.getAttribute('data-i'), bs=it.querySelectorAll('button'), k=key(i), got=+b.getAttribute(b.getAttributeNames().filter(function(a){return a.indexOf('data-')===0;})[0]), ok=got===k;
+        for(var x=0;x<bs.length;x++){ bs[x].disabled=true; var v=+bs[x].getAttribute(bs[x].getAttributeNames().filter(function(a){return a.indexOf('data-')===0;})[0]); if(v===k) bs[x].className='choice ok'; }
+        if(!ok) b.className='choice no';
+        var f=it.querySelector('.fb'); f.className='fb '+(ok?'ok':'no'); f.innerHTML=txt(i,ok,got);
+        n++; if(ok) r++; if(done) done(n,r,box.querySelectorAll('.item').length);
+      });
+    }
+    one($('ta2m'),function(i){ return P[i][2]; },function(i,ok,got){ return ok?'Yes.':'You chose: '+DEFS[got]+'.'; },
+      function(n,r,t){ $('ta2m-s').textContent=r+' of '+n+' right.'; if(n===t) $('ta2sw').classList.remove('hide'); });
+    one($('ta2s'),function(i){ return S[i][1]; },function(i,ok,got){ return (ok?'Yes. ':'You said '+NEEDS[got]+'. ')+'<span class="plain">'+S[i][2]+'</span>'; },
+      function(n,r,t){ $('ta2s-s').textContent=r+' of '+n+' right.'; if(n===t){ $('ta2scale').classList.remove('hide'); $('ta2iw').classList.remove('hide'); } });
+    one($('ta2i'),function(i){ return I[i][2]; },function(i,ok,got){ return (ok?'Yes. ':'You chose '+I[i][1][got]+'. ')+'<span class="plain">'+I[i][3]+'</span>'; });
+  })();
+  </script>
+</div>
+<hr><div id="ta3">
+  <style>
+    #ta3{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:860px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ta3 *{box-sizing:border-box;}
+    #ta3 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ta3 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ta3 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ta3 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ta3 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ta3 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ta3 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ta3 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #ta3 .q.on .start{display:block;}
+    #ta3 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #ta3 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ta3 button:hover{background:#0f4a5c;}
+    #ta3 button.ghost{background:transparent;color:var(--teal);}
+    #ta3 button.ghost:hover{background:var(--teal-bg);}
+    #ta3 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ta3 button.amber:hover{background:#e0a52a;}
+    #ta3 button:disabled{opacity:.45;cursor:default;}
+    #ta3 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #ta3 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ta3 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #ta3 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #ta3 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;opacity:1;}
+    #ta3 .choice:disabled{cursor:default;}
+    #ta3 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ta3 .fb.ok{color:var(--ok);} #ta3 .fb.no{color:var(--no);}
+    #ta3 .fb .plain{font-weight:normal;color:var(--ink);}
+    #ta3 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;background:#fff;color:var(--ink);}
+    #ta3 textarea:focus{outline:none;border-color:var(--teal);}
+    #ta3 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ta3 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ta3 .talk p{margin:0 0 6px;}
+    #ta3 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ta3 .ex p{margin:4px 0;}
+    #ta3 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #ta3 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #ta3 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #ta3 .note{font-size:14px;color:var(--muted);}
+    #ta3 .hide{display:none !important;}
+    #ta3 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ta3 .item:first-child{border-top:none;}
+    #ta3 .item > b{color:var(--teal);}
+    #ta3 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #ta3 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #ta3 .video iframe,#ta3 .video video,#ta3 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #ta3 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #ta3 table.t th,#ta3 table.t td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;}
+    #ta3 table.t th{background:var(--slate-bg);}
+    #ta3 table.t td.big{font-weight:bold;color:var(--teal);white-space:nowrap;}
+    #ta3 .ticks label{display:inline-flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:6px 12px;margin:0 6px 8px 0;cursor:pointer;font-size:16px;}
+    #ta3 .ticks label.ok{border-color:var(--ok);background:var(--ok-bg);}
+    #ta3 .ticks label.no{border-color:var(--no);background:var(--no-bg);}
+    #ta3 .ticks label.miss{border-color:var(--amber);border-style:dashed;}
+    #ta3 .verb{font-weight:bold;color:var(--teal);}
+    #ta3 .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    #ta3 .card{border:2px solid var(--line);border-radius:12px;padding:14px;background:#fff;cursor:pointer;font-weight:bold;text-align:center;}
+    #ta3 .card:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #ta3 .card.on{border-color:var(--teal);background:var(--teal-bg);box-shadow:0 0 0 3px var(--teal-bg);}
+    @media (max-width:560px){ #ta3 .cards{grid-template-columns:1fr;} #ta3 table.t{font-size:13px;} }
+  </style>
+
+  <h1>Choose the verb</h1>
+  <p class="sub">Eight claims about AI. Which verb fits the evidence behind each one?</p>
+  <div class="panel" id="ta3"><div class="item" data-i="0"><b>A</b><div>It has been <span class=gap>_____</span> that around 1.5% of the world&rsquo;s electricity goes to data centres.<div class="opt"><button class="choice" data-o="0">estimated</button><button class="choice" data-o="1">established</button></div><div class="fb"></div></div></div><div class="item" data-i="1"><b>B</b><div>Seeing the size of data centres, it can be <span class=gap>_____</span> that more communities will lose land to their construction.<div class="opt"><button class="choice" data-o="0">inferred</button><button class="choice" data-o="1">implied</button></div><div class="fb"></div></div></div><div class="item" data-i="2"><b>C</b><div>Some researchers have <span class=gap>_____</span> that AI has added to misinformation because it&rsquo;s often impossible to say if content was AI or human-generated.<div class="opt"><button class="choice" data-o="0">asserted</button><button class="choice" data-o="1">estimated</button></div><div class="fb"></div></div></div><div class="item" data-i="3"><b>D</b><div>Cybersecurity teams <span class=gap>_____</span> that AI bots have figured out how to dismantle paywalls.<div class="opt"><button class="choice" data-o="0">suspect</button><button class="choice" data-o="1">estimate</button></div><div class="fb"></div></div></div><div class="item" data-i="4"><b>E</b><div>Some reports <span class=gap>_____</span> AI hiring algorithms systematically disadvantage certain demographic groups.<div class="opt"><button class="choice" data-o="0">estimate</button><button class="choice" data-o="1">indicate</button></div><div class="fb"></div></div></div><div class="item" data-i="5"><b>F</b><div>Digital rights activists <span class=gap>_____</span> that AI surveillance systems violate fundamental privacy principles.<div class="opt"><button class="choice" data-o="0">suspect</button><button class="choice" data-o="1">contend</button></div><div class="fb"></div></div></div><div class="item" data-i="6"><b>G</b><div>The rapid rise of autonomous weapons <span class=gap>_____</span> that governments may soon rely on machines to make life-or-death decisions.<div class="opt"><button class="choice" data-o="0">implies</button><button class="choice" data-o="1">infers</button></div><div class="fb"></div></div></div><div class="item" data-i="7"><b>H</b><div>It is <span class=gap>_____</span> that global spending on AI technologies will surpass 900 billion dollars by the end of the decade.<div class="opt"><button class="choice" data-o="0">inferred</button><button class="choice" data-o="1">estimated</button></div><div class="fb"></div></div></div></div>
+  <div class="score" id="ta3-s"></div>
+  <div class="talk hide" id="ta3-t">
+    <p><strong>In pairs</strong>: which two of these eight issues worry you most? Why?</p>
+    <p class="note">Use the verb from the sentence: <em>Activists contend that... and I agree, because...</em></p>
+  </div>
+
+
+  <script>
+  (function(){
+    var C=[["It has been ___ that around 1.5% of the world&rsquo;s electricity goes to data centres.", ["estimated", "established"], [0], "<em>Around</em> is the clue: it is a calculation. The International Energy Agency&rsquo;s estimate for 2024."], ["Seeing the size of data centres, it can be ___ that more communities will lose land to their construction.", ["inferred", "implied"], [0], "We look at the signs and reach a conclusion: inferred."], ["Some researchers have ___ that AI has added to misinformation because it&rsquo;s often impossible to say if content was AI or human-generated.", ["asserted", "estimated"], [0], "There is no number here, so nothing to estimate. They say it confidently: asserted."], ["Cybersecurity teams ___ that AI bots have figured out how to dismantle paywalls.", ["suspect", "estimate"], [0], "No number, no proof, and something bad: suspect."], ["Some reports ___ AI hiring algorithms systematically disadvantage certain demographic groups.", ["estimate", "indicate"], [1], "Reports point in a direction: indicate. Estimate would need a number."], ["Digital rights activists ___ that AI surveillance systems violate fundamental privacy principles.", ["suspect", "contend"], [0, 1], "Both work. <em>Contend</em>: they say it in public, in a debate. <em>Suspect</em>: they think it, without proof. Activists usually contend."], ["The rapid rise of autonomous weapons ___ that governments may soon rely on machines to make life-or-death decisions.", ["implies", "infers"], [0], "A trend can&rsquo;t infer. Only people infer. The trend implies."], ["It is ___ that global spending on AI technologies will surpass 900 billion dollars by the end of the decade.", ["inferred", "estimated"], [1], "A number about the future: estimated."]], box=document.getElementById('ta3'); if(!box) return; var n=0,r=0;
+    box.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||b.disabled) return;
+      var it=b.closest('.item'), i=+it.getAttribute('data-i'), bs=it.querySelectorAll('button'), got=+b.getAttribute('data-o'), ok=C[i][2].indexOf(got)>-1;
+      for(var x=0;x<bs.length;x++){ bs[x].disabled=true; if(C[i][2].indexOf(x)>-1) bs[x].className='choice ok'; }
+      if(!ok) b.className='choice no';
+      it.querySelector('.gap').textContent=C[i][1][got];
+      var f=it.querySelector('.fb'); f.className='fb '+(ok?'ok':'no'); f.innerHTML=(ok?'Yes. ':'You chose '+C[i][1][got]+'. ')+'<span class="plain">'+C[i][3]+'</span>';
+      n++; if(ok) r++; document.getElementById('ta3-s').textContent=r+' of '+n+' right.';
+      if(n===C.length) document.getElementById('ta3-t').classList.remove('hide');
+    });
+  })();
+  </script>
+</div>
+<hr><div id="ta4">
+  <style>
+    #ta4{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:860px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ta4 *{box-sizing:border-box;}
+    #ta4 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ta4 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ta4 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ta4 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ta4 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ta4 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ta4 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ta4 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #ta4 .q.on .start{display:block;}
+    #ta4 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #ta4 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ta4 button:hover{background:#0f4a5c;}
+    #ta4 button.ghost{background:transparent;color:var(--teal);}
+    #ta4 button.ghost:hover{background:var(--teal-bg);}
+    #ta4 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ta4 button.amber:hover{background:#e0a52a;}
+    #ta4 button:disabled{opacity:.45;cursor:default;}
+    #ta4 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #ta4 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ta4 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #ta4 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #ta4 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;opacity:1;}
+    #ta4 .choice:disabled{cursor:default;}
+    #ta4 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ta4 .fb.ok{color:var(--ok);} #ta4 .fb.no{color:var(--no);}
+    #ta4 .fb .plain{font-weight:normal;color:var(--ink);}
+    #ta4 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;background:#fff;color:var(--ink);}
+    #ta4 textarea:focus{outline:none;border-color:var(--teal);}
+    #ta4 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ta4 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ta4 .talk p{margin:0 0 6px;}
+    #ta4 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ta4 .ex p{margin:4px 0;}
+    #ta4 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #ta4 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #ta4 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #ta4 .note{font-size:14px;color:var(--muted);}
+    #ta4 .hide{display:none !important;}
+    #ta4 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ta4 .item:first-child{border-top:none;}
+    #ta4 .item > b{color:var(--teal);}
+    #ta4 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #ta4 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #ta4 .video iframe,#ta4 .video video,#ta4 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #ta4 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #ta4 table.t th,#ta4 table.t td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;}
+    #ta4 table.t th{background:var(--slate-bg);}
+    #ta4 table.t td.big{font-weight:bold;color:var(--teal);white-space:nowrap;}
+    #ta4 .ticks label{display:inline-flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:6px 12px;margin:0 6px 8px 0;cursor:pointer;font-size:16px;}
+    #ta4 .ticks label.ok{border-color:var(--ok);background:var(--ok-bg);}
+    #ta4 .ticks label.no{border-color:var(--no);background:var(--no-bg);}
+    #ta4 .ticks label.miss{border-color:var(--amber);border-style:dashed;}
+    #ta4 .verb{font-weight:bold;color:var(--teal);}
+    #ta4 .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    #ta4 .card{border:2px solid var(--line);border-radius:12px;padding:14px;background:#fff;cursor:pointer;font-weight:bold;text-align:center;}
+    #ta4 .card:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #ta4 .card.on{border-color:var(--teal);background:var(--teal-bg);box-shadow:0 0 0 3px var(--teal-bg);}
+    @media (max-width:560px){ #ta4 .cards{grid-template-columns:1fr;} #ta4 table.t{font-size:13px;} }
+  </style>
+
+  <h1>How AI uses our drinking water</h1>
+  <p class="sub">Watch the next part. Why are these things mentioned? Write a few words for each, then check.</p>
+  
+    <div class="video"><div id="ta4p-yt"></div></div>
+    <div class="btns">
+      <button id="ta4p-play">Play 1:30 to 5:09</button>
+      <button id="ta4p-back" class="ghost">Back 5 s</button>
+      <span class="note" id="ta4p-t" style="margin-left:auto"></span>
+    </div>
+  <p class="note">Video: <em>How AI uses our drinking water</em>, BBC World Service (YouTube).</p>
+  <div class="panel" id="ta4w" style="margin-top:12px"><div class="item"><b>A</b><div><strong>air-cooling systems</strong><textarea placeholder="Why is it mentioned? A few words." style="min-height:44px;margin-top:6px"></textarea><div class="ans hide" style="margin-top:6px;color:var(--ok)"><strong>Most data centres used air cooling, and that was fine until AI came along.</strong> <span class="note">(2:06)</span></div></div></div><div class="item"><b>B</b><div><strong>drinking water</strong><textarea placeholder="Why is it mentioned? A few words." style="min-height:44px;margin-top:6px"></textarea><div class="ans hide" style="margin-top:6px;color:var(--ok)"><strong>Liquid cooling needs clean water, to stop bacteria, clogs and corrosion. So it is mostly drinking water.</strong> <span class="note">(2:24)</span></div></div></div><div class="item"><b>C</b><div><strong>absorb the heat</strong><textarea placeholder="Why is it mentioned? A few words." style="min-height:44px;margin-top:6px"></textarea><div class="ans hide" style="margin-top:6px;color:var(--ok)"><strong>The coolant absorbs the heat from the chips and carries it to a heat exchanger.</strong> <span class="note">(2:41)</span></div></div></div><div class="item"><b>D</b><div><strong>80%</strong><textarea placeholder="Why is it mentioned? A few words." style="min-height:44px;margin-top:6px"></textarea><div class="ans hide" style="margin-top:6px;color:var(--ok)"><strong>Up to 80% of the water evaporates in the cooling towers.</strong> <span class="note">(3:10)</span></div></div></div><div class="item"><b>E</b><div><strong>400%</strong><textarea placeholder="Why is it mentioned? A few words." style="min-height:44px;margin-top:6px"></textarea><div class="ans hide" style="margin-top:6px;color:var(--ok)"><strong>The International Energy Agency expects electricity demand for AI-optimised data centres to increase by 400% by 2030, to 300 TWh: about the UK&rsquo;s electricity for a year.</strong> <span class="note">(4:00)</span></div></div></div><div class="item"><b>F</b><div><strong>AI hardware</strong><textarea placeholder="Why is it mentioned? A few words." style="min-height:44px;margin-top:6px"></textarea><div class="ans hide" style="margin-top:6px;color:var(--ok)"><strong>Water is also needed to make the chips and to refine the raw materials for them.</strong> <span class="note">(4:18)</span></div></div></div><div class="item"><b>G</b><div><strong>Google, Meta and Microsoft annual reports</strong><textarea placeholder="Why is it mentioned? A few words." style="min-height:44px;margin-top:6px"></textarea><div class="ans hide" style="margin-top:6px;color:var(--ok)"><strong>Their data centres use billions of litres a year from local sources, but none of them say how much of it is due to AI.</strong> <span class="note">(4:47)</span></div></div></div>
+    <div class="btns"><button id="ta4-show" class="amber">Show the answers</button></div>
+  </div>
+
+  <div class="hide" id="ta4b">
+    <h1 style="margin-top:26px">How strong is each claim?</h1>
+    <p class="sub">Three claims from the video. Which verb fits the evidence behind it?</p>
+    <div class="panel" id="ta4c"><div class="item" data-i="0"><b>1</b><div>&ldquo;For liquid cooling the water must be clean to prevent bacteria growing or clogs and corrosion in the system.&rdquo; (2:24)<div class="opt"><button class="choice" data-o="0">established</button><button class="choice" data-o="1">estimated</button><button class="choice" data-o="2">asserted</button></div><div class="fb"></div></div></div><div class="item" data-i="1"><b>2</b><div>&ldquo;Overall, up to 80% of the water evaporates.&rdquo; (3:10)<div class="opt"><button class="choice" data-o="0">established</button><button class="choice" data-o="1">estimated</button><button class="choice" data-o="2">suspected</button></div><div class="fb"></div></div></div><div class="item" data-i="2"><b>3</b><div>&ldquo;Electricity demand for AI-optimised data centres is expected to increase by 400% by 2030.&rdquo; (4:00)<div class="opt"><button class="choice" data-o="0">established</button><button class="choice" data-o="1">estimated</button><button class="choice" data-o="2">asserted</button></div><div class="fb"></div></div></div></div>
+    <div class="talk">
+      <p><strong>Now argue it.</strong> Google, Meta and Microsoft publish their total water use, not the AI part. So if a journalist gives you a number for AI only, has it been <em>inferred</em> or <em>estimated</em>? Both answers can be defended. Defend one.</p>
+    </div>
+    <div class="ex"><p><strong>Engineers&rsquo; corner.</strong> At the board: why does a cooling tower lose water, and a closed loop doesn&rsquo;t? What does the closed loop lose instead?</p>
+    <p><strong>Maths check.</strong> &ldquo;Increase <em>by</em> 400%&rdquo;: if demand is 60 TWh today, what is it in 2030?</p></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var A=90, B=309, done=false; if(!document.getElementById('ta4p-play')) return;
+    function fire(){ if(done) return; done=true; if(window['ta4Done']) window['ta4Done'](); }
+    
+    var P=null, rdy=false;
+    var V={ok:function(){return rdy;}, play:function(){ if(!rdy) return; var t=P.getCurrentTime(); if(t<A-0.5||t>=B) P.seekTo(A,true); P.playVideo(); },
+      pause:function(){ if(rdy) P.pauseVideo(); }, t:function(){ return rdy?P.getCurrentTime():0; }, seek:function(s){ if(rdy) P.seekTo(s,true); }};
+    function make(){ P=new YT.Player('ta4p-yt',{videoId:'b0C56yqIkbk',playerVars:{rel:0,playsinline:1,modestbranding:1,start:Math.floor(A)},
+      events:{onReady:function(){ rdy=true; },onStateChange:function(e){ if(e.data===0) fire(); }}}); }
+    if(window.YT&&window.YT.Player) make();
+    else { var prev=window.onYouTubeIframeAPIReady; window.onYouTubeIframeAPIReady=function(){ if(prev) prev(); make(); };
+      var sc=document.createElement('script'); sc.src='https://www.youtube.com/iframe_api'; document.head.appendChild(sc); }
+    setInterval(function(){ if(!V.ok()) return; var t=V.t();
+      var m=Math.floor(t/60), s=Math.floor(t%60); document.getElementById('ta4p-t').textContent=m+':'+(s<10?'0':'')+s;
+      if(t>=B-0.1&&t<B+2){ V.pause(); fire(); } },150);
+    document.getElementById('ta4p-play').addEventListener('click',function(){ V.play(); });
+    document.getElementById('ta4p-back').addEventListener('click',function(){ V.seek(Math.max(A,V.t()-5)); });
+  })();
+  </script>
+  <script>
+  (function(){
+    var T=[["&ldquo;For liquid cooling the water must be clean to prevent bacteria growing or clogs and corrosion in the system.&rdquo; (2:24)", ["established", "estimated", "asserted"], 0, "Engineers know this from experience and tests. Nobody disputes it: established."], ["&ldquo;Overall, up to 80% of the water evaporates.&rdquo; (3:10)", ["established", "estimated", "suspected"], 1, "<em>Up to</em> gives it away. A calculated range: estimated."], ["&ldquo;Electricity demand for AI-optimised data centres is expected to increase by 400% by 2030.&rdquo; (4:00)", ["established", "estimated", "asserted"], 1, "2030 hasn&rsquo;t happened. A projection is an estimate, never established."]]; if(!document.getElementById('ta4w')) return; var $=function(i){ return document.getElementById(i); };
+    function show(){ var a=document.querySelectorAll('#ta4w .ans'); for(var i=0;i<a.length;i++) a[i].classList.remove('hide');
+      $('ta4-show').disabled=true; $('ta4b').classList.remove('hide'); }
+    $('ta4-show').addEventListener('click',show);
+    window.ta4Done=function(){ $('ta4w').scrollIntoView({behavior:'smooth',block:'start'}); };
+    $('ta4c').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||b.disabled) return;
+      var it=b.closest('.item'), i=+it.getAttribute('data-i'), bs=it.querySelectorAll('button'), got=+b.getAttribute('data-o'), ok=got===T[i][2];
+      for(var x=0;x<bs.length;x++){ bs[x].disabled=true; if(x===T[i][2]) bs[x].className='choice ok'; }
+      if(!ok) b.className='choice no';
+      var f=it.querySelector('.fb'); f.className='fb '+(ok?'ok':'no'); f.innerHTML=(ok?'Yes. ':'You chose '+T[i][1][got]+'. ')+'<span class="plain">'+T[i][3]+'</span>';
+    });
+  })();
+  </script>
+</div>
+<hr><div id="ta5">
+  <style>
+    #ta5{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:860px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ta5 *{box-sizing:border-box;}
+    #ta5 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ta5 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ta5 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ta5 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ta5 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ta5 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ta5 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ta5 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #ta5 .q.on .start{display:block;}
+    #ta5 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #ta5 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ta5 button:hover{background:#0f4a5c;}
+    #ta5 button.ghost{background:transparent;color:var(--teal);}
+    #ta5 button.ghost:hover{background:var(--teal-bg);}
+    #ta5 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ta5 button.amber:hover{background:#e0a52a;}
+    #ta5 button:disabled{opacity:.45;cursor:default;}
+    #ta5 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #ta5 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ta5 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #ta5 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #ta5 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;opacity:1;}
+    #ta5 .choice:disabled{cursor:default;}
+    #ta5 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ta5 .fb.ok{color:var(--ok);} #ta5 .fb.no{color:var(--no);}
+    #ta5 .fb .plain{font-weight:normal;color:var(--ink);}
+    #ta5 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;background:#fff;color:var(--ink);}
+    #ta5 textarea:focus{outline:none;border-color:var(--teal);}
+    #ta5 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ta5 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ta5 .talk p{margin:0 0 6px;}
+    #ta5 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ta5 .ex p{margin:4px 0;}
+    #ta5 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #ta5 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #ta5 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #ta5 .note{font-size:14px;color:var(--muted);}
+    #ta5 .hide{display:none !important;}
+    #ta5 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ta5 .item:first-child{border-top:none;}
+    #ta5 .item > b{color:var(--teal);}
+    #ta5 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #ta5 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #ta5 .video iframe,#ta5 .video video,#ta5 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #ta5 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #ta5 table.t th,#ta5 table.t td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;}
+    #ta5 table.t th{background:var(--slate-bg);}
+    #ta5 table.t td.big{font-weight:bold;color:var(--teal);white-space:nowrap;}
+    #ta5 .ticks label{display:inline-flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:6px 12px;margin:0 6px 8px 0;cursor:pointer;font-size:16px;}
+    #ta5 .ticks label.ok{border-color:var(--ok);background:var(--ok-bg);}
+    #ta5 .ticks label.no{border-color:var(--no);background:var(--no-bg);}
+    #ta5 .ticks label.miss{border-color:var(--amber);border-style:dashed;}
+    #ta5 .verb{font-weight:bold;color:var(--teal);}
+    #ta5 .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    #ta5 .card{border:2px solid var(--line);border-radius:12px;padding:14px;background:#fff;cursor:pointer;font-weight:bold;text-align:center;}
+    #ta5 .card:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #ta5 .card.on{border-color:var(--teal);background:var(--teal-bg);box-shadow:0 0 0 3px var(--teal-bg);}
+    @media (max-width:560px){ #ta5 .cards{grid-template-columns:1fr;} #ta5 table.t{font-size:13px;} }
+  </style>
+
+  <h1>Rewrite it</h1>
+  <p class="sub">Five more ways data centres affect the people who live near them. Rewrite each sentence with a verb from the box, in the right form. Use a different verb each time.</p>
+  <div class="lang"><b>VERBS</b><span>assert</span><span>contend</span><span>establish</span><span>imply</span><span>indicate</span><span>infer</span><span>suspect</span><span style="text-decoration:line-through;opacity:.6">estimate</span></div>
+  <div class="ex"><p>According to a report, data centres could increase the typical electricity bill in the US state of Virginia by $37 per month by 2040.</p>
+  <p>&rarr; <em>It&rsquo;s been <strong>estimated</strong> that data centres could increase the typical electricity bill in Virginia by $37 per month by 2040.</em></p></div>
+  <div class="panel" id="ta5"><div class="item" data-i="0"><b>A</b><div>According to some residents of the areas surrounding data centres, the noise levels reduce their ability to work and sleep.<textarea placeholder="Rewrite it with one of the verbs."></textarea><div class="fb"></div><div class="ans hide note" style="font-size:16px;color:var(--ink)">A possible answer: Some residents of the areas surrounding data centres have <strong>indicated</strong> that the noise levels reduce their ability to work and sleep.</div></div></div><div class="item" data-i="1"><b>B</b><div>Heavy truck traffic and diesel exhaust emissions are common near data centres, and they will increase further when several data centres are clustered together.<textarea placeholder="Rewrite it with one of the verbs."></textarea><div class="fb"></div><div class="ans hide note" style="font-size:16px;color:var(--ink)">A possible answer: It can be <strong>inferred</strong> that when several data centres are clustered together, the truck traffic and diesel exhaust emissions will increase.</div></div></div><div class="item" data-i="2"><b>C</b><div>Researchers have found that data centres affect the air and water quality.<textarea placeholder="Rewrite it with one of the verbs."></textarea><div class="fb"></div><div class="ans hide note" style="font-size:16px;color:var(--ink)">A possible answer: It&rsquo;s been <strong>established</strong> that data centres affect the air and water quality.</div></div></div><div class="item" data-i="3"><b>D</b><div>People use phrases like &lsquo;uncontrolled growth in AI&rsquo; because they don&rsquo;t think that current regulation is keeping up with data centre expansion.<textarea placeholder="Rewrite it with one of the verbs."></textarea><div class="fb"></div><div class="ans hide note" style="font-size:16px;color:var(--ink)">A possible answer: People use phrases like &lsquo;uncontrolled growth in AI&rsquo; to <strong>imply</strong> that current regulation may not be keeping up with data centre expansion.</div></div></div><div class="item" data-i="4"><b>E</b><div>Some residents worry that farmland will be converted into industrial zones as developers propose more and more data centres.<textarea placeholder="Rewrite it with one of the verbs."></textarea><div class="fb"></div><div class="ans hide note" style="font-size:16px;color:var(--ink)">A possible answer: Some residents <strong>suspect</strong> that developers will convert farmland into industrial zones as they propose more and more data centres.</div></div></div>
+    <div class="btns"><button id="ta5-chk">Check my verbs</button><button id="ta5-show" class="ghost">Possible answers</button></div>
+  </div>
+  <p class="note">There is more than one good answer for each sentence. The page only checks which verbs you used, not the whole sentence: compare with your partner.</p>
+
+
+  <script>
+  (function(){
+    var V=["assert", "contend", "establish", "imply", "indicate", "infer", "suspect"], box=document.getElementById('ta5'); if(!box) return;
+    var FORMS={}; V.forEach(function(v){ var st=v.replace(/e$/,''); FORMS[v]=new RegExp('\\b'+st+'(e|es|ed|ing|s)?\\b','i'); });
+    FORMS['imply']=/\bimpl(y|ies|ied|ying)\b/i;
+    FORMS['infer']=/\binfer(s|red|ring)?\b/i;
+    document.getElementById('ta5-chk').addEventListener('click',function(){
+      var its=box.querySelectorAll('.item'), seen={};
+      for(var i=0;i<its.length;i++){ var t=its[i].querySelector('textarea').value, f=its[i].querySelector('.fb'), got=[];
+        if(!t.trim()){ f.className='fb'; f.textContent=''; continue; }
+        V.forEach(function(v){ if(FORMS[v].test(t)) got.push(v); });
+        if(!got.length){ f.className='fb no'; f.textContent='I can\'t find one of the seven verbs.'; continue; }
+        var rep=got.filter(function(v){ return seen[v]; }); got.forEach(function(v){ seen[v]=1; });
+        f.className='fb '+(rep.length?'no':'ok'); f.textContent=rep.length?'You already used '+rep.join(', ')+'. Try a different verb.':'Verb: '+got.join(', ')+'.'; }
+    });
+    document.getElementById('ta5-show').addEventListener('click',function(){ var a=box.querySelectorAll('.ans'); for(var i=0;i<a.length;i++) a[i].classList.remove('hide'); this.disabled=true; });
+  })();
+  </script>
+</div>
+<hr><div id="ta6">
+  <style>
+    #ta6{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:860px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ta6 *{box-sizing:border-box;}
+    #ta6 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ta6 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ta6 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ta6 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ta6 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ta6 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ta6 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ta6 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #ta6 .q.on .start{display:block;}
+    #ta6 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #ta6 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ta6 button:hover{background:#0f4a5c;}
+    #ta6 button.ghost{background:transparent;color:var(--teal);}
+    #ta6 button.ghost:hover{background:var(--teal-bg);}
+    #ta6 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ta6 button.amber:hover{background:#e0a52a;}
+    #ta6 button:disabled{opacity:.45;cursor:default;}
+    #ta6 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #ta6 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ta6 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #ta6 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #ta6 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;opacity:1;}
+    #ta6 .choice:disabled{cursor:default;}
+    #ta6 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ta6 .fb.ok{color:var(--ok);} #ta6 .fb.no{color:var(--no);}
+    #ta6 .fb .plain{font-weight:normal;color:var(--ink);}
+    #ta6 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;background:#fff;color:var(--ink);}
+    #ta6 textarea:focus{outline:none;border-color:var(--teal);}
+    #ta6 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ta6 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ta6 .talk p{margin:0 0 6px;}
+    #ta6 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ta6 .ex p{margin:4px 0;}
+    #ta6 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #ta6 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #ta6 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #ta6 .note{font-size:14px;color:var(--muted);}
+    #ta6 .hide{display:none !important;}
+    #ta6 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ta6 .item:first-child{border-top:none;}
+    #ta6 .item > b{color:var(--teal);}
+    #ta6 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #ta6 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #ta6 .video iframe,#ta6 .video video,#ta6 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #ta6 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #ta6 table.t th,#ta6 table.t td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;}
+    #ta6 table.t th{background:var(--slate-bg);}
+    #ta6 table.t td.big{font-weight:bold;color:var(--teal);white-space:nowrap;}
+    #ta6 .ticks label{display:inline-flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:6px 12px;margin:0 6px 8px 0;cursor:pointer;font-size:16px;}
+    #ta6 .ticks label.ok{border-color:var(--ok);background:var(--ok-bg);}
+    #ta6 .ticks label.no{border-color:var(--no);background:var(--no-bg);}
+    #ta6 .ticks label.miss{border-color:var(--amber);border-style:dashed;}
+    #ta6 .verb{font-weight:bold;color:var(--teal);}
+    #ta6 .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    #ta6 .card{border:2px solid var(--line);border-radius:12px;padding:14px;background:#fff;cursor:pointer;font-weight:bold;text-align:center;}
+    #ta6 .card:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #ta6 .card.on{border-color:var(--teal);background:var(--teal-bg);box-shadow:0 0 0 3px var(--teal-bg);}
+    @media (max-width:560px){ #ta6 .cards{grid-template-columns:1fr;} #ta6 table.t{font-size:13px;} }
+  </style>
+
+  <h1>What can be done?</h1>
+  <p class="sub">The end of the video: what the industry says it is trying.</p>
+  
+    <div class="video"><div id="ta6p-yt"></div></div>
+    <div class="btns">
+      <button id="ta6p-play">Play 5:00 to 6:36</button>
+      <button id="ta6p-back" class="ghost">Back 5 s</button>
+      <span class="note" id="ta6p-t" style="margin-left:auto"></span>
+    </div>
+  <p class="note">Video: <em>How AI uses our drinking water</em>, BBC World Service (YouTube).</p>
+  <h2>Pick one solution with your partner</h2>
+  <div class="cards" id="ta6c"><div class="card" data-i="0">Pay people who live near data centres</div><div class="card" data-i="1">Move data centres under the sea, to the Arctic or into space</div><div class="card" data-i="2">Put legal limits on how much people can use AI</div><div class="card" data-i="3">Ask consumers to boycott AI services</div><div class="card" data-i="4">Make data centres use a fixed share of renewable energy</div></div>
+  <div class="btns"><button id="ta6-pick" class="amber">Pick one for us</button></div>
+  <div class="talk hide" id="ta6t">
+    <p><strong id="ta6-name"></strong></p>
+    <p>1. How feasible is it? Who would pay?</p>
+    <p>2. One benefit and one drawback.</p>
+    <p>3. What would it change for AI users, for governments, for companies?</p>
+    <p class="note" style="margin-top:10px">Use at least two of the verbs. <em>Critics contend that... &middot; It can be inferred that... &middot; It&rsquo;s been estimated that... &middot; I suspect that...</em></p>
+    <textarea placeholder="Your best sentence, with one of the verbs."></textarea>
+  </div>
+
+
+  <script>
+  (function(){
+    var A=300, B=396, done=false; if(!document.getElementById('ta6p-play')) return;
+    function fire(){ if(done) return; done=true; if(window['ta6Done']) window['ta6Done'](); }
+    
+    var P=null, rdy=false;
+    var V={ok:function(){return rdy;}, play:function(){ if(!rdy) return; var t=P.getCurrentTime(); if(t<A-0.5||t>=B) P.seekTo(A,true); P.playVideo(); },
+      pause:function(){ if(rdy) P.pauseVideo(); }, t:function(){ return rdy?P.getCurrentTime():0; }, seek:function(s){ if(rdy) P.seekTo(s,true); }};
+    function make(){ P=new YT.Player('ta6p-yt',{videoId:'b0C56yqIkbk',playerVars:{rel:0,playsinline:1,modestbranding:1,start:Math.floor(A)},
+      events:{onReady:function(){ rdy=true; },onStateChange:function(e){ if(e.data===0) fire(); }}}); }
+    if(window.YT&&window.YT.Player) make();
+    else { var prev=window.onYouTubeIframeAPIReady; window.onYouTubeIframeAPIReady=function(){ if(prev) prev(); make(); };
+      var sc=document.createElement('script'); sc.src='https://www.youtube.com/iframe_api'; document.head.appendChild(sc); }
+    setInterval(function(){ if(!V.ok()) return; var t=V.t();
+      var m=Math.floor(t/60), s=Math.floor(t%60); document.getElementById('ta6p-t').textContent=m+':'+(s<10?'0':'')+s;
+      if(t>=B-0.1&&t<B+2){ V.pause(); fire(); } },150);
+    document.getElementById('ta6p-play').addEventListener('click',function(){ V.play(); });
+    document.getElementById('ta6p-back').addEventListener('click',function(){ V.seek(Math.max(A,V.t()-5)); });
+  })();
+  </script>
+  <script>
+  (function(){
+    var box=document.getElementById('ta6c'); if(!box) return; var cs=box.querySelectorAll('.card'), last=-1;
+    function choose(i){ for(var k=0;k<cs.length;k++) cs[k].classList.toggle('on',k===i);
+      document.getElementById('ta6-name').textContent=cs[i].textContent; document.getElementById('ta6t').classList.remove('hide'); }
+    box.addEventListener('click',function(e){ var c=e.target.closest?e.target.closest('.card'):null; if(c) choose(+c.getAttribute('data-i')); });
+    document.getElementById('ta6-pick').addEventListener('click',function(){ var i; do{ i=Math.floor(Math.random()*cs.length); }while(i===last&&cs.length>1); last=i; choose(i); });
+    window.ta6Done=function(){};
+  })();
+  </script>
+</div>
+</body></html>

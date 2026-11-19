@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How thirsty is AI? Choose the verb</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="ta3">
+  <style>
+    #ta3{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:860px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ta3 *{box-sizing:border-box;}
+    #ta3 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ta3 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ta3 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ta3 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ta3 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ta3 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ta3 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ta3 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #ta3 .q.on .start{display:block;}
+    #ta3 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #ta3 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ta3 button:hover{background:#0f4a5c;}
+    #ta3 button.ghost{background:transparent;color:var(--teal);}
+    #ta3 button.ghost:hover{background:var(--teal-bg);}
+    #ta3 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ta3 button.amber:hover{background:#e0a52a;}
+    #ta3 button:disabled{opacity:.45;cursor:default;}
+    #ta3 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #ta3 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ta3 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #ta3 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #ta3 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;opacity:1;}
+    #ta3 .choice:disabled{cursor:default;}
+    #ta3 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ta3 .fb.ok{color:var(--ok);} #ta3 .fb.no{color:var(--no);}
+    #ta3 .fb .plain{font-weight:normal;color:var(--ink);}
+    #ta3 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;background:#fff;color:var(--ink);}
+    #ta3 textarea:focus{outline:none;border-color:var(--teal);}
+    #ta3 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ta3 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ta3 .talk p{margin:0 0 6px;}
+    #ta3 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ta3 .ex p{margin:4px 0;}
+    #ta3 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #ta3 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #ta3 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #ta3 .note{font-size:14px;color:var(--muted);}
+    #ta3 .hide{display:none !important;}
+    #ta3 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ta3 .item:first-child{border-top:none;}
+    #ta3 .item > b{color:var(--teal);}
+    #ta3 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #ta3 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #ta3 .video iframe,#ta3 .video video,#ta3 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #ta3 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #ta3 table.t th,#ta3 table.t td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;}
+    #ta3 table.t th{background:var(--slate-bg);}
+    #ta3 table.t td.big{font-weight:bold;color:var(--teal);white-space:nowrap;}
+    #ta3 .ticks label{display:inline-flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:6px 12px;margin:0 6px 8px 0;cursor:pointer;font-size:16px;}
+    #ta3 .ticks label.ok{border-color:var(--ok);background:var(--ok-bg);}
+    #ta3 .ticks label.no{border-color:var(--no);background:var(--no-bg);}
+    #ta3 .ticks label.miss{border-color:var(--amber);border-style:dashed;}
+    #ta3 .verb{font-weight:bold;color:var(--teal);}
+    #ta3 .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    #ta3 .card{border:2px solid var(--line);border-radius:12px;padding:14px;background:#fff;cursor:pointer;font-weight:bold;text-align:center;}
+    #ta3 .card:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #ta3 .card.on{border-color:var(--teal);background:var(--teal-bg);box-shadow:0 0 0 3px var(--teal-bg);}
+    @media (max-width:560px){ #ta3 .cards{grid-template-columns:1fr;} #ta3 table.t{font-size:13px;} }
+  </style>
+
+  <h1>Choose the verb</h1>
+  <p class="sub">Eight claims about AI. Which verb fits the evidence behind each one?</p>
+  <div class="panel" id="ta3"><div class="item" data-i="0"><b>A</b><div>It has been <span class=gap>_____</span> that around 1.5% of the world&rsquo;s electricity goes to data centres.<div class="opt"><button class="choice" data-o="0">estimated</button><button class="choice" data-o="1">established</button></div><div class="fb"></div></div></div><div class="item" data-i="1"><b>B</b><div>Seeing the size of data centres, it can be <span class=gap>_____</span> that more communities will lose land to their construction.<div class="opt"><button class="choice" data-o="0">inferred</button><button class="choice" data-o="1">implied</button></div><div class="fb"></div></div></div><div class="item" data-i="2"><b>C</b><div>Some researchers have <span class=gap>_____</span> that AI has added to misinformation because it&rsquo;s often impossible to say if content was AI or human-generated.<div class="opt"><button class="choice" data-o="0">asserted</button><button class="choice" data-o="1">estimated</button></div><div class="fb"></div></div></div><div class="item" data-i="3"><b>D</b><div>Cybersecurity teams <span class=gap>_____</span> that AI bots have figured out how to dismantle paywalls.<div class="opt"><button class="choice" data-o="0">suspect</button><button class="choice" data-o="1">estimate</button></div><div class="fb"></div></div></div><div class="item" data-i="4"><b>E</b><div>Some reports <span class=gap>_____</span> AI hiring algorithms systematically disadvantage certain demographic groups.<div class="opt"><button class="choice" data-o="0">estimate</button><button class="choice" data-o="1">indicate</button></div><div class="fb"></div></div></div><div class="item" data-i="5"><b>F</b><div>Digital rights activists <span class=gap>_____</span> that AI surveillance systems violate fundamental privacy principles.<div class="opt"><button class="choice" data-o="0">suspect</button><button class="choice" data-o="1">contend</button></div><div class="fb"></div></div></div><div class="item" data-i="6"><b>G</b><div>The rapid rise of autonomous weapons <span class=gap>_____</span> that governments may soon rely on machines to make life-or-death decisions.<div class="opt"><button class="choice" data-o="0">implies</button><button class="choice" data-o="1">infers</button></div><div class="fb"></div></div></div><div class="item" data-i="7"><b>H</b><div>It is <span class=gap>_____</span> that global spending on AI technologies will surpass 900 billion dollars by the end of the decade.<div class="opt"><button class="choice" data-o="0">inferred</button><button class="choice" data-o="1">estimated</button></div><div class="fb"></div></div></div></div>
+  <div class="score" id="ta3-s"></div>
+  <div class="talk hide" id="ta3-t">
+    <p><strong>In pairs</strong>: which two of these eight issues worry you most? Why?</p>
+    <p class="note">Use the verb from the sentence: <em>Activists contend that... and I agree, because...</em></p>
+  </div>
+
+
+  <script>
+  (function(){
+    var C=[["It has been ___ that around 1.5% of the world&rsquo;s electricity goes to data centres.", ["estimated", "established"], [0], "<em>Around</em> is the clue: it is a calculation. The International Energy Agency&rsquo;s estimate for 2024."], ["Seeing the size of data centres, it can be ___ that more communities will lose land to their construction.", ["inferred", "implied"], [0], "We look at the signs and reach a conclusion: inferred."], ["Some researchers have ___ that AI has added to misinformation because it&rsquo;s often impossible to say if content was AI or human-generated.", ["asserted", "estimated"], [0], "There is no number here, so nothing to estimate. They say it confidently: asserted."], ["Cybersecurity teams ___ that AI bots have figured out how to dismantle paywalls.", ["suspect", "estimate"], [0], "No number, no proof, and something bad: suspect."], ["Some reports ___ AI hiring algorithms systematically disadvantage certain demographic groups.", ["estimate", "indicate"], [1], "Reports point in a direction: indicate. Estimate would need a number."], ["Digital rights activists ___ that AI surveillance systems violate fundamental privacy principles.", ["suspect", "contend"], [0, 1], "Both work. <em>Contend</em>: they say it in public, in a debate. <em>Suspect</em>: they think it, without proof. Activists usually contend."], ["The rapid rise of autonomous weapons ___ that governments may soon rely on machines to make life-or-death decisions.", ["implies", "infers"], [0], "A trend can&rsquo;t infer. Only people infer. The trend implies."], ["It is ___ that global spending on AI technologies will surpass 900 billion dollars by the end of the decade.", ["inferred", "estimated"], [1], "A number about the future: estimated."]], box=document.getElementById('ta3'); if(!box) return; var n=0,r=0;
+    box.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||b.disabled) return;
+      var it=b.closest('.item'), i=+it.getAttribute('data-i'), bs=it.querySelectorAll('button'), got=+b.getAttribute('data-o'), ok=C[i][2].indexOf(got)>-1;
+      for(var x=0;x<bs.length;x++){ bs[x].disabled=true; if(C[i][2].indexOf(x)>-1) bs[x].className='choice ok'; }
+      if(!ok) b.className='choice no';
+      it.querySelector('.gap').textContent=C[i][1][got];
+      var f=it.querySelector('.fb'); f.className='fb '+(ok?'ok':'no'); f.innerHTML=(ok?'Yes. ':'You chose '+C[i][1][got]+'. ')+'<span class="plain">'+C[i][3]+'</span>';
+      n++; if(ok) r++; document.getElementById('ta3-s').textContent=r+' of '+n+' right.';
+      if(n===C.length) document.getElementById('ta3-t').classList.remove('hide');
+    });
+  })();
+  </script>
+</div>
+</body>
+</html>

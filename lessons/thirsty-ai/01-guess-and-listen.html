@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How thirsty is AI? Guess and listen</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="ta1">
+  <style>
+    #ta1{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:860px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ta1 *{box-sizing:border-box;}
+    #ta1 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ta1 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ta1 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ta1 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ta1 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ta1 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ta1 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ta1 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #ta1 .q.on .start{display:block;}
+    #ta1 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #ta1 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ta1 button:hover{background:#0f4a5c;}
+    #ta1 button.ghost{background:transparent;color:var(--teal);}
+    #ta1 button.ghost:hover{background:var(--teal-bg);}
+    #ta1 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ta1 button.amber:hover{background:#e0a52a;}
+    #ta1 button:disabled{opacity:.45;cursor:default;}
+    #ta1 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #ta1 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ta1 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #ta1 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #ta1 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;opacity:1;}
+    #ta1 .choice:disabled{cursor:default;}
+    #ta1 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ta1 .fb.ok{color:var(--ok);} #ta1 .fb.no{color:var(--no);}
+    #ta1 .fb .plain{font-weight:normal;color:var(--ink);}
+    #ta1 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;background:#fff;color:var(--ink);}
+    #ta1 textarea:focus{outline:none;border-color:var(--teal);}
+    #ta1 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ta1 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ta1 .talk p{margin:0 0 6px;}
+    #ta1 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ta1 .ex p{margin:4px 0;}
+    #ta1 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #ta1 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #ta1 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #ta1 .note{font-size:14px;color:var(--muted);}
+    #ta1 .hide{display:none !important;}
+    #ta1 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ta1 .item:first-child{border-top:none;}
+    #ta1 .item > b{color:var(--teal);}
+    #ta1 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #ta1 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #ta1 .video iframe,#ta1 .video video,#ta1 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #ta1 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #ta1 table.t th,#ta1 table.t td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;}
+    #ta1 table.t th{background:var(--slate-bg);}
+    #ta1 table.t td.big{font-weight:bold;color:var(--teal);white-space:nowrap;}
+    #ta1 .ticks label{display:inline-flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:6px 12px;margin:0 6px 8px 0;cursor:pointer;font-size:16px;}
+    #ta1 .ticks label.ok{border-color:var(--ok);background:var(--ok-bg);}
+    #ta1 .ticks label.no{border-color:var(--no);background:var(--no-bg);}
+    #ta1 .ticks label.miss{border-color:var(--amber);border-style:dashed;}
+    #ta1 .verb{font-weight:bold;color:var(--teal);}
+    #ta1 .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    #ta1 .card{border:2px solid var(--line);border-radius:12px;padding:14px;background:#fff;cursor:pointer;font-weight:bold;text-align:center;}
+    #ta1 .card:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #ta1 .card.on{border-color:var(--teal);background:var(--teal-bg);box-shadow:0 0 0 3px var(--teal-bg);}
+    @media (max-width:560px){ #ta1 .cards{grid-template-columns:1fr;} #ta1 table.t{font-size:13px;} }
+  </style>
+
+  <h1>How thirsty is AI?</h1>
+  <p class="sub">Two numbers about ChatGPT. Nobody in the room knows them, so just guess. Then lock your guesses.</p>
+  <div class="panel" id="ta1g"><div class="item" data-i="0"><b>1</b><div>How much water does one average message to ChatGPT use?<div class="opt"><button class="choice" data-o="0">a teaspoon</button><button class="choice" data-o="1">1/15 of a teaspoon</button><button class="choice" data-o="2">half a glass</button></div></div></div><div class="item" data-i="1"><b>2</b><div>How many messages are sent to ChatGPT every day?<div class="opt"><button class="choice" data-o="0">one million</button><button class="choice" data-o="1">one billion</button><button class="choice" data-o="2">one hundred billion</button></div></div></div>
+    <div class="btns"><button id="ta1-lock" disabled>Lock my guesses</button></div>
+  </div>
+
+  <div class="hide" id="ta1v">
+    <h2>Watch, and listen for <em>how</em> the numbers are introduced</h2>
+    <p class="sub">Tick the words and phrases you hear. Two of them are not in the video.</p>
+    <div class="ticks" id="ta1t"><label data-k="1"><input type="checkbox"> according to</label><label data-k="1"><input type="checkbox"> claims</label><label data-k="1"><input type="checkbox"> estimate</label><label data-k="1"><input type="checkbox"> sceptical</label><label data-k="1"><input type="checkbox"> not enough information</label><label data-k="1"><input type="checkbox"> trust</label><label data-k="0"><input type="checkbox"> proved</label><label data-k="0"><input type="checkbox"> confirmed</label></div>
+    
+    <div class="video"><div id="ta1p-yt"></div></div>
+    <div class="btns">
+      <button id="ta1p-play">Play 0:00 to 1:30</button>
+      <button id="ta1p-back" class="ghost">Back 5 s</button>
+      <span class="note" id="ta1p-t" style="margin-left:auto"></span>
+    </div>
+    <p class="note">Video: <em>How AI uses our drinking water</em>, BBC World Service (YouTube). <a href="#" id="ta1-skip">Skip to the answers</a></p>
+  </div>
+
+  <div class="hide" id="ta1a">
+    <div class="panel" id="ta1r" style="border-left:6px solid var(--ok)"></div>
+    <h1 style="margin-top:26px">Three numbers, one question</h1>
+    <p class="sub">How much water does one message to an AI use? Three different answers.</p>
+    <div class="panel" style="overflow-x:auto"><table class="t">
+      <tr><th>Who says so</th><th>Water per message</th><th>What it counts</th><th>Did they publish how they calculated it?</th></tr>
+      <tr><td>Sam Altman, boss of OpenAI (blog, June 2025)</td><td class="big">about 0.3 mL</td><td>Not said.</td><td>No. OpenAI declined to give the BBC details.</td></tr>
+      <tr><td>Prof. Shaolei Ren, University of California, Riverside (research on a GPT-3-sized model)</td><td class="big">10 to 50 mL</td><td>Cooling the data centre <strong>and</strong> producing its electricity.</td><td>Yes: a research study, <em>Making AI Less &lsquo;Thirsty&rsquo;</em>.</td></tr>
+      <tr><td>Google, about its own AI, Gemini (August 2025)</td><td class="big">0.26 mL</td><td>Cooling only. Not the water used to produce the electricity.</td><td>Yes, a technical paper. Not checked by independent scientists yet.</td></tr>
+    </table>
+    <p class="note" style="margin:8px 0 0">0.3 mL is 1/15 of a teaspoon. 500 mL for 10 to 50 messages is 10 to 50 mL each.</p></div>
+    <div class="talk">
+      <p><strong>In pairs</strong></p>
+      <p>1. The highest number is 30 to 150 times the lowest. Look at the &ldquo;What it counts&rdquo; column. Is one of them wrong, or are they measuring different things?</p>
+      <p>2. Which number would you trust most? Why?</p>
+      <p>3. The BBC calls Altman&rsquo;s number an <em>estimate</em>. Is that the right word for a number with no calculation published? What word would you use?</p>
+    </div>
+    <div class="ex"><p><strong>One more thing about numbers.</strong> The video says one billion messages a day. That was Altman&rsquo;s figure in December 2024. In July 2025, OpenAI said 2.5 billion. A number in a video has a date.</p></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var A=0, B=90, done=false; if(!document.getElementById('ta1p-play')) return;
+    function fire(){ if(done) return; done=true; if(window['ta1Done']) window['ta1Done'](); }
+    
+    var P=null, rdy=false;
+    var V={ok:function(){return rdy;}, play:function(){ if(!rdy) return; var t=P.getCurrentTime(); if(t<A-0.5||t>=B) P.seekTo(A,true); P.playVideo(); },
+      pause:function(){ if(rdy) P.pauseVideo(); }, t:function(){ return rdy?P.getCurrentTime():0; }, seek:function(s){ if(rdy) P.seekTo(s,true); }};
+    function make(){ P=new YT.Player('ta1p-yt',{videoId:'b0C56yqIkbk',playerVars:{rel:0,playsinline:1,modestbranding:1,start:Math.floor(A)},
+      events:{onReady:function(){ rdy=true; },onStateChange:function(e){ if(e.data===0) fire(); }}}); }
+    if(window.YT&&window.YT.Player) make();
+    else { var prev=window.onYouTubeIframeAPIReady; window.onYouTubeIframeAPIReady=function(){ if(prev) prev(); make(); };
+      var sc=document.createElement('script'); sc.src='https://www.youtube.com/iframe_api'; document.head.appendChild(sc); }
+    setInterval(function(){ if(!V.ok()) return; var t=V.t();
+      var m=Math.floor(t/60), s=Math.floor(t%60); document.getElementById('ta1p-t').textContent=m+':'+(s<10?'0':'')+s;
+      if(t>=B-0.1&&t<B+2){ V.pause(); fire(); } },150);
+    document.getElementById('ta1p-play').addEventListener('click',function(){ V.play(); });
+    document.getElementById('ta1p-back').addEventListener('click',function(){ V.seek(Math.max(A,V.t()-5)); });
+  })();
+  </script>
+  <script>
+  (function(){
+    var G=[["How much water does one average message to ChatGPT use?", ["a teaspoon", "1/15 of a teaspoon", "half a glass"], 1], ["How many messages are sent to ChatGPT every day?", ["one million", "one billion", "one hundred billion"], 1]], box=document.getElementById('ta1g'); if(!box) return;
+    var $=function(i){ return document.getElementById(i); }, pick=[null,null];
+    box.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button.choice'):null; if(!b||b.disabled) return;
+      var it=b.closest('.item'), i=+it.getAttribute('data-i'), bs=it.querySelectorAll('button');
+      for(var k=0;k<bs.length;k++) bs[k].classList.remove('sel'); b.classList.add('sel'); pick[i]=+b.getAttribute('data-o');
+      $('ta1-lock').disabled=pick[0]===null||pick[1]===null;
+    });
+    $('ta1-lock').addEventListener('click',function(){
+      var bs=box.querySelectorAll('button'); for(var k=0;k<bs.length;k++) bs[k].disabled=true;
+      this.textContent='Locked'; $('ta1v').classList.remove('hide'); $('ta1v').scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    window.ta1Done=function(){
+      if(!$('ta1a').classList.contains('hide')) return;
+      var h='<h2 style="margin-top:0">What the video says</h2>';
+      G.forEach(function(g,i){ var you=pick[i]===null?'no guess':g[1][pick[i]];
+        h+='<p style="margin:0 0 6px">'+g[0]+'<br><strong style="color:var(--ok)">'+g[1][g[2]]+'</strong> <span class="note">&middot; you guessed: '+you+(pick[i]===g[2]?' &#10003;':'')+'</span></p>'; });
+      h+='<p style="margin:10px 0 0"><strong>Both numbers come from one person: Sam Altman, the boss of OpenAI.</strong> Listen again to the words the BBC puts around them.</p>';
+      var ls=$('ta1t').querySelectorAll('label'), right=0;
+      for(var k=0;k<ls.length;k++){ var said=ls[k].getAttribute('data-k')==='1', on=ls[k].querySelector('input').checked;
+        ls[k].className=said?(on?'ok':'miss'):(on?'no':''); if(said===on) right++; ls[k].querySelector('input').disabled=true; }
+      h+='<p class="note" style="margin:6px 0 0">Words: '+right+' of '+ls.length+' right. Green: heard and ticked. Dashed: in the video, not ticked. Red: ticked, but not in the video (<em>proved</em>, <em>confirmed</em>). Nobody in the video says the number is proved.</p>';
+      $('ta1r').innerHTML=h; $('ta1a').classList.remove('hide'); $('ta1a').scrollIntoView({behavior:'smooth',block:'start'});
+    };
+    $('ta1-skip').addEventListener('click',function(e){ e.preventDefault(); window.ta1Done(); });
+  })();
+  </script>
+</div>
+</body>
+</html>

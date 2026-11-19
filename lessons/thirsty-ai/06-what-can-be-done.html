@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How thirsty is AI? What can be done?</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="ta6">
+  <style>
+    #ta6{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:860px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ta6 *{box-sizing:border-box;}
+    #ta6 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ta6 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ta6 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ta6 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ta6 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ta6 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ta6 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ta6 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #ta6 .q.on .start{display:block;}
+    #ta6 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #ta6 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ta6 button:hover{background:#0f4a5c;}
+    #ta6 button.ghost{background:transparent;color:var(--teal);}
+    #ta6 button.ghost:hover{background:var(--teal-bg);}
+    #ta6 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ta6 button.amber:hover{background:#e0a52a;}
+    #ta6 button:disabled{opacity:.45;cursor:default;}
+    #ta6 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #ta6 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ta6 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #ta6 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #ta6 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;opacity:1;}
+    #ta6 .choice:disabled{cursor:default;}
+    #ta6 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ta6 .fb.ok{color:var(--ok);} #ta6 .fb.no{color:var(--no);}
+    #ta6 .fb .plain{font-weight:normal;color:var(--ink);}
+    #ta6 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;background:#fff;color:var(--ink);}
+    #ta6 textarea:focus{outline:none;border-color:var(--teal);}
+    #ta6 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ta6 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ta6 .talk p{margin:0 0 6px;}
+    #ta6 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ta6 .ex p{margin:4px 0;}
+    #ta6 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #ta6 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #ta6 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #ta6 .note{font-size:14px;color:var(--muted);}
+    #ta6 .hide{display:none !important;}
+    #ta6 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ta6 .item:first-child{border-top:none;}
+    #ta6 .item > b{color:var(--teal);}
+    #ta6 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #ta6 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #ta6 .video iframe,#ta6 .video video,#ta6 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #ta6 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #ta6 table.t th,#ta6 table.t td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;}
+    #ta6 table.t th{background:var(--slate-bg);}
+    #ta6 table.t td.big{font-weight:bold;color:var(--teal);white-space:nowrap;}
+    #ta6 .ticks label{display:inline-flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:6px 12px;margin:0 6px 8px 0;cursor:pointer;font-size:16px;}
+    #ta6 .ticks label.ok{border-color:var(--ok);background:var(--ok-bg);}
+    #ta6 .ticks label.no{border-color:var(--no);background:var(--no-bg);}
+    #ta6 .ticks label.miss{border-color:var(--amber);border-style:dashed;}
+    #ta6 .verb{font-weight:bold;color:var(--teal);}
+    #ta6 .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    #ta6 .card{border:2px solid var(--line);border-radius:12px;padding:14px;background:#fff;cursor:pointer;font-weight:bold;text-align:center;}
+    #ta6 .card:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #ta6 .card.on{border-color:var(--teal);background:var(--teal-bg);box-shadow:0 0 0 3px var(--teal-bg);}
+    @media (max-width:560px){ #ta6 .cards{grid-template-columns:1fr;} #ta6 table.t{font-size:13px;} }
+  </style>
+
+  <h1>What can be done?</h1>
+  <p class="sub">The end of the video: what the industry says it is trying.</p>
+  
+    <div class="video"><div id="ta6p-yt"></div></div>
+    <div class="btns">
+      <button id="ta6p-play">Play 5:00 to 6:36</button>
+      <button id="ta6p-back" class="ghost">Back 5 s</button>
+      <span class="note" id="ta6p-t" style="margin-left:auto"></span>
+    </div>
+  <p class="note">Video: <em>How AI uses our drinking water</em>, BBC World Service (YouTube).</p>
+  <h2>Pick one solution with your partner</h2>
+  <div class="cards" id="ta6c"><div class="card" data-i="0">Pay people who live near data centres</div><div class="card" data-i="1">Move data centres under the sea, to the Arctic or into space</div><div class="card" data-i="2">Put legal limits on how much people can use AI</div><div class="card" data-i="3">Ask consumers to boycott AI services</div><div class="card" data-i="4">Make data centres use a fixed share of renewable energy</div></div>
+  <div class="btns"><button id="ta6-pick" class="amber">Pick one for us</button></div>
+  <div class="talk hide" id="ta6t">
+    <p><strong id="ta6-name"></strong></p>
+    <p>1. How feasible is it? Who would pay?</p>
+    <p>2. One benefit and one drawback.</p>
+    <p>3. What would it change for AI users, for governments, for companies?</p>
+    <p class="note" style="margin-top:10px">Use at least two of the verbs. <em>Critics contend that... &middot; It can be inferred that... &middot; It&rsquo;s been estimated that... &middot; I suspect that...</em></p>
+    <textarea placeholder="Your best sentence, with one of the verbs."></textarea>
+  </div>
+
+
+  <script>
+  (function(){
+    var A=300, B=396, done=false; if(!document.getElementById('ta6p-play')) return;
+    function fire(){ if(done) return; done=true; if(window['ta6Done']) window['ta6Done'](); }
+    
+    var P=null, rdy=false;
+    var V={ok:function(){return rdy;}, play:function(){ if(!rdy) return; var t=P.getCurrentTime(); if(t<A-0.5||t>=B) P.seekTo(A,true); P.playVideo(); },
+      pause:function(){ if(rdy) P.pauseVideo(); }, t:function(){ return rdy?P.getCurrentTime():0; }, seek:function(s){ if(rdy) P.seekTo(s,true); }};
+    function make(){ P=new YT.Player('ta6p-yt',{videoId:'b0C56yqIkbk',playerVars:{rel:0,playsinline:1,modestbranding:1,start:Math.floor(A)},
+      events:{onReady:function(){ rdy=true; },onStateChange:function(e){ if(e.data===0) fire(); }}}); }
+    if(window.YT&&window.YT.Player) make();
+    else { var prev=window.onYouTubeIframeAPIReady; window.onYouTubeIframeAPIReady=function(){ if(prev) prev(); make(); };
+      var sc=document.createElement('script'); sc.src='https://www.youtube.com/iframe_api'; document.head.appendChild(sc); }
+    setInterval(function(){ if(!V.ok()) return; var t=V.t();
+      var m=Math.floor(t/60), s=Math.floor(t%60); document.getElementById('ta6p-t').textContent=m+':'+(s<10?'0':'')+s;
+      if(t>=B-0.1&&t<B+2){ V.pause(); fire(); } },150);
+    document.getElementById('ta6p-play').addEventListener('click',function(){ V.play(); });
+    document.getElementById('ta6p-back').addEventListener('click',function(){ V.seek(Math.max(A,V.t()-5)); });
+  })();
+  </script>
+  <script>
+  (function(){
+    var box=document.getElementById('ta6c'); if(!box) return; var cs=box.querySelectorAll('.card'), last=-1;
+    function choose(i){ for(var k=0;k<cs.length;k++) cs[k].classList.toggle('on',k===i);
+      document.getElementById('ta6-name').textContent=cs[i].textContent; document.getElementById('ta6t').classList.remove('hide'); }
+    box.addEventListener('click',function(e){ var c=e.target.closest?e.target.closest('.card'):null; if(c) choose(+c.getAttribute('data-i')); });
+    document.getElementById('ta6-pick').addEventListener('click',function(){ var i; do{ i=Math.floor(Math.random()*cs.length); }while(i===last&&cs.length>1); last=i; choose(i); });
+    window.ta6Done=function(){};
+  })();
+  </script>
+</div>
+</body>
+</html>
