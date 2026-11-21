@@ -730,4 +730,276 @@
   })();
   </script>
 </div>
+<hr><div id="so8">
+  <style>
+    #so8{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:820px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #so8 *{box-sizing:border-box;}
+    #so8 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #so8 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #so8 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #so8 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #so8 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #so8 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #so8 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #so8 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #so8 button:hover{background:#0f4a5c;}
+    #so8 button.ghost{background:transparent;color:var(--teal);}
+    #so8 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #so8 button:disabled{opacity:.45;cursor:default;}
+    #so8 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;}
+    #so8 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so8 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #so8 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);opacity:1;}
+    #so8 .fb{font-weight:bold;margin-top:8px;font-size:16px;}
+    #so8 .fb.ok{color:var(--ok);} #so8 .fb.no{color:var(--no);}
+    #so8 .plain{font-weight:normal;color:var(--ink);}
+    #so8 input[type=text],#so8 textarea{font:inherit;font-size:17px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink);}
+    #so8 textarea{min-height:84px;resize:vertical;}
+    #so8 input[type=text]:focus,#so8 textarea:focus{outline:none;border-color:var(--teal);}
+    #so8 select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);max-width:100%;}
+    #so8 select.ok{border-color:var(--ok);background:var(--ok-bg);} #so8 select.no{border-color:var(--no);background:var(--no-bg);}
+    #so8 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #so8 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #so8 .talk p{margin:0 0 6px;}
+    #so8 .note{font-size:14px;color:var(--muted);}
+    #so8 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;}
+    #so8 .card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center;font-weight:bold;font-size:19px;color:var(--teal);cursor:pointer;}
+    #so8 .card:hover{border-color:var(--teal);}
+    #so8 .card.on{border-color:var(--terra);background:var(--terra-bg);color:var(--terra);}
+    #so8 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #so8 .item:first-child{border-top:none;}
+    #so8 .item > b{color:var(--teal);}
+    #so8 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:12px 0;}
+    #so8 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #so8 .letters{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;}
+    #so8 .letters button{min-width:38px;padding:8px 0;font-size:20px;font-family:"Courier New",monospace;background:#fff;color:var(--ink);border-color:var(--line);}
+    #so8 .letters button:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #so8 .letters button.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);opacity:1;}
+    #so8 .letters button.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #so8 .words span.w{cursor:pointer;padding:2px 3px;border-radius:5px;border:2px solid transparent;}
+    #so8 .words span.w:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #so8 .words.done span.w{cursor:default;} #so8 .words.done span.w:hover{border-color:transparent;background:none;}
+    #so8 span.w.no{background:var(--no-bg)!important;border-color:var(--no)!important;color:var(--no);text-decoration:line-through;}
+    #so8 span.w.ok{background:var(--ok-bg)!important;border-color:var(--ok)!important;color:var(--ok);font-weight:bold;}
+    #so8 .diff{font-size:17px;line-height:2;}
+    #so8 .diff .lab{display:inline-block;min-width:80px;font-size:13px;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+    #so8 .diff del{background:var(--no-bg);color:var(--no);border-radius:4px;padding:1px 3px;}
+    #so8 .diff ins{background:var(--ok-bg);color:var(--ok);text-decoration:none;font-weight:bold;border-radius:4px;padding:1px 3px;}
+    #so8 .resp{font-family:"Courier New",monospace;font-size:19px;font-weight:bold;color:var(--terra);}
+    #so8 .play{padding:6px 12px;font-size:15px;}
+    #so8 .hide{display:none;}
+  </style>
+
+  <style>
+    #so8 .board{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+    #so8 .team{border:3px solid var(--line);border-radius:12px;padding:10px 14px;background:#fff;text-align:center;}
+    #so8 .team .nm{font-weight:bold;font-size:17px;}
+    #so8 .team .pt{font-size:40px;font-weight:bold;line-height:1.1;}
+    #so8 .team.a .nm,#so8 .team.a .pt{color:var(--terra);} #so8 .team.b .nm,#so8 .team.b .pt{color:var(--teal);}
+    #so8 .team.a.on{border-color:var(--terra);background:var(--terra-bg);}
+    #so8 .team.b.on{border-color:var(--teal);background:var(--teal-bg);}
+    #so8 .stage{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;text-align:center;}
+    #so8 .who{font-size:20px;font-weight:bold;margin-bottom:10px;}
+    #so8 .who.a{color:var(--terra);} #so8 .who.b{color:var(--teal);}
+    #so8 .big{font-family:"Courier New",monospace;font-size:46px;font-weight:bold;letter-spacing:.06em;color:var(--ink);margin:8px 0;word-break:break-word;}
+    #so8 .big .s{color:var(--no);text-decoration:underline;}
+    #so8 .say{font-size:18px;color:var(--muted);}
+    #so8 .say b{color:var(--teal);}
+    #so8 .stage input[type=text]{max-width:440px;font-size:24px;text-align:center;font-family:"Courier New",monospace;}
+    #so8 .stage .btns{justify-content:center;}
+    #so8 .opts{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 14px;}
+    #so8 .opts button{background:#fff;color:var(--ink);border-color:var(--line);font-weight:normal;}
+    #so8 .opts button.on{background:var(--teal-bg);border-color:var(--teal);color:var(--teal);font-weight:bold;}
+    #so8 .tries{font-size:16px;margin-top:10px;}
+    #so8 .tries div{margin:2px 0;}
+    #so8 .recap{columns:2;column-gap:24px;font-size:16px;}
+    #so8 .recap div{break-inside:avoid;padding:2px 0;}
+    @media (max-width:560px){#so8 .big{font-size:32px;} #so8 .recap{columns:1;}}
+  </style>
+  <h1>Mystery words</h1>
+  <p class="sub">Two teams, one screen. Every word is from the lesson, and every word has a trap.</p>
+
+  <div id="so8-setup" class="panel">
+    <h2 style="margin-top:0">How to play</h2>
+    <div class="opts" id="so8-mode">
+      <button data-v="hear" class="on">Hear it, spell it</button>
+      <button data-v="see">See it, say it</button>
+    </div>
+    <p class="note" id="so8-rule" style="margin-top:0"></p>
+    <h2>Which words?</h2>
+    <div class="opts" id="so8-pool">
+      <button data-v="silent" class="on">Silent letters (20)</button>
+      <button data-v="french">The French trap (10)</button>
+      <button data-v="all">All 30</button>
+    </div>
+    <h2>How long?</h2>
+    <div class="opts" id="so8-len">
+      <button data-v="10" class="on">10 words</button>
+      <button data-v="20">20 words</button>
+    </div>
+    <div class="btns"><button class="amber" id="so8-go">Start</button>
+      <span class="note">A random team starts. Both teams get the same number of words.</span></div>
+  </div>
+
+  <div id="so8-game" class="hide">
+    <div class="board">
+      <div class="team a" id="so8-ta"><div class="nm">Team A</div><div class="pt" id="so8-sa">0</div></div>
+      <div class="team b" id="so8-tb"><div class="nm">Team B</div><div class="pt" id="so8-sb">0</div></div>
+    </div>
+    <div class="stage">
+      <div class="note" id="so8-count"></div>
+      <div class="who" id="so8-who"></div>
+      <div id="so8-word" class="big hide"></div>
+      <div id="so8-say" class="say hide"></div>
+      <div class="btns" id="so8-audio">
+        <button id="so8-play">&#9654; Play</button>
+        <button class="ghost" id="so8-slow">&#9654; Slowly</button>
+      </div>
+      <div id="so8-typing">
+        <p class="note" style="margin:10px 0 6px">Spell it out loud, letter by letter. One person types.</p>
+        <input type="text" id="so8-in" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        <div class="btns"><button id="so8-check">Check</button></div>
+      </div>
+      <div id="so8-judge" class="hide">
+        <div class="btns"><button class="ghost" id="so8-model">&#9654; Hear the model</button></div>
+        <div class="btns hide" id="so8-verdict">
+          <button id="so8-yes" style="background:var(--ok);border-color:var(--ok)">It matched (+2)</button>
+          <button class="ghost" id="so8-no">It didn't</button>
+        </div>
+      </div>
+      <div class="fb" id="so8-fb"></div>
+      <div class="tries" id="so8-tries"></div>
+      <div class="btns"><button class="amber hide" id="so8-next">Next word</button></div>
+    </div>
+  </div>
+
+  <div id="so8-end" class="hide">
+    <div class="panel" style="text-align:center">
+      <div class="big" id="so8-win" style="font-family:inherit;font-size:34px"></div>
+      <div class="note" id="so8-final"></div>
+    </div>
+    <h2>The words you played</h2>
+    <div class="panel recap" id="so8-recap"></div>
+    <div class="talk">
+      <p><strong>Pick two words from the list.</strong> Your partner says them; you say if they got the silent letters and the sounds right.</p>
+    </div>
+    <div class="btns"><button class="amber" id="so8-again">Play again</button></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('so8'); if(!root) return;
+    var D=[["Wednesday", ["wednesday"], [[2, 3]], "WENZ-day", "mc70bae"], ["autumn", ["autumn"], [[5, 6]], "AW-təm", "m1ea4ff"], ["February", ["february"], [[3, 4]], "FEB-yoo-ə-ree", "mf21e56"], ["climbing", ["climbing"], [[4, 5]], "KLY-ming", "m097bca"], ["knitting", ["knitting"], [[0, 1]], "NIT-ing", "mc76b0b"], ["salmon", ["salmon"], [[2, 3]], "SAM-ən", "ma0a242"], ["yoghurt", ["yoghurt", "yogurt"], [[3, 4]], "YOG-ət", "mcaa17f"], ["subtle", ["subtle"], [[2, 3]], "SUT-l", "mbbfb43"], ["gnome", ["gnome"], [[0, 1]], "NOHM", "mffe446"], ["champagne", ["champagne"], [[6, 7]], "sham-PAYN", "m8cd2b4"], ["hour", ["hour"], [[0, 1]], "OW-ə", "m5a343a"], ["half", ["half"], [[2, 3]], "HAHF", "mef198d"], ["knife", ["knife"], [[0, 1]], "NYFE", "mf59229"], ["cupboard", ["cupboard"], [[2, 3]], "KUB-əd", "mfc9747"], ["scissors", ["scissors"], [[1, 2]], "SIZ-əz", "m7e22fe"], ["honestly", ["honestly"], [[0, 1]], "ON-ist-lee", "m33e443"], ["listen", ["listen"], [[3, 4]], "LIS-ən", "m4366cc"], ["receipt", ["receipt"], [[5, 6]], "ri-SEET", "m89c94c"], ["swordfish", ["swordfish"], [[1, 2]], "SAWD-fish", "m85aea5"], ["Worcestershire", ["worcestershire", "worcestershire sauce"], [[2, 5]], "WUSS-tə-shə", "m1ac416"], ["colonel", ["colonel"], [], "KER-nl", "m8c4050"], ["lieutenant", ["lieutenant"], [], "lef-TEN-ənt", "m4b6c10"], ["coup", ["coup"], [[3, 4]], "KOO", "m434706"], ["mnemonic", ["mnemonic"], [[0, 1]], "ni-MON-ik", "m5e15d1"], ["debut", ["debut"], [[4, 5]], "DAY-byoo", "m6ee5ce"], ["genre", ["genre"], [], "ZHON-ruh", "ma71d5c"], ["bouquet", ["bouquet"], [[6, 7]], "boo-KAY", "m5d3bec"], ["faux pas", ["faux pas"], [[3, 4], [7, 8]], "foh-PAH", "m6e1ff1"], ["ennui", ["ennui"], [], "on-WEE", "mfcf689"], ["buoy", ["buoy"], [], "BOY", "me49453"]];
+    var POOLS={silent:range(0,20),french:range(20,30),all:range(0,30)};
+    var RULE={hear:'A word plays. The team on turn spells it out loud and types it: 2 points. Wrong? The other team can steal it for 1 point.',
+              see:'A word appears. The team on turn says it out loud, then everyone hears the model. Did it match? 2 points. The other team can challenge; the teacher has the last word.'};
+    var opt={mode:'hear',pool:'silent',len:10}, G=null, cur=null;
+    function range(a,b){var r=[];for(var i=a;i<b;i++)r.push(i);return r;}
+    function $(id){return document.getElementById('so8-'+id);}
+    function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+    function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+    function norm(s){return s.toLowerCase().replace(/[\u2018\u2019]/g,"'").replace(/[-_]+/g,' ')
+      .replace(/^\s*the word is\s+/,'').replace(/[.,!?]/g,'').replace(/\s+/g,' ').trim();}
+    function marked(k){var w=D[k][0],sp=D[k][2],on={},h='';
+      sp.forEach(function(p){for(var i=p[0];i<p[1];i++)on[i]=1;});
+      for(var i=0;i<w.length;i++)h+=on[i]?'<span class="s">'+esc(w[i])+'</span>':esc(w[i]);return h;}
+    var snd=null;
+    function play(slow){ if(!cur) return; if(snd) snd.pause();
+      snd=new Audio('audio/mystery/'+D[cur.k][4]+(slow?'s':'')+'.mp3'); snd.play(); }
+
+    function pick(boxId,key){ var box=$(boxId);
+      box.addEventListener('click',function(e){ var b=e.target.closest?e.target.closest('button'):null; if(!b||b.disabled) return;
+        var bs=box.querySelectorAll('button'); for(var i=0;i<bs.length;i++) bs[i].classList.remove('on');
+        b.classList.add('on'); opt[key]=key==='len'?+b.getAttribute('data-v'):b.getAttribute('data-v'); sync(); }); }
+    function sync(){ $('rule').textContent=RULE[opt.mode];
+      var b20=$('len').querySelector('[data-v="20"]'), b10=$('len').querySelector('[data-v="10"]');
+      b20.disabled=POOLS[opt.pool].length<20;
+      if(b20.disabled&&opt.len===20){ opt.len=10; b20.classList.remove('on'); b10.classList.add('on'); } }
+    pick('mode','mode'); pick('pool','pool'); pick('len','len'); sync();
+
+    $('go').addEventListener('click',function(){
+      var words=shuffle(POOLS[opt.pool].slice()).slice(0,opt.len);   // even length: equal turns
+      G={words:words,i:-1,score:[0,0],start:Math.random()<0.5?0:1,log:[]};
+      $('sa').textContent='0'; $('sb').textContent='0';
+      $('setup').classList.add('hide'); $('end').classList.add('hide'); $('game').classList.remove('hide');
+      next();
+    });
+    function team(t){return t===0?'Team A':'Team B';}
+    function setTurn(t){ cur.team=t; $('ta').classList.toggle('on',t===0); $('tb').classList.toggle('on',t===1);
+      var w=$('who'); w.className='who '+(t===0?'a':'b'); w.textContent=team(t)+(cur.steal?': steal it!':''); }
+    function next(){
+      G.i++; if(G.i>=G.words.length) return finish();
+      cur={k:G.words[G.i],steal:false,locked:false,tries:[]};
+      $('count').textContent='Word '+(G.i+1)+' of '+G.words.length;
+      $('fb').textContent=''; $('fb').className='fb'; $('tries').innerHTML=''; $('next').classList.add('hide');
+      var hear=opt.mode==='hear';
+      $('word').classList.toggle('hide',hear); $('say').classList.add('hide');
+      $('audio').classList.toggle('hide',!hear); $('typing').classList.toggle('hide',!hear);
+      $('judge').classList.toggle('hide',hear); $('verdict').classList.add('hide'); $('model').disabled=false;
+      if(!hear){ $('word').textContent=D[cur.k][0]; }
+      $('in').value=''; $('in').readOnly=false; $('check').disabled=false;
+      setTurn((G.start+G.i)%2);
+      if(hear){ $('in').focus(); }
+    }
+    function award(t,p){ G.score[t]+=p; $('sa').textContent=G.score[0]; $('sb').textContent=G.score[1]; }
+    function reveal(){
+      $('word').innerHTML=marked(cur.k); $('word').classList.remove('hide');
+      $('say').innerHTML='Say it: <b>'+esc(D[cur.k][3])+'</b>'+(D[cur.k][2].length?'':' &middot; no silent letter here: the trap is the sound');
+      $('say').classList.remove('hide');
+      $('audio').classList.remove('hide'); $('typing').classList.add('hide'); $('judge').classList.add('hide');
+      $('who').textContent=team(cur.team);
+      $('next').classList.remove('hide'); $('next').textContent=G.i+1<G.words.length?'Next word':'See who won';
+    }
+    $('play').addEventListener('click',function(){play(false);});
+    $('slow').addEventListener('click',function(){play(true);});
+    $('in').addEventListener('keydown',function(e){ if(e.key==='Enter') $('check').click(); });
+    $('check').addEventListener('click',function(){
+      if(!cur||cur.locked) return;
+      var raw=$('in').value, v=norm(raw); if(!v) return;
+      cur.locked=true;
+      var ok=D[cur.k][1].indexOf(v)>=0;
+      cur.tries.push([cur.team,raw,ok]);
+      var fb=$('fb');
+      if(ok){
+        var p=cur.steal?1:2; award(cur.team,p);
+        fb.className='fb ok'; fb.textContent=team(cur.team)+': yes! +'+p;
+        G.log.push([cur.k,cur.team]); showTries(); reveal(); return;
+      }
+      if(!cur.steal){   // competitive: no reveal while the other team can still steal
+        cur.steal=true; fb.className='fb no'; fb.textContent='Not this time.';
+        setTurn(1-cur.team); $('in').value=''; cur.locked=false; $('in').focus(); return;
+      }
+      fb.className='fb no'; fb.textContent='Nobody got it. Here it is:';
+      G.log.push([cur.k,-1]); showTries(); reveal();
+    });
+    function showTries(){ var h='';
+      cur.tries.forEach(function(t){ h+='<div><span style="color:var(--'+(t[0]===0?'terra':'teal')+');font-weight:bold">'+team(t[0])+'</span> typed <span class="resp" style="color:'+(t[2]?'var(--ok)':'var(--no)')+';'+(t[2]?'':'text-decoration:line-through')+'">'+esc(t[1])+'</span></div>'; });
+      $('tries').innerHTML=h; }
+    $('model').addEventListener('click',function(){ play(false); $('verdict').classList.remove('hide'); });
+    function judged(ok){ if(!cur||cur.locked) return; cur.locked=true;
+      $('verdict').classList.add('hide'); $('model').disabled=true;
+      if(ok){ award(cur.team,2); $('fb').className='fb ok'; $('fb').textContent=team(cur.team)+': +2'; }
+      else { $('fb').className='fb no'; $('fb').textContent='No points this time.'; }
+      G.log.push([cur.k,ok?cur.team:-1]); reveal(); }
+    $('yes').addEventListener('click',function(){judged(true);});
+    $('no').addEventListener('click',function(){judged(false);});
+    $('next').addEventListener('click',function(){ if(snd) snd.pause(); next(); });
+    function finish(){
+      $('game').classList.add('hide'); $('end').classList.remove('hide');
+      var a=G.score[0],b=G.score[1];
+      $('win').textContent=a===b?'A draw!':(a>b?'Team A wins!':'Team B wins!');
+      $('win').style.color=a===b?'var(--ink)':(a>b?'var(--terra)':'var(--teal)');
+      $('final').textContent='Team A '+a+' \u00b7 Team B '+b+' \u00b7 '+G.words.length+' words, '+(G.words.length/2)+' each';
+      var h=''; G.log.forEach(function(l){ h+='<div><span class="resp" style="color:var(--ink)">'+marked(l[0])+'</span> <span class="note">'+esc(D[l[0]][3])+(l[1]<0?' &middot; nobody':' &middot; '+team(l[1]))+'</span></div>'; });
+      $('recap').innerHTML=h;
+    }
+    $('again').addEventListener('click',function(){ $('end').classList.add('hide'); $('setup').classList.remove('hide'); });
+  })();
+  </script>
+</div>
 </body></html>
