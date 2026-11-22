@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How thirsty is AI? Claim court</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="ta7">
+  <style>
+    #ta7{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --ok:#1f8a4c;--ok-bg:#e6f5ec;--no:#b23a3a;--no-bg:#fbeaea;--amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:860px;margin:0 auto;padding:20px 22px 26px;border-radius:14px;}
+    #ta7 *{box-sizing:border-box;}
+    #ta7 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #ta7 h2{font-size:21px;margin:22px 0 8px;color:var(--teal);}
+    #ta7 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #ta7 .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #ta7 .q{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+    #ta7 .q b{color:var(--teal);font-size:22px;min-width:28px;}
+    #ta7 .q.on{border-left-color:var(--teal);background:var(--teal-bg);}
+    #ta7 .q .start{display:none;margin-top:6px;font-size:16px;color:var(--teal);font-style:italic;}
+    #ta7 .q.on .start{display:block;}
+    #ta7 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center;}
+    #ta7 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:10px 18px;cursor:pointer;background:var(--teal);color:#fff;}
+    #ta7 button:hover{background:#0f4a5c;}
+    #ta7 button.ghost{background:transparent;color:var(--teal);}
+    #ta7 button.ghost:hover{background:var(--teal-bg);}
+    #ta7 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #ta7 button.amber:hover{background:#e0a52a;}
+    #ta7 button:disabled{opacity:.45;cursor:default;}
+    #ta7 .choice{border-color:var(--line);background:#fff;color:var(--ink);font-weight:normal;text-align:left;padding:8px 14px;}
+    #ta7 .choice:hover{background:var(--teal-bg);border-color:var(--teal);}
+    #ta7 .choice.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;}
+    #ta7 .choice.no{background:var(--no-bg);border-color:var(--no);color:var(--no);text-decoration:line-through;opacity:1;}
+    #ta7 .choice.sel{background:var(--teal-bg);border-color:var(--teal);font-weight:bold;opacity:1;}
+    #ta7 .choice:disabled{cursor:default;}
+    #ta7 .fb{font-weight:bold;margin-top:8px;font-size:16px;min-height:20px;}
+    #ta7 .fb.ok{color:var(--ok);} #ta7 .fb.no{color:var(--no);}
+    #ta7 .fb .plain{font-weight:normal;color:var(--ink);}
+    #ta7 textarea{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;width:100%;min-height:70px;background:#fff;color:var(--ink);}
+    #ta7 textarea:focus{outline:none;border-color:var(--teal);}
+    #ta7 .score{text-align:center;color:var(--muted);font-size:16px;margin-top:10px;font-weight:bold;}
+    #ta7 .talk{margin-top:22px;padding:16px 20px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ta7 .talk p{margin:0 0 6px;}
+    #ta7 .ex{background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:16px;}
+    #ta7 .ex p{margin:4px 0;}
+    #ta7 .lang{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--amber-bg);border:2px solid #f1d9a6;border-radius:12px;padding:10px 16px;margin:0 0 14px;font-size:17px;}
+    #ta7 .lang b{font-size:13px;letter-spacing:.06em;color:var(--muted);margin-right:4px;}
+    #ta7 .lang span{background:#fff;border-radius:8px;padding:2px 10px;font-style:italic;}
+    #ta7 .note{font-size:14px;color:var(--muted);}
+    #ta7 .hide{display:none !important;}
+    #ta7 .item{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start;}
+    #ta7 .item:first-child{border-top:none;}
+    #ta7 .item > b{color:var(--teal);}
+    #ta7 .opt{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+    #ta7 .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:0;}
+    #ta7 .video iframe,#ta7 .video video,#ta7 .video > div{position:absolute;inset:0;width:100%;height:100%;border:0;}
+    #ta7 table.t{width:100%;border-collapse:collapse;font-size:15px;}
+    #ta7 table.t th,#ta7 table.t td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;}
+    #ta7 table.t th{background:var(--slate-bg);}
+    #ta7 table.t td.big{font-weight:bold;color:var(--teal);white-space:nowrap;}
+    #ta7 .ticks label{display:inline-flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:10px;padding:6px 12px;margin:0 6px 8px 0;cursor:pointer;font-size:16px;}
+    #ta7 .ticks label.ok{border-color:var(--ok);background:var(--ok-bg);}
+    #ta7 .ticks label.no{border-color:var(--no);background:var(--no-bg);}
+    #ta7 .ticks label.miss{border-color:var(--amber);border-style:dashed;}
+    #ta7 .verb{font-weight:bold;color:var(--teal);}
+    #ta7 .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    #ta7 .card{border:2px solid var(--line);border-radius:12px;padding:14px;background:#fff;cursor:pointer;font-weight:bold;text-align:center;}
+    #ta7 .card:hover{border-color:var(--teal);background:var(--teal-bg);}
+    #ta7 .card.on{border-color:var(--teal);background:var(--teal-bg);box-shadow:0 0 0 3px var(--teal-bg);}
+    @media (max-width:560px){ #ta7 .cards{grid-template-columns:1fr;} #ta7 table.t{font-size:13px;} }
+  </style>
+
+  <style>
+    #ta7 .board{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+    #ta7 .team{border:3px solid var(--line);border-radius:12px;padding:10px 14px;background:#fff;text-align:center;}
+    #ta7 .team .nm{font-weight:bold;font-size:17px;}
+    #ta7 .team .pt{font-size:40px;font-weight:bold;line-height:1.1;}
+    #ta7 .team.a .nm,#ta7 .team.a .pt{color:var(--terra);} #ta7 .team.b .nm,#ta7 .team.b .pt{color:var(--teal);}
+    #ta7 .team.a.on{border-color:var(--terra);background:var(--terra-bg);}
+    #ta7 .team.b.on{border-color:var(--teal);background:var(--teal-bg);}
+    #ta7 .stage{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;}
+    #ta7 .who{font-size:20px;font-weight:bold;margin-bottom:8px;text-align:center;}
+    #ta7 .who.a{color:var(--terra);} #ta7 .who.b{color:var(--teal);}
+    #ta7 .claim{font-size:23px;line-height:1.5;margin:6px 0 14px;}
+    #ta7 .claim .gap{display:inline-block;min-width:120px;border-bottom:3px solid var(--amber);text-align:center;font-weight:bold;color:var(--teal);}
+    #ta7 .vopts{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    #ta7 .vopts button{font-size:20px;padding:12px;}
+    #ta7 .opts{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 14px;}
+    #ta7 .opts button{background:#fff;color:var(--ink);border-color:var(--line);font-weight:normal;}
+    #ta7 .opts button.on{background:var(--teal-bg);border-color:var(--teal);color:var(--teal);font-weight:bold;}
+    #ta7 .bonus{margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--amber-bg);border:2px solid #f1d9a6;}
+    #ta7 .bonus .opt{margin-top:8px;}
+    #ta7 .why{margin-top:12px;font-size:17px;}
+    #ta7 .recap div{padding:6px 0;border-top:1px solid var(--line);font-size:16px;}
+    #ta7 .recap div:first-child{border-top:none;}
+    @media (max-width:560px){#ta7 .vopts{grid-template-columns:1fr;} #ta7 .claim{font-size:19px;}}
+  </style>
+  <h1>Claim court</h1>
+  <p class="sub">Two teams, one screen. Every claim has evidence behind it, or none. Pick the verb the evidence allows.</p>
+
+  <div id="ta7-setup" class="panel">
+    <h2 style="margin-top:0">How to play</h2>
+    <p style="margin:0 0 6px">A claim appears with a gap. The team on turn picks the verb: <strong>2 points</strong>.
+      Wrong? The other team can steal it for <strong>1 point</strong>.</p>
+    <p style="margin:0 0 6px">The team that gets the verb wins a <strong>bonus question, +1</strong>: what does that verb need behind it?</p>
+    <p class="note" style="margin:0">On Zoom: the teacher shares the screen and clicks what each team says.</p>
+    <h2>How long?</h2>
+    <div class="opts" id="ta7-len">
+      <button data-v="10" class="on">10 claims</button>
+      <button data-v="20">20 claims</button>
+    </div>
+    <div class="btns"><button class="amber" id="ta7-go">Start</button>
+      <span class="note">A random team starts. Both teams get the same number of claims.</span></div>
+  </div>
+
+  <div id="ta7-game" class="hide">
+    <div class="board">
+      <div class="team a" id="ta7-ta"><div class="nm">Team A</div><div class="pt" id="ta7-sa">0</div></div>
+      <div class="team b" id="ta7-tb"><div class="nm">Team B</div><div class="pt" id="ta7-sb">0</div></div>
+    </div>
+    <div class="stage">
+      <div class="note" id="ta7-count" style="text-align:center"></div>
+      <div class="who" id="ta7-who"></div>
+      <div class="claim" id="ta7-claim"></div>
+      <div class="vopts" id="ta7-v"></div>
+      <div class="fb" id="ta7-fb" style="text-align:center"></div>
+      <div class="bonus hide" id="ta7-bonus">
+        <strong id="ta7-bq"></strong>
+        <div class="opt" id="ta7-bo"></div>
+        <div class="fb" id="ta7-bfb"></div>
+      </div>
+      <div class="why hide" id="ta7-why"></div>
+      <div class="btns" style="justify-content:center"><button class="amber hide" id="ta7-next">Next claim</button></div>
+    </div>
+  </div>
+
+  <div id="ta7-end" class="hide">
+    <div class="panel" style="text-align:center">
+      <div id="ta7-win" style="font-size:34px;font-weight:bold"></div>
+      <div class="note" id="ta7-final"></div>
+    </div>
+    <h2>The claims you judged</h2>
+    <div class="panel recap" id="ta7-recap"></div>
+    <div class="talk">
+      <p><strong>In pairs:</strong> pick one claim from the list. Change one detail so that a different verb becomes the right one.</p>
+      <p class="note">Example: <em>With no evidence yet, residents suspect...</em> &rarr; <em>After a year of water tests, it has been established...</em></p>
+    </div>
+    <div class="btns"><button class="amber" id="ta7-again">Play again</button></div>
+  </div>
+
+
+  <script>
+  (function(){
+    var root=document.getElementById('ta7'); if(!root) return;
+    var D=[["Every physics lab can show it, so it is ___: evaporating water carries heat away. That is how a cooling tower works.", ["established", "estimated", "suspected", "contended"], 0, "Anyone can test it, and nobody disputes it: established. No number, so not estimated; no debate, so not contended."], ["Decades of tests have ___ beyond any doubt that liquid cooling needs clean water, to avoid bacteria, clogs and corrosion.", ["established", "implied", "suspected", "asserted"], 0, "&ldquo;Beyond any doubt&rdquo; is proof: established. Tests can&rsquo;t suspect or assert; only people do that."], ["After a full year of meter readings, the operator has ___ exactly how much water the site used: 1.2 million litres.", ["established", "estimated", "implied", "suspected"], 0, "Measured, and <em>exactly</em>: established. An estimate is approximate."], ["1 billion messages a day, about 0.3 mL each: a student ___ that ChatGPT uses about 300,000 litres of water a day.", ["estimated", "established", "implied", "suspected"], 1, "A calculation with <em>about</em>: estimated. Not established: both numbers come from OpenAI, and nobody has checked them."], ["The International Energy Agency ___ that electricity demand for AI data centres will reach about 300 TWh by 2030.", ["estimates", "establishes", "infers", "suspects"], 1, "A number about the future: estimates. 2030 hasn&rsquo;t happened, so nothing about it can be established."], ["From their calculations, engineers ___ that up to 80% of the water in a cooling tower evaporates.", ["estimate", "establish", "imply", "contend"], 1, "Calculations and <em>up to</em>, a range: estimate. Nobody disagrees, so not contend."], ["Early figures from three companies ___ that their water use is rising, but it is too soon to be sure.", ["indicate", "establish", "infer", "suspect"], 2, "Figures point in a direction: indicate. &ldquo;Too soon to be sure&rdquo; rules out establish, and figures can&rsquo;t infer or suspect."], ["A small online survey ___ that most users have no idea how much water AI uses.", ["indicates", "infers", "suspects", "contends"], 2, "Surveys show, they don&rsquo;t think: indicates. Only people infer, suspect or contend."], ["By calling it &ldquo;Sam Altman&rsquo;s estimate&rdquo;, not just &ldquo;the figure&rdquo;, the BBC ___ that the number is his alone, not a checked fact.", ["implies", "infers", "establishes", "estimates"], 2, "The BBC says it indirectly, through its choice of words: implies. You, the viewer, infer."], ["When a company says its number covers &ldquo;cooling only&rdquo;, it ___ that other water, like the water used to produce its electricity, is not counted.", ["implies", "infers", "suspects", "estimates"], 2, "Not said directly, but it is there in &ldquo;only&rdquo;: implies. The company is the speaker, so it can&rsquo;t infer."], ["The words &ldquo;up to 80%&rdquo; ___ that in many cooling towers the real figure is lower.", ["imply", "infer", "establish", "suspect"], 2, "Words can imply; only people infer or suspect. <em>Up to</em> gives a maximum, so lower figures are implied."], ["From the words &ldquo;cooling only&rdquo;, the reader ___ that Google&rsquo;s 0.26 mL is not the full water cost of a message.", ["infers", "implies", "estimates", "asserts"], 2, "The reader reads the sign and reaches a conclusion: infers. The speaker implies, the listener infers."], ["Seeing the cooling towers grow next to the town, residents ___ that the new data centre will need a lot of water.", ["infer", "imply", "establish", "estimate"], 2, "They see signs and reach a conclusion: infer. No number, so not estimate; not proved yet, so not establish."], ["From two figures given by OpenAI itself (1 billion messages a day in December 2024, 2.5 billion in July 2025), analysts ___ that use was growing fast.", ["inferred", "implied", "established", "estimated"], 2, "A conclusion from the figures: inferred. Not established: the only source is the company. No new number, so not estimated."], ["In a blog post, with no calculation published, Sam Altman ___ that an average ChatGPT message uses about one fifteenth of a teaspoon of water.", ["asserted", "established", "inferred", "suspected"], 3, "Said with confidence, no method shown: asserted. The BBC called it an estimate; you can argue about that, but it was never established."], ["With no tests and no data, a startup&rsquo;s website ___ that its new cooling system uses &ldquo;zero water&rdquo;.", ["asserts", "establishes", "indicates", "estimates"], 3, "No tests, no data, only confidence: asserts. Data indicate; this has none."], ["In the public debate about AI&rsquo;s water, Professor Ren openly ___ that the true figure is much higher once you count the water used to produce the electricity.", ["contends", "infers", "establishes", "implies"], 3, "Said openly, in a debate, against another view: contends."], ["In a heated debate with the town council, the company ___ that the data centre will create jobs, while residents argue the opposite.", ["contends", "establishes", "infers", "estimates"], 3, "A debate, two sides: contends. The future can&rsquo;t be established."], ["With no evidence yet, some residents ___ that the data centre is the reason their tap water tastes strange.", ["suspect", "establish", "estimate", "infer"], 4, "A bad feeling, no evidence: suspect. You can&rsquo;t infer without evidence."], ["Nobody has checked, but some journalists ___ that tech companies hide their AI water use on purpose.", ["suspect", "establish", "estimate", "infer"], 4, "Nobody has checked, and it is something bad: suspect."]], NEEDS=["proof", "a calculation", "signs or data", "confidence", "a feeling"];
+    var opt={len:10}, G=null, cur=null;
+    function $(id){return document.getElementById('ta7-'+id);}
+    function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+    function team(t){return t===0?'Team A':'Team B';}
+    function col(t){return t===0?'var(--terra)':'var(--teal)';}
+    function gap(k,w){return D[k][0].replace('___','<span class="gap">'+(w||'?')+'</span>');}
+
+    $('len').addEventListener('click',function(e){ var b=e.target.closest?e.target.closest('button'):null; if(!b) return;
+      var bs=$('len').querySelectorAll('button'); for(var i=0;i<bs.length;i++) bs[i].classList.remove('on');
+      b.classList.add('on'); opt.len=+b.getAttribute('data-v'); });
+
+    $('go').addEventListener('click',function(){
+      var idx=[]; for(var i=0;i<D.length;i++) idx.push(i);
+      G={claims:shuffle(idx).slice(0,opt.len),i:-1,score:[0,0],start:Math.random()<0.5?0:1,log:[],turns:[0,0]};
+      award(0,0);
+      $('setup').classList.add('hide'); $('end').classList.add('hide'); $('game').classList.remove('hide');
+      next();
+    });
+    function setTurn(t,steal){ cur.team=t; $('ta').classList.toggle('on',t===0); $('tb').classList.toggle('on',t===1);
+      var w=$('who'); w.className='who '+(t===0?'a':'b'); w.textContent=team(t)+(steal?': steal it!':''); }
+    function award(t,p){ G.score[t]+=p; $('sa').textContent=G.score[0]; $('sb').textContent=G.score[1]; }
+    function next(){
+      G.i++; if(G.i>=G.claims.length) return finish();
+      var k=G.claims[G.i];
+      cur={k:k,steal:false,locked:false,got:-1,bonus:false,opts:shuffle([0,1,2,3])};
+      $('count').textContent='Claim '+(G.i+1)+' of '+G.claims.length;
+      $('claim').innerHTML=gap(k);
+      var h=''; cur.opts.forEach(function(o,p){ h+='<button class="choice" data-p="'+p+'">'+D[k][1][o]+'</button>'; });   // position only: the key stays in JS
+      $('v').innerHTML=h;
+      $('fb').textContent=''; $('fb').className='fb';
+      $('bonus').classList.add('hide'); $('why').classList.add('hide'); $('next').classList.add('hide');
+      var t=(G.start+G.i)%2; G.turns[t]++; setTurn(t,false);
+    }
+    $('v').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button.choice'):null;
+      if(!b||b.disabled||!cur||cur.locked) return;
+      cur.locked=true;
+      var o=cur.opts[+b.getAttribute('data-p')], ok=o===0;
+      if(ok){
+        b.className='choice ok'; disableAll();
+        var p=cur.steal?1:2; award(cur.team,p); cur.got=cur.team;
+        $('fb').className='fb ok'; $('fb').textContent=team(cur.team)+': yes! +'+p;
+        $('claim').innerHTML=gap(cur.k,D[cur.k][1][0]); $('who').textContent=team(cur.team);
+        return askBonus();
+      }
+      b.className='choice no'; b.disabled=true;
+      b.innerHTML=D[cur.k][1][o]+' <span class="note" style="display:inline-block">('+team(cur.team)+')</span>';
+      if(!cur.steal){   // competitive: nothing revealed while the other team can still steal
+        cur.steal=true; $('fb').className='fb no'; $('fb').textContent='Not this time.';
+        setTurn(1-cur.team,true); cur.locked=false; return;
+      }
+      disableAll(); $('fb').className='fb no'; $('fb').textContent='Nobody got it.';
+      $('claim').innerHTML=gap(cur.k,D[cur.k][1][0]);
+      reveal();
+    });
+    function disableAll(){ var bs=$('v').querySelectorAll('button'); for(var i=0;i<bs.length;i++) bs[i].disabled=true; }
+    function askBonus(){
+      $('bq').innerHTML=team(cur.got)+', bonus +1: what does <em>'+D[cur.k][1][0]+'</em> need behind it?';
+      $('bq').style.color=col(cur.got);
+      var h=''; NEEDS.forEach(function(n,i){ h+='<button class="choice" data-n="'+i+'">'+n+'</button> '; });
+      $('bo').innerHTML=h; $('bfb').textContent=''; $('bfb').className='fb'; cur.bonus=true;
+      $('bonus').classList.remove('hide');
+    }
+    $('bo').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('button.choice'):null;
+      if(!b||b.disabled||!cur||!cur.bonus) return;
+      cur.bonus=false;
+      var n=+b.getAttribute('data-n'), key=D[cur.k][2], ok=n===key;
+      var bs=$('bo').querySelectorAll('button'); for(var i=0;i<bs.length;i++){ bs[i].disabled=true; if(+bs[i].getAttribute('data-n')===key) bs[i].className='choice ok'; }
+      if(!ok) b.className='choice no';
+      if(ok) award(cur.got,1);
+      $('bfb').className='fb '+(ok?'ok':'no'); $('bfb').textContent=ok?'+1':'No bonus.';
+      reveal();
+    });
+    function reveal(){
+      G.log.push([cur.k,cur.got]);
+      $('who').textContent=team(cur.team);
+      $('why').innerHTML=D[cur.k][3]; $('why').classList.remove('hide');
+      $('next').textContent=G.i+1<G.claims.length?'Next claim':'See who won';
+      $('next').classList.remove('hide');
+    }
+    $('next').addEventListener('click',function(){ if(cur&&!cur.bonus) next(); });
+    function finish(){
+      $('game').classList.add('hide'); $('end').classList.remove('hide');
+      var a=G.score[0],b=G.score[1];
+      $('win').textContent=a===b?'A draw!':(a>b?'Team A wins!':'Team B wins!');
+      $('win').style.color=a===b?'var(--ink)':(a>b?'var(--terra)':'var(--teal)');
+      $('final').textContent='Team A '+a+' \u00b7 Team B '+b+' \u00b7 '+G.claims.length+' claims, '+(G.claims.length/2)+' each';
+      var h=''; G.log.forEach(function(l){ h+='<div>'+gap(l[0],D[l[0]][1][0])+' <span class="note">&middot; '+(l[1]<0?'nobody':team(l[1]))+'</span></div>'; });
+      $('recap').innerHTML=h;
+    }
+    $('again').addEventListener('click',function(){ $('end').classList.add('hide'); $('setup').classList.remove('hide'); });
+    window.ta7State=function(){ return {G:G,cur:cur}; };
+  })();
+  </script>
+</div>
+</body>
+</html>
