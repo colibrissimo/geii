@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Noise filter: Fourier vocabulary</title>
+<style>
+  :root{--petrol:#155E75;--saffron:#F4B942;--saffron2:#e0a52a;--ink:#10262b;--paper:#f6f4ee;--line:#cfd8d8;
+    --ok:#2e7d52;--okbg:#e6f4ec;--no:#b23b3b;--nobg:#fbeaea;--muted:#52646a;--p1:#155E75;--p2:#c0661c;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,sans-serif;line-height:1.5;}
+  #nf{max-width:900px;margin:0 auto;padding:18px 16px 40px;}
+  #nf h1{font-size:30px;margin:0 0 2px;color:var(--petrol);}
+  #nf h2{font-size:20px;color:var(--petrol);margin:0 0 10px;}
+  #nf .sub{margin:0 0 16px;color:#3a4a4d;font-size:15px;}
+  #nf .panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:16px;}
+  #nf .hidden{display:none !important;}
+  #nf .center{text-align:center;}
+  #nf button{font-family:inherit;font-size:15px;font-weight:bold;border:none;border-radius:10px;padding:11px 16px;cursor:pointer;}
+  #nf .accent{background:var(--saffron);color:var(--ink);}
+  #nf .accent:hover{background:var(--saffron2);}
+  #nf .ghost{background:#eef1f0;color:var(--petrol);}
+  #nf .modes,#nf .pools{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 14px;}
+  #nf .mode{flex:1 1 240px;text-align:left;background:#eef1f0;border:2px solid var(--line);color:var(--ink);font-weight:normal;padding:14px 16px;}
+  #nf .mode b{display:block;font-size:17px;color:var(--petrol);margin-bottom:2px;}
+  #nf .mode.on,#nf .pool.on{border-color:var(--saffron2);background:#fff7e6;}
+  #nf .pool{background:#eef1f0;border:2px solid var(--line);color:var(--ink);font-weight:normal;}
+  #nf .names{display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 14px;}
+  #nf .names label{flex:1 1 200px;font-size:14px;font-weight:bold;}
+  #nf .names input{display:block;width:100%;margin-top:4px;padding:9px 11px;border:2px solid var(--line);border-radius:8px;font-size:16px;font-family:inherit;}
+  #nf .c1{color:var(--p1);} #nf .c2{color:var(--p2);}
+  #nf ul.how{margin:6px 0 0;padding-left:20px;font-size:15px;}
+  #nf kbd{display:inline-block;min-width:22px;text-align:center;border:1px solid #9fb0b3;border-bottom-width:3px;border-radius:5px;padding:0 5px;font-family:inherit;font-weight:bold;background:#fff;color:var(--ink);font-size:14px;}
+  #nf .bar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+  #nf .chip{flex:1 1 150px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;color:var(--muted);}
+  #nf .chip strong{display:block;font-size:22px;color:var(--ink);font-variant-numeric:tabular-nums;}
+  #nf .clock strong{color:var(--petrol);font-size:26px;}
+  #nf .sc{color:#fff;border:none;} #nf .sc strong{color:#fff;font-size:30px;}
+  #nf .sc.s1{background:var(--p1);} #nf .sc.s2{background:var(--p2);}
+  #nf .card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:20px;text-align:center;}
+  #nf .kind{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+  #nf .fr{font-size:30px;font-weight:bold;color:var(--ink);line-height:1.3;}
+  #nf .wait .fr{opacity:.25;}
+  #nf .noise{height:10px;border-radius:6px;background:#eef1f0;margin:14px 0 0;overflow:hidden;}
+  #nf .noise i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--saffron),var(--saffron2));transition:width .1s linear;}
+  #nf .noise.steal i{background:linear-gradient(90deg,#e3a27a,var(--p2));}
+  #nf .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 4px;}
+  #nf .opt{position:relative;background:#fff;border:2px solid var(--line);color:var(--ink);font-size:21px;font-weight:normal;padding:16px 14px 16px 84px;text-align:left;min-height:64px;}
+  #nf .opt:hover{border-color:var(--saffron2);}
+  #nf .opt .keys{position:absolute;left:10px;top:50%;transform:translateY(-50%);display:flex;gap:4px;}
+  #nf .opt .k1{border-color:var(--p1);color:var(--p1);} #nf .opt .k2{border-color:var(--p2);color:var(--p2);}
+  #nf .solo .opt .k2{display:none;} #nf .solo .opt{padding-left:48px;}
+  #nf .opt.out{opacity:.5;text-decoration:line-through;cursor:default;}
+  #nf .opt.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:bold;opacity:1;text-decoration:none;}
+  #nf .opt.no{background:var(--nobg);border-color:var(--no);color:var(--no);opacity:1;}
+  #nf .opt .tag{display:block;font-size:13px;font-weight:normal;color:var(--muted);text-decoration:none;}
+  #nf .msg{text-align:center;min-height:24px;font-size:17px;font-weight:bold;margin-top:10px;}
+  #nf .msg.m1{color:var(--p1);} #nf .msg.m2{color:var(--p2);} #nf .msg.ok{color:var(--ok);} #nf .msg.no{color:var(--no);}
+  #nf .next{margin-top:10px;}
+  #nf table.res{width:100%;border-collapse:collapse;font-size:15px;margin-top:8px;}
+  #nf table.res td,#nf table.res th{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top;}
+  #nf table.res th{background:#f2f7f8;color:var(--petrol);}
+  #nf .result{font-size:26px;font-weight:bold;color:var(--petrol);text-align:center;margin:6px 0 10px;}
+  @media (max-width:640px){ #nf .opts{grid-template-columns:1fr;} #nf .fr{font-size:24px;} }
+</style>
+</head>
+<body>
+<div id="nf">
+  <h1>Noise filter</h1>
+  <p class="sub">What is the Fourier transform used for? &middot; Three of the four answers are noise. Filter them out.</p>
+
+  <div class="panel" id="nf-setup">
+    <h2>How do you want to play?</h2>
+    <div class="modes">
+      <button class="mode on" id="nf-m2" type="button"><b>Duel, one keyboard</b>Two players side by side. Fastest right answer wins the word.</button>
+      <button class="mode" id="nf-m1" type="button"><b>Solo, against the clock</b>Every wrong answer costs 5 seconds.</button>
+    </div>
+    <div class="names" id="nf-names">
+      <label><span class="c1">Left player</span><input id="nf-n1" maxlength="18" placeholder="Name"></label>
+      <label><span class="c2">Right player</span><input id="nf-n2" maxlength="18" placeholder="Name"></label>
+    </div>
+    <h2>Which words?</h2>
+    <div class="pools" id="nf-pools">
+      <button class="pool" type="button" data-v="0">Round 1: cicadas and the filter</button>
+      <button class="pool" type="button" data-v="1">Round 2: shock absorbers, cell tower</button>
+      <button class="pool" type="button" data-v="2">Round 3: 4G, 5G and the birds</button>
+      <button class="pool on" type="button" data-v="all">All 30 (16 words)</button>
+    </div>
+    <ul class="how" id="nf-how2">
+      <li><span class="c1"><b>Left player</b></span>: keys <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd>. <span class="c2"><b>Right player</b></span>: keys <kbd>7</kbd> <kbd>8</kbd> <kbd>9</kbd> <kbd>0</kbd>. The number keys on the top row, no Shift needed.</li>
+      <li>The keys wake up a moment after the French appears: read it first.</li>
+      <li>First answer takes the word. Right: <b>+2</b>. Wrong: the other player can <b>steal it for +1</b>, with 6 seconds to answer.</li>
+      <li>10 seconds and nobody answers? The word is lost in the noise: no points.</li>
+      <li>Press <kbd>Enter</kbd> or Next for the next word. The highest score wins.</li>
+    </ul>
+    <ul class="how hidden" id="nf-how1">
+      <li>Click an answer, or press <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd>.</li>
+      <li>Wrong: <b>+5 seconds</b>. The clock stops while you read the answer. <kbd>Enter</kbd> or Next to go on.</li>
+    </ul>
+    <p class="center" style="margin:16px 0 0;"><button class="accent" id="nf-start" type="button">Start &rarr;</button></p>
+  </div>
+
+  <div id="nf-play" class="hidden">
+    <div class="bar" id="nf-bar"></div>
+    <div class="card" id="nf-card"><div class="kind">In English?</div><div class="fr" id="nf-fr"></div>
+      <div class="noise" id="nf-noise"><i id="nf-noisebar"></i></div></div>
+    <div class="opts" id="nf-opts"></div>
+    <div class="msg" id="nf-msg"></div>
+    <p class="center next"><button class="accent hidden" id="nf-next" type="button">Next word &rarr; <kbd>Enter</kbd></button></p>
+  </div>
+
+  <div id="nf-end" class="hidden">
+    <div class="panel">
+      <div class="result" id="nf-result"></div>
+      <div id="nf-end-body"></div>
+      <p class="center" style="margin-top:14px;"><button class="accent" id="nf-again" type="button">Play again</button>
+        <button class="ghost" id="nf-menu" type="button">Change mode or words</button></p>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var R=[[["la transformée de Fourier", "the Fourier transform", "the four-ear transform", "the Fourier transformee", "the Fourier series"], ["une balade à vélo", "a bike ride", "a bike bride", "a velo ballad", "a bike race"], ["notre quotidien, la vie de tous les jours", "our everyday lives", "our everyday knives", "our quotidianity", "our daily paper"], ["un filtre de suppression du bruit", "a noise suppression filter", "a nose suppression filter", "a noise suppressage filter", "a noise generator"], ["un filtre passe-bas", "a low-pass filter", "a slow-pass filter", "a pass-low filter", "a high-pass filter"], ["agaçant, pénible", "annoying", "enjoying", "agacing", "noisy"], ["concevoir (un filtre, un système)", "to design", "to resign", "to conceptionate", "to draw"], ["le domaine temporel", "the time domain", "the thyme domain", "the tempo domain", "the time zone"], ["enregistrer (un son, un signal)", "to record", "to recook", "to enregister", "to replay"], ["le domaine fréquentiel", "the frequency domain", "the frequency domino", "the frequential domain", "the frequency band"]], [["les cordes vocales", "vocal cords", "local cords", "vocal ropes", "voice box"], ["séparer, distinguer", "to separate out", "to desperate out", "to separe out", "to spread out"], ["mettre à zéro, annuler", "to zero out", "to hero out", "to put at zero", "to zoom out"], ["les composantes fréquentielles", "frequency components", "frequency condiments", "frequential composants", "frequency counters"], ["se débarrasser de, éliminer", "to get rid of", "to get red of", "to debarrass of", "to get hold of"], ["atténué, amorti (un bruit, une vibration)", "damped", "dumped", "amortised", "amplified"], ["les amortisseurs (d'un vélo, d'une voiture)", "shock absorbers", "sock absorbers", "shock amortisers", "shock waves"], ["se désagréger, tomber en morceaux", "to fall apart", "to fall a tart", "to fall morcelled", "to fall behind"], ["la réponse en fréquence", "the frequency response", "the frequency responsible", "the answer in frequency", "the frequency range"], ["une antenne-relais (de téléphonie mobile)", "a cell tower", "a cell flower", "a cellular towerette", "a power pylon"]], [["un émetteur (radio, réseau mobile)", "a transmitter", "a transmitten", "an emettor", "a transistor"], ["un récepteur (radio, réseau mobile)", "a receiver", "a deceiver", "a receptator", "a receptor"], ["une porteuse (fréquence porteuse)", "a carrier", "a career", "a porter", "a channel"], ["très rapprochées, serrées (des fréquences)", "packed closely together", "parked closely together", "approached closely together", "stacked on top of each other"], ["repousser (une forêt, la végétation)", "to regrow", "to re-row", "to repush", "to replant"], ["la faune (sauvage)", "wildlife", "wild wife", "savage life", "wilderness"], ["un réseau de capteurs", "a sensor network", "a censor network", "a captor network", "a social network"], ["faire correspondre", "to match up", "to munch up", "to make correspond", "to catch up"], ["sans fil", "wireless", "tireless", "threadless", "wired"], ["surveiller à distance", "to monitor remotely", "to minotaur remotely", "to survey at distance", "to control remotely"]]];
+  var KIND=["the joke","French in disguise","a real word, but something else"];
+  var READ=800, WORD=10000, STEAL=6000, PEN=5;
+  var $=function(id){ return document.getElementById('nf-'+id); };
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+  function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)),t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  function fmt(ms){ var s=ms/1000, m=Math.floor(s/60); s=s-m*60; return m+":"+(s<10?"0":"")+s.toFixed(1); }
+  function show(id){ ['setup','play','end'].forEach(function(x){ $(x).classList.toggle('hidden',x!==id); }); }
+
+  var mode=2, pool='all', names=['Left player','Right player'];
+  var deck=[], qi=0, cur=null, score=[0,0], log=[], best=null;
+  var run=0, segStart=0, pen=0, right=0, wrongs=[], tick=null, armT=null;
+
+  function setMode(m){ mode=m; $('m1').classList.toggle('on',m===1); $('m2').classList.toggle('on',m===2);
+    $('names').classList.toggle('hidden',m!==2); $('how1').classList.toggle('hidden',m!==1); $('how2').classList.toggle('hidden',m!==2); }
+  $('m1').addEventListener('click',function(){ setMode(1); });
+  $('m2').addEventListener('click',function(){ setMode(2); });
+  $('pools').addEventListener('click',function(e){ var b=e.target.closest?e.target.closest('button'):null; if(!b) return;
+    var bs=$('pools').querySelectorAll('button'); for(var i=0;i<bs.length;i++) bs[i].classList.remove('on'); b.classList.add('on'); pool=b.getAttribute('data-v'); });
+
+  function makeDeck(){
+    var items=[]; R.forEach(function(rnd,r){ if(pool==='all'||+pool===r) rnd.forEach(function(row){ items.push(row); }); });
+    shuffle(items);
+    return pool==='all'&&mode===2 ? items.slice(0,16) : items;
+  }
+  function elapsed(){ return run+(segStart?Date.now()-segStart:0)+pen*1000; }
+  function drawBar(){
+    var h='<div class="chip"><span>Word</span><strong>'+Math.min(qi+1,deck.length)+' / '+deck.length+'</strong></div>';
+    if(mode===1){ h+='<div class="chip clock"><span>Time'+(pen?' (incl. +'+pen+' s)':'')+'</span><strong>'+fmt(elapsed())+'</strong></div>'+
+                     '<div class="chip"><span>Right</span><strong>'+right+'</strong></div>'; }
+    else { h+='<div class="chip sc s1"><span>'+esc(names[0])+'</span><strong>'+score[0]+'</strong></div>'+
+              '<div class="chip sc s2"><span>'+esc(names[1])+'</span><strong>'+score[1]+'</strong></div>'; }
+    $('bar').innerHTML=h;
+  }
+  function newGame(){
+    names=[($('n1').value||'').trim()||'Left player',($('n2').value||'').trim()||'Right player'];
+    deck=makeDeck(); qi=0; score=[0,0]; log=[]; run=0; segStart=0; pen=0; right=0; wrongs=[];
+    $('opts').classList.toggle('solo',mode===1);
+    show('play'); clearInterval(tick); tick=setInterval(loop,100); ask();
+  }
+  function ask(){
+    var row=deck[qi];
+    // cur.opts[p] = index into row (1 = answer, 2 pun, 3 calque, 4 near-miss); the key never goes in the DOM
+    cur={row:row, opts:shuffle([1,2,3,4]), state:'read', first:-1, out:-1, t0:0};
+    $('fr').textContent=row[0];
+    var h=''; cur.opts.forEach(function(ix,p){
+      h+='<button class="opt" type="button" data-p="'+p+'"><span class="keys"><kbd class="k1">'+(p+1)+'</kbd><kbd class="k2">'+[7,8,9,0][p]+'</kbd></span>'+esc(row[ix])+'</button>'; });
+    $('opts').innerHTML=h; $('msg').textContent=''; $('msg').className='msg'; $('next').classList.add('hidden');
+    $('noise').className='noise'; $('noisebar').style.width='100%';
+    clearTimeout(armT);
+    if(mode===1){ cur.state='open'; segStart=Date.now(); $('card').classList.remove('wait'); }
+    else { $('card').classList.add('wait'); armT=setTimeout(function(){ cur.state='open'; cur.t0=Date.now(); $('card').classList.remove('wait'); },READ); }
+    drawBar();
+  }
+  function loop(){
+    if(mode===1){ drawBar(); return; }
+    if(!cur) return;
+    if(cur.state==='open'||cur.state==='steal'){
+      var lim=cur.state==='open'?WORD:STEAL, left=Math.max(0,lim-(Date.now()-cur.t0));
+      $('noisebar').style.width=(100*left/lim)+'%';
+      if(left<=0) timeout();
+    }
+  }
+  function btn(p){ return $('opts').querySelector('[data-p="'+p+'"]'); }
+  function tagOf(ix){ return '<span class="tag">'+KIND[ix-2]+'</span>'; }
+  function press(player,p){
+    if(!cur) return;
+    if(mode===1){ if(cur.state!=='open') return; return solo(p); }
+    if(player<0) return;                      // a duel answer must say who: keys, not the mouse
+    if(cur.state==='open'){
+      cur.state='done';                       // lock first: one answer per press window
+      var ok=cur.opts[p]===1;
+      if(ok){ score[player]+=2; log.push({row:cur.row,who:player,how:2,first:p}); return over(player+':right',p); }
+      cur.first=player; cur.out=p;
+      var b=btn(p); b.classList.add('out'); b.disabled=true; b.innerHTML+=' <span class="tag">('+esc(names[player])+')</span>';
+      $('msg').className='msg m'+(2-player); $('msg').textContent=names[1-player]+': steal it! +1';
+      $('noise').className='noise steal'; cur.t0=Date.now(); cur.state='steal'; drawBar(); return;
+    }
+    if(cur.state==='steal'){
+      if(player!==1-cur.first||p===cur.out) return;   // only the other player, and not the crossed-out option
+      cur.state='done';
+      var ok2=cur.opts[p]===1;
+      if(ok2){ score[player]+=1; log.push({row:cur.row,who:player,how:1,first:cur.out}); return over(player+':steal',p); }
+      log.push({row:cur.row,who:-1,first:cur.out,second:p}); return over('none',p);
+    }
+  }
+  function timeout(){
+    if(cur.state==='open'){ cur.state='done'; log.push({row:cur.row,who:-1,lost:true}); over('lost',-1); }
+    else if(cur.state==='steal'){ cur.state='done'; log.push({row:cur.row,who:-1,first:cur.out}); over('none',-1); }
+  }
+  function over(how,p){
+    clearTimeout(armT); $('noisebar').style.width='0%';
+    reveal(p);
+    var m=$('msg'), w=how.split(':');
+    if(w[1]==='right'){ m.className='msg ok'; m.textContent=names[+w[0]]+': right! +2'; }
+    else if(w[1]==='steal'){ m.className='msg ok'; m.textContent=names[+w[0]]+' steals it! +1'; }
+    else if(how==='lost'){ m.className='msg no'; m.textContent='Lost in the noise. No points.'; }
+    else { m.className='msg no'; m.textContent='Nobody filtered it out. No points.'; }
+    drawBar(); $('next').classList.remove('hidden');
+  }
+  function reveal(p){
+    cur.opts.forEach(function(ix,q){ var b=btn(q); b.disabled=true;
+      if(ix===1){ b.className='opt ok'; return; }
+      if(q===p||q===cur.out){ b.className='opt no'; }
+      else b.className='opt out';
+      b.innerHTML+=' '+tagOf(ix);
+    });
+  }
+  function solo(p){
+    cur.state='done'; run+=Date.now()-segStart; segStart=0;
+    var ok=cur.opts[p]===1;
+    if(ok) right++; else { pen+=PEN; wrongs.push({row:cur.row,said:cur.row[cur.opts[p]],kind:KIND[cur.opts[p]-2]}); }
+    reveal(p);
+    $('msg').className='msg '+(ok?'ok':'no');
+    $('msg').innerHTML=ok?'Right!':'Not this one: +'+PEN+' s. You picked <s>'+esc(cur.row[cur.opts[p]])+'</s>, '+KIND[cur.opts[p]-2]+'.';
+    drawBar(); $('next').classList.remove('hidden');
+  }
+  function next(){
+    if(!cur||cur.state!=='done') return;
+    qi++; if(qi<deck.length) ask(); else finish();
+  }
+  function finish(){
+    clearInterval(tick); clearTimeout(armT); cur=null;
+    var body='';
+    if(mode===1){
+      var tot=elapsed(), isBest=(best===null||tot<best); if(isBest) best=tot;
+      $('result').innerHTML=fmt(tot)+(isBest?' &nbsp;<span style="font-size:15px;color:var(--ok);">your best this session</span>':'');
+      body='<p class="center">'+right+' right out of '+deck.length+(pen?' &middot; +'+pen+' s for wrong answers':'')+'</p>'+
+           '<p class="center" style="color:var(--muted);">Your best this session: '+fmt(best)+'</p>';
+      if(wrongs.length){ body+='<table class="res"><tr><th>French</th><th>You picked</th><th>The answer</th></tr>';
+        wrongs.forEach(function(x){ body+='<tr><td>'+esc(x.row[0])+'</td><td><s>'+esc(x.said)+'</s> <span style="color:var(--muted)">('+x.kind+')</span></td><td><b style="color:var(--ok)">'+esc(x.row[1])+'</b></td></tr>'; });
+        body+='</table>'; }
+    } else {
+      var a=score[0], b=score[1];
+      $('result').innerHTML = a===b ? 'A draw: '+a+' each!' : esc(names[a>b?0:1])+' wins, '+Math.max(a,b)+' to '+Math.min(a,b)+'.';
+      body='<table class="res"><tr><th>French</th><th>English</th><th>Who</th></tr>';
+      log.forEach(function(x){ body+='<tr><td>'+esc(x.row[0])+'</td><td><b>'+esc(x.row[1])+'</b></td><td>'+
+        (x.who<0?(x.lost?'lost in the noise':'nobody'):esc(names[x.who])+(x.how===1?' (steal, +1)':' (+2)'))+'</td></tr>'; });
+      body+='</table><p style="margin:12px 0 0">Say three words from the list to your partner, in a sentence about the video.</p>';
+    }
+    $('end-body').innerHTML=body; show('end');
+  }
+  $('opts').addEventListener('click',function(e){ var b=e.target.closest?e.target.closest('button.opt'):null; if(!b||b.disabled) return;
+    var p=+b.getAttribute('data-p');
+    if(mode===1) press(0,p);
+    else if(cur&&cur.state==='steal') press(1-cur.first,p);   // a click during a steal is the stealer's
+    else press(-1,p);                                          // a click in a duel can't say who: keys only
+  });
+  var L={Digit1:0,Digit2:1,Digit3:2,Digit4:3,Numpad1:0,Numpad2:1,Numpad3:2,Numpad4:3}, Rk={Digit7:0,Digit8:1,Digit9:2,Digit0:3};
+  document.addEventListener('keydown',function(e){
+    if($('play').classList.contains('hidden')) return;
+    if(e.target&&e.target.tagName==='INPUT') return;
+    if(e.key==='Enter'){ e.preventDefault(); next(); return; }
+    if(e.repeat) return;
+    if(mode===1){ if(e.code in L) press(0,L[e.code]); return; }
+    if(e.code in L&&!/Numpad/.test(e.code)) press(0,L[e.code]);
+    else if(e.code in Rk) press(1,Rk[e.code]);
+  });
+  $('start').addEventListener('click',newGame);
+  $('next').addEventListener('click',next);
+  $('again').addEventListener('click',newGame);
+  $('menu').addEventListener('click',function(){ clearInterval(tick); cur=null; show('setup'); });
+  window.nfState=function(){ return {cur:cur,score:score,deck:deck,qi:qi,log:log,mode:mode,pen:pen,right:right}; };
+})();
+</script>
+</body>
+</html>
