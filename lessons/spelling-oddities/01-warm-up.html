@@ -73,11 +73,17 @@
 
   <h1>Pronunciation and spelling oddities</h1>
   <p class="sub">Look at the twelve words. Click the one you would <strong>least</strong> like to say out loud, in front of everyone.</p>
-  <div class="grid" id="so1-g"><div class="card" data-i="0">squirrel</div><div class="card" data-i="1">rural</div><div class="card" data-i="2">thorough</div><div class="card" data-i="3">clothes</div><div class="card" data-i="4">sixth</div><div class="card" data-i="5">world</div><div class="card" data-i="6">February</div><div class="card" data-i="7">specifically</div><div class="card" data-i="8">hierarchy</div><div class="card" data-i="9">comfortable</div><div class="card" data-i="10">Leicester</div><div class="card" data-i="11">anemone</div></div>
+  <div class="grid" id="so1-g"><div class="card" data-i="0" data-a="squirrel">squirrel</div><div class="card" data-i="1" data-a="rural">rural</div><div class="card" data-i="2" data-a="thorough">thorough</div><div class="card" data-i="3" data-a="clothes">clothes</div><div class="card" data-i="4" data-a="sixth">sixth</div><div class="card" data-i="5" data-a="world">world</div><div class="card" data-i="6" data-a="february">February</div><div class="card" data-i="7" data-a="specifically">specifically</div><div class="card" data-i="8" data-a="hierarchy">hierarchy</div><div class="card" data-i="9" data-a="comfortable">comfortable</div><div class="card" data-i="10" data-a="leicester">Leicester</div><div class="card" data-i="11" data-a="anemone">anemone</div></div>
   <div class="hide" id="so1-talk">
     <div class="talk">
       <p><strong>You chose <span id="so1-w"></span>.</strong> Tell your partner: why that one? Which part of it is the problem?</p>
-      <p class="note" style="margin:0">Then try to say it. Your partner decides if it worked.</p>
+      <p class="note" style="margin:0 0 10px">Then try to say it. Your partner decides if it worked. Then listen.</p>
+      <button class="ghost play" id="so1-hear">&#9654; Hear it</button>
+    </div>
+    <div class="hide" id="so1-all">
+      <h2>All twelve</h2>
+      <p class="sub">Listen, then say each one to your partner.</p>
+      <div class="panel"><button class="ghost play" data-a="squirrel">&#9654; squirrel</button> <button class="ghost play" data-a="rural">&#9654; rural</button> <button class="ghost play" data-a="thorough">&#9654; thorough</button> <button class="ghost play" data-a="clothes">&#9654; clothes</button> <button class="ghost play" data-a="sixth">&#9654; sixth</button> <button class="ghost play" data-a="world">&#9654; world</button> <button class="ghost play" data-a="february">&#9654; February</button> <button class="ghost play" data-a="specifically">&#9654; specifically</button> <button class="ghost play" data-a="hierarchy">&#9654; hierarchy</button> <button class="ghost play" data-a="comfortable">&#9654; comfortable</button> <button class="ghost play" data-a="leicester">&#9654; Leicester</button> <button class="ghost play" data-a="anemone">&#9654; anemone</button> </div>
     </div>
     <h2>Then talk</h2>
     <div class="q"><b>1</b><span>A word you are never sure how to spell.</span></div>
@@ -89,11 +95,19 @@
   <script>
   (function(){
     var g=document.getElementById('so1-g'); if(!g) return;
+    var cur=null, pick=null;
+    function play(slug){ if(cur) cur.pause(); cur=new Audio('audio/warmup/'+slug+'.mp3'); cur.play(); }
     g.addEventListener('click',function(e){
       var c=e.target.closest?e.target.closest('.card'):null; if(!c) return;
       var cs=g.querySelectorAll('.card'); for(var i=0;i<cs.length;i++) cs[i].classList.remove('on');
-      c.classList.add('on'); document.getElementById('so1-w').textContent=c.textContent;
+      c.classList.add('on'); pick=c.getAttribute('data-a'); document.getElementById('so1-w').textContent=c.textContent;
       document.getElementById('so1-talk').classList.remove('hide');
+    });
+    document.getElementById('so1-hear').addEventListener('click',function(){
+      if(!pick) return; play(pick); document.getElementById('so1-all').classList.remove('hide');
+    });
+    document.getElementById('so1-all').addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('[data-a]'):null; if(b) play(b.getAttribute('data-a'));
     });
   })();
   </script>
