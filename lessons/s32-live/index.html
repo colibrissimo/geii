@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is the Fourier transform used for? Live session</title>
+<style>html,body{margin:0;padding:12px 0;background:#f7f8fa;}</style>
+</head>
+<body>
+<div id="s32">
+  <style>
+    #s32{--ink:#1d2733;--muted:#5b6b7c;--paper:#f7f8fa;--card:#fff;--line:#d9e0ea;
+      --teal:#155E75;--teal-bg:#E0F2F7;--terra:#D97757;--terra-bg:#FBEEE8;--slate:#64748B;--slate-bg:#F1F5F9;
+      --amber:#F4B942;--amber-bg:#fff7e6;
+      font-family:Verdana,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.55;color:var(--ink);
+      background:var(--paper);max-width:860px;margin:0 auto;padding:20px 22px 26px;}
+    #s32 *{box-sizing:border-box;}
+    #s32 h1{font-size:28px;margin:0 0 4px;color:var(--teal);line-height:1.25;}
+    #s32 .sub{margin:0 0 18px;color:var(--muted);font-size:16px;}
+    #s32 .step{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--teal);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+    #s32 .step h2{font-size:21px;margin:0 0 8px;color:var(--teal);display:flex;gap:12px;align-items:baseline;}
+    #s32 .step h2 b{background:var(--teal);color:#fff;border-radius:50%;min-width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;font-size:17px;}
+    #s32 .step p{margin:0 0 10px;}
+    #s32 .step.post{border-left-color:var(--terra);}
+    #s32 .step.post h2{color:var(--terra);} #s32 .step.post h2 b{background:var(--terra);}
+    #s32 .step.home{border-left-color:var(--slate);}
+    #s32 .step.home h2{color:var(--slate);} #s32 .step.home h2 b{background:var(--slate);}
+    #s32 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+    #s32 a.go{display:inline-block;font-weight:bold;font-size:17px;text-decoration:none;background:var(--teal);color:#fff;border-radius:10px;padding:10px 18px;}
+    #s32 a.go:hover{background:#0f4a5c;}
+    #s32 button{font-family:inherit;font-size:16px;font-weight:bold;border:2px solid var(--teal);border-radius:10px;padding:8px 16px;cursor:pointer;background:transparent;color:var(--teal);}
+    #s32 button:hover{background:var(--teal-bg);}
+    #s32 button.amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+    #s32 button.amber:hover{background:#e0a52a;}
+    #s32 button.fr{border-color:var(--line);color:var(--muted);font-weight:normal;font-size:14px;padding:6px 12px;}
+    #s32 button[aria-expanded="true"]{box-shadow:inset 0 0 0 2px var(--ink);}
+    #s32 .ans{display:none;margin-top:10px;background:var(--teal-bg);border-radius:10px;padding:12px 16px;font-size:17px;}
+    #s32 .ans.open{display:block;}
+    #s32 .ans p{margin:4px 0;}
+    #s32 .ans ol{margin:4px 0;padding-left:24px;}
+    #s32 .frt{display:none;margin-top:10px;background:var(--slate-bg);border-left:5px solid var(--slate);border-radius:10px;padding:10px 14px;font-size:16px;color:var(--ink);}
+    #s32 .frt.open{display:block;}
+    #s32 .frt p{margin:4px 0;}
+    #s32 .talk{margin:10px 0;padding:12px 16px;border-radius:12px;background:var(--amber-bg);border:2px solid #f1d9a6;font-size:17px;}
+    #s32 .talk p{margin:2px 0;font-style:italic;}
+    #s32 .verbs{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;}
+    #s32 .verbs span{background:#fff;border:1px solid #f1c48a;color:#b45309;font-weight:bold;border-radius:8px;padding:2px 10px;font-size:15px;}
+    #s32 .quote{color:var(--muted);font-size:16px;}
+    #s32 .note{font-size:14px;color:var(--muted);margin-top:16px;}
+    @media (max-width:560px){#s32{font-size:17px;padding:16px;} #s32 h1{font-size:24px;}}
+  </style>
+
+  <h1>What is the Fourier transform used for?</h1>
+  <p class="sub">Live on Zoom. Headphones or earphones on, volume low at the start. We go step by step, together.</p>
+
+  <section class="step">
+    <h2><b>1</b>Guess first</h2>
+    <p>Before the video: write down three things in your day that you think use the Fourier transform. Then type one of them in the Zoom chat.</p>
+    <div class="btns"><button class="fr" data-t="fr1" aria-expanded="false">En français</button></div>
+    <div class="frt" id="fr1"><p>Avant la vidéo : notez trois choses de votre journée qui utilisent, selon vous, la transformée de Fourier. Puis tapez-en une dans le chat Zoom.</p></div>
+  </section>
+
+  <section class="step">
+    <h2><b>2</b>Watch and notice</h2>
+    <p>On Moodle, open the book <strong>What is the Fourier Transform used for?</strong> Read the NOTE, watch the video (5 min 42), then do the activities and the quiz. In the transcript, count the verbs in orange.</p>
+    <div class="btns"><button class="amber" data-t="a2" aria-expanded="false">How many orange verbs?</button><button class="fr" data-t="fr2" aria-expanded="false">En français</button></div>
+    <div class="ans" id="a2">
+      <p><strong>13.</strong> They are all built the same way: <em>be</em> (or <em>get</em>) + past participle. This is the passive voice.</p>
+      <div class="verbs"><span>I'm often asked</span><span>it's used</span><span>is ... used</span><span>is damped</span><span>need to be understood</span><span>gets transmitted</span><span>are subdivided</span><span>is sent</span><span>are packed</span><span>is generated</span><span>is achieved</span><span>is used</span><span>is used</span></div>
+      <p>Did you find 14? Then you counted <em>is</em> and <em>used</em> in "What is the Fourier transform used for?" as two verbs. Together, they make one.</p>
+    </div>
+    <div class="frt" id="fr2"><p>Sur Moodle, ouvrez le livre <strong>What is the Fourier Transform used for?</strong> Lisez la NOTE, regardez la vidéo (5 min 42), puis faites les activités et le quiz. Dans la transcription, comptez les verbes en orange.</p></div>
+  </section>
+
+  <section class="step">
+    <h2><b>3</b>Check your guesses</h2>
+    <p>Which of your guesses did the video confirm? Which uses did you not expect?</p>
+    <div class="btns"><button class="amber" data-t="a3" aria-expanded="false">The four uses in the video</button><button class="fr" data-t="fr3" aria-expanded="false">En français</button></div>
+    <div class="ans" id="a3"><ol>
+      <li><strong>Removing noise.</strong> A low-pass filter takes out the cicadas and keeps his voice.</li>
+      <li><strong>Shock absorbers.</strong> Engineers study the vibrations and the resonance when they design them.</li>
+      <li><strong>4G and 5G.</strong> The phone network uses it to create the signal (OFDM) and to receive it.</li>
+      <li><strong>Wildlife.</strong> Microphones in the forest pick out the sound of a bird or a frog from all the noise.</li>
+    </ol></div>
+    <div class="frt" id="fr3"><p>Lesquelles de vos hypothèses la vidéo confirme-t-elle ? Quelles utilisations ne vous attendiez-vous pas à voir ?</p></div>
+  </section>
+
+  <section class="step">
+    <h2><b>4</b>Sine, square, saw</h2>
+    <p>Open the Spectral Canvas. In <strong>or try</strong>, choose <strong>sine</strong>. Before you press Play, guess: how many lines will you see in the lower picture? One? Two? Lots? Type your guess in the chat. Then press Play.</p>
+    <p>Do the same with <strong>square</strong>, then <strong>saw</strong>. Write one sentence for each sound.</p>
+    <div class="btns"><a class="go" href="https://colibrissimo.github.io/geii/lessons/spectral-canvas/" target="_blank" rel="noopener">Open the Spectral Canvas</a></div>
+    <div class="talk"><p>The sine has only one line...</p><p>The square has more lines than the sine, but...</p><p>The saw sounds ... and in the picture, it has...</p></div>
+    <div class="btns"><button class="amber" data-t="a4a" aria-expanded="false">Sine</button><button class="amber" data-t="a4b" aria-expanded="false">Square</button><button class="amber" data-t="a4c" aria-expanded="false">Saw</button><button class="fr" data-t="fr4" aria-expanded="false">En français</button></div>
+    <div class="ans" id="a4a"><p><strong>Sine: one line</strong>, at 220 Hz. A sine is one frequency, so the picture shows one line.</p></div>
+    <div class="ans" id="a4b"><p><strong>Square: a ladder with gaps.</strong> A line at 220 Hz, then lines at 660, 1100, 1540 Hz... That is 3, 5, 7 times 220: only the odd ones, and each one is quieter than the one below.</p></div>
+    <div class="ans" id="a4c"><p><strong>Saw: the full ladder.</strong> 220, 440, 660, 880 Hz... Every multiple of 220, getting quieter as it goes up. No gaps.</p><p>All three sounds play the same note. What changes is the ladder above it, and that is why they sound different.</p></div>
+    <div class="frt" id="fr4"><p>Ouvrez le Spectral Canvas. Dans <strong>or try</strong>, choisissez <strong>sine</strong>. Avant d'appuyer sur Play, devinez : combien de lignes allez-vous voir dans l'image du bas ? Une ? Deux ? Beaucoup ? Tapez votre réponse dans le chat. Puis appuyez sur Play.</p><p>Faites la même chose avec <strong>square</strong>, puis <strong>saw</strong>. Écrivez une phrase en anglais pour chaque son.</p></div>
+  </section>
+
+  <section class="step">
+    <h2><b>5</b>Music in a beam of light</h2>
+    <p>The artist Jem Finer sent music across the River Thames, in London, inside a beam of light: from an old lighthouse at Trinity Buoy Wharf to a listening post on the other bank. The music was <em>Longplayer</em>, a piece that lasts 1000 years. The work is called <em>Sonic Ray</em>.</p>
+    <p class="quote">A journalist at the Evening Standard asked: "How do you send a piece of music through a laser beam?" What is your guess?</p>
+    <div class="btns"><a class="go" href="https://www.artangel.org.uk/project/sonic-ray/" target="_blank" rel="noopener">Read about Sonic Ray</a></div>
+    <p style="margin-top:12px">Which is the <strong>message</strong>, which is the <strong>signal</strong>, and which is the <strong>carrier</strong>?</p>
+    <div class="btns"><button class="amber" data-t="a5" aria-expanded="false">Show the answer</button><button class="fr" data-t="fr5" aria-expanded="false">En français</button></div>
+    <div class="ans" id="a5">
+      <p><strong>The message:</strong> the music.</p>
+      <p><strong>The carrier:</strong> the beam of light. It crosses the river.</p>
+      <p><strong>The signal:</strong> the light with the music encoded in it. On the other bank, a receiver turns it back into sound.</p>
+      <p>Remember the video: in 4G and 5G, each part of your data is sent on a different carrier.</p>
+    </div>
+    <div class="frt" id="fr5"><p>L'artiste Jem Finer a envoyé de la musique de l'autre côté de la Tamise, à Londres, dans un faisceau de lumière : d'un ancien phare à Trinity Buoy Wharf jusqu'à un poste d'écoute sur l'autre rive. La musique était <em>Longplayer</em>, une œuvre qui dure 1000 ans. L'œuvre s'appelle <em>Sonic Ray</em>.</p><p>Un journaliste de l'Evening Standard a demandé : comment envoyer un morceau de musique dans un rayon laser ? Votre hypothèse ?</p><p>Lequel est le <strong>message</strong>, lequel est le <strong>signal</strong>, et lequel est la <strong>porteuse</strong> (carrier) ?</p></div>
+  </section>
+
+  <section class="step">
+    <h2><b>6</b>Draw it, save it, load it back</h2>
+    <p>Back on the canvas: press <strong>Clear sound</strong>. Draw a simple shape (a triangle, a line, a letter) and press <strong>Play</strong>. Press <strong>Save WAV</strong>.</p>
+    <p>Then press <strong>Clear paint</strong>, and load your WAV with <strong>Load a sound or an image</strong>. Write one sentence: what came back, and what did not?</p>
+    <div class="btns"><a class="go" href="https://colibrissimo.github.io/geii/lessons/spectral-canvas/" target="_blank" rel="noopener">Open the Spectral Canvas</a></div>
+    <div class="btns"><button class="amber" data-t="a6" aria-expanded="false">Show the answer</button><button class="fr" data-t="fr6" aria-expanded="false">En français</button></div>
+    <div class="ans" id="a6">
+      <p><strong>What came back:</strong> the whole shape, now in teal. It is not paint any more, it is a sound.</p>
+      <p><strong>What did not come back exactly:</strong> the sharp edges. They are a little blurred, with a faint glow around them, because the canvas listens to the sound in short slices of time.</p>
+      <p>Try the eraser on it: nothing happens. It is sound now, so only <strong>Clear sound</strong> removes it.</p>
+    </div>
+    <div class="frt" id="fr6"><p>Retour sur le canvas : appuyez sur <strong>Clear sound</strong>. Dessinez une forme simple (un triangle, une ligne, une lettre) et appuyez sur <strong>Play</strong>. Appuyez sur <strong>Save WAV</strong>.</p><p>Ensuite, appuyez sur <strong>Clear paint</strong> et rechargez votre WAV avec <strong>Load a sound or an image</strong>. Écrivez une phrase en anglais : qu'est-ce qui revient, et qu'est-ce qui ne revient pas ?</p></div>
+  </section>
+
+  <section class="step post">
+    <h2><b>7</b>Post it</h2>
+    <p>Post everything you wrote today in the forum <strong>s32: what did you see?</strong> on Moodle. One post per person, or one per pair with both names. You will see the other posts after you post yours.</p>
+    <p>Keep your WAV. In January, the TP <strong>Hidden in the Spectrum</strong> starts with your sentences and your sound.</p>
+    <div class="btns"><button class="fr" data-t="fr7" aria-expanded="false">En français</button></div>
+    <div class="frt" id="fr7"><p>Postez tout ce que vous avez écrit aujourd'hui dans le forum <strong>s32: what did you see?</strong> sur Moodle. Un message par personne, ou un par binôme avec vos deux noms. Vous verrez les autres messages après avoir posté le vôtre.</p><p>Gardez votre WAV. En janvier, le TP <strong>Hidden in the Spectrum</strong> commence avec vos phrases et votre son.</p></div>
+  </section>
+
+  <section class="step home">
+    <h2><b>+</b>At home</h2>
+    <p>On Moodle: the stress-shift book (PEriod, periODic) and the dictation. Then the vocabulary game, in solo mode.</p>
+    <div class="btns"><a class="go" href="https://colibrissimo.github.io/geii/games/fourier_noise_filter.html" target="_blank" rel="noopener">Noise filter: the vocabulary game</a><button class="fr" data-t="fr8" aria-expanded="false">En français</button></div>
+    <div class="frt" id="fr8"><p>Sur Moodle : le livre sur le déplacement de l'accent (PEriod, periODic) et la dictée. Puis le jeu de vocabulaire, en mode solo.</p></div>
+  </section>
+
+  <p class="note">Video: Iain Collings, "What is the Fourier Transform used for?". Sonic Ray: artangel.org.uk.</p>
+
+  <script>
+  (function(){
+    var root=document.getElementById('s32');
+    root.querySelectorAll('button[data-t]').forEach(function(b){
+      b.addEventListener('click',function(){
+        var box=document.getElementById(b.getAttribute('data-t'));
+        var open=box.classList.toggle('open');
+        b.setAttribute('aria-expanded',open?'true':'false');
+      });
+    });
+  })();
+  </script>
+</div>
+</body>
+</html>
