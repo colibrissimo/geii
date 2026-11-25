@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spectral Canvas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Share+Tech+Mono&display=swap">
+<style>
+:root{--bg:#08141a;--panel:#0f2029;--line:#23414e;--ink:#d9eef4;--mute:#8fb0bb;--teal:#0891B2;--orange:#F97316}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 Raleway,system-ui,sans-serif;padding:16px}
+main{max-width:1000px;margin:0 auto}
+h1{font-size:22px;margin:0 0 2px}
+p.lead{margin:0 0 12px;color:var(--mute)}
+.bar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;background:var(--panel);border:1px solid var(--line);padding:10px;margin:0 0 8px}
+button,.file{background:var(--teal);color:#fff;border:0;padding:7px 12px;font:600 14px Raleway,sans-serif;cursor:pointer;border-radius:3px;display:inline-block}
+button.alt{background:transparent;border:1px solid var(--line);color:var(--ink)}
+button.go{background:var(--orange)}
+button.on{outline:2px solid var(--orange)}
+label{display:inline-flex;gap:6px;align-items:center;color:var(--mute);font-size:13px}
+input[type=text],select,textarea{background:#071015;color:var(--ink);border:1px solid var(--line);padding:6px;font:14px 'Share Tech Mono',monospace}
+textarea{width:100%;height:96px;display:block;margin-bottom:8px}
+.stage{position:relative;margin:0 0 8px;padding-left:46px}
+canvas{display:block;width:100%;background:#000;touch-action:none}
+#paint{cursor:crosshair}
+.title{position:absolute;right:8px;top:6px;font:12px 'Share Tech Mono',monospace;color:#fff;background:#0008;padding:2px 6px;pointer-events:none}
+.tick{position:absolute;left:0;width:42px;text-align:right;font:11px 'Share Tech Mono',monospace;color:var(--mute);transform:translateY(-50%)}
+#head{position:absolute;top:0;bottom:0;width:1px;background:#fff;pointer-events:none;display:none}
+#status{font:13px 'Share Tech Mono',monospace;color:var(--orange);min-height:20px;margin:0 0 8px}
+details{margin:0 0 8px}
+summary{cursor:pointer;color:var(--mute);margin-bottom:6px}
+</style></head><body><main>
+<h1>Spectral Canvas</h1>
+<p class="lead">Time runs left to right, pitch runs upwards, brightness is loudness. Make a sound, paint on it, press Play, and watch the lower picture.</p>
+
+<div class="bar">
+  <label class="file" for="file">Load a sound or an image</label>
+  <input id="file" type="file" accept="audio/*,image/*" hidden>
+  <label>or try <select id="demo" aria-label="Try a sound"><option value="">a sound...</option><option value="sine_220Hz">sine</option><option value="square_220Hz">square</option><option value="saw_220Hz">saw</option></select></label>
+  <label><input id="invert" type="checkbox"> invert image</label>
+  <input id="text" type="text" value="GEII" maxlength="14" size="10" aria-label="Text to write">
+  <button id="write" class="alt">Write it</button>
+  <button id="clearPaint" class="alt">Clear paint</button>
+  <button id="clearSound" class="alt">Clear sound</button>
+  <label>length <select id="len"><option>4</option><option selected>8</option><option>16</option></select> s</label>
+</div>
+<div class="bar">
+  <button id="brush" class="alt on">Brush</button><button id="erase" class="alt">Eraser</button>
+  <label>size <input id="size" type="range" min="2" max="40" value="10"></label>
+  <label>brightness <input id="strength" type="range" min="10" max="100" value="100"></label>
+  <label>image level <input id="level" type="range" min="-48" max="0" value="-18"></label>
+</div>
+
+<div class="stage" id="s1"><canvas id="paint" width="960" height="300"></canvas><div id="head"></div><span class="title">your canvas: sound in teal, paint in orange</span></div>
+<div class="bar">
+  <button id="play" class="go">Play</button><button id="stopAll" class="alt">Stop</button>
+  <label>volume <input id="vol" type="range" min="0" max="100" value="50"></label>
+  <label>window <select id="win"><option value="512">short (12 ms)</option><option value="2048" selected>medium (46 ms)</option><option value="8192">long (186 ms)</option></select></label>
+  <button id="wav" class="alt">Save WAV</button><button id="png" class="alt">Save picture</button>
+</div>
+<div class="stage" id="s2"><canvas id="reveal" width="960" height="300"></canvas><span class="title">what the speakers are really playing</span></div>
+<div id="status" role="status">Ready.</div>
+
+<details open id="codePanel"><summary>Make the sound in code (Strudel)</summary>
+  <div class="bar" style="display:block">
+    <select id="examples" aria-label="Examples" style="margin-bottom:8px"></select>
+    <textarea id="code" spellcheck="false" aria-label="Strudel code"></textarea>
+    <button id="run" class="go">Play or update code</button>
+    <button id="hushBtn" class="alt">Stop code</button>
+    <button id="capture">Capture onto the canvas</button>
+  </div>
+</details>
+</main>
+<script>
+(()=>{
+// Everything that would go to the speakers passes through one limiter and one volume control.
+const G={ctx:null};
+const origConnect=AudioNode.prototype.connect;
+function graph(ctx){
+  if(G.ctx)return G;
+  G.ctx=ctx;G.bus=ctx.createGain();
+  G.limiter=ctx.createDynamicsCompressor();
+  G.limiter.threshold.value=-6;G.limiter.knee.value=0;G.limiter.ratio.value=20;G.limiter.attack.value=.003;G.limiter.release.value=.1;
+  G.analyser=ctx.createAnalyser();G.analyser.fftSize=2048;G.analyser.smoothingTimeConstant=0;
+  G.master=ctx.createGain();G.master.gain.value=.5;
+  origConnect.call(G.bus,G.limiter);origConnect.call(G.limiter,G.analyser);origConnect.call(G.analyser,G.master);origConnect.call(G.master,ctx.destination);
+  return G;
+}
+AudioNode.prototype.connect=function(dest,...rest){
+  if(dest instanceof AudioDestinationNode){const g=graph(this.context);if(this!==g.master&&!this.__direct)return origConnect.call(this,g.bus)}
+  return origConnect.call(this,dest,...rest);
+};
+window.__sc={G,origConnect,graph};
+})();
+</script>
+<script src="https://unpkg.com/@strudel/web@1.3.0"></script>
+<script>
+// Kept inside a function: Strudel puts its own names (fft, sine, mix...) on the page's global scope.
+(()=>{
+const {G,origConnect,graph}=window.__sc;
+const $=id=>document.getElementById(id);
+const W=960,H=300,FMIN=40,FMAX=16000,FLOOR=-60;
+const hasStrudel=typeof initStrudel==='function';
+let ownCtx=null,repl=null,strudelReady=null;
+const stopCode=()=>{if(repl)repl.stop();liveOn=false};
+const getCtx=()=>hasStrudel?getAudioContext():(ownCtx||(ownCtx=new AudioContext()));
+const say=t=>{$('status').textContent=t};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+let dur=8,base=null,baseV=new Float32Array(W*H),paint=new Float32Array(W*H);
+let paintAudio=null,paintDirty=true,lastMix=null;
+const rowFreq=r=>FMIN*Math.pow(FMAX/FMIN,(H-1-r)/(H-1));
+
+function fft(re,im){
+  const n=re.length;
+  for(let i=1,j=0;i<n;i++){let b=n>>1;for(;j&b;b>>=1)j^=b;j^=b;if(i<j){let t=re[i];re[i]=re[j];re[j]=t;t=im[i];im[i]=im[j];im[j]=t}}
+  for(let len=2;len<=n;len<<=1){
+    const a=-2*Math.PI/len,wr=Math.cos(a),wi=Math.sin(a);
+    for(let i=0;i<n;i+=len){let cr=1,ci=0;
+      for(let k=0;k<len/2;k++){
+        const p=i+k,q=p+len/2,xr=re[q]*cr-im[q]*ci,xi=re[q]*ci+im[q]*cr;
+        re[q]=re[p]-xr;im[q]=im[p]-xi;re[p]+=xr;im[p]+=xi;
+        const t=cr*wr-ci*wi;ci=cr*wi+ci*wr;cr=t;
+      }
+    }
+  }
+}
+function rowBins(n,sr){
+  const out=[];
+  for(let r=0;r<H;r++){
+    const lo=rowFreq(Math.min(H-1,r+.5))/sr*n,hi=rowFreq(Math.max(0,r-.5))/sr*n;
+    let a=Math.round(lo),b=Math.round(hi);if(b<a)b=a;
+    out.push([Math.min(a,n/2-1),Math.min(b,n/2-1)]);
+  }
+  return out;
+}
+// Sound to picture: 0 is silence, 1 is the loudest point of the file.
+function analyse(sig,sr,n=4096){
+  const out=new Float32Array(W*H),win=new Float32Array(n);let sum=0;
+  for(let i=0;i<n;i++){win[i]=.5-.5*Math.cos(2*Math.PI*i/(n-1));sum+=win[i]}
+  const bins=rowBins(n,sr),re=new Float32Array(n),im=new Float32Array(n);let peak=-Infinity;
+  for(let x=0;x<W;x++){
+    const start=Math.round((x+.5)/W*sig.length-n/2);
+    for(let i=0;i<n;i++){const s=start+i;re[i]=(s>=0&&s<sig.length?sig[s]:0)*win[i];im[i]=0}
+    fft(re,im);
+    for(let r=0;r<H;r++){
+      let m=0;for(let b=bins[r][0];b<=bins[r][1];b++)m=Math.max(m,re[b]*re[b]+im[b]*im[b]);
+      const db=10*Math.log10(m*4/(sum*sum)+1e-14);out[r*W+x]=db;if(db>peak)peak=db;
+    }
+  }
+  for(let i=0;i<out.length;i++)out[i]=Math.max(0,1+(out[i]-peak)/-FLOOR);
+  return out;
+}
+// Picture to sound: one sine per row, its loudness following the brightness along the row.
+const TAB=8192,sine=new Float32Array(TAB);for(let i=0;i<TAB;i++)sine[i]=Math.sin(2*Math.PI*i/TAB);
+function renderPaint(sr){
+  const len=Math.round(dur*sr),out=new Float32Array(len),seg=len/W,amp=new Float32Array(W+1);
+  for(let r=0;r<H;r++){
+    let any=false;
+    for(let x=0;x<W;x++){const v=paint[r*W+x];amp[x+1]=v>0?Math.pow(10,(v-1)*-FLOOR/20):0;if(v>0)any=true}
+    if(!any)continue;
+    amp[0]=0;
+    const inc=rowFreq(r)/sr*TAB;let ph=Math.random()*TAB;
+    for(let x=0;x<W;x++){
+      const a0=amp[x],a1=amp[x+1],i0=Math.round(x*seg),i1=Math.round((x+1)*seg),n=i1-i0;
+      if(a0===0&&a1===0){ph=(ph+inc*n)%TAB;continue}
+      const da=(a1-a0)/n;let a=a0;
+      for(let i=i0;i<i1;i++){out[i]+=a*sine[ph|0];ph+=inc;if(ph>=TAB)ph-=TAB;a+=da}
+    }
+  }
+  let p=0;for(let i=0;i<len;i++)p=Math.max(p,Math.abs(out[i]));
+  if(p>0)for(let i=0;i<len;i++)out[i]/=p;
+  return out;
+}
+function mix(sr){
+  if(paintDirty||!paintAudio||paintAudio.length!==Math.round(dur*sr)){paintAudio=renderPaint(sr);paintDirty=false}
+  const g=Math.pow(10,$('level').value/20),len=paintAudio.length,out=new Float32Array(len);
+  for(let i=0;i<len;i++)out[i]=paintAudio[i]*g+(base&&i<base.length?base[i]:0);
+  let p=0;for(let i=0;i<len;i++)p=Math.max(p,Math.abs(out[i]));
+  if(p>.7)for(let i=0;i<len;i++)out[i]*=.7/p;
+  lastMix=out;return out;
+}
+
+// Drawing
+const pc=$('paint'),pg=pc.getContext('2d'),rc=$('reveal'),rg=rc.getContext('2d');
+const pimg=pg.createImageData(W,H);
+function drawPaint(){
+  const d=pimg.data;
+  for(let i=0;i<W*H;i++){
+    const b=baseV[i],v=paint[i],k=i*4;
+    let R=8*b*b,G_=145*b*b,B=178*b*b;
+    if(v>0){const t=.35+.65*v;R=249*t+R*(1-t);G_=115*t+G_*(1-t);B=22*t+B*(1-t)}
+    d[k]=R;d[k+1]=G_;d[k+2]=B;d[k+3]=255;
+  }
+  pg.putImageData(pimg,0,0);
+}
+const LUT=new Uint8ClampedArray(256*3);
+for(let i=0;i<256;i++){const t=i/255;
+  const stops=[[0,0,0,0],[.35,8,90,120],[.65,8,145,178],[.85,249,115,22],[1,255,245,225]];
+  let a=stops[0],b=stops[1];for(let s=0;s<stops.length-1;s++)if(t>=stops[s][0]&&t<=stops[s+1][0]){a=stops[s];b=stops[s+1]}
+  const u=(t-a[0])/((b[0]-a[0])||1);for(let c=0;c<3;c++)LUT[i*3+c]=a[c+1]+(b[c+1]-a[c+1])*u;
+}
+let bins=null,col=rg.createImageData(1,H),lastX=-1,playing=false,liveOn=false,t0=0,src=null;
+const MIN_DB=-100,MAX_DB=-40;
+function drawCol(x,f){
+  for(let r=0;r<H;r++){
+    let m=-200;for(let b=bins[r][0];b<=bins[r][1];b++)if(f[b]>m)m=f[b];
+    const i=Math.max(0,Math.min(255,Math.round((m-MIN_DB)/(MAX_DB-MIN_DB)*255)));
+    const k=r*4;col.data[k]=LUT[i*3];col.data[k+1]=LUT[i*3+1];col.data[k+2]=LUT[i*3+2];col.data[k+3]=255;
+  }
+  rg.putImageData(col,x,0);
+}
+function colFromMix(c){
+  const n=G.analyser.fftSize,re=new Float32Array(n),im=new Float32Array(n),end=Math.round((c+1)/W*lastMix.length);
+  for(let i=0;i<n;i++){const s=end-n+i,a=2*Math.PI*i/n;re[i]=(s>=0&&s<lastMix.length?lastMix[s]:0)*(.42-.5*Math.cos(a)+.08*Math.cos(2*a))}
+  fft(re,im);
+  const f=new Float32Array(n/2);for(let i=0;i<n/2;i++)f[i]=10*Math.log10((re[i]*re[i]+im[i]*im[i])/(n*n)+1e-20);
+  return f;
+}
+function setWindow(){if(!G.analyser)return;G.analyser.fftSize=+$('win').value;bins=rowBins(G.analyser.fftSize,G.ctx.sampleRate)}
+function tick(){
+  requestAnimationFrame(tick);
+  if(!G.analyser||!(playing||liveOn))return;
+  const now=G.ctx.currentTime;let frac;
+  if(playing){frac=(now-t0)/dur;if(frac>=1){playing=false;$('head').style.display='none';say('Finished. Compare the two pictures.');return}}
+  else frac=(now%dur)/dur;
+  if(!bins)setWindow();
+  const f=new Float32Array(G.analyser.frequencyBinCount);G.analyser.getFloatFrequencyData(f);
+  const x=Math.floor(frac*W);
+  if(lastX<0||x<lastX)lastX=x-1;
+  // If the browser stalled, fill the missed columns from the signal that was playing.
+  for(let c=lastX+1;c<x;c++)if(c>=0)drawCol(c,playing?colFromMix(c):f);
+  if(x>=0)drawCol(x,f);
+  lastX=x;
+  const h=$('head');h.style.display='block';
+  const box=pc.getBoundingClientRect();h.style.left=(46+frac*box.width)+'px';
+}
+requestAnimationFrame(tick);
+
+// Painting
+let tool='brush',down=false,px=0,py=0;
+function dab(cx,cy){
+  const R=+$('size').value,S=$('strength').value/100;
+  for(let y=Math.max(0,cy-R|0);y<=Math.min(H-1,cy+R);y++)for(let x=Math.max(0,cx-R|0);x<=Math.min(W-1,cx+R);x++){
+    const d=Math.hypot(x-cx,y-cy)/R;if(d>1)continue;
+    const fall=1-d*d,i=(y|0)*W+(x|0);
+    if(tool==='brush')paint[i]=Math.max(paint[i],S*fall);
+    else{paint[i]*=d*d;if(paint[i]<.02)paint[i]=0}
+  }
+}
+function pos(e){const b=pc.getBoundingClientRect();return [(e.clientX-b.left)/b.width*W,(e.clientY-b.top)/b.height*H]}
+pc.addEventListener('pointerdown',e=>{down=true;pc.setPointerCapture(e.pointerId);[px,py]=pos(e);dab(px,py);paintDirty=true;drawPaint()});
+pc.addEventListener('pointermove',e=>{
+  if(!down)return;const [x,y]=pos(e),n=Math.max(1,Math.hypot(x-px,y-py)/2);
+  for(let i=1;i<=n;i++)dab(px+(x-px)*i/n,py+(y-py)*i/n);
+  px=x;py=y;paintDirty=true;drawPaint();
+});
+addEventListener('pointerup',()=>{down=false});
+$('brush').onclick=()=>{tool='brush';$('brush').classList.add('on');$('erase').classList.remove('on')};
+$('erase').onclick=()=>{tool='erase';$('erase').classList.add('on');$('brush').classList.remove('on')};
+
+function stamp(draw){
+  const o=document.createElement('canvas');o.width=W;o.height=H;const g=o.getContext('2d',{willReadFrequently:true});
+  g.fillStyle='#000';g.fillRect(0,0,W,H);draw(g);
+  const d=g.getImageData(0,0,W,H).data,inv=$('invert').checked;
+  for(let i=0;i<W*H;i++){
+    let l=(d[i*4]*.2126+d[i*4+1]*.7152+d[i*4+2]*.0722)/255;
+    paint[i]=Math.max(paint[i],l);
+  }
+  paintDirty=true;drawPaint();
+}
+function writeText(t){
+  stamp(g=>{let size=150;g.textAlign='center';g.textBaseline='middle';g.fillStyle='#fff';
+    do{g.font=`700 ${size}px Raleway,Arial,sans-serif`;size-=4}while(g.measureText(t).width>W*.9&&size>20);
+    g.fillText(t,W/2,H*.4)});
+}
+$('write').onclick=()=>writeText($('text').value);
+$('clearPaint').onclick=()=>{paint.fill(0);paintDirty=true;drawPaint()};
+$('clearSound').onclick=()=>{base=null;baseV.fill(0);drawPaint()};
+$('len').onchange=()=>{if(!base){dur=+$('len').value;paintDirty=true}else say('Length follows the loaded sound. Clear the sound to change it.')};
+
+function setBase(sig,sr){
+  let p=0;for(let i=0;i<sig.length;i++)p=Math.max(p,Math.abs(sig[i]));
+  if(p>0)for(let i=0;i<sig.length;i++)sig[i]/=p;
+  base=sig;dur=sig.length/sr;baseV=analyse(sig,sr);paintDirty=true;drawPaint();
+}
+$('file').onchange=async e=>{
+  const f=e.target.files[0];if(!f)return;e.target.value='';
+  if(f.type.startsWith('image/')){
+    const bmp=await createImageBitmap(f),inv=$('invert').checked;
+    stamp(g=>{const k=Math.min(W/bmp.width,H/bmp.height),w=bmp.width*k,h=bmp.height*k;
+      if(inv)g.filter='invert(1)';g.drawImage(bmp,(W-w)/2,(H-h)/2,w,h);g.filter='none'});
+    say('Image loaded as paint. Press Play.');
+  }else{
+    await loadSound(await f.arrayBuffer());
+  }
+};
+async function loadSound(ab){
+  say('Reading the sound...');await sleep(20);
+  try{
+    const ctx=getCtx(),buf=await ctx.decodeAudioData(ab);
+    const len=Math.min(buf.length,60*buf.sampleRate),sig=new Float32Array(len);
+    for(let c=0;c<buf.numberOfChannels;c++){const d=buf.getChannelData(c);for(let i=0;i<len;i++)sig[i]+=d[i]/buf.numberOfChannels}
+    setBase(sig,buf.sampleRate);say(`Sound loaded, ${dur.toFixed(1)} s. Paint on it, then press Play.`);
+  }catch(err){say('That file could not be read as a sound.')}
+}
+$('demo').onchange=async e=>{
+  const n=e.target.value;if(!n)return;e.target.value='';
+  try{const r=await fetch(`sounds/${n}.wav`);if(!r.ok)throw 0;await loadSound(await r.arrayBuffer())}
+  catch(err){say('That sound could not be loaded. Check your connection.')}
+};
+
+// Play, save
+function stopPlay(){if(src){try{src.stop()}catch(e){}src=null}playing=false;$('head').style.display='none'}
+async function play(){
+  const ctx=getCtx();await ctx.resume();graph(ctx);setWindow();stopPlay();
+  say('Rendering...');await sleep(20);
+  const t=performance.now(),out=mix(ctx.sampleRate);
+  window.lastRenderMs=performance.now()-t;
+  const b=ctx.createBuffer(1,out.length,ctx.sampleRate);b.copyToChannel(out,0);
+  src=ctx.createBufferSource();src.buffer=b;origConnect.call(src,G.limiter);
+  rg.fillStyle='#000';rg.fillRect(0,0,W,H);lastX=-1;
+  t0=ctx.currentTime+.05;src.start(t0);playing=true;say('Playing.');
+  src.onended=()=>{};
+}
+$('play').onclick=play;
+$('stopAll').onclick=()=>{stopPlay();stopCode();say('Stopped.')};
+$('vol').oninput=()=>{if(G.master)G.master.gain.value=$('vol').value/100};
+$('win').onchange=setWindow;
+function saveBlob(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+$('wav').onclick=()=>{
+  const sr=getCtx().sampleRate,s=mix(sr),n=s.length,b=new DataView(new ArrayBuffer(44+n*2));
+  const w=(o,t)=>{for(let i=0;i<t.length;i++)b.setUint8(o+i,t.charCodeAt(i))};
+  w(0,'RIFF');b.setUint32(4,36+n*2,true);w(8,'WAVEfmt ');b.setUint32(16,16,true);b.setUint16(20,1,true);b.setUint16(22,1,true);
+  b.setUint32(24,sr,true);b.setUint32(28,sr*2,true);b.setUint16(32,2,true);b.setUint16(34,16,true);w(36,'data');b.setUint32(40,n*2,true);
+  for(let i=0;i<n;i++)b.setInt16(44+i*2,Math.max(-1,Math.min(1,s[i]))*32767,true);
+  saveBlob(new Blob([b],{type:'audio/wav'}),'spectral_canvas.wav');
+};
+$('png').onclick=()=>{
+  const o=document.createElement('canvas');o.width=W;o.height=H*2+8;const g=o.getContext('2d');
+  g.fillStyle='#fff';g.fillRect(0,0,W,o.height);g.drawImage(pc,0,0);g.drawImage(rc,0,H+8);
+  o.toBlob(b=>saveBlob(b,'spectral_canvas.png'));
+};
+
+// Strudel
+const EX={
+ 'Rap beat':`setcps(.35)\nstack(\n  s("bd ~ ~ bd ~ ~ ~ ~, ~ ~ sd ~, hh*8").bank("RolandTR808").gain(.35),\n  note("<a1 a1 f1 g1>").s("sine").penv(12).pdecay(.08).decay(1.2).sustain(0).distort("2:.4").gain(.3)\n)`,
+ 'Metal riff':`setcps(.75)\nstack(\n  note("e2 e2 e2 g2 e2 e2 bb2 a2").superimpose(x=>x.add(note(7))).s("sawtooth").distort("4:.15").lpf(2200).decay(.14).sustain(.25).gain(.12),\n  s("bd*8, ~ sd ~ sd, hh*8").bank("RolandTR909").gain(.3)\n)`,
+ 'Slow build':`setcps(.4)\nstack(\n  note("<a1 f1 c2 g1>").s("sawtooth").lpf(saw.range(200,3500).slow(32)).lpq(3).room(.8).gain(.14),\n  note("e4 a4 b4 c5 b4 a4 e4 g4").s("triangle").delay(.6).room(.9).gain(.07),\n  note("<[a3,e4] [f3,c4] [c4,g4] [g3,d4]>").s("sawtooth").distort(saw.range(0,2.5).slow(32)).lpf(saw.range(400,5000).slow(32)).room(.9).gain(saw.range(0,.1).slow(32))\n)`,
+ 'Filter sweep':`note("a2 a2 c3 e3").s("sawtooth").lpf(sine.range(300,3000).slow(4)).lpq(8).gain(.15).jux(rev)`,
+ 'Clean sine':`note("a2").s("sine").gain(.15)`,
+ 'Clipped sine':`note("a2").s("sine").distort("4:.15").gain(.15)`
+};
+for(const k of Object.keys(EX)){const o=document.createElement('option');o.textContent=k;$('examples').append(o)}
+$('examples').onchange=()=>{$('code').value=EX[$('examples').value]};$('code').value=EX['Rap beat'];
+if(!hasStrudel){$('codePanel').style.display='none';say('Strudel did not load here, so the code panel is off. Loading and painting still work.')}
+else{
+  strudelReady=initStrudel({prebake:()=>samples('https://raw.githubusercontent.com/felixroos/dough-samples/main/tidal-drum-machines.json')});
+  strudelReady.then(r=>{repl=r});
+  async function runCode(){
+    const ctx=getCtx();await ctx.resume();graph(ctx);setWindow();stopPlay();
+    try{await strudelReady;await evaluate($('code').value);liveOn=true;lastX=-1;say('Code is playing.')}catch(err){say('Code error: '+err.message)}
+  }
+  $('run').onclick=runCode;
+  $('hushBtn').onclick=()=>{stopCode();say('Code stopped.')};
+  $('capture').onclick=async()=>{
+    if(!liveOn)await runCode();
+    const ctx=getCtx(),n=Math.round((+$('len').value)*ctx.sampleRate),sig=new Float32Array(n);let at=0;
+    const p=ctx.createScriptProcessor(4096,2,1),z=ctx.createGain();z.gain.value=0;z.__direct=true;
+    origConnect.call(G.bus,p);origConnect.call(p,z);origConnect.call(z,ctx.destination);
+    say('Capturing...');
+    await new Promise(res=>{p.onaudioprocess=e=>{
+      const a=e.inputBuffer.getChannelData(0),b=e.inputBuffer.getChannelData(1);
+      for(let i=0;i<a.length&&at<n;i++)sig[at++]=(a[i]+b[i])/2;
+      if(at>=n)res();
+    }});
+    p.onaudioprocess=null;G.bus.disconnect(p);p.disconnect();z.disconnect();
+    setBase(sig,ctx.sampleRate);say(`Captured ${dur.toFixed(1)} s onto the canvas. Paint on it, stop the code, then press Play.`);
+  };
+}
+drawPaint();rg.fillStyle='#000';rg.fillRect(0,0,W,H);
+for(const [s,h] of [['s1',H],['s2',H]])for(const hz of [100,1000,10000]){
+  const r=(H-1)*(1-Math.log(hz/FMIN)/Math.log(FMAX/FMIN)),t=document.createElement('span');
+  t.className='tick';t.style.top=(r/H*100)+'%';t.textContent=hz>=1000?(hz/1000)+' kHz':hz+' Hz';$(s).append(t);
+}
+// Test hooks
+window.SC={W,H,G,rowFreq,stopCode,get paint(){return paint},get baseV(){return baseV},get dur(){return dur},analyse,writeText,mix,setBase,getCtx,
+  get lastMix(){return lastMix},corr(a,b){let n=a.length,ma=0,mb=0;for(let i=0;i<n;i++){ma+=a[i];mb+=b[i]}ma/=n;mb/=n;let s=0,sa=0,sb=0;for(let i=0;i<n;i++){const x=a[i]-ma,y=b[i]-mb;s+=x*y;sa+=x*x;sb+=y*y}return s/Math.sqrt(sa*sb)},
+  get playing(){return playing},revealData(){return rg.getImageData(0,0,W,H).data},paintBox(){return pc.getBoundingClientRect()}};
+})();
+</script>
+</body></html>
