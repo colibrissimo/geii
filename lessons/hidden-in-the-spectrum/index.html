@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hidden in the Spectrum: what's coming</title>
+<style>
+:root{--bg:#f5f2ec;--ink:#1b1a2b;--muted:#5a5870;--card:#fff;--line:#e2ddd3;--night:#0e0b20;--night2:#1c1438;--plum:#6b1d6e;--pink:#b5367a;--coral:#e8574f;--peach:#feb078;--cream:#fcf3c8}
+*{box-sizing:border-box}html{color-scheme:light}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 Verdana,"Segoe UI",-apple-system,Arial,sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:0 16px 56px}
+header{background:var(--night);color:#fff;border-radius:0 0 18px 18px;overflow:hidden;margin-bottom:18px}
+header svg{display:block;width:100%;height:auto}
+.htxt{padding:6px 24px 24px}
+.kicker{font:13px/1.4 "Courier New",monospace;letter-spacing:2px;text-transform:uppercase;color:var(--peach)}
+h1{font-size:2rem;line-height:1.15;margin:6px 0 10px}
+.pitch{font-size:1.15rem;margin:0;color:var(--cream)}
+.bar{display:flex;justify-content:flex-end;margin:0 0 14px}
+.lang{font:inherit;font-weight:700;padding:8px 14px;border-radius:999px;border:2px solid var(--plum);background:#fff;color:var(--plum);cursor:pointer}
+.lang:hover{background:var(--plum);color:#fff}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:14px 0}
+h2{font-size:1.3rem;margin:0 0 10px;color:var(--plum)}
+h2 .n{display:inline-block;font:700 13px/1 "Courier New",monospace;letter-spacing:2px;color:var(--coral);margin-right:8px;vertical-align:middle}
+p{margin:8px 0}
+ul{margin:8px 0;padding-left:24px}li{margin:6px 0}
+.rest{background:var(--night);color:#fff;border:none;text-align:center;padding:28px 22px}
+.rest h2{color:var(--peach);font-size:1.8rem;margin:0 0 6px}
+.rest p{color:var(--cream);margin:0}
+.pick{background:#f1e9f3;border-color:#d9c3dc}
+.pick label{font-weight:700;margin-right:8px}
+.pick select{font:inherit;padding:8px 10px;border-radius:8px;border:1px solid #b9a3bd;background:#fff;color:var(--ink)}
+#mydates{margin:12px 0 0;padding:0;list-style:none}
+#mydates li{background:#fff;border-radius:10px;padding:8px 14px;margin:8px 0}
+.small{color:var(--muted);font-size:.92rem}
+a.go{display:inline-block;margin-top:6px;font-weight:700;text-decoration:none;background:var(--plum);color:#fff;border-radius:10px;padding:10px 18px}
+a.go:hover{background:var(--pink)}
+.fr{display:none}
+body.isfr .fr{display:block}body.isfr .en{display:none}
+body.isfr span.fr{display:inline}
+@media (max-width:520px){body{font-size:16px}h1{font-size:1.5rem}section{padding:16px}.rest h2{font-size:1.4rem}}
+</style></head>
+<body><div class="wrap">
+<header>
+<svg viewBox="0 0 880 150" role="img" aria-label="A spectrogram with a circle, a line and a triangle inside it">
+<defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#0e0b20"/><stop offset="1" stop-color="#2a1245"/></linearGradient></defs>
+<rect width="880" height="150" fill="url(#g)"/>
+<g stroke="#6b1d6e" stroke-width="2" opacity=".55"><path d="M0 128h880M0 136h880M0 143h880"/></g>
+<g stroke="#b5367a" stroke-width="3" opacity=".5"><path d="M30 118v26M52 110v34M75 121v23M101 114v30M640 116v28M668 108v36M700 119v25M735 112v32M790 117v27M830 109v35"/></g>
+<circle cx="190" cy="62" r="34" fill="none" stroke="#feb078" stroke-width="6"/>
+<path d="M290 96 L470 30" stroke="#fcf3c8" stroke-width="6" stroke-linecap="round"/>
+<path d="M540 96 L590 26 L640 96 Z" fill="none" stroke="#e8574f" stroke-width="6" stroke-linejoin="round"/>
+<g fill="#fcf3c8" opacity=".8" font-family="Courier New,monospace" font-size="11"><text x="8" y="16">16 kHz</text><text x="8" y="146">40 Hz</text><text x="810" y="146">time</text></g>
+</svg>
+<div class="htxt">
+<div class="kicker">BUT2 GEII · S3 · TP · January</div>
+<h1>Hidden in the Spectrum</h1>
+<p class="pitch en">Can you send a picture through sound?</p>
+<p class="pitch fr">Peut-on envoyer une image par le son ?</p>
+</div>
+</header>
+
+<div class="bar"><button class="lang" id="lang">Français</button></div>
+
+<section class="rest">
+<h2 class="en">Nothing to do before January.</h2>
+<h2 class="fr">Rien à faire avant janvier.</h2>
+<p class="en">No work for this TP during the holidays. This page just tells you what is coming.</p>
+<p class="fr">Aucun travail pour ce TP pendant les vacances. Cette page vous dit simplement ce qui arrive.</p>
+</section>
+
+<section>
+<h2><span class="n">01</span><span class="en">What it is</span><span class="fr">De quoi il s'agit</span></h2>
+<div class="en">
+<p>In January, you work with a partner. You choose two pictures from a gallery in the Spectral Canvas and turn each one into a sound. Then you play it and look at the spectrogram: does the picture come back? All of it, part of it, or something you did not expect?</p>
+<p>You try to find out why. Then, in a short oral, you show us what you found, in English.</p>
+<p>You have already done the first steps this week: sine, square, saw, and your own shape.</p>
+</div>
+<div class="fr">
+<p>En janvier, vous travaillez en binôme. Vous choisissez deux images dans une galerie du Spectral Canvas et vous transformez chacune en son. Puis vous l'écoutez et vous regardez le spectrogramme : l'image revient-elle ? En entier, en partie, ou sous une forme inattendue ?</p>
+<p>Vous cherchez à comprendre pourquoi. Puis, dans un court oral, vous nous montrez ce que vous avez trouvé, en anglais.</p>
+<p>Vous avez déjà fait les premières étapes cette semaine : sine, square, saw, et votre propre forme.</p>
+</div>
+</section>
+
+<section class="pick">
+<h2><span class="n">02</span><span class="en">Your dates</span><span class="fr">Vos dates</span></h2>
+<label for="grp"><span class="en">My TP group:</span><span class="fr">Mon groupe de TP :</span></label>
+<select id="grp"><option value="">...</option><option>A2I A</option><option>A2I B</option><option>EME A</option><option>EME B</option><option>ESE A</option><option>ESE B</option></select>
+<ul id="mydates"></ul>
+<p class="small en">Your other January English session is the written exam (DS). It is not part of this TP.</p>
+<p class="small fr">Votre autre séance d'anglais de janvier est le DS. Elle ne fait pas partie de ce TP.</p>
+</section>
+
+<section>
+<h2><span class="n">03</span><span class="en">What you already have</span><span class="fr">Ce que vous avez déjà</span></h2>
+<ul class="en">
+<li>Your sentences from this week, in the forum "What did you see?" on Moodle.</li>
+<li>Your saved WAV. Lost it? No problem: you can make a new one in January in two minutes.</li>
+<li>The Spectral Canvas. Same link in January.</li>
+</ul>
+<ul class="fr">
+<li>Vos phrases de cette semaine, dans le forum « What did you see? » sur Moodle.</li>
+<li>Votre fichier WAV. Vous l'avez perdu ? Pas de problème : vous en referez un en deux minutes en janvier.</li>
+<li>Le Spectral Canvas. Même lien en janvier.</li>
+</ul>
+<a class="go" href="https://colibrissimo.github.io/geii/lessons/spectral-canvas/" target="_blank" rel="noopener"><span class="en">Open the Spectral Canvas</span><span class="fr">Ouvrir le Spectral Canvas</span></a>
+</section>
+
+<section>
+<h2><span class="n">04</span><span class="en">What comes next</span><span class="fr">La suite</span></h2>
+<p class="en">Before the Christmas holidays, this page becomes the full brief: what you do in the TP session, how the oral works, and exactly how it is marked. Same link.</p>
+<p class="fr">Avant les vacances de Noël, cette page deviendra la consigne complète : ce que vous faites pendant la séance de TP, le déroulement de l'oral, et exactement comment il est noté. Même lien.</p>
+<p class="small en">A question? Email me.</p>
+<p class="small fr">Une question ? Écrivez-moi.</p>
+</section>
+</div>
+
+<script>
+var D={
+"A2I A":{s2:["Thursday 7 January, 10:00 to 12:00","jeudi 7 janvier, de 10h00 à 12h00"],oral:["Thursday 14 January, 08:00 to 10:00","jeudi 14 janvier, de 08h00 à 10h00"]},
+"A2I B":{s2:["Thursday 7 January, 10:00 to 12:00","jeudi 7 janvier, de 10h00 à 12h00"],oral:["Thursday 14 January, 08:00 to 10:00","jeudi 14 janvier, de 08h00 à 10h00"]},
+"EME A":{s2:["Monday 4 January, 10:00 to 12:00","lundi 4 janvier, de 10h00 à 12h00"],oral:["Monday 11 January, 08:00 to 10:00","lundi 11 janvier, de 08h00 à 10h00"]},
+"EME B":{s2:["Friday 8 January, 08:00 to 10:00","vendredi 8 janvier, de 08h00 à 10h00"],oral:["Thursday 14 January, 10:00 to 12:00","jeudi 14 janvier, de 10h00 à 12h00"]},
+"ESE A":{s2:["Wednesday 6 January, 13:30 to 15:30","mercredi 6 janvier, de 13h30 à 15h30"],oral:["Thursday 7 January, 13:30 to 15:30","jeudi 7 janvier, de 13h30 à 15h30"]},
+"ESE B":{s2:["Thursday 7 January, 08:00 to 10:00","jeudi 7 janvier, de 08h00 à 10h00"],oral:["Monday 11 January, 10:00 to 12:00","lundi 11 janvier, de 10h00 à 12h00"]}
+};
+var L={s2:["TP session, room 3A15","Séance de TP, salle 3A15"],oral:["Your oral, room 3A15","Votre oral, salle 3A15"]};
+function get(k){try{return localStorage.getItem('hits-'+k)}catch(e){return null}}
+function put(k,v){try{localStorage.setItem('hits-'+k,v)}catch(e){}}
+var sel=document.getElementById('grp'),md=document.getElementById('mydates'),btn=document.getElementById('lang');
+function fr(){return document.body.classList.contains('isfr')?1:0}
+function show(){var d=D[sel.value];if(!d){md.innerHTML='';return}
+ var i=fr();md.innerHTML=['s2','oral'].map(function(k){return '<li><b>'+L[k][i]+(i?' : ':': ')+'</b>'+d[k][i]+'</li>'}).join('');
+ put('grp',sel.value)}
+sel.addEventListener('change',show);
+btn.addEventListener('click',function(){document.body.classList.toggle('isfr');btn.textContent=fr()?'English':'Français';put('fr',fr()?'1':'0');show()});
+if(get('fr')==='1'){document.body.classList.add('isfr');btn.textContent='English'}
+var g=get('grp');if(g&&D[g])sel.value=g;show();
+</script>
+</body></html>
