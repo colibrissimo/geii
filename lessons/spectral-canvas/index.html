@@ -310,7 +310,7 @@ $('demo').onchange=async e=>{
 // Play, save
 function stopPlay(){if(src){try{src.stop()}catch(e){}src=null}playing=false;$('head').style.display='none'}
 async function play(){
-  const ctx=getCtx();await ctx.resume();graph(ctx);setWindow();stopPlay();
+  const ctx=getCtx();await ctx.resume();graph(ctx);setWindow();stopPlay();stopCode();
   say('Rendering...');await sleep(20);
   const t=performance.now(),out=mix(ctx.sampleRate);
   window.lastRenderMs=performance.now()-t;
