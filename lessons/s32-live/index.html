@@ -47,6 +47,8 @@
     #s32 .verbs span{background:#fff;border:1px solid #f1c48a;color:#b45309;font-weight:bold;border-radius:8px;padding:2px 10px;font-size:15px;}
     #s32 .quote{color:var(--muted);font-size:16px;}
     #s32 .note{font-size:14px;color:var(--muted);margin-top:16px;}
+    #s32 textarea.tpl{display:block;width:100%;font:inherit;font-size:16px;line-height:1.6;padding:10px 14px;margin-top:6px;border:2px dashed var(--terra);border-radius:10px;background:var(--terra-bg);color:var(--ink);resize:vertical;}
+    #s32 .copied{font-size:15px;color:var(--teal);font-weight:bold;}
     @media (max-width:560px){#s32{font-size:17px;padding:16px;} #s32 h1{font-size:24px;}}
   </style>
 
@@ -129,10 +131,19 @@
 
   <section class="step post">
     <h2><b>7</b>Post it</h2>
-    <p>Post everything you wrote today in the forum <strong>What did you see?</strong> on Moodle. One post per person, or one per pair with both names. You will see the other posts after you post yours.</p>
+    <p>In the forum <strong>What did you see?</strong> on Moodle, click <strong>Add discussion topic</strong>. Copy the post below, paste it, and fill in the gaps. One post per person, or one per pair with both names.</p>
+    <textarea class="tpl" id="tpl" readonly rows="9" aria-label="The post to copy">My three guesses: ...
+Orange verbs: I counted ...
+The video confirmed: ...
+Sine: I can see ...
+Square: I can see ...
+Saw: I can see ...
+Sonic Ray: the message is ..., the carrier is ..., and the signal is ...
+My shape: ... came back, but ... did not.</textarea>
+    <div class="btns"><button class="amber" id="copytpl">Copy the post</button><span class="copied" id="copied" role="status"></span></div>
     <p>Keep your WAV. In January, the TP <strong>Hidden in the Spectrum</strong> starts with your sentences and your sound.</p>
     <div class="btns"><button class="fr" data-t="fr7" aria-expanded="false">En français</button></div>
-    <div class="frt" id="fr7"><p>Postez tout ce que vous avez écrit aujourd'hui dans le forum <strong>What did you see?</strong> sur Moodle. Un message par personne, ou un par binôme avec vos deux noms. Vous verrez les autres messages après avoir posté le vôtre.</p><p>Gardez votre WAV. En janvier, le TP <strong>Hidden in the Spectrum</strong> commence avec vos phrases et votre son.</p></div>
+    <div class="frt" id="fr7"><p>Dans le forum <strong>What did you see?</strong> sur Moodle, cliquez sur <strong>Ajouter une discussion</strong>. Copiez le message ci-dessus, collez-le et complétez les trous, en anglais. Chaque ligne correspond à une étape. Un message par personne, ou un par binôme avec vos deux noms.</p><p>Gardez votre WAV. En janvier, le TP <strong>Hidden in the Spectrum</strong> commence avec vos phrases et votre son.</p></div>
   </section>
 
   <section class="step home">
@@ -153,6 +164,12 @@
         var open=box.classList.toggle('open');
         b.setAttribute('aria-expanded',open?'true':'false');
       });
+    });
+    var tpl=document.getElementById('tpl'),cb=document.getElementById('copytpl'),msg=document.getElementById('copied');
+    cb.addEventListener('click',function(){
+      function done(){msg.textContent='Copied. Now paste it in the forum.'}
+      function fallback(){tpl.removeAttribute('readonly');tpl.select();try{document.execCommand('copy');done()}catch(e){msg.textContent='Select the text and copy it (Ctrl+C).'}tpl.setAttribute('readonly','')}
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(tpl.value).then(done,fallback)}else{fallback()}
     });
   })();
   </script>
